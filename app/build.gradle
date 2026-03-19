@@ -4,7 +4,7 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"//"29.0.3"
     defaultConfig {
-        applicationId "com.sentaroh.android.SMBSync3"
+        applicationId "com.ildar_aim.smbsync4"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 2

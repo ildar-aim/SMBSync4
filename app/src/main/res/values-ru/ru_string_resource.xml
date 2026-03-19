@@ -4,10 +4,12 @@
         <string name="msgs_about_dlg_func_btn">Функции</string>
         <string name="msgs_about_dlg_privacy_btn">Политика приватности</string>
         <string name="msgs_about_dlg_change_btn">Журнал изменений</string>
-        <string name="msgs_dlg_title_about">О SMBSync3</string>
-        <string name="msgs_dlg_title_about_func_desc">SMBSync3_about_RU_Desc.md</string>
-        <string name="msgs_dlg_title_about_privacy_desc">SMBSync3_about_RU_Privacy.md</string>
-        <string name="msgs_dlg_title_about_change_desc">SMBSync3_about_EN_Change.md</string>
+        <string name="msgs_dlg_title_about">О SMBSync4</string>
+        <string name="msgs_dlg_title_about_func_desc">SMBSync4_about_RU_Desc.md</string>
+        <string name="msgs_dlg_title_about_privacy_desc">SMBSync4_about_RU_Privacy.md</string>
+        <string name="msgs_dlg_title_about_change_desc">SMBSync4_about_EN_Change.md</string>
+        <string name="msgs_about_dlg_licenses_btn">Лицензии</string>
+        <string name="msgs_dlg_title_about_licenses_desc">SMBSync4_about_EN_Licenses.md</string>
     <!-- Export/Import -->
         <string name="msgs_export_import_profile_title">Импорт файла задания</string>
         <string name="msgs_export_import_profile_listing">Список файлов</string>
@@ -48,25 +50,25 @@
         <string name="msgs_export_import_pswd_hint_confirm">Подтвердите пароль</string>
         <string name="msgs_export_import_pswd_unmatched_confirm_pswd">Пароль и пароль подтверждения не совпадают.</string>
     <!-- Help -->
-        <string name="msgs_help_sync_task_file">SMBSync3_Help_RU_task.md</string>
+        <string name="msgs_help_sync_task_file">SMBSync4_Help_RU_task.md</string>
         <string name="msgs_help_sync_task_title">Справка по задачам синхронизации</string>
-        <string name="msgs_help_sync_folder_external_file">SMBSync3_Help_RU_folder_external.md</string>
+        <string name="msgs_help_sync_folder_external_file">SMBSync4_Help_RU_folder_external.md</string>
         <string name="msgs_help_sync_folder_external_title">Справка по локальным папкам</string>
-        <string name="msgs_help_sync_folder_keyword">SMBSync3_Help_RU_folder_keyword.md</string>
+        <string name="msgs_help_sync_folder_keyword">SMBSync4_Help_RU_folder_keyword.md</string>
         <string name="msgs_help_sync_folder_keyword_title">Справка по параметрам</string>
-        <string name="msgs_help_sync_folder_smb_file">SMBSync3_Help_RU_folder_smb.md</string>
+        <string name="msgs_help_sync_folder_smb_file">SMBSync4_Help_RU_folder_smb.md</string>
         <string name="msgs_help_sync_folder_smb_title">Справка по SMB-серверу</string>
-        <string name="msgs_help_sync_folder_zip_file">SMBSync3_Help_RU_folder_zip.md</string>
+        <string name="msgs_help_sync_folder_zip_file">SMBSync4_Help_RU_folder_zip.md</string>
         <string name="msgs_help_sync_folder_zip_title">Справка по ZIP файлу</string>
-        <string name="msgs_help_directory_filter_file">SMBSync3_Help_RU_directory_filter.md</string>
+        <string name="msgs_help_directory_filter_file">SMBSync4_Help_RU_directory_filter.md</string>
         <string name="msgs_help_directory_filter_title">Справка по каталогу фильтрации</string>
-        <string name="msgs_help_file_filter_file">SMBSync3_Help_RU_file_filter.md</string>
+        <string name="msgs_help_file_filter_file">SMBSync4_Help_RU_file_filter.md</string>
         <string name="msgs_help_file_filter_title">Помощь в фильтрации файлов</string>
-        <string name="msgs_help_ip_address_filter_file">SMBSync3_Help_RU_ip_address_filter.md</string>
+        <string name="msgs_help_ip_address_filter_file">SMBSync4_Help_RU_ip_address_filter.md</string>
         <string name="msgs_help_ip_address_filter_title">Помощь фильтра IP-адресов</string>
-        <string name="msgs_help_schedule_file">SMBSync3_Help_RU_schedule.md</string>
+        <string name="msgs_help_schedule_file">SMBSync4_Help_RU_schedule.md</string>
         <string name="msgs_help_schedule_title">Schedule help</string>
-        <string name="msgs_help_group_file">SMBSync3_Help_RU_group.md</string>
+        <string name="msgs_help_group_file">SMBSync4_Help_RU_group.md</string>
         <string name="msgs_help_group_title">Group help</string>
     <!-- Log management -->
         <string name="msgs_log_management_enable_log_file_warning">Следующие данные будут записаны в файл журнала, если его включить. \nВерсия Android, Имя устройства, Имя каталога, Имя файла, Имя учетной записи SMB, IP-адрес, Имя сетевого интерфейса, Настройки системы, Информация о приложении</string>
@@ -85,7 +87,7 @@
         <string name="msgs_security_application_password_create_forget_recovery">Если вы забыли свой пароль, пожалуйста переустановите приложение.</string>
         <string name="msgs_security_application_password_create_forget_warning">Если вы забудите свой пароль, вам потребуется переустановка приложения, поэтому не забывайте его.</string>
         <string name="msgs_security_stored_sectret_key_change_title">Внутренний ключ</string>
-        <string name="msgs_security_stored_sectret_key_change_message">Пароль приложения не может быть расшифрован, так как ключ, хранящийся в Android Keystore, был изменен после создания пароля приложения.\nПожалуйста, выполните следующие шаги для его восстановления.\n1. Сохраните список заданий, если это возможно.\n2. переустановить SMBSync3.(Удалить и установить)\n3. Импорт сохраненного списка задач(или импортировать автоматически сохраненный список задач).</string>
+        <string name="msgs_security_stored_sectret_key_change_message">Пароль приложения не может быть расшифрован, так как ключ, хранящийся в Android Keystore, был изменен после создания пароля приложения.\nПожалуйста, выполните следующие шаги для его восстановления.\n1. Сохраните список заданий, если это возможно.\n2. переустановить SMBSync4.(Удалить и установить)\n3. Импорт сохраненного списка задач(или импортировать автоматически сохраненный список задач).</string>
         <string name="msgs_security_stored_sectret_key_change_error">Внутренняя ошибка ключа</string>
         <string name="msgs_security_stored_sectret_key_save_error">Внутренний код проверки ключа сохранить ошибку</string>
         <string name="msgs_security_application_password_auth_title">Проверка подлинности пароля приложения</string>
@@ -154,10 +156,10 @@
         <string name="msgs_info_storage_copy_completed">Скопировано в буфер обмена</string>
         <string name="msgs_info_storage_send_btn_title">Отправить разработчику</string>
         <string name="msgs_info_storage_title">Хранение информации</string>
-        <string name="msgs_your_problem_title">Ваша проблема/вопрос о SMBSync3</string>
-        <string name="msgs_your_problem_msg">Пожалуйста, заполните детали вашей проблемы или вопроса о SMBSync3.</string>
-        <string name="msgs_your_problem_hint">Пример: SDCard не распознается SMBSync3.</string>
-        <string name="msgs_your_problem_no_desc">Проблема/вопросы не описаны, мы не можем на них ответить, пока не будет описана проблема/вопросы SMBSync3.</string>
+        <string name="msgs_your_problem_title">Ваша проблема/вопрос о SMBSync4</string>
+        <string name="msgs_your_problem_msg">Пожалуйста, заполните детали вашей проблемы или вопроса о SMBSync4.</string>
+        <string name="msgs_your_problem_hint">Пример: SDCard не распознается SMBSync4.</string>
+        <string name="msgs_your_problem_no_desc">Проблема/вопросы не описаны, мы не можем на них ответить, пока не будет описана проблема/вопросы SMBSync4.</string>
         <string name="msgs_log_activate_pinned">Автопрокрутка отключена</string>
         <string name="msgs_log_confirm_clear_all_msg">Удалить все записи сообщений ?</string>
         <string name="msgs_log_inactivate_pinned">Автопрокрутка включена</string>
@@ -274,7 +276,7 @@
         <string name="msgs_msg_cont_label_pinned_active">Отключите автопрокрутку</string>
         <string name="msgs_msg_cont_label_pinned_inactive">Включите автопрокрутку</string>
         <string name="msgs_no_profile_entry">Нет заданий</string>
-        <string name="msgs_notification_smbsync_active">SMBSync3 был запущен.</string>
+        <string name="msgs_notification_smbsync_active">SMBSync4 был запущен.</string>
         <string name="msgs_notification_sync_active">синхронизация активна.</string>
         <string name="msgs_override">переопределение?</string>
         <string name="msgs_task_cont_label_auto">Автовыбор</string>
@@ -522,7 +524,7 @@
         <string name="msgs_tab_name_msg">Сообщения</string>
         <string name="msgs_tab_name_task">Задача</string>
         <string name="msgs_tab_name_group">Группа</string>
-        <string name="msgs_terminate_application">Выход из SMBSync3.</string>
+        <string name="msgs_terminate_application">Выход из SMBSync4.</string>
     <!-- Privacy Policy confirm -->
         <string name="msgs_privacy_policy_title">Политика приватности</string>
         <string name="msgs_privacy_policy_show_privacy_policy">Показать политику конфиденциальности</string>
@@ -550,7 +552,7 @@
         <string name="msgs_menu_import">Импортировать список задач</string>
         <string name="msgs_menu_log_management">Управление файлами журналов</string>
         <string name="msgs_menu_show_hide_filter">Показать/скрыть фильтр</string>
-        <string name="msgs_menu_about">О SMBSync3</string>
+        <string name="msgs_menu_about">О SMBSync4</string>
         <string name="msgs_menu_settings">Настройки</string>
         <string name="msgs_menu_housekeep">Обслуживание файлов администратора</string>
         <string name="msgs_menu_kill">Убить приложение</string>
@@ -815,7 +817,7 @@
         <string name="msgs_edit_sync_task_list_cont_label_add_sync_task">Добавить синхронизированную задачу</string>
         <string name="msgs_edit_sync_task_list_help_title">Справка по редактированию списка синхронизированных задач</string>
         <string name="msgs_edit_sync_task_list_add_task_list_guide">Выберите задачу, которую вы хотите добавить, и нажмите кнопку \"Добавить\".</string>
-        <string name="msgs_edit_sync_task_list_help_file">SMBSync3_Help_RU_edit_sync_task_list.md</string>
+        <string name="msgs_edit_sync_task_list_help_file">SMBSync4_Help_RU_edit_sync_task_list.md</string>
         <string name="msgs_edit_sync_task_list_confirm_msg_nosave">Список задач изменился. Выйти без сохранения?</string>
     <!-- Sync Button -->
         <string name="msgs_main_sync_button_confirmation_message_title">Подтвердить начало синхронизации</string>
@@ -824,8 +826,8 @@
         <string name="msgs_main_sync_button_start_error_auto_task_does_not_exists">Автозадача не существует.</string>
         <string name="msgs_main_sync_button_confirmation_message_suppress">Отключите это оповещение (можно включить в настройках синхронизации).</string>
     <!-- Shortcut -->
-        <string name="msgs_main_shortcut_title">SMBSync3 Shortcut</string>
-        <string name="msgs_main_shorcut_confirmation_message_title">Подтвердите запуск SMBSync3.</string>
+        <string name="msgs_main_shortcut_title">SMBSync4 Shortcut</string>
+        <string name="msgs_main_shorcut_confirmation_message_title">Подтвердите запуск SMBSync4.</string>
         <string name="msgs_main_shorcut_confirmation_message_msg">Вы хотите начать выполнение следующих задач?</string>
         <string name="msgs_main_shortcut_start_error_task_not_found">(%1$s) Не найдено заданий для начала синхронизации. Задача = %2$s</string>
         <string name="msgs_main_shortcut_start_error_auto_task_does_not_exists">(%s) Автозадача не существует.</string>
@@ -840,8 +842,8 @@
         <string name="msgs_main_shortcut_button_label_button3">Кнопка3</string>
     <!-- svc -->
         <string name="msgs_svc_can_not_start_sync_task_disabled">Поскольку задача синхронизации отключена, она не смогла запустить задачу синхронизации.</string>
-        <string name="msgs_svc_received_start_request_from_scheduler">Запрос синхронизации получен от планировщика SMBSync3.</string>
-        <string name="msgs_svc_received_start_request_from_scheduler_task_not_found">Запрос синхронизации получен от планировщика SMBSync3, но он был проигнорирован, поскольку эта задача не существует:</string>
+        <string name="msgs_svc_received_start_request_from_scheduler">Запрос синхронизации получен от планировщика SMBSync4.</string>
+        <string name="msgs_svc_received_start_request_from_scheduler_task_not_found">Запрос синхронизации получен от планировщика SMBSync4, но он был проигнорирован, поскольку эта задача не существует:</string>
         <string name="msgs_svc_received_start_request_from_scheduler_no_task_list">Выполнение прервано, потому что задача синхронизации не существует.</string>
         <string name="msgs_svc_received_start_request_from_external">Запрос синхронизации получен из внешнего приложения.</string>
         <string name="msgs_svc_received_start_request_from_external_task_not_found">Запрос синхронизации получен от внешнего приложения, но он был проигнорирован, поскольку указанная задача синхронизации не существует:</string>
@@ -916,7 +918,7 @@
         <string name="msgs_storage_permission_msg_saf_error_occured">SAF Berechtigungsfehler anfordern</string>
         <string name="msgs_storage_permission_all_file_access_title">All File Access</string>
         <string name="msgs_storage_permission_all_file_access_image">all_file_access_desc_en.png</string>
-        <string name="msgs_storage_permission_all_file_access_request_message">SMBSync3 требует разрешения \"Доступ ко всем файлам\" для синхронизации с различными указанными вами каталогами. \nожалуйста, ознакомьтесь с политикой конфиденциальности приложения, чтобы узнать о собираемых данных и требуемых разрешениях.\nЧтобы разрешить \"Доступ ко всем файлам\", выполните следующие действия.\n0. Нажмите \"Далее\" в нижней части экрана.\n1. Нажмите \"SMBSync3\" на появившемся экране \"Доступ ко всем файлам\".\n2. Включите переключатель в правой части экрана.\n3. Убедитесь, что переключатель в правой части экрана горит синим цветом.\n4. Вернитесь на экран приложения с помощью клавиши \"Назад\".</string>
+        <string name="msgs_storage_permission_all_file_access_request_message">SMBSync4 требует разрешения \"Доступ ко всем файлам\" для синхронизации с различными указанными вами каталогами. \nожалуйста, ознакомьтесь с политикой конфиденциальности приложения, чтобы узнать о собираемых данных и требуемых разрешениях.\nЧтобы разрешить \"Доступ ко всем файлам\", выполните следующие действия.\n0. Нажмите \"Далее\" в нижней части экрана.\n1. Нажмите \"SMBSync4\" на появившемся экране \"Доступ ко всем файлам\".\n2. Включите переключатель в правой части экрана.\n3. Убедитесь, что переключатель в правой части экрана горит синим цветом.\n4. Вернитесь на экран приложения с помощью клавиши \"Назад\".</string>
         <string name="msgs_storage_permission_all_file_access_button_text">Next</string>
         <string name="msgs_storage_permission_all_file_access_denied_message">Вы не можете запустить приложение, пока не будет разрешен \"Доступ ко всем файлам\". Если вы хотите разрешить его, пожалуйста, запустите приложение заново.</string>
         <string name="msgs_storage_permission_all_file_access_error_message">Экран разрешения \"Доступ ко всем файлам\" не мог отображаться.\nОшибка = %s</string>

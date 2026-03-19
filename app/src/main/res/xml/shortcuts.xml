@@ -11,8 +11,8 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.sentaroh.android.SMBSync3"
-            android:targetClass="com.sentaroh.android.SMBSync3.ActivityShortcut" >
+            android:targetPackage="com.ildar_aim.smbsync4"
+            android:targetClass="com.ildar_aim.smbsync4.ActivityShortcut" >
             <extra
                 android:name="shortcut_id"
                 android:value="1"/>
@@ -29,8 +29,8 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.sentaroh.android.SMBSync3"
-            android:targetClass="com.sentaroh.android.SMBSync3.ActivityShortcut" >
+            android:targetPackage="com.ildar_aim.smbsync4"
+            android:targetClass="com.ildar_aim.smbsync4.ActivityShortcut" >
             <extra
                 android:name="shortcut_id"
                 android:value="2"/>
@@ -48,8 +48,8 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.sentaroh.android.SMBSync3"
-            android:targetClass="com.sentaroh.android.SMBSync3.ActivityShortcut" >
+            android:targetPackage="com.ildar_aim.smbsync4"
+            android:targetClass="com.ildar_aim.smbsync4.ActivityShortcut" >
             <extra
                 android:name="shortcut_id"
                 android:value="3"/>

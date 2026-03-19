@@ -52,7 +52,7 @@ google-services.json
 release/
 app/release/
 app/build/
-app/src/main/java/com/sentaroh/android/SMBSync2/SyncTaskXml.java
-app/src/main/java/com/sentaroh/android/SMBSync2/TwoWaySync.java
-app/src/main/java/com/sentaroh/android/SMBSync2/TwoWaySyncFile.java
+app/src/main/java/com/ildar_aim/smbsync4/SyncTaskXml.java
+app/src/main/java/com/ildar_aim/smbsync4/TwoWaySync.java
+app/src/main/java/com/ildar_aim/smbsync4/TwoWaySyncFile.java
 message_translation-sync2.xlsm

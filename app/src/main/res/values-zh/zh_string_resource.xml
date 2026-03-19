@@ -4,10 +4,12 @@
         <string name="msgs_about_dlg_func_btn">功能</string>
         <string name="msgs_about_dlg_privacy_btn">私隐政策</string>
         <string name="msgs_about_dlg_change_btn">变更日志</string>
-        <string name="msgs_dlg_title_about">关于SMBSync3</string>
-        <string name="msgs_dlg_title_about_func_desc">SMBSync3_about_ZH_Desc.md</string>
-        <string name="msgs_dlg_title_about_privacy_desc">SMBSync3_about_ZH_Privacy.md</string>
-        <string name="msgs_dlg_title_about_change_desc">SMBSync3_about_EN_Change.md</string>
+        <string name="msgs_dlg_title_about">关于SMBSync4</string>
+        <string name="msgs_dlg_title_about_func_desc">SMBSync4_about_ZH_Desc.md</string>
+        <string name="msgs_dlg_title_about_privacy_desc">SMBSync4_about_ZH_Privacy.md</string>
+        <string name="msgs_dlg_title_about_change_desc">SMBSync4_about_EN_Change.md</string>
+        <string name="msgs_about_dlg_licenses_btn">许可证</string>
+        <string name="msgs_dlg_title_about_licenses_desc">SMBSync4_about_EN_Licenses.md</string>
     <!-- Export/Import -->
         <string name="msgs_export_import_profile_title">选择要导入的任务文件</string>
         <string name="msgs_export_import_profile_listing">档案表</string>
@@ -48,25 +50,25 @@
         <string name="msgs_export_import_pswd_hint_confirm">确认密码</string>
         <string name="msgs_export_import_pswd_unmatched_confirm_pswd">密码和确认密码不一致。</string>
     <!-- Help -->
-        <string name="msgs_help_sync_task_file">SMBSync3_Help_ZH_task.md</string>
+        <string name="msgs_help_sync_task_file">SMBSync4_Help_ZH_task.md</string>
         <string name="msgs_help_sync_task_title">同步任务帮助</string>
-        <string name="msgs_help_sync_folder_external_file">SMBSync3_Help_ZH_folder_external.md</string>
+        <string name="msgs_help_sync_folder_external_file">SMBSync4_Help_ZH_folder_external.md</string>
         <string name="msgs_help_sync_folder_external_title">本地文件夹帮助</string>
-        <string name="msgs_help_sync_folder_keyword">SMBSync3_Help_ZH_folder_keyword.md</string>
+        <string name="msgs_help_sync_folder_keyword">SMBSync4_Help_ZH_folder_keyword.md</string>
         <string name="msgs_help_sync_folder_keyword_title">参数帮助</string>
-        <string name="msgs_help_sync_folder_smb_file">SMBSync3_Help_ZH_folder_smb.md</string>
+        <string name="msgs_help_sync_folder_smb_file">SMBSync4_Help_ZH_folder_smb.md</string>
         <string name="msgs_help_sync_folder_smb_title">SMB服务器帮助</string>
-        <string name="msgs_help_sync_folder_zip_file">SMBSync3_Help_ZH_folder_zip.md</string>
+        <string name="msgs_help_sync_folder_zip_file">SMBSync4_Help_ZH_folder_zip.md</string>
         <string name="msgs_help_sync_folder_zip_title">ZIP文件帮助</string>
-        <string name="msgs_help_directory_filter_file">SMBSync3_Help_ZH_directory_filter.md</string>
+        <string name="msgs_help_directory_filter_file">SMBSync4_Help_ZH_directory_filter.md</string>
         <string name="msgs_help_directory_filter_title">目录过滤帮助</string>
-        <string name="msgs_help_file_filter_file">SMBSync3_Help_ZH_file_filter.md</string>
+        <string name="msgs_help_file_filter_file">SMBSync4_Help_ZH_file_filter.md</string>
         <string name="msgs_help_file_filter_title">文件过滤器帮助</string>
-        <string name="msgs_help_ip_address_filter_file">SMBSync3_Help_ZH_ip_address_filter.md</string>
+        <string name="msgs_help_ip_address_filter_file">SMBSync4_Help_ZH_ip_address_filter.md</string>
         <string name="msgs_help_ip_address_filter_title">IP地址过滤帮助</string>
-        <string name="msgs_help_schedule_file">SMBSync3_Help_ZH_schedule.md</string>
+        <string name="msgs_help_schedule_file">SMBSync4_Help_ZH_schedule.md</string>
         <string name="msgs_help_schedule_title">安排帮助</string>
-        <string name="msgs_help_group_file">SMBSync3_Help_ZH_group.md</string>
+        <string name="msgs_help_group_file">SMBSync4_Help_ZH_group.md</string>
         <string name="msgs_help_group_title">团体帮助</string>
     <!-- Log management -->
         <string name="msgs_log_management_enable_log_file_warning">启用后，以下数据将被记录在日志文件中。\nAndroid版本、设备名称、目录名称、文件名称、SMB账户名称、IP地址、网络接口名称、系统设置、应用程序信息。</string>
@@ -80,7 +82,7 @@
         <string name="msgs_security_application_password_create_forget_recovery">如果您忘记密码，请初始化或重新安装应用程序。</string>
         <string name="msgs_security_application_password_create_forget_warning">如果您忘记密码，您将需要初始化或重新安装应用程序，所以请不要忘记密码。</string>
         <string name="msgs_security_stored_sectret_key_change_title">内部钥匙</string>
-        <string name="msgs_security_stored_sectret_key_change_message">由于应用程序密码创建后，Android Keystore中存储的密钥已被更改，因此无法解密应用程序密码。\n请按照以下步骤进行恢复。\n1. 如果可能的话，保存你的任务列表。\n2.重新安装SMBSync3。(卸载和安装)\n3. 导入已保存的任务列表(或导入自动保存的任务列表)</string>
+        <string name="msgs_security_stored_sectret_key_change_message">由于应用程序密码创建后，Android Keystore中存储的密钥已被更改，因此无法解密应用程序密码。\n请按照以下步骤进行恢复。\n1. 如果可能的话，保存你的任务列表。\n2.重新安装SMBSync4。(卸载和安装)\n3. 导入已保存的任务列表(或导入自动保存的任务列表)</string>
         <string name="msgs_security_stored_sectret_key_change_error">内部密钥错误</string>
         <string name="msgs_security_stored_sectret_key_save_error">内部密钥验证码保存错误</string>
         <string name="msgs_security_application_password_auth_title">应用程序密码验证</string>
@@ -149,10 +151,10 @@
         <string name="msgs_info_storage_copy_completed">已复制到剪贴板</string>
         <string name="msgs_info_storage_send_btn_title">发送给开发者</string>
         <string name="msgs_info_storage_title">存储信息</string>
-        <string name="msgs_your_problem_title">关于SMBSync3的问题/疑问</string>
-        <string name="msgs_your_problem_msg">请填写您有关SMBSync2的问题/疑问的详细信息。</string>
-        <string name="msgs_your_problem_hint">例如：SMBSync2无法识别sdcard。</string>
-        <string name="msgs_your_problem_no_desc">问题/疑问没有描述，除非描述SMBSync3的问题/疑问，否则我们无法回答。</string>
+        <string name="msgs_your_problem_title">关于SMBSync4的问题/疑问</string>
+        <string name="msgs_your_problem_msg">请填写您有关SMBSync4的问题/疑问的详细信息。</string>
+        <string name="msgs_your_problem_hint">例如：SMBSync4无法识别sdcard。</string>
+        <string name="msgs_your_problem_no_desc">问题/疑问没有描述，除非描述SMBSync4的问题/疑问，否则我们无法回答。</string>
         <string name="msgs_log_activate_pinned">禁用自动滚动</string>
         <string name="msgs_log_confirm_clear_all_msg">删除所有信息条目 ?</string>
         <string name="msgs_log_inactivate_pinned">自动滚动已启用</string>
@@ -269,7 +271,7 @@
         <string name="msgs_msg_cont_label_pinned_active">禁用自动滚动</string>
         <string name="msgs_msg_cont_label_pinned_inactive">启用自动滚动</string>
         <string name="msgs_no_profile_entry">无任务</string>
-        <string name="msgs_notification_smbsync_active">SMBSync3已启动。</string>
+        <string name="msgs_notification_smbsync_active">SMBSync4已启动。</string>
         <string name="msgs_notification_sync_active">同步是活动的。</string>
         <string name="msgs_override">覆盖？</string>
         <string name="msgs_task_cont_label_auto">设置为自动</string>
@@ -517,7 +519,7 @@
         <string name="msgs_tab_name_msg">讯息</string>
         <string name="msgs_tab_name_task">任务</string>
         <string name="msgs_tab_name_group">群体</string>
-        <string name="msgs_terminate_application">退出SMBSync3。</string>
+        <string name="msgs_terminate_application">退出SMBSync4。</string>
     <!-- Privacy Policy confirm -->
         <string name="msgs_privacy_policy_title">同意隐私政策</string>
         <string name="msgs_privacy_policy_show_privacy_policy">显示隐私政策</string>
@@ -545,7 +547,7 @@
         <string name="msgs_menu_import">导入设置</string>
         <string name="msgs_menu_log_management">记录管理</string>
         <string name="msgs_menu_show_hide_filter">显示/隐藏过滤器</string>
-        <string name="msgs_menu_about">关于SMBSync3</string>
+        <string name="msgs_menu_about">关于SMBSync4</string>
         <string name="msgs_menu_settings">设置</string>
         <string name="msgs_menu_housekeep">数据库维护</string>
         <string name="msgs_menu_kill">关闭应用程序</string>
@@ -810,7 +812,7 @@
         <string name="msgs_edit_sync_task_list_cont_label_add_sync_task">添加同步任务</string>
         <string name="msgs_edit_sync_task_list_help_title">编辑同步任务列表的帮助</string>
         <string name="msgs_edit_sync_task_list_add_task_list_guide">选择你要添加的任务，并点击 \"添加 \"按钮。</string>
-        <string name="msgs_edit_sync_task_list_help_file">SMBSync3_Help_ZH_edit_sync_task_list.md</string>
+        <string name="msgs_edit_sync_task_list_help_file">SMBSync4_Help_ZH_edit_sync_task_list.md</string>
         <string name="msgs_edit_sync_task_list_confirm_msg_nosave">任务列表已经改变。不保存就退出？</string>
     <!-- Sync Button -->
         <string name="msgs_main_sync_button_confirmation_message_title">确认开始同步</string>
@@ -819,8 +821,8 @@
         <string name="msgs_main_sync_button_start_error_auto_task_does_not_exists">自动任务不存在。</string>
         <string name="msgs_main_sync_button_confirmation_message_suppress">禁用此通知（可在同步设置中启用）。</string>
     <!-- Shortcut -->
-        <string name="msgs_main_shortcut_title">SMBSync3快捷键</string>
-        <string name="msgs_main_shorcut_confirmation_message_title">确认SMBSync3的启动</string>
+        <string name="msgs_main_shortcut_title">SMBSync4快捷键</string>
+        <string name="msgs_main_shorcut_confirmation_message_title">确认SMBSync4的启动</string>
         <string name="msgs_main_shorcut_confirmation_message_msg">您是否要启动以下任务？</string>
         <string name="msgs_main_shortcut_start_error_task_not_found">(%1$s)没有找到开始同步的任务。任务=%2$s</string>
         <string name="msgs_main_shortcut_start_error_auto_task_does_not_exists">(%s)自动任务不存在。</string>
@@ -835,8 +837,8 @@
         <string name="msgs_main_shortcut_button_label_button3">按钮3</string>
     <!-- svc -->
         <string name="msgs_svc_can_not_start_sync_task_disabled">因为同步任务被禁用，所以无法启动同步任务。</string>
-        <string name="msgs_svc_received_start_request_from_scheduler">收到来自SMBSync3调度器的同步请求。</string>
-        <string name="msgs_svc_received_start_request_from_scheduler_task_not_found">收到来自SMBSync3调度器的同步请求，但由于该任务不存在，所以被忽略。 </string>
+        <string name="msgs_svc_received_start_request_from_scheduler">收到来自SMBSync4调度器的同步请求。</string>
+        <string name="msgs_svc_received_start_request_from_scheduler_task_not_found">收到来自SMBSync4调度器的同步请求，但由于该任务不存在，所以被忽略。 </string>
         <string name="msgs_svc_received_start_request_from_scheduler_no_task_list">因为同步任务不存在，所以执行中止。</string>
         <string name="msgs_svc_received_start_request_from_external">收到来自外部应用程序的同步请求。</string>
         <string name="msgs_svc_received_start_request_from_external_task_not_found">收到来自外部应用程序的同步请求，但由于指定的同步任务不存在而被忽略 : </string>
@@ -911,7 +913,7 @@
         <string name="msgs_storage_permission_msg_saf_error_occured">SAF 申请权限错误</string>
         <string name="msgs_storage_permission_all_file_access_title">All File Access</string>
         <string name="msgs_storage_permission_all_file_access_image">all_file_access_desc_en.png</string>
-        <string name="msgs_storage_permission_all_file_access_request_message">SMBSync3需要 \"访问所有文件 \"的权限，以便同步到您指定的各个目录。请查看应用程序的隐私政策，了解要收集的数据和所需的权限。\n请按照下面的步骤来允许 \"访问所有文件\"。\n0. 点屏幕底部的 \"下一步\"。\n1. 在出现的 \"访问所有文件 \"屏幕上点 \"SMBSync3\"。\n2. 2. 打开屏幕右侧的开关。\n3. 确认屏幕右侧的开关是蓝色的。\n4. 用后退键返回到应用屏幕。</string>
+        <string name="msgs_storage_permission_all_file_access_request_message">SMBSync4需要 \"访问所有文件 \"的权限，以便同步到您指定的各个目录。请查看应用程序的隐私政策，了解要收集的数据和所需的权限。\n请按照下面的步骤来允许 \"访问所有文件\"。\n0. 点屏幕底部的 \"下一步\"。\n1. 在出现的 \"访问所有文件 \"屏幕上点 \"SMBSync4\"。\n2. 2. 打开屏幕右侧的开关。\n3. 确认屏幕右侧的开关是蓝色的。\n4. 用后退键返回到应用屏幕。</string>
         <string name="msgs_storage_permission_all_file_access_button_text">Next</string>
         <string name="msgs_storage_permission_all_file_access_denied_message">You cannot launch the app until \"All File Access\" is allowed. If you want to allow it, please start the app again.</string>
         <string name="msgs_storage_permission_all_file_access_error_message">The \"All File Access\" permission screen could not be displayed.\nError=%s</string>

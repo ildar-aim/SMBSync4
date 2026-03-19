@@ -17,7 +17,7 @@
 			android:entries="@array/settings_playback_ringtone_when_sync_ended_list_entries"
 			android:entryValues="@array/settings_playback_ringtone_when_sync_ended_list_values"
 			android:singleLineTitle="false"/>
-        <com.sentaroh.android.SMBSync3.SeekBarPreference
+        <com.ildar_aim.smbsync4.SeekBarPreference
             android:key="@string/settings_playback_ringtone_volume"
             android:title="@string/settings_playback_ringtone_volume_title"
             android:summary="@string/settings_playback_ringtone_volume_summary"

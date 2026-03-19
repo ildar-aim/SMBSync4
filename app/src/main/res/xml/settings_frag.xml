@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
 	<header android:title="@string/settings_sync_title"
-	    android:fragment="com.sentaroh.android.SMBSync3.ActivitySettings$SettingsSync"/>
+	    android:fragment="com.ildar_aim.smbsync4.ActivitySettings$SettingsSync"/>
     <header android:title="@string/settings_ui_title"
-	    android:fragment="com.sentaroh.android.SMBSync3.ActivitySettings$SettingsUi"/>
+	    android:fragment="com.ildar_aim.smbsync4.ActivitySettings$SettingsUi"/>
 	<header android:title="@string/settings_smb_title"
-	    android:fragment="com.sentaroh.android.SMBSync3.ActivitySettings$SettingsSmb"/>
+	    android:fragment="com.ildar_aim.smbsync4.ActivitySettings$SettingsSmb"/>
     <header android:title="@string/settings_security_title"
-        android:fragment="com.sentaroh.android.SMBSync3.ActivitySettings$SettingsSecurity"/>
+        android:fragment="com.ildar_aim.smbsync4.ActivitySettings$SettingsSecurity"/>
 	<header android:title="@string/settings_misc_title"
-	    android:fragment="com.sentaroh.android.SMBSync3.ActivitySettings$SettingsMisc"/>
+	    android:fragment="com.ildar_aim.smbsync4.ActivitySettings$SettingsMisc"/>
 </preference-headers>

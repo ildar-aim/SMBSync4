@@ -4,10 +4,12 @@
         <string name="msgs_about_dlg_func_btn">Fonctions</string>
         <string name="msgs_about_dlg_privacy_btn">Confidentialité</string>
         <string name="msgs_about_dlg_change_btn">Historique des modifications</string>
-        <string name="msgs_dlg_title_about">À propos de SMBSync3</string>
-        <string name="msgs_dlg_title_about_func_desc">SMBSync3_about_FR_Desc.md</string>
-        <string name="msgs_dlg_title_about_privacy_desc">SMBSync3_about_FR_Privacy.md</string>
-        <string name="msgs_dlg_title_about_change_desc">SMBSync3_about_EN_Change.md</string>
+        <string name="msgs_dlg_title_about">À propos de SMBSync4</string>
+        <string name="msgs_dlg_title_about_func_desc">SMBSync4_about_FR_Desc.md</string>
+        <string name="msgs_dlg_title_about_privacy_desc">SMBSync4_about_FR_Privacy.md</string>
+        <string name="msgs_dlg_title_about_change_desc">SMBSync4_about_EN_Change.md</string>
+        <string name="msgs_about_dlg_licenses_btn">Licences</string>
+        <string name="msgs_dlg_title_about_licenses_desc">SMBSync4_about_EN_Licenses.md</string>
     <!-- Export/Import -->
         <string name="msgs_export_import_profile_title">Sélectionner les tâches et les paramètres à importer</string>
         <string name="msgs_export_import_profile_listing">Afficher les fichiers de configutaion</string>
@@ -48,25 +50,25 @@
         <string name="msgs_export_import_pswd_hint_confirm">Confirmer mot de passe</string>
         <string name="msgs_export_import_pswd_unmatched_confirm_pswd">Le mot de passe et le mot de passe de confirmation ne correspondent pas.</string>
     <!-- Help -->
-        <string name="msgs_help_sync_task_file">SMBSync3_Help_FR_task.md</string>
+        <string name="msgs_help_sync_task_file">SMBSync4_Help_FR_task.md</string>
         <string name="msgs_help_sync_task_title">Aide de Configuration de Tâche</string>
-        <string name="msgs_help_sync_folder_external_file">SMBSync3_Help_FR_folder_external.md</string>
+        <string name="msgs_help_sync_folder_external_file">SMBSync4_Help_FR_folder_external.md</string>
         <string name="msgs_help_sync_folder_external_title">Aide sur les dossiers locaux</string>
-        <string name="msgs_help_sync_folder_keyword">SMBSync3_Help_FR_folder_keyword.md</string>
+        <string name="msgs_help_sync_folder_keyword">SMBSync4_Help_FR_folder_keyword.md</string>
         <string name="msgs_help_sync_folder_keyword_title">Aide sur les paramètres</string>
-        <string name="msgs_help_sync_folder_smb_file">SMBSync3_Help_FR_folder_smb.md</string>
+        <string name="msgs_help_sync_folder_smb_file">SMBSync4_Help_FR_folder_smb.md</string>
         <string name="msgs_help_sync_folder_smb_title">Aide sur Serveur SMB</string>
-        <string name="msgs_help_sync_folder_zip_file">SMBSync3_Help_FR_folder_zip.md</string>
+        <string name="msgs_help_sync_folder_zip_file">SMBSync4_Help_FR_folder_zip.md</string>
         <string name="msgs_help_sync_folder_zip_title">Aide sur Fichier ZIP</string>
-        <string name="msgs_help_directory_filter_file">SMBSync3_Help_FR_directory_filter.md</string>
+        <string name="msgs_help_directory_filter_file">SMBSync4_Help_FR_directory_filter.md</string>
         <string name="msgs_help_directory_filter_title">Aide sur le filtre de répertoire</string>
-        <string name="msgs_help_file_filter_file">SMBSync3_Help_FR_file_filter.md</string>
+        <string name="msgs_help_file_filter_file">SMBSync4_Help_FR_file_filter.md</string>
         <string name="msgs_help_file_filter_title">Aide sur les filtres de fichiers</string>
-        <string name="msgs_help_ip_address_filter_file">SMBSync3_Help_FR_ip_address_filter.md</string>
+        <string name="msgs_help_ip_address_filter_file">SMBSync4_Help_FR_ip_address_filter.md</string>
         <string name="msgs_help_ip_address_filter_title">Aide sur le filtre d\'adresses IP</string>
-        <string name="msgs_help_schedule_file">SMBSync3_Help_FR_schedule.md</string>
+        <string name="msgs_help_schedule_file">SMBSync4_Help_FR_schedule.md</string>
         <string name="msgs_help_schedule_title">Schedule help</string>
-        <string name="msgs_help_group_file">SMBSync3_Help_FR_group.md</string>
+        <string name="msgs_help_group_file">SMBSync4_Help_FR_group.md</string>
         <string name="msgs_help_group_title">Group help</string>
     <!-- Log management -->
         <string name="msgs_log_management_enable_log_file_warning">En poursuivant, les données suivantes seront enregistrées dans un fichier que vous pouvez envoyer:\nVersion Android, Nom du périphérique, Nom des dossiers, Nom des fichiers, Nom de compte SMB, addresse IP, Nom de l\'interface réseau, Paramètres système, Paramètres d\'application</string>
@@ -85,7 +87,7 @@
         <string name="msgs_security_application_password_create_forget_recovery">Si vous oubliez le mot de passe, vous devrez réinitialiser ou réinstaller l\'application</string>
         <string name="msgs_security_application_password_create_forget_warning">Si vous oubliez le mot de passe, vous devrez réinitialiser ou réinstaller l\'application. Continuer ?</string>
         <string name="msgs_security_stored_sectret_key_change_title">Clé interne</string>
-        <string name="msgs_security_stored_sectret_key_change_message">Le mot de passe de l\'application ne peut pas être décrypté car la clé stockée dans le Keystore d\'Android a été modifiée après la création du mot de passe de l\'application.\nVeuillez suivre les étapes suivantes pour la récupérer.\n1. Enregistrez votre liste de tâches si possible.\n2. réinstallez SMBSync3(Désinstallation et installation)\n3. Importation d\'une liste de tâches sauvegardée(ou importer une liste de tâches enregistrée automatiquement)</string>
+        <string name="msgs_security_stored_sectret_key_change_message">Le mot de passe de l\'application ne peut pas être décrypté car la clé stockée dans le Keystore d\'Android a été modifiée après la création du mot de passe de l\'application.\nVeuillez suivre les étapes suivantes pour la récupérer.\n1. Enregistrez votre liste de tâches si possible.\n2. réinstallez SMBSync4(Désinstallation et installation)\n3. Importation d\'une liste de tâches sauvegardée(ou importer une liste de tâches enregistrée automatiquement)</string>
         <string name="msgs_security_stored_sectret_key_change_error">Erreur de clé interne</string>
         <string name="msgs_security_stored_sectret_key_save_error">Erreur de sauvegarde du code de vérification de la clé interne</string>
         <string name="msgs_security_application_password_auth_title">Verrouillage de l\'application par mot de passe</string>
@@ -154,10 +156,10 @@
         <string name="msgs_info_storage_copy_completed">Copié dans le presse-papier</string>
         <string name="msgs_info_storage_send_btn_title">Envoyer au développeur</string>
         <string name="msgs_info_storage_title">Données sur le stockage</string>
-        <string name="msgs_your_problem_title">Votre problème/question concernant SMBSync3</string>
+        <string name="msgs_your_problem_title">Votre problème/question concernant SMBSync4</string>
         <string name="msgs_your_problem_msg">Merci de compléter les détails concernant le problème que vous rencontrez ou votre question.</string>
-        <string name="msgs_your_problem_hint">Exemple: la carte SD n\'est pas reconnue par SMBSync3.</string>
-        <string name="msgs_your_problem_no_desc">Le probleme/question n\'est pas decrit, nous ne pouvons y repondre que si le probleme/question de SMBSync3 est decrit.</string>
+        <string name="msgs_your_problem_hint">Exemple: la carte SD n\'est pas reconnue par SMBSync4.</string>
+        <string name="msgs_your_problem_no_desc">Le probleme/question n\'est pas decrit, nous ne pouvons y repondre que si le probleme/question de SMBSync4 est decrit.</string>
         <string name="msgs_log_activate_pinned">Défilement automatique désactivé</string>
         <string name="msgs_log_confirm_clear_all_msg">Supprimer toutes les entrées de messages ?</string>
         <string name="msgs_log_inactivate_pinned">Défilement automatique activé</string>
@@ -274,7 +276,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_msg_cont_label_pinned_active">Désactiver l\'autodéfilement</string>
         <string name="msgs_msg_cont_label_pinned_inactive">Activer l\'autodéfilement</string>
         <string name="msgs_no_profile_entry">Aucune tâche</string>
-        <string name="msgs_notification_smbsync_active">SMBSync3 démarré.</string>
+        <string name="msgs_notification_smbsync_active">SMBSync4 démarré.</string>
         <string name="msgs_notification_sync_active">Synchronisation active.</string>
         <string name="msgs_override">poursuivre?</string>
         <string name="msgs_task_cont_label_auto">Mode auto</string>
@@ -522,7 +524,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_tab_name_msg">Messages</string>
         <string name="msgs_tab_name_task">Tâches</string>
         <string name="msgs_tab_name_group">Groupe</string>
-        <string name="msgs_terminate_application">Quitter SMBSync3</string>
+        <string name="msgs_terminate_application">Quitter SMBSync4</string>
     <!-- Privacy Policy confirm -->
         <string name="msgs_privacy_policy_title">Confidentialité</string>
         <string name="msgs_privacy_policy_show_privacy_policy">Afficher la politique de confidentialité</string>
@@ -817,7 +819,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_edit_sync_task_list_cont_label_add_sync_task">Ajouter une tâche de synchronisation</string>
         <string name="msgs_edit_sync_task_list_help_title">Aide à l\'édition de la liste des tâches synchronisées</string>
         <string name="msgs_edit_sync_task_list_add_task_list_guide">Sélectionnez la tâche que vous voulez ajouter et cliquez sur le bouton \"Ajouter\".</string>
-        <string name="msgs_edit_sync_task_list_help_file">SMBSync3_Help_FR_edit_sync_task_list.md</string>
+        <string name="msgs_edit_sync_task_list_help_file">SMBSync4_Help_FR_edit_sync_task_list.md</string>
         <string name="msgs_edit_sync_task_list_confirm_msg_nosave">La liste des tâches a changé. Quitter sans sauvegarder ?</string>
     <!-- Sync Button -->
         <string name="msgs_main_sync_button_confirmation_message_title">Confirmer le début de la sync</string>
@@ -826,8 +828,8 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_main_sync_button_start_error_auto_task_does_not_exists">Auto task n\'existe pas.</string>
         <string name="msgs_main_sync_button_confirmation_message_suppress">Désactiver cette notification (peut être activée dans les paramètres de synchronisation)</string>
     <!-- Shortcut -->
-        <string name="msgs_main_shortcut_title">Raccourci SMBSync3</string>
-        <string name="msgs_main_shorcut_confirmation_message_title">Confirmer le démarrage de SMBSync3</string>
+        <string name="msgs_main_shortcut_title">Raccourci SMBSync4</string>
+        <string name="msgs_main_shorcut_confirmation_message_title">Confirmer le démarrage de SMBSync4</string>
         <string name="msgs_main_shorcut_confirmation_message_msg">Voulez-vous commencer les tâches suivantes ?</string>
         <string name="msgs_main_shortcut_start_error_task_not_found">(%1$s) Aucune tâche trouvée pour démarrer la synchronisation. Tâche=%2$s</string>
         <string name="msgs_main_shortcut_start_error_auto_task_does_not_exists">(%s) Auto task n\'existe pas.</string>
@@ -842,8 +844,8 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_main_shortcut_button_label_button3">Bouton3</string>
     <!-- svc -->
         <string name="msgs_svc_can_not_start_sync_task_disabled">La tâche de synchronisation n\'a pas été exécutée, car elle est désactivée.</string>
-        <string name="msgs_svc_received_start_request_from_scheduler">Demande de sync reçue depuis le planificateur de SMBSync3.</string>
-        <string name="msgs_svc_received_start_request_from_scheduler_task_not_found">Demande de sync reçue depuis le planificateur de SMBSync3, mais elle a été ignorée, car la tâche n\'existe pas.</string>
+        <string name="msgs_svc_received_start_request_from_scheduler">Demande de sync reçue depuis le planificateur de SMBSync4.</string>
+        <string name="msgs_svc_received_start_request_from_scheduler_task_not_found">Demande de sync reçue depuis le planificateur de SMBSync4, mais elle a été ignorée, car la tâche n\'existe pas.</string>
         <string name="msgs_svc_received_start_request_from_scheduler_no_task_list">Exécution interrompue, car la tâche de synchronisation n\'existe pas.</string>
         <string name="msgs_svc_received_start_request_from_external">Demande de sync reçue depuis une application externe.</string>
         <string name="msgs_svc_received_start_request_from_external_task_not_found">Demande de sync reçue depuis une application externe, mais elle a été ignorée, car cette tâche n\'existe pas.</string>
@@ -918,7 +920,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_storage_permission_msg_saf_error_occured">SAF Erreur de demande d\'autorisation</string>
         <string name="msgs_storage_permission_all_file_access_title">All File Access</string>
         <string name="msgs_storage_permission_all_file_access_image">all_file_access_desc_en.png</string>
-        <string name="msgs_storage_permission_all_file_access_request_message">SMBSync3 requiert l\'autorisation d\'\"accéder à tous les fichiers\" afin de se synchroniser avec les différents répertoires que vous spécifiez. Veuillez consulter la politique de confidentialité de l\'application pour connaître les données à collecter et les autorisations requises.\nVeuillez suivre les étapes ci-dessous pour autoriser \"l\'accès à tous les fichiers\".\n0. Appuyez sur \"Suivant\" en bas de l\'écran.\n1. Appuyez sur \"SMBSync3\" sur l\'écran \"Accès à tous les fichiers\" qui apparaît.\n2. Allumez l\'interrupteur sur le côté droit de l\'écran.\n3. Confirmez que l\'interrupteur sur le côté droit de l\'écran est bleu.\n4. Revenez à l\'écran de l\'application avec la touche retour.</string>
+        <string name="msgs_storage_permission_all_file_access_request_message">SMBSync4 requiert l\'autorisation d\'\"accéder à tous les fichiers\" afin de se synchroniser avec les différents répertoires que vous spécifiez. Veuillez consulter la politique de confidentialité de l\'application pour connaître les données à collecter et les autorisations requises.\nVeuillez suivre les étapes ci-dessous pour autoriser \"l\'accès à tous les fichiers\".\n0. Appuyez sur \"Suivant\" en bas de l\'écran.\n1. Appuyez sur \"SMBSync4\" sur l\'écran \"Accès à tous les fichiers\" qui apparaît.\n2. Allumez l\'interrupteur sur le côté droit de l\'écran.\n3. Confirmez que l\'interrupteur sur le côté droit de l\'écran est bleu.\n4. Revenez à l\'écran de l\'application avec la touche retour.</string>
         <string name="msgs_storage_permission_all_file_access_button_text">Next</string>
         <string name="msgs_storage_permission_all_file_access_denied_message">Vous ne pouvez pas lancer l\'application tant que \"All File Access\" n\'est pas autorisé. Si vous souhaitez l\'autoriser, veuillez relancer l\'application.</string>
         <string name="msgs_storage_permission_all_file_access_error_message">L\'écran d\'autorisation \"Accès à tous les fichiers\" n\'a pas pu être affiché.\nErreur=%s</string>

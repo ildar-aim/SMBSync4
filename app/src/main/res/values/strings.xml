@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SMBSync3</string>
-    <string name="smbsync_main_title">SMBSync3</string>
-    <string name="app_name_auto_sync">StartSync3</string>
-    <string name="app_name_notice_message">StartSync3</string>
+    <string name="app_name">SMBSync4</string>
+    <string name="smbsync_main_title">SMBSync4</string>
+    <string name="app_name_auto_sync">StartSync4</string>
+    <string name="app_name_notice_message">StartSync4</string>
 </resources>
