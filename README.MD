@@ -4,6 +4,8 @@ Fork of [SMBSync3](https://github.com/Sentaroh/SMBSync3) by Sentaroh, which is a
 
 SMBSync4 is a tool to synchronize files between Android device's internal storage, MicroSD, USB Flash and PC/NAS via wireless LAN using SMB1, SMB2 or SMB3 protocol.
 
+**Supported Android versions:** 8.0 Oreo (API 26) through 14 Upside Down Cake (API 34)
+
 ### Features
 - Mirror, Copy, Move, and Archive synchronization modes
 - Multiple USB drives can be used
