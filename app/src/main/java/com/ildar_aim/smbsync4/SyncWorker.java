@@ -452,13 +452,13 @@ public class SyncWorker extends Worker {
             if (gp.isSyncWorkerActive()) {
                 lu.addDebugMsg(1, "I", "SyncWorker is already started.");
             } else {
-                WorkManager.getInstance().cancelAllWorkByTag(WORKER_TAG);
-                WorkManager.getInstance().pruneWork();
+                WorkManager.getInstance(c).cancelAllWorkByTag(WORKER_TAG);
+                WorkManager.getInstance(c).pruneWork();
                 OneTimeWorkRequest req = new OneTimeWorkRequest.Builder(SyncWorker.class)
 //                        .setInputData(new Data.Builder().putString(WORKER_ACTION_KEY, SCHEDULE_INTENT_TIMER_EXPIRED).build())
                         .addTag(WORKER_TAG)
                         .build();
-                WorkManager.getInstance().enqueueUniqueWork(WORKER_TAG, ExistingWorkPolicy.KEEP, req);
+                WorkManager.getInstance(c).enqueueUniqueWork(WORKER_TAG, ExistingWorkPolicy.KEEP, req);
             }
         }
     }
