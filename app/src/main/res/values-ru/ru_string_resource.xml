@@ -31,8 +31,8 @@
         <string name="msgs_export_import_profile_error_occured_while_import_task_list">При импорте списка задач произошла ошибка. Пожалуйста, проверьте ошибку на вкладке "Сообщения".</string>
         <string name="msgs_import_autosave_dlg_title">Импортировать список задач</string>
         <string name="msgs_import_autosave_dlg_select_exported_file">Выберите другой файл</string>
-        <string name="msgs_import_autosave_dlg_autosave_list">Список задач сохраненный автоматически</string>
-        <string name="msgs_import_autosave_dlg_manual_save_list">Список задач сохраненный вручную</string>
+        <string name="msgs_import_autosave_dlg_autosave_list">Список задач, сохраненный автоматически</string>
+        <string name="msgs_import_autosave_dlg_manual_save_list">Список задач, сохраненный вручную</string>
         <string name="msgs_import_autosave_dlg_autosave_failed">Автосохранение задачи синхронизации не удалось</string>
         <string name="msgs_import_autosave_dlg_autosave_completed">Сохраненные настройки</string>
         <string name="msgs_import_autosave_dlg_autosave_enty_item">%s</string>
@@ -84,8 +84,8 @@
     <!-- Application passowrd -->
         <string name="msgs_security_application_password_create_title">Задать пароль на приложение</string>
         <string name="msgs_security_application_password_create_min_length_is_4_digit">Для пароля требуется минимум 4 символа.</string>
-        <string name="msgs_security_application_password_create_forget_recovery">Если вы забыли свой пароль, пожалуйста переустановите приложение.</string>
-        <string name="msgs_security_application_password_create_forget_warning">Если вы забудите свой пароль, вам потребуется переустановка приложения, поэтому не забывайте его.</string>
+        <string name="msgs_security_application_password_create_forget_recovery">Если вы забыли свой пароль, пожалуйста, переустановите приложение.</string>
+        <string name="msgs_security_application_password_create_forget_warning">Если вы забудете свой пароль, вам потребуется переустановка приложения, поэтому не забывайте его.</string>
         <string name="msgs_security_stored_sectret_key_change_title">Внутренний ключ</string>
         <string name="msgs_security_stored_sectret_key_change_message">Пароль приложения не может быть расшифрован, так как ключ, хранящийся в Android Keystore, был изменен после создания пароля приложения.\nПожалуйста, выполните следующие шаги для его восстановления.\n1. Сохраните список заданий, если это возможно.\n2. переустановить SMBSync4.(Удалить и установить)\n3. Импорт сохраненного списка задач(или импортировать автоматически сохраненный список задач).</string>
         <string name="msgs_security_stored_sectret_key_change_error">Внутренняя ошибка ключа</string>
@@ -103,7 +103,7 @@
         <string name="msgs_audit_msgs_local_dir">Имя локального каталога содержит %s. Неверный символ удален.</string>
         <string name="msgs_audit_share_not_spec">Укажите название общего ресурса.</string>
         <string name="msgs_clear_log_message">Очистить сообщения журнала.</string>
-        <string name="msgs_cont_button_diabled_by_sync">Запрошенная операция была проигнорированна во время синхронизации.</string>
+        <string name="msgs_cont_button_diabled_by_sync">Запрошенная операция была проигнорирована во время синхронизации.</string>
         <string name="msgs_copy_sync_profile">Копировать процесс синхронизации</string>
         <string name="msgs_create_profile_error">Не удалось создать файл списка задач: %s</string>
         <string name="msgs_current_dir">Текущий каталог:</string>
@@ -121,9 +121,9 @@
         <string name="msgs_extra_data_sync_profile_type_error">Синхронизация отменена, поскольку синхронизация не String.</string>
         <string name="msgs_filelist_cancel">Создание удаленного списка файлов отменено.</string>
         <string name="msgs_filelist_error">Произошла ошибка при создании списка файлов SMB.</string>
-        <string name="msgs_filter_edit_dlg_title">Изменить фтльтр</string>
+        <string name="msgs_filter_edit_dlg_title">Изменить фильтр</string>
         <string name="msgs_filter_list_dlg_add">Добавить</string>
-        <string name="msgs_filter_list_dlg_add_dir_filter">Добавить фтльтр каталогов</string>
+        <string name="msgs_filter_list_dlg_add_dir_filter">Добавить фильтр каталогов</string>
         <string name="msgs_filter_list_dlg_close">Закрыть</string>
         <string name="msgs_filter_list_dlg_dir_filter">Фильтр каталогов</string>
         <string name="msgs_filter_list_dlg_file_filter">Фильтр по имени файла</string>
@@ -211,7 +211,7 @@
         <string name="msgs_main_sync_history_status_cancel">Отмена</string>
         <string name="msgs_main_sync_history_status_error">Ошибка</string>
         <string name="msgs_main_sync_history_status_running">Запуск</string>
-        <string name="msgs_main_sync_history_status_success">Выполенно</string>
+        <string name="msgs_main_sync_history_status_success">Выполнено</string>
         <string name="msgs_main_sync_history_status_warning">Предупреждение</string>
         <string name="msgs_main_sync_history_status_skip">Skipped</string>
         <string name="msgs_main_sync_list_array_task_auto">АВТО</string>
@@ -358,7 +358,7 @@
         <string name="msgs_task_sync_task_dlg_swap_warning_title">Источник подкачки и место назначения</string>
         <string name="msgs_task_sync_task_dlg_swap_warning_message">Замена содержимого исходной и конечной папок может привести к удалению непреднамеренных файлов или каталогов.\nНастройте тестовый режим или создайте тестовую директорию и проведите проверку, чтобы убедиться, что непреднамеренные файлы или каталоги не будут удалены.</string>
         <string name="msgs_task_sync_task_dlg_swap_directory_name_parameter_removed">В исходной папке переменные, связанные с датой и временем съемки, недоступны и были удалены.</string>
-        <string name="msgs_task_sync_task_dlg_dir_name_has_invalid_char">Имя каталога содержало недопустимые символы, и они былио удалены (\", :, \\, ?, *, &lt;, &gt;, \|).</string>
+        <string name="msgs_task_sync_task_dlg_dir_name_has_invalid_char">Имя каталога содержало недопустимые символы, и они были удалены (\", :, \\, ?, *, &lt;, &gt;, \|).</string>
         <string name="msgs_task_sync_task_dlg_file_filter_not_specified">Фильтр по имени файла не указан</string>
         <string name="msgs_task_sync_task_dlg_file_filter_sync_all_file">Все файлы</string>
         <string name="msgs_task_sync_task_dlg_file_name_has_invalid_char">Недопустимые символы (/, \", :, \\, ?, *, &lt;, &gt;, \|), были удалены из имени файла.</string>
@@ -397,7 +397,7 @@
         <string name="msgs_task_sync_task_filter_list_dlg_file_filter">Фильтр по имени файла</string>
         <string name="msgs_task_sync_task_filter_list_dlg_filter_hint">Фильтр</string>
         <string name="msgs_task_sync_task_filter_list_dlg_include">Включать</string>
-        <string name="msgs_task_sync_task_filter_list_dlg_not_specified">Не определенный</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_not_specified">Не определен</string>
         <string name="msgs_task_sync_task_filter_title">Фильтр</string>
         <string name="msgs_task_sync_task_sync_file_type_add_audio_title">Добавить аудио</string>
         <string name="msgs_task_sync_task_sync_file_type_add_image_title">Добавить изображение</string>
@@ -458,7 +458,7 @@
         <string name="msgs_task_sync_task_sync_option_offset_of_dst_time_value_title">Выберите смещение летнего времени (минуты)</string>
         <string name="msgs_task_sync_task_sync_option_not_set_file_last_modified">Не устанавливайте время обновления файла назначения в соответствии с исходным файлом</string>
         <string name="msgs_task_sync_task_sync_option_not_set_file_last_modified_warning">При включении, время последнего изменения целевого файла не может совпадать с исходным файлом, поэтому файл копируется каждый раз при синхронизации. Используйте эту опцию, например, когда цель не может установить последнее измененное время. 
-Если эта опция включена, вы можете предотвратить копирование файлов каждый раз, отключив функцию \"Использовать время последней модификации для определения различий в файлах\". \nПереведено с помощью www.DeepL.com/Translator (бесплатная версия)</string>
+Если эта опция включена, вы можете предотвратить копирование файлов каждый раз, отключив функцию \"Использовать время последней модификации для определения различий в файлах\".</string>
         <string name="msgs_task_sync_task_sync_option_perform_overriden_copy_move">Перезаписать целевой(ые) файл(ы)</string>
         <string name="msgs_task_sync_task_sync_option_retry_if_error_occured">Повторите попытку при сетевой ошибке</string>
         <string name="msgs_task_sync_task_sync_option_show_special_option">Показать расширенные опции</string>
@@ -597,8 +597,8 @@
         <string name="msgs_mirror_ignore_override_copy_file">Копирование файла игнорируется, поскольку для этой задачи отключена опция \ \"Перезаписать файл (ы) назначения \".</string>
         <string name="msgs_mirror_ignore_override_move_file">Перемещение файла игнорируется, поскольку для этой задачи отключена опция \ \"Перезаписать файл (ы) назначения \".</string>
         <string name="msgs_mirror_invalid_folder_combination">Invalid folder type combination. Source=%1$s, Destination=%2$s</string>
-        <string name="msgs_mirror_invalid_file_directory_name_character_error">Исходный файл или имя каталога содержит символы, которые недопустимы для места назначения. Измените имя, чтобы разрешить синхронизацию. Персонаж:%1$s, Путь:%2$s</string>
-        <string name="msgs_mirror_invalid_file_directory_name_character_skipped">Файл или каталог исключены из процесса синхронизации, поскольку имя источника содержит символы, недопустимые для места назначения. Персонаж:%1$s, Путь:%2$s</string>
+        <string name="msgs_mirror_invalid_file_directory_name_character_error">Исходный файл или имя каталога содержит символы, которые недопустимы для места назначения. Измените имя, чтобы разрешить синхронизацию. Символ:%1$s, Путь:%2$s</string>
+        <string name="msgs_mirror_invalid_file_directory_name_character_skipped">Файл или каталог исключены из процесса синхронизации, поскольку имя источника содержит символы, недопустимые для места назначения. Символ:%1$s, Путь:%2$s</string>
         <string name="msgs_mirror_remote_addr_not_connected">Невозможно подключиться к адресу хоста SMB %s</string>
         <string name="msgs_mirror_remote_addr_not_connected_with_port">Невозможно подключиться к узлу SMB %1$s через порт %2$s</string>
         <string name="msgs_mirror_remote_name_not_found">Не удалось найти имя хоста SMB, попробуйте его с IP-адресом. Имя хоста =%s</string>
@@ -886,11 +886,11 @@
         <string name="msgs_sync_folder_archive_btn_title_hh">HH</string>
         <string name="msgs_sync_folder_archive_btn_title_min">MIN</string>
         <string name="msgs_sync_folder_archive_btn_title_sec">SEC</string>
-        <string name="msgs_sync_folder_archive_btn_title_week_number">ЕЖЕНЕДЕЛЬНЫЙ ЧИСЛО</string>
+        <string name="msgs_sync_folder_archive_btn_title_week_number">ЕЖЕНЕДЕЛЬНОЕ ЧИСЛО</string>
         <string name="msgs_sync_folder_archive_btn_title_week_day">День недели (%1$s,%2$s...)</string>
         <string name="msgs_sync_folder_archive_btn_title_week_day_long">День недели (%1$s,%2$s...)</string>
         <string name="msgs_sync_folder_archive_zip_folder_not_supported">Изменена на локальную папку, так как папка ZIP не может быть использована, когда метод синхронизации - архив.</string>
-        <string name="deleted_msgs_sync_folder_archive_zip_folder_not_supported_error">Запрошенная операция была проигнорированна. Файлы ZIP не могут использоваться в качестве адресатов для типа синхронизации архива.</string>
+        <string name="deleted_msgs_sync_folder_archive_zip_folder_not_supported_error">Запрошенная операция была проигнорирована. Файлы ZIP не могут использоваться в качестве адресатов для типа синхронизации архива.</string>
         <string name="msgs_sync_folder_archive_btn_title_year">Год</string>
         <string name="msgs_sync_folder_archive_btn_title_month">Месяц</string>
         <string name="msgs_sync_folder_archive_btn_title_day">День</string>
@@ -961,7 +961,7 @@
         <string name="settings_device_orientation_landscape_tablet_title">Вид планшета в ландшафтном режиме</string>
         <string name="settings_exit_clean">settings_exit_clean</string>
         <string name="settings_exit_clean_summary_ena">Убить процесс приложения после очистки приложения</string>
-        <string name="settings_exit_clean_title">Выход посли очистки</string>
+        <string name="settings_exit_clean_title">Выход после очистки</string>
         <string name="settings_exported_profile_encryption">settings_exported_profile_encryption</string>
         <string name="settings_force_screen_on_while_sync">settings_force_screen_on_while_sync</string>
         <string name="settings_force_screen_on_while_sync_summary_ena">The screen lights up when the sync starts and wakes up</string>

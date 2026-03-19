@@ -150,7 +150,7 @@
         <string name="msgs_hist_cont_label_select_all">全て選択</string>
         <string name="msgs_hist_cont_label_share">共有</string>
         <string name="msgs_hist_cont_label_unselect_all">全ての選択を解除</string>
-        <string name="msgs_import_prof_fail">タスクの取り込が失敗しました。</string>
+        <string name="msgs_import_prof_fail">タスクの取り込みが失敗しました。</string>
         <string name="msgs_import_prof_fail_no_valid_item">指定されたファイルには有効なタスク項目が存在しません。 ファイル(%s)</string>
         <string name="msgs_info_storage_copy_clipboard">コピー</string>
         <string name="msgs_info_storage_copy_completed">クリップボードにコピーしました</string>
@@ -356,7 +356,7 @@
         <string name="msgs_task_sync_task_dlg_active">自動同期タスク</string>
         <string name="msgs_task_sync_task_dlg_change_source_and_destination">ソースと宛先フォルダーを入替える</string>
         <string name="msgs_task_sync_task_dlg_swap_warning_title">ソースと宛先フォルダーを入替える</string>
-        <string name="msgs_task_sync_task_dlg_swap_warning_message">ソースフォルダーと宛先フォルダーの内容を入れ替えるとファイルやディレクトリーが削除される可能性があります。\nテストモードまたはテストディレクトリー作成してテストを行い意図しないファイルやディレクトリーが削除されない事を確認してください。</string>
+        <string name="msgs_task_sync_task_dlg_swap_warning_message">ソースフォルダーと宛先フォルダーの内容を入れ替えるとファイルやディレクトリーが削除される可能性があります。\nテストモードまたはテストディレクトリーを作成してテストを行い意図しないファイルやディレクトリーが削除されない事を確認してください。</string>
         <string name="msgs_task_sync_task_dlg_swap_directory_name_parameter_removed">ソースフォルダーでは撮影日時に関する変数は使用できないため削除しました。</string>
         <string name="msgs_task_sync_task_dlg_dir_name_has_invalid_char">ディレクトリ名に使用できない文字が含まれていましたので削除しました。 (\", :, \\, ?, *, &lt;, &gt;, \|)</string>
         <string name="msgs_task_sync_task_dlg_file_filter_not_specified">ファイル名フィルタ―は指定されてません</string>
@@ -444,7 +444,7 @@
         <string name="msgs_task_sync_task_sync_option_hidden_directory">隠しディレクトリを処理する</string>
         <string name="msgs_task_sync_task_sync_option_hidden_file">隠しファイルを処理する</string>
         <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter_warn_dialog_title">フィルターにより除外されたディレクトリー/ファイルを削除する</string>
-        <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter_warn_dialog">ソースディレクトリに存在しないすべてのファイルとディレクトリー、およびフィルタにより除外されたファイルとディレクトリーは宛先ディレクトリーから削除されます。\nテストモードまたはテストディレクトリー作成してテストを行い、意図しないファイルやディレクトリーを削除しないことを確認してください。</string>
+        <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter_warn_dialog">ソースディレクトリに存在しないすべてのファイルとディレクトリー、およびフィルタにより除外されたファイルとディレクトリーは宛先ディレクトリーから削除されます。\nテストモードまたはテストディレクトリーを作成してテストを行い、意図しないファイルやディレクトリーを削除しないことを確認してください。</string>
         <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter">フィルターにより除外されたディレクトリー/ファイルを削除する</string>
         <string name="msgs_task_sync_task_sync_option_ignore_never_overwrite_destination_file_if_it_is_newer_than_the_source_file_option_enabled">\"宛先ファイルがソースファイルより新しい時は宛先ファイルを上書きしない\"オプションが有効なためファイルの上書きコピーを無視しました。</string>
         <string name="msgs_task_sync_task_sync_option_ignore_unusable_character_used_directory_file_name">ディレクトリ名またはファイル名に使用できない文字が含まれているディレクトリまたはファイルの処理をスキップする。 (\", :, \\, ?, *, &lt;, &gt;, \|)</string>
@@ -745,7 +745,7 @@
         <string name="msgs_schedule_cont_label_unselect_all">全ての選択解除</string>
         <string name="msgs_schedule_confirm_msg_delete">下記のスケジュールを削除します。結果は即座に反映され、取り消しできません。</string>
         <string name="msgs_schedule_confirm_msg_enable">下記のスケジュールを有効にします。結果は即座に反映され、取り消しできません。</string>
-        <string name="msgs_schedule_confirm_msg_disable">下記のスケジュールを無効にします。.結果は即座に反映され、取り消しできません。</string>
+        <string name="msgs_schedule_confirm_msg_disable">下記のスケジュールを無効にします。結果は即座に反映され、取り消しできません。</string>
         <string name="msgs_schedule_confirm_msg_rename_warning">スケジュール名を変更します。.結果は即座に反映され、取り消しできません。</string>
         <string name="msgs_schedule_confirm_msg_rename_duplicate_name">スケジュール名が重複しています。</string>
         <string name="msgs_schedule_confirm_msg_nosave">スケジュールが変更されています、保存せず終了しますか。</string>

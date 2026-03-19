@@ -33,7 +33,7 @@
         <string name="msgs_import_autosave_dlg_select_exported_file">Selezionare un altro file</string>
         <string name="msgs_import_autosave_dlg_autosave_list">Autosalvataggio file impostazioni</string>
         <string name="msgs_import_autosave_dlg_manual_save_list">Impostazioni file utente di back-up</string>
-        <string name="msgs_import_autosave_dlg_autosave_failed">Un tentativo di auto-salvataggio impostazioni sincronizzazione è stato fallito</string>
+        <string name="msgs_import_autosave_dlg_autosave_failed">Un tentativo di auto-salvataggio impostazioni sincronizzazione è fallito</string>
         <string name="msgs_import_autosave_dlg_autosave_completed">Impostazioni salvate</string>
         <string name="msgs_import_autosave_dlg_autosave_enty_item">%s</string>
         <string name="msgs_import_autosave_dlg_autosave_enty_item_latest">%s (Ultimo file salvato)</string>
@@ -105,7 +105,7 @@
         <string name="msgs_clear_log_message">Pulisci log messaggi</string>
         <string name="msgs_cont_button_diabled_by_sync">L\'operazione richiesta è stata ignorata durante sincronizzazione.</string>
         <string name="msgs_copy_sync_profile">Compito di Copia Sync</string>
-        <string name="msgs_create_profile_error">Creazione file di backup delle impostazioni fallito: %s</string>
+        <string name="msgs_create_profile_error">Creazione file di backup delle impostazioni fallita: %s</string>
         <string name="msgs_current_dir">Corrente dir:</string>
         <string name="msgs_delete_following_profile">Eliminare i seguenti task?</string>
         <string name="msgs_dir_empty">Cartelle non può essere trovato</string>
@@ -115,8 +115,8 @@
         <string name="msgs_task_name_remove_with_schedule_group_task_list">Quando un task viene eliminato, viene anche eliminato il nome del task nella pianificazione.</string>
         <string name="msgs_task_name_contains_invalid_character">Il nome della task contiene caratteri non validi: \"%s\"</string>
         <string name="msgs_edit_sync_profile">Modifica Sync Task</string>
-        <string name="msgs_export_prof_fail">Esportazione impostazione di sincronizzazione fallito.</string>
-        <string name="msgs_export_prof_success">Esportazione impostazione di sincronizzazione effettuato con successo.</string>
+        <string name="msgs_export_prof_fail">Esportazione impostazione di sincronizzazione fallita.</string>
+        <string name="msgs_export_prof_success">Esportazione impostazione di sincronizzazione effettuata con successo.</string>
         <string name="msgs_export_prof_title">Impostazioni Esportazione Sincronizzazione.</string>
         <string name="msgs_extra_data_sync_profile_type_error">Sync annullata: la richiesta ricevuta dall\'app esterna non è una stringa</string>
         <string name="msgs_filelist_cancel">Generazione della lista file remota annullata.</string>
@@ -418,7 +418,7 @@ Si prega di fare riferimento all\'Informativa sulla privacy per il trattamento d
         <string name="msgs_task_sync_task_sync_file_size_unit_gib">GiB</string>
         <string name="msgs_task_sync_task_sync_file_size_filter_type_none">Tutte</string>
         <string name="msgs_task_sync_task_sync_file_size_filter_type_less_than">Meno di</string>
-        <string name="msgs_task_sync_task_sync_file_size_filter_type_greater_than">Piu di</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_type_greater_than">Più di</string>
         <string name="msgs_task_sync_task_sync_file_size_filter_error_file_size_not_specified">La dimensione del file non è specificata</string>
         <string name="msgs_task_sync_task_sync_file_size_filter_error_file_size_can_not_be_more_than_5_digits">La dimensione del file non può essere superiore a 5 cifre</string>
         <string name="msgs_task_sync_task_sync_file_size_filter_error_file_size_must_be_greater_than_0">La dimensione del file deve essere maggiore o uguale a 1</string>
@@ -430,7 +430,7 @@ Si prega di fare riferimento all\'Informativa sulla privacy per il trattamento d
         <string name="msgs_task_sync_task_sync_file_date_type_newer_than">Più recente di</string>
         <string name="msgs_task_sync_task_sync_file_date_type_after_sync_begin_day">Dal giorno di inizio della sincronizzazione</string>
         <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_not_specified">La data di aggiornamento non è specificata.</string>
-        <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_must_be_greater_than_0">La data di aggiornamento non puo essere di meno di un giorno.</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_must_be_greater_than_0">La data di aggiornamento non può essere di meno di un giorno.</string>
         <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_must_be_less_3_digit">La data di aggiornamento non può essere più di 3 cifre.</string>
         <string name="msgs_task_sync_task_sync_option">Opzioni:</string>
         <string name="msgs_task_sync_task_sync_option_allowance_last_mod_time">Differenza di tempo minima consentita (in secondi) tra i file di origine e di destinazione</string>

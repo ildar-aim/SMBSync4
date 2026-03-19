@@ -12,7 +12,7 @@
         <string name="msgs_dlg_title_about_licenses_desc">SMBSync4_about_EN_Licenses.md</string>
     <!-- Export/Import -->
         <string name="msgs_export_import_profile_title">Sélectionner les tâches et les paramètres à importer</string>
-        <string name="msgs_export_import_profile_listing">Afficher les fichiers de configutaion</string>
+        <string name="msgs_export_import_profile_listing">Afficher les fichiers de configuration</string>
         <string name="msgs_export_import_profile_setting_parms">Restaurer les paramètres de l\'application </string>
         <string name="msgs_export_import_profile_schedule_parms">Restaurer les paramètres de planification des tâches</string>
         <string name="msgs_export_import_profile_group_parms">Restaurer les paramètres du groupe</string>
@@ -37,7 +37,7 @@
         <string name="msgs_import_autosave_dlg_autosave_completed">Paramètres sauvegardés</string>
         <string name="msgs_import_autosave_dlg_autosave_enty_item">%s</string>
         <string name="msgs_import_autosave_dlg_autosave_enty_item_latest">%s (dernier fichier sauvegardé)</string>
-        <string name="msgs_export_import_profile_smb_account_name_password_not_restored">Le nom d\'utilisateur, mot de passe du compte ainsi que le mot de passe des archives (ZIP) n\'ont pas pu être importé. Si vous désinstallez l\'application et essayez de restaurer une sauvegarde, ces données d\'identification ne pourront plus être décryptées. Editez la tâche de synchronisation et saisissez à nouveau les données d\'identification.</string>
+        <string name="msgs_export_import_profile_smb_account_name_password_not_restored">Le nom d\'utilisateur, mot de passe du compte ainsi que le mot de passe des archives (ZIP) n\'ont pas pu être importés. Si vous désinstallez l\'application et essayez de restaurer une sauvegarde, ces données d\'identification ne pourront plus être décryptées. Éditez la tâche de synchronisation et saisissez à nouveau les données d\'identification.</string>
         <string name="msgs_export_import_pswd_password_title">Protection par mot de passe</string>
         <string name="msgs_export_import_pswd_password_protect">Protéger le fichier de sauvegarde par mot de passe</string>
         <string name="msgs_export_import_pswd_specify_password">Saisir un mot de passe.</string>
@@ -57,9 +57,9 @@
         <string name="msgs_help_sync_folder_keyword">SMBSync4_Help_FR_folder_keyword.md</string>
         <string name="msgs_help_sync_folder_keyword_title">Aide sur les paramètres</string>
         <string name="msgs_help_sync_folder_smb_file">SMBSync4_Help_FR_folder_smb.md</string>
-        <string name="msgs_help_sync_folder_smb_title">Aide sur Serveur SMB</string>
+        <string name="msgs_help_sync_folder_smb_title">Aide sur le Serveur SMB</string>
         <string name="msgs_help_sync_folder_zip_file">SMBSync4_Help_FR_folder_zip.md</string>
-        <string name="msgs_help_sync_folder_zip_title">Aide sur Fichier ZIP</string>
+        <string name="msgs_help_sync_folder_zip_title">Aide sur le Fichier ZIP</string>
         <string name="msgs_help_directory_filter_file">SMBSync4_Help_FR_directory_filter.md</string>
         <string name="msgs_help_directory_filter_title">Aide sur le filtre de répertoire</string>
         <string name="msgs_help_file_filter_file">SMBSync4_Help_FR_file_filter.md</string>
@@ -72,7 +72,7 @@
         <string name="msgs_help_group_title">Group help</string>
     <!-- Log management -->
         <string name="msgs_log_management_enable_log_file_warning">En poursuivant, les données suivantes seront enregistrées dans un fichier que vous pouvez envoyer:\nVersion Android, Nom du périphérique, Nom des dossiers, Nom des fichiers, Nom de compte SMB, addresse IP, Nom de l\'interface réseau, Paramètres système, Paramètres d\'application</string>
-        <string name="msgs_log_management_send_log_file_warning">Envoyer le fichier journal par courriel au développeur. Le fichier journal contient les données suivantes: Version Android, Nom du périphérique, Nom des dossiers, Nom des fichiers, Nom de compte SMB, addresse IP, Nom de l\'interface réseau, Paramètres système, Paramètres d\'application.\n1.Selectionner le bouton Aperçu pour vérifier le contenu du fichier temp_log.tx qui sera envoyé (si l\'écran de sélection d\'application FAVORITE apparait, choisissez l\'application pour visualiser le fichier texte)\n
+        <string name="msgs_log_management_send_log_file_warning">Envoyer le fichier journal par courriel au développeur. Le fichier journal contient les données suivantes: Version Android, Nom du périphérique, Nom des dossiers, Nom des fichiers, Nom de compte SMB, addresse IP, Nom de l\'interface réseau, Paramètres système, Paramètres d\'application.\n1.Sélectionner le bouton Aperçu pour vérifier le contenu du fichier temp_log.tx qui sera envoyé (si l\'écran de sélection d\'application FAVORITE apparait, choisissez l\'application pour visualiser le fichier texte)\n
 2.Une fois que vous avez confirmé ce que vous soumettez, appuyez sur le bouton \"Envoyer\" pour décrire votre question ou problème.\n
 3.Si vous souhaitez protéger le fichier ZIP par un mot de passe, entrez le mot de passe et le mot de passe de confirmation.\n
 4.Appuyez sur le bouton \"Envoyer\" et sélectionnez E-Mail dans la boîte de dialogue de sélection des E-Mails.\n
@@ -105,7 +105,7 @@
         <string name="msgs_clear_log_message">Effacer les messages de journalisation (log)</string>
         <string name="msgs_cont_button_diabled_by_sync">L\'opération demandée a été ignorée durant la synchronisation.</string>
         <string name="msgs_copy_sync_profile">Copier la Tâche de Synchronisation</string>
-        <string name="msgs_create_profile_error">Echec de création du fichier de sauvegarde: %s</string>
+        <string name="msgs_create_profile_error">Échec de création du fichier de sauvegarde: %s</string>
         <string name="msgs_current_dir">Dossier en cours:</string>
         <string name="msgs_delete_following_profile">Supprimer les tâches suivantes ?</string>
         <string name="msgs_dir_empty">Dossier non trouvé</string>
@@ -115,7 +115,7 @@
         <string name="msgs_task_name_remove_with_schedule_group_task_list">Lorsque la tâche est supprimée, le nom de la tâche dans l\'annexe/le groupe est également supprimé.</string>
         <string name="msgs_task_name_contains_invalid_character">Le nom de la tâche contient des caractères non valides: \"%s\"</string>
         <string name="msgs_edit_sync_profile">Modifier la Tâche de Synchronisation</string>
-        <string name="msgs_export_prof_fail">Echec d\'exportation des paramètres de synchronisation.</string>
+        <string name="msgs_export_prof_fail">Échec d\'exportation des paramètres de synchronisation.</string>
         <string name="msgs_export_prof_success">Paramètres de synchronisation exportés avec succès.</string>
         <string name="msgs_export_prof_title">Exporter les Paramètres de Synchronisation</string>
         <string name="msgs_extra_data_sync_profile_type_error">Synchronisation annulée: la requête reçue par l\'application externe n\'est pas une chaîne de caractères.</string>
@@ -150,7 +150,7 @@
         <string name="msgs_hist_cont_label_select_all">Sélectionner tous les éléments de l\'historique</string>
         <string name="msgs_hist_cont_label_share">Partager</string>
         <string name="msgs_hist_cont_label_unselect_all">Désélectionner tous les éléments de l\'historique</string>
-        <string name="msgs_import_prof_fail">Echec de l\'importation du fichier de configuration</string>
+        <string name="msgs_import_prof_fail">Échec de l\'importation du fichier de configuration</string>
         <string name="msgs_import_prof_fail_no_valid_item">%s ne contient aucune donnée de configuration valable</string>
         <string name="msgs_info_storage_copy_clipboard">Copier</string>
         <string name="msgs_info_storage_copy_completed">Copié dans le presse-papier</string>
@@ -180,7 +180,7 @@
         <string name="msgs_main_external_storage_select_activity_not_found_msg">N\'a pas réussi à lancer l\'activité d\'autorisation d\'écriture sur le stockage externe.</string>
         <string name="msgs_main_external_storage_select_required_cancel_msg">Les tâches utilisant le stockage SDCARD/USB ne peuvent être exécutées tant que l\'accès au stockage SDCARD/USB n\'est pas accordé.</string>
         <string name="msgs_main_external_storage_select_retry_select_msg">Le répertoire racine du stockage n\'a pas été sélectionné.  Voulez-vous le resélectionner ?</string>
-        <string name="msgs_main_external_storage_uuid_duplicated">Les UUID suivantes ne peuvent pas être utilisées car elles sont dupliquées. Formatez un lecteur MicroSD ou USB OTG pour l\'utiliser.</string>
+        <string name="msgs_main_external_storage_uuid_duplicated">Les UUID suivants ne peuvent pas être utilisés car ils sont dupliqués. Formatez un lecteur MicroSD ou USB OTG pour l\'utiliser.</string>
         <string name="msgs_main_external_storage_uuid_unusable">Médias non montés</string>
         <string name="msgs_main_external_storage_request_permission">Autorisation d\'utiliser le stockage SDCARD/USB</string>
         <string name="msgs_main_permission_external_storage_denied_msg">The application cannot be started because you have not been granted permission to access the storage.</string>
@@ -261,7 +261,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_connect_any_ap">Lorsqu\'il est connecté à l\'AP</string>
         <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_connect_private_address">Adresse IP privée uniquement</string>
         <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_connect_specific_address">Enregistré dans la liste des adresses IP</string>
-        <string name="msgs_main_sync_select_task_no_auto_task">Tache de synchronisation non sélectionnée</string>
+        <string name="msgs_main_sync_select_task_no_auto_task">Tâche de synchronisation non sélectionnée</string>
         <string name="msgs_main_sync_selected_tasks">Exécuter la tâche de synchronisation sélectionnée</string>
         <string name="msgs_main_sync_selected_task_not_found">La tâche sélectionnée n\'existe pas: %s</string>
         <string name="msgs_main_sync_specified_sync_task_not_scheduled">La tâche sélectionnée ne sera pas exécutée, car elle a été ignorée.</string>
@@ -291,8 +291,8 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_task_cont_label_sync_specific">Démarrer la synchronisation (%s)</string>
         <string name="msgs_task_cont_label_unselect_all">Désélectionner tout</string>
         <string name="msgs_task_cont_label_up">Monter</string>
-        <string name="msgs_task_cont_to_auto_task">Souhaitez-vous que les taches suivantes soient des \"taches automatiques\" ?</string>
-        <string name="msgs_task_cont_to_manual_task">Souhaitez-vous que les taches suivantes soient \"manuelles\" ?</string>
+        <string name="msgs_task_cont_to_auto_task">Souhaitez-vous que les tâches suivantes soient des \"tâches automatiques\" ?</string>
+        <string name="msgs_task_cont_to_manual_task">Souhaitez-vous que les tâches suivantes soient \"manuelles\" ?</string>
         <string name="msgs_task_edit_sync_folder_dlg_change_wifi_confition_to_any">Si la source ou la destination sont sur un serveur SMB: activer Démarrer la synchro selon la connexion Wifi \"Tous les réseaux\"?</string>
         <string name="msgs_task_edit_sync_folder_dlg_change_wifi_confition_has_private">Si la source ou la destination sont sur un serveur SMB: activer Démarrer la synchro selon la connexion Wifi \"Wifi avec IP privée\"?</string>
         <string name="msgs_task_edit_sync_folder_dlg_change_destination_folder_to_local">Lorsque SMB est défini comme dossier source, vous ne pouvez pas sélectionner ZIP comme dossier de destination. Par conséquent, le dossier de destination a été modifié en local.</string>
@@ -450,7 +450,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_task_sync_task_sync_option_ignore_unusable_character_used_directory_file_name">Ignorer les dossiers et fichiers dont le nom contient des caractères invalides (\", :, \\, ?, *, &lt;, &gt;, \|)</string>
         <string name="msgs_task_sync_task_sync_option_source_root_dir_file">Synchroniser les fichiers situés dans la racine du dossier source</string>
         <string name="msgs_task_sync_task_sync_option_never_overwrite_destination_file_if_it_is_newer_than_the_source_file">Ne pas remplacer le fichier de destination s\'il est plus récent que le fichier source</string>
-        <string name="msgs_task_sync_task_sync_option_never_overwrite_destination_file_if_it_is_newer_than_the_source_file_warning">AVERTISSEMENT: Risque de Résultats Inattendus!\nSi vous êtes dans une région avec changement d\'heure en été, ou que vous changez de fuseau horaire, le fichier destination peut faussement apparaitre comme plus ancien s\'il a été modifié pendant l\'intervalle de temps où l\'heure d\'été/fuseau horaire ont changé. Il est fortement recommandé d\'activer l\'option \"Confirmer avant de remplacer/supprimer\". Veuillez vérifier le contenu du fichier avant de l\'écraser.</string>
+        <string name="msgs_task_sync_task_sync_option_never_overwrite_destination_file_if_it_is_newer_than_the_source_file_warning">AVERTISSEMENT: Risque de Résultats Inattendus!\nSi vous êtes dans une région avec changement d\'heure en été, ou que vous changez de fuseau horaire, le fichier destination peut faussement apparaître comme plus ancien s\'il a été modifié pendant l\'intervalle de temps où l\'heure d\'été/fuseau horaire ont changé. Il est fortement recommandé d\'activer l\'option \"Confirmer avant de remplacer/supprimer\". Veuillez vérifier le contenu du fichier avant de l\'écraser.</string>
         <string name="msgs_task_sync_task_sync_option_copy_no_compare_title">Avertissement d\'écrasement du fichier cible</string>
         <string name="msgs_task_sync_task_sync_option_copy_no_compare_warning">\"Utiliser la taille des fichiers pour déterminer s\'ils sont différents\" et \"Utiliser la date de dernière modification pour déterminer si les fichiers sont différents\" ne sont pas sélectionnés et écraseront toujours le fichier cible.</string>
         <string name="msgs_task_sync_task_sync_option_diff_file_ignore_dst_difference">Ignorer la différence de temps liée au décalage de l\'heure d\'été</string>
@@ -502,7 +502,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_task_sync_task_edit_keyword_quit_warning">Les paramètres ont été modifiés. Voulez-vous sortir ?</string>
         <string name="msgs_task_sync_task_edit_keyword_mirror_can_not_used_taken_date">Une variable liée à la date et à l\'heure du tournage est utilisée dans le dossier de destination.(%s) Elle ne peut pas être utilisée par le miroir et doit être supprimée.</string>
         <string name="msgs_rename_profile">Renommer la tâche</string>
-        <string name="msgs_save_to_profile_error">Echec de la sauvegarde du fichier de configuration: %s</string>
+        <string name="msgs_save_to_profile_error">Échec de la sauvegarde du fichier de configuration: %s</string>
         <string name="msgs_select_export_file">Destination du fichier à exporter</string>
         <string name="msgs_select_import_file">Choisir le fichier à importer</string>
         <string name="msgs_select_local_dir">Sélectionnez le répertoire local</string>
@@ -552,7 +552,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_menu_import">Importer la configuration</string>
         <string name="msgs_menu_log_management">Journalisation</string>
         <string name="msgs_menu_show_hide_filter">Afficher/masquer le filtre</string>
-        <string name="msgs_menu_about">A propos</string>
+        <string name="msgs_menu_about">À propos</string>
         <string name="msgs_menu_settings">Paramètres</string>
         <string name="msgs_menu_housekeep">Maintenance</string>
         <string name="msgs_menu_kill">Arrêt forcé</string>
@@ -593,7 +593,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_mirror_directory_ignored_because_access_not_granted">Le répertoire est ignoré parce qu\'il est inaccessible. Répertoire=%s</string>
         <string name="msgs_mirror_file_ignored_because_access_not_granted">Le dossier a été ignoré parce qu\'il était inaccessible. Fichier=%s</string>
         <string name="msgs_mirror_directory_ignored_because_sync_sub_directory_disabled">Les sous-répertoires ont été ignorés car \"Inclure les sous-répertoires\" était désactivé. Répertoire=%s</string>
-        <string name="msgs_mirror_file_set_last_modified_failed">Echec de mise à jour de la date du fichier (setLastModified()). Activer l\'option \"Ne pas changer la date de dernière modification du fichier destination pour qu\'elle soit identique à la source\".</string>
+        <string name="msgs_mirror_file_set_last_modified_failed">Échec de mise à jour de la date du fichier (setLastModified()). Activer l\'option \"Ne pas changer la date de dernière modification du fichier destination pour qu\'elle soit identique à la source\".</string>
         <string name="msgs_mirror_file_zip_update_zip_file">Updating ZIP file.</string>
         <string name="msgs_mirror_ignore_override_copy_file">Copie du fichier ignorée, car l\'option \"Remplacer les fichiers destination\" est désactivée.</string>
         <string name="msgs_mirror_ignore_override_move_file">Déplacement du fichier ignoré, car l\'option \"Remplacer les fichiers destination\" est désactivée.</string>
@@ -634,7 +634,7 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="msgs_mirror_task_file_deleted">[Fichier effacé]</string>
         <string name="msgs_mirror_task_file_moved">[Fichier déplacé]</string>
         <string name="msgs_mirror_task_file_replaced">[Fichier remplacé]</string>
-        <string name="msgs_mirror_task_file_failed">[Echec]</string>
+        <string name="msgs_mirror_task_file_failed">[Échec]</string>
         <string name="msgs_mirror_task_file_ignored">[Ignoré]</string>
         <string name="msgs_mirror_task_dir_delete_failed">N\'a pas réussi à supprimer le répertoire.</string>
         <string name="msgs_mirror_task_file_moving">Le dossier est en cours de déplacement. %s%%fini.</string>
@@ -1057,8 +1057,8 @@ Veuillez vous référer à la politique de confidentialité pour le traitement d
         <string name="settings_smb_lm_compatibility_title">Compatibilité SMB(SMBv1)</string>
         <string name="settings_smb_title">Paramètres SMB</string>
         <string name="settings_smb_use_extended_security">settings_smb_use_extended_security</string>
-        <string name="settings_smb_use_extended_security_summary_ena">Utiliser la Sécurité Etendue</string>
-        <string name="settings_smb_use_extended_security_title">Utiliser la Sécurité Etendue(SMBv1)</string>
+        <string name="settings_smb_use_extended_security_summary_ena">Utiliser la Sécurité Étendue</string>
+        <string name="settings_smb_use_extended_security_title">Utiliser la Sécurité Étendue(SMBv1)</string>
         <string name="settings_suppress_add_external_storage_notification">settings_suppress_add_external_storage_notification</string>
         <string name="settings_suppress_add_external_storage_notification_summary_ena">Ne pas afficher la notification d\'ajout de stockage SDCARD/USB</string>
         <string name="settings_suppress_add_external_storage_notification_title">Notification de l\'ajout de stockage SDCARD/USB</string>

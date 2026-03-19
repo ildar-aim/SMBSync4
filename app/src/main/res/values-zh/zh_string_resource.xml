@@ -72,7 +72,7 @@
         <string name="msgs_help_group_title">团体帮助</string>
     <!-- Log management -->
         <string name="msgs_log_management_enable_log_file_warning">启用后，以下数据将被记录在日志文件中。\nAndroid版本、设备名称、目录名称、文件名称、SMB账户名称、IP地址、网络接口名称、系统设置、应用程序信息。</string>
-        <string name="msgs_log_management_send_log_file_warning">通过电子邮件将日志文件发送给开发人员。日志文件包含Android版本，设备名称，目录名称，文件名称，SMB帐户名称，IP地址，网络接口名称，系统设置和应用程序信息。\n1.点击"预览"按钮查看将会发送的temp_log.txt文件的内容。（如果点击后显示了应用程序的列表，则选择合适的应用程序以显示文本文件内容。） \n2。在阅读完要发送的文件后，在"电子邮件选择"对话框中选择"电子邮件"。\n3。请在电子邮件正文中输入问题/疑问并发送电子邮件（日志文件以zip格式附加）</string>
+        <string name="msgs_log_management_send_log_file_warning">通过电子邮件将日志文件发送给开发人员。日志文件包含Android版本，设备名称，目录名称，文件名称，SMB帐户名称，IP地址，网络接口名称，系统设置和应用程序信息。\n1.点击"预览"按钮查看将会发送的temp_log.txt文件的内容。（如果点击后显示了应用程序的列表，则选择合适的应用程序以显示文本文件内容。） \n2.在阅读完要发送的文件后，在"电子邮件选择"对话框中选择"电子邮件"。\n3.请在电子邮件正文中输入问题/疑问并发送电子邮件（日志文件以zip格式附加）</string>
         <string name="msgs_log_management_title">日志管理</string>
         <string name="settings_mgt_dir">设置_mgt_dir</string>
         <string name="settings_mgt_dir_title">管理文件的位置</string>
@@ -422,7 +422,7 @@
         <string name="msgs_task_sync_task_sync_file_date_filter_dialog_title">选择文件更新日期比较方法</string>
         <string name="msgs_task_sync_task_sync_file_date_hint">日</string>
         <string name="msgs_task_sync_task_sync_file_date_type_none">未使用</string>
-        <string name="msgs_task_sync_task_sync_file_date_type_older_than">老于</string>
+        <string name="msgs_task_sync_task_sync_file_date_type_older_than">早于</string>
         <string name="msgs_task_sync_task_sync_file_date_type_newer_than">几天前</string>
         <string name="msgs_task_sync_task_sync_file_date_type_after_sync_begin_day">同步开始日期后</string>
         <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_not_specified">更新日期未指定。</string>
@@ -510,7 +510,7 @@
         <string name="msgs_smbsync_main_settings_jcifs_changed_restart">SMBv1的参数已被更改。 在重新启动应用程序之前，此更改不会生效。 现在退出此应用程序？</string>
         <string name="msgs_smbsync_ui_settings_language_changed_restart">建议在更改主题或语言后重新启动应用程序。点击 \"重新启动\"，现在就可以重新启动。如果您想稍后重启，请点击 \"稍后\"。</string>
         <string name="msgs_smbsync_ui_settings_language_changed_restart_later">后来</string>
-        <string name="msgs_smbsync_ui_settings_language_changed_restart_immediate">重新启动</string>
+        <string name="msgs_smbsync_ui_settings_language_changed_restart_immediate">立即重启</string>
         <string name="msgs_smbsync_main_start">应用开始。</string>
         <string name="msgs_smnsync_main_kill_application">杀死应用程序？</string>
         <string name="msgs_specify_task_name">请为任务指定一个名称</string>
@@ -564,11 +564,11 @@
         <string name="msgs_mirror_confirm_delete_file_confirm">确认删除文件\n%s\n(禁用此同步任务的 \"覆盖/删除前确认 \"选项，以避免将来出现此消息)</string>
         <string name="msgs_mirror_confirm_delete_zip_item_file_confirm">你想删除ZIP文件中的文件吗？\n%s\n如果不需要确认，请在同步任务中取消勾选 \"确认\"）。</string>
         <string name="msgs_mirror_confirm_delete_zip_item_dir_confirm">你想删除ZIP文件中的目录吗？\n%s\n如果不需要确认，请在同步任务中取消勾选 \"确认\"）。</string>
-        <string name="msgs_mirror_file_zip_split_archive_can_not_be_used">分割存档是不能使用的。</string>
+        <string name="msgs_mirror_file_zip_split_archive_can_not_be_used">不能使用分割存档。</string>
         <string name="msgs_mirror_confirm_move_cancel">[用户取消移动操作]</string>
         <string name="msgs_mirror_confirm_move_confirm">Confirm moving of file\nMove from %1$s \nDestination %2$s \n(If you don\'t need to confirm, uncheck \"Confirm\" in the synchronization task.)</string>
-        <string name="msgs_mirror_confirm_no_btn">没有</string>
-        <string name="msgs_mirror_confirm_noall_btn">全部否决</string>
+        <string name="msgs_mirror_confirm_no_btn">否</string>
+        <string name="msgs_mirror_confirm_noall_btn">全部否</string>
         <string name="msgs_mirror_confirm_please_check_confirm_msg_archive">点击这里，确认存档文件</string>
         <string name="msgs_mirror_confirm_please_check_confirm_msg_copy">点击这里确认覆盖文件</string>
         <string name="msgs_mirror_confirm_please_check_confirm_msg_delete_dir">点击这里，确认删除目录</string>
