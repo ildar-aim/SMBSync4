@@ -24,6 +24,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 import android.content.Context;
+import android.content.pm.ServiceInfo;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -128,7 +129,13 @@ public class SyncWorker extends Worker {
         mUtil.addDebugMsg(1, "I", "doWork entered");
 
         NotificationUtils.setNotificationIcon(mGp, mUtil, R.drawable.ic_48_smbsync_run_anim, R.drawable.ic_48_smbsync_run);
-        ForegroundInfo fg=new ForegroundInfo(mGp.notificationOngoingMessageID, mGp.notification);
+        ForegroundInfo fg;
+        if (Build.VERSION.SDK_INT >= 34) {
+            fg = new ForegroundInfo(mGp.notificationOngoingMessageID, mGp.notification,
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
+        } else {
+            fg = new ForegroundInfo(mGp.notificationOngoingMessageID, mGp.notification);
+        }
         setForegroundAsync(fg);
 
         listWorkerEnqueuedItem(mContext, mGp, mUtil, WorkManager.getInstance(mContext), WORKER_TAG);

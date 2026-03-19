@@ -5499,7 +5499,11 @@ public class ActivityMain extends AppCompatActivity {
             media_filter.addAction(Intent.ACTION_MEDIA_EJECT);
             media_filter.addAction(Intent.ACTION_MEDIA_REMOVED);
             media_filter.addDataScheme("file");
-            registerReceiver(mMediaStatusChangeListener, media_filter);
+            if (Build.VERSION.SDK_INT >= 33) {
+                registerReceiver(mMediaStatusChangeListener, media_filter, Context.RECEIVER_EXPORTED);
+            } else {
+                registerReceiver(mMediaStatusChangeListener, media_filter);
+            }
             mUtil.addDebugMsg(1, "I", "mediaStatusListener registered");
         } else {
             mUtil.addDebugMsg(1, "I", "mediaStatusListener already registered");

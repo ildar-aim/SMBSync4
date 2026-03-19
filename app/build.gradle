@@ -1,19 +1,23 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"//"29.0.3"
+    namespace 'com.ildar_aim.smbsync4'
+    compileSdk 34
+    buildToolsVersion '34.0.0'
+
     defaultConfig {
         applicationId "com.ildar_aim.smbsync4"
-        minSdkVersion 26
-        targetSdkVersion 30
+        minSdk 26
+        targetSdk 34
         versionCode 2
         versionName "1.0.1"
     }
 
-    lintOptions {
-        disable 'MissingTranslation'
-        abortOnError false
+    buildFeatures {
+        buildConfig = true
+        aidl = true
     }
 
     compileOptions {
@@ -21,96 +25,54 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    lint {
+        disable 'MissingTranslation'
+        abortOnError false
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-
-            applicationVariants.all { variant ->
-                if (variant.buildType.name.equals("debug")) {
-                    variant.outputs.all {
-                        def versionName = variant.versionName
-                        def mod_name = "${rootProject.name}"
-                        def fileExtension= outputFileName.toString().substring(outputFileName.toString().lastIndexOf(".")+1)
-                        def newName = "${mod_name}_debug.${fileExtension}"
-                        outputFileName = newName
-
-                        task copyDebugApk(type: Copy) {
-                            from 'build/outputs/apk/debug'
-                            into '../debug_apk/' // Into the project root, one level above the app folder
-                            include '*debug.apk'
-                        }
-
-                        task copyDebugApkRelease(type: Copy) {
-                            from 'build/outputs/apk/debug'
-                            into '../release/' // Into the project root, one level above the app folder
-                            include '*debug.apk'
-                        }
-
-//                        tasks.withType(JavaCompile) {
-//                            options.compilerArgs << '-Xlint:unchecked,deprecation'
-//                        }
-
-                        afterEvaluate {
-                            packageDebug.finalizedBy(copyDebugApkRelease)
-//                            copyDebugApkRelease.finalizedBy(copyDebugApk)
-                        }
-
-                    }
-                }
-            }
-
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-
-            applicationVariants.all { variant ->
-                if (variant.buildType.name.equals("release")) {
-                    variant.outputs.all {
-                        def versionName = variant.versionName
-                        def versionNumber = String.format("%04d", variant.versionCode)
-                        def mod_name = "${rootProject.name}"
-                        def date = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())
-                        def fileExtension= outputFileName.toString().substring(outputFileName.toString().lastIndexOf(".")+1)
-                        def newName = "${mod_name}_${versionName}_${versionNumber}_release_${date}.${fileExtension}"
-                        outputFileName = newName
-                    }
-                }
-            }
-
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
+            if (variant.buildType.name == "debug") {
+                outputFileName = "SMBSync4_debug.apk"
+            } else {
+                def vn = variant.versionName
+                def vc = String.format("%04d", variant.versionCode)
+                outputFileName = "SMBSync4_${vn}_${vc}_release.apk"
+            }
+        }
+    }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    // AndroidX
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.work:work-runtime:2.9.0'
 
-//    implementation 'com.google.android.material:material:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-//    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
-
+    // SMB/CIFS libraries
     implementation files('libs/jcifs-ng-2.1.6-20201207-01.jar')
     implementation files('libs/jcifs-1.3.17_patch.jar')
     implementation files('libs/JcifsFile2-1.0.8.jar')
+
+    // Security
     implementation files('libs/bcprov-jdk15to18-1.66.jar')
 
-    implementation files('libs/Utilities3-1.0.3.aar')
+    // Custom utilities (AAR — Jetifier transforms support→AndroidX in bytecode)
+    implementation(name: 'Utilities3-1.0.3', ext: 'aar')
 
+    // Metadata & Markdown
     implementation files('libs/metadata-extractor-2.11.0.jar')
-
-    implementation "androidx.work:work-runtime:2.5.0"
-
     implementation files('libs/MarkDownJ_0.4.jar')
-
-//    implementation("androidx.webkit:webkit:1.3.0")
-
-//    implementation 'androidx.activity:activity:1.2.0-alpha06'
-//    implementation "androidx.fragment:fragment-ktx:1.3.0-alpha06"
-//    implementation 'androidx.activity:activity:1.2.0-rc01'
-//    implementation "androidx.fragment:fragment-ktx:1.3.0-rc01"
-//    implementation "androidx.core:core-ktx:+"
-
 }
