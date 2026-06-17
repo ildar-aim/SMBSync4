@@ -555,69 +555,102 @@ public final class CommonUtilities {
     final static public String LIST_ITEM_ENCODE_CR_CHARACTER ="\u0003";
     final static public String LIST_ITEM_LINE_SEPARATOR="\n";
     synchronized static public void saveMessageList(Context c, GlobalParameters gp) {
-//        Thread.dumpStack();
         if (gp.syncMessageList == null || (gp.syncMessageList!=null && gp.syncMessageList.size()==0)) return;
-        long b_time= System.currentTimeMillis();
-        if (gp.syncMessageListChanged) {
-            try {
-                SafFile3 df =new SafFile3(c, gp.settingAppManagemsntDirectoryName);
-                if (!df.exists()) df.mkdirs();
-                SafFile3 mf =new SafFile3(c, gp.settingAppManagemsntDirectoryName + "/.messages");
-                mf.deleteIfExists();
-                if (!mf.exists()) mf.createNewFile();
-                OutputStream fos=mf.getOutputStream();
-                BufferedOutputStream bos=new BufferedOutputStream(fos, GENERAL_IO_BUFFER_SIZE);
-                PrintWriter pw=new PrintWriter(bos);
-                StringBuffer sb=new StringBuffer(1024*5);
-                synchronized (gp.syncMessageList) {
-                    for (MessageListAdapter.MessageListItem smi:gp.syncMessageList) {
-                        sb.setLength(0);
-                        sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getCategory()).append(LIST_ITEM_DATA_SEPARATOR); //msgCat
-                        sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getDate()).append(LIST_ITEM_DATA_SEPARATOR); //msgDate
-                        sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getTime()).append(LIST_ITEM_DATA_SEPARATOR); //msgTime
-                        sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getTitle()).append(LIST_ITEM_DATA_SEPARATOR); //msgTitle
-                        sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getMessage().replaceAll("\n", LIST_ITEM_ENCODE_CR_CHARACTER)).append(LIST_ITEM_DATA_SEPARATOR); //msgBody
-                        sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getPath()).append(LIST_ITEM_DATA_SEPARATOR); //msgPath
-                        sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getType()).append(LIST_ITEM_DATA_SEPARATOR); //msgType
-                        pw.println(sb.toString());
-                    }
-                    gp.syncMessageListChanged =false;
-                }
-                pw.flush();
+        if (!gp.syncMessageListChanged) return;
+        // Atomic save: write to .messages.tmp first, then rename. Without this,
+        // a kill mid-write would lose the entire message history. Plus the previous
+        // code cleared syncMessageListChanged BEFORE flush, so a failed write would
+        // silently lose messages.
+        PrintWriter pw = null;
+        boolean save_success = false;
+        try {
+            SafFile3 df =new SafFile3(c, gp.settingAppManagemsntDirectoryName);
+            if (!df.exists()) df.mkdirs();
+            SafFile3 tmp_file =new SafFile3(c, gp.settingAppManagemsntDirectoryName + "/.messages.tmp");
+            tmp_file.deleteIfExists();
+            tmp_file.createNewFile();
+            OutputStream fos=tmp_file.getOutputStream();
+            BufferedOutputStream bos=new BufferedOutputStream(fos, GENERAL_IO_BUFFER_SIZE);
+            pw = new PrintWriter(bos);
+            StringBuffer sb=new StringBuffer(1024*5);
+            // Snapshot the list while holding its lock so we don't block UI for too long
+            ArrayList<MessageListAdapter.MessageListItem> snapshot;
+            synchronized (gp.syncMessageList) {
+                snapshot = new ArrayList<MessageListAdapter.MessageListItem>(gp.syncMessageList);
+            }
+            for (MessageListAdapter.MessageListItem smi:snapshot) {
+                sb.setLength(0);
+                sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getCategory()).append(LIST_ITEM_DATA_SEPARATOR);
+                sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getDate()).append(LIST_ITEM_DATA_SEPARATOR);
+                sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getTime()).append(LIST_ITEM_DATA_SEPARATOR);
+                sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getTitle()).append(LIST_ITEM_DATA_SEPARATOR);
+                sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getMessage().replaceAll("\n", LIST_ITEM_ENCODE_CR_CHARACTER)).append(LIST_ITEM_DATA_SEPARATOR);
+                sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getPath()).append(LIST_ITEM_DATA_SEPARATOR);
+                sb.append(LIST_ITEM_DUMMY_DATA).append(smi.getType()).append(LIST_ITEM_DATA_SEPARATOR);
+                pw.println(sb.toString());
+            }
+            pw.flush();
+            // Check for write errors before claiming success
+            if (pw.checkError()) {
+                log.error("saveMessageList: PrintWriter error during write");
+            } else {
                 pw.close();
-            } catch(Exception e) {
-                log.error(CommonUtilities.getExecutedMethodName()+" error.", e);
+                pw = null;
+                // Atomically rename temp into place
+                SafFile3 final_file =new SafFile3(c, gp.settingAppManagemsntDirectoryName + "/.messages");
+                final_file.deleteIfExists();
+                if (tmp_file.renameTo(final_file)) {
+                    save_success = true;
+                } else {
+                    log.error("saveMessageList: rename failed: "+tmp_file.getPath()+" -> "+final_file.getPath());
+                    tmp_file.deleteIfExists();
+                }
+            }
+            // Only clear the changed flag AFTER successful write+rename
+            if (save_success) gp.syncMessageListChanged = false;
+        } catch(Exception e) {
+            log.error(CommonUtilities.getExecutedMethodName()+" error.", e);
+        } finally {
+            if (pw != null) {
+                try { pw.close(); } catch(Exception ignore) {}
+                try {
+                    SafFile3 tmp_file = new SafFile3(c, gp.settingAppManagemsntDirectoryName + "/.messages.tmp");
+                    tmp_file.deleteIfExists();
+                } catch(Exception ignore) {}
             }
         }
     }
 
     static public ArrayList<MessageListAdapter.MessageListItem> loadMessageList(Context c, GlobalParameters gp) {
-        long b_time= System.currentTimeMillis();
         ArrayList<MessageListAdapter.MessageListItem> result=new ArrayList<MessageListAdapter.MessageListItem>(GlobalParameters.MESSAGE_LIST_INITIAL_VALUE);
+        BufferedReader bir = null;
         try {
             SafFile3 mf =new SafFile3(c, gp.settingAppManagemsntDirectoryName + "/.messages");
             if (mf!=null && mf.exists()) {
                 InputStreamReader isr = new InputStreamReader(mf.getInputStream(), "UTF-8");
-                BufferedReader bir=new BufferedReader(isr, GENERAL_IO_BUFFER_SIZE);
+                bir=new BufferedReader(isr, GENERAL_IO_BUFFER_SIZE);
                 String line=null;
                 while((line=bir.readLine())!=null) {
                     String[] msg_array=line.split(LIST_ITEM_DATA_SEPARATOR);
                     if (msg_array.length>=7) {
                         MessageListAdapter.MessageListItem smi = new MessageListAdapter.MessageListItem(
-                                msg_array[0].replace(LIST_ITEM_DUMMY_DATA, ""),//Cat
-                                msg_array[1].replace(LIST_ITEM_DUMMY_DATA, ""), //msgDate
-                                msg_array[2].replace(LIST_ITEM_DUMMY_DATA, ""), //msgTime
-                                msg_array[3].replace(LIST_ITEM_DUMMY_DATA, ""), //msgTitle
-                                msg_array[4].replace(LIST_ITEM_DUMMY_DATA, "").replaceAll(LIST_ITEM_ENCODE_CR_CHARACTER, "\n"), //msgBody
-                                msg_array[5].replace(LIST_ITEM_DUMMY_DATA, ""), //msgPath
-                                msg_array[6].replace(LIST_ITEM_DUMMY_DATA, "")); //msgType
+                                msg_array[0].replace(LIST_ITEM_DUMMY_DATA, ""),
+                                msg_array[1].replace(LIST_ITEM_DUMMY_DATA, ""),
+                                msg_array[2].replace(LIST_ITEM_DUMMY_DATA, ""),
+                                msg_array[3].replace(LIST_ITEM_DUMMY_DATA, ""),
+                                msg_array[4].replace(LIST_ITEM_DUMMY_DATA, "").replaceAll(LIST_ITEM_ENCODE_CR_CHARACTER, "\n"),
+                                msg_array[5].replace(LIST_ITEM_DUMMY_DATA, ""),
+                                msg_array[6].replace(LIST_ITEM_DUMMY_DATA, ""));
                         result.add(smi);
                     }
                 }
-                bir.close();
             }
         } catch(Exception e) {
             log.error(CommonUtilities.getExecutedMethodName()+" error.", e);
+        } finally {
+            // Previously the close() was inside the try block — on read errors
+            // the stream leaked.
+            if (bir != null) try { bir.close(); } catch(Exception ignore) {}
         }
         return result;
     }

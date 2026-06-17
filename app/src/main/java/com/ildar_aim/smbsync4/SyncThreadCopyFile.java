@@ -72,12 +72,12 @@ public class SyncThreadCopyFile {
                     ", destination="+t_df.lastModified()+", source="+mf.lastModified()+", destination_size="+t_df.length()+", source_size="+mf.length());
 
             tf.deleteIfExists();
-            if (!t_df.renameTo(mf)) {
+            if (!t_df.renameTo(tf)) {
                 stwa.util.addLogMsg("W", sti.getSyncTaskName(), "SafFile3 renameTo Error="+t_df.getLastErrorMessage());
                 t_df.deleteIfExists();
                 return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
             }
-            SyncThread.scanMediaFile(stwa, sti, mf);
+            SyncThread.scanMediaFile(stwa, sti, tf);
         } catch(IOException e) {
             putErrorMessage(stwa, sti, e, mf.getPath(), tf.getPath());
             sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
@@ -96,20 +96,18 @@ public class SyncThreadCopyFile {
 
 
         int sync_result= SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
+        String to_file_temp=tf.getAppDirectoryCache()+"/"+System.currentTimeMillis();
+        File temp_file=new File(to_file_temp);
+        InputStream is = null;
+        OutputStream os = null;
         try {
-            String to_file_temp=tf.getAppDirectoryCache()+"/"+System.currentTimeMillis();//mf.getName();
-
             SyncThread.createDirectoryToLocalStorage(stwa, sti, tf.getParentFile().getPath());
 
-            InputStream is =null;
-            long m_saf_length=-1;
             is = mf.getInputStream();
+            os = new FileOutputStream(temp_file);
 
-            OutputStream os =null;
-            File temp_file=new File(to_file_temp);
-            os=new FileOutputStream(temp_file);//stwa.appContext.getContentResolver().openOutputStream(temp_sf.getUri());
-
-            int result=copyFile(stwa, sti, mf.getParentFile().getPath(), tf.getParentFile().getPath(), mf.getName(), mf.length(), mf.getInputStream(), os);
+            int result=copyFile(stwa, sti, mf.getParentFile().getPath(), tf.getParentFile().getPath(), mf.getName(), mf.length(), is, os);
+            is = null; os = null; // copyFile() closes them on success
             if (result== SyncTaskItem.SYNC_RESULT_STATUS_CANCEL) {
                 if (temp_file.exists()) temp_file.delete();
                 return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
@@ -124,8 +122,7 @@ public class SyncThreadCopyFile {
                 stwa.util.addLogMsg("W", sti.getSyncTaskName(), "Error="+e.getMessage());
             }
             if (stwa.logLevel>=1) stwa.util.addDebugMsg(1,"I", CommonUtilities.getExecutedMethodName(), " After copy fp="+to_file_temp+
-                    ", destination="+temp_sf.lastModified()+", source="+mf.lastModified()+", destination_size="+temp_sf.length()+", source_size="+mf.length()+
-                    ", m_saf_size="+m_saf_length);
+                    ", destination="+temp_sf.lastModified()+", source="+mf.lastModified()+", destination_size="+temp_sf.length()+", source_size="+mf.length());
 
             tf.deleteIfExists();
             if (!temp_sf.moveToWithRename(tf)){
@@ -133,16 +130,28 @@ public class SyncThreadCopyFile {
                 if (temp_file.exists()) temp_file.delete();
                 return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
             }
-            SyncThread.scanMediaFile(stwa, sti, mf);
+            SyncThread.scanMediaFile(stwa, sti, tf);
         } catch(IOException e) {
             putErrorMessage(stwa, sti, e, mf.getPath(), tf.getPath());
             sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
         } catch(Exception e) {
             putErrorMessage(stwa, sti, e, mf.getPath(), tf.getPath());
             sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+        } finally {
+            closeQuietly(is);
+            closeQuietly(os);
+            if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS && temp_file.exists()) {
+                try { temp_file.delete(); } catch(Exception ignore) {}
+            }
         }
 
         return sync_result;
+    }
+
+    private static void closeQuietly(java.io.Closeable c) {
+        if (c != null) {
+            try { c.close(); } catch (Exception ignore) {}
+        }
     }
 
     static public int copyFileLocalToSmb(SyncThreadWorkArea stwa, SyncTaskItem sti, SafFile3 mf, JcifsFile tf) {
@@ -151,18 +160,22 @@ public class SyncThreadCopyFile {
         if (sti.isSyncTestMode()) return SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
 
         int sync_result= SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
+        String to_file_temp = tf.getParent()+"/"+ System.currentTimeMillis()+".tmp";
+        InputStream is = null;
+        OutputStream os = null;
+        JcifsFile temp_out = null;
         try {
-            String to_file_temp = tf.getParent()+"/"+ System.currentTimeMillis()+".tmp";//"/temp.tmp";
             SyncThread.createDirectoryToSmb(stwa, sti, tf.getParent(), stwa.destinationSmbAuth);
 
-            JcifsFile temp_out=new JcifsFile(to_file_temp, stwa.destinationSmbAuth);
-            InputStream is=mf.getInputStream();
-            OutputStream os = temp_out.getOutputStream();
+            temp_out = new JcifsFile(to_file_temp, stwa.destinationSmbAuth);
+            is = mf.getInputStream();
+            os = temp_out.getOutputStream();
 
             int result=copyFile(stwa, sti, mf.getParentFile().getPath(), tf.getParent(), mf.getName(),
-                    mf.length(), mf.getInputStream(), os);
+                    mf.length(), is, os);
+            is = null; os = null; // copyFile() closes them on success
             if (result== SyncTaskItem.SYNC_RESULT_STATUS_CANCEL) {
-                if (tf.exists()) tf.delete();
+                try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
                 return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
             }
 
@@ -176,7 +189,18 @@ public class SyncThreadCopyFile {
             if (stwa.logLevel>=1) stwa.util.addDebugMsg(1,"I", CommonUtilities.getExecutedMethodName(), " After copy fp=",tf.getPath(),
                     ", destination="+temp_out.getLastModified(),", source="+mf.lastModified(),", destination_size="+temp_out.length(),", source_size="+mf.length());
             if (tf.exists()) tf.delete();
-            temp_out.renameTo(tf);
+            try {
+                temp_out.renameTo(tf);
+            } catch(JcifsException re) {
+                stwa.util.addLogMsg("E", sti.getSyncTaskName(), "JcifsFile renameTo Error="+re.getMessage());
+                try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
+                throw re;
+            }
+            if (!tf.exists()) {
+                stwa.util.addLogMsg("E", sti.getSyncTaskName(), "JcifsFile rename verification failed: "+tf.getPath());
+                try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
+                return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+            }
         } catch(IOException e) {
             putErrorMessage(stwa, sti, e, mf.getPath(), tf.getPath());
             sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
@@ -186,6 +210,12 @@ public class SyncThreadCopyFile {
         } catch(Exception e) {
             putErrorMessage(stwa, sti, e, mf.getPath(), tf.getPath());
             sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+        } finally {
+            closeQuietly(is);
+            closeQuietly(os);
+            if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS && temp_out != null) {
+                try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
+            }
         }
 
         return sync_result;
@@ -219,17 +249,23 @@ public class SyncThreadCopyFile {
 
         if (sti.isSyncTestMode()) return SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
 
-        String to_file_temp = tf.getParent()+"/"+ System.currentTimeMillis()+".tmp";//"/temp.tmp";
+        String to_file_temp = tf.getParent()+"/"+ System.currentTimeMillis()+".tmp";
 
         int sync_result= SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
+        InputStream is = null;
+        OutputStream os = null;
+        JcifsFile temp_out = null;
         try {
-            JcifsFile temp_out = new JcifsFile(to_file_temp, stwa.destinationSmbAuth);
+            temp_out = new JcifsFile(to_file_temp, stwa.destinationSmbAuth);
             SyncThread.createDirectoryToSmb(stwa, sti, tf.getParent(), stwa.destinationSmbAuth);
 
+            is = mf.getInputStream();
+            os = temp_out.getOutputStream();
             int result=copyFile(stwa, sti, mf.getParent(), tf.getParent(), mf.getName(),
-                    mf.length(), mf.getInputStream(), temp_out.getOutputStream());
+                    mf.length(), is, os);
+            is = null; os = null; // copyFile() closes them on success
             if (result== SyncTaskItem.SYNC_RESULT_STATUS_CANCEL) {
-                if (temp_out.exists()) temp_out.delete();
+                try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
                 return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
             }
 
@@ -243,7 +279,18 @@ public class SyncThreadCopyFile {
             if (stwa.logLevel>=1) stwa.util.addDebugMsg(1,"I", CommonUtilities.getExecutedMethodName(), " After copy fp="+tf.getPath()+
                     ", destination="+temp_out.getLastModified()+", source="+mf.getLastModified()+", destination_size="+temp_out.length()+", source_size="+mf.length());
             if (tf.exists()) tf.delete();
-            temp_out.renameTo(tf);
+            try {
+                temp_out.renameTo(tf);
+            } catch(JcifsException re) {
+                stwa.util.addLogMsg("E", sti.getSyncTaskName(), "JcifsFile renameTo Error="+re.getMessage());
+                try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
+                throw re;
+            }
+            if (!tf.exists()) {
+                stwa.util.addLogMsg("E", sti.getSyncTaskName(), "JcifsFile rename verification failed: "+tf.getPath());
+                try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
+                return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+            }
 
         } catch(IOException e) {
             putErrorMessage(stwa, sti, e, mf.getPath(), tf.getPath());
@@ -254,10 +301,16 @@ public class SyncThreadCopyFile {
         } catch(Exception e) {
             putErrorMessage(stwa, sti, e, mf.getPath(), tf.getPath());
             sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+        } finally {
+            closeQuietly(is);
+            closeQuietly(os);
+            if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS && temp_out != null) {
+                try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
+            }
         }
 
 
-        return SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
+        return sync_result;
     }
 
     static public int copyFileSmbToLocal(SyncThreadWorkArea stwa, SyncTaskItem sti, JcifsFile mf, SafFile3 tf) {
@@ -273,16 +326,19 @@ public class SyncThreadCopyFile {
         if (sti.isSyncTestMode()) return SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
 
         int sync_result= SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
+        String to_file_temp=tf.getPath()+".tmp";
+        SafFile3 t_df = null;
+        InputStream is = null;
+        OutputStream os = null;
         try {
             SyncThread.createDirectoryToLocalStorage(stwa, sti, tf.getParentFile());
 
-            InputStream is = mf.getInputStream();
-            OutputStream os =null;
-            String to_file_temp=tf.getPath()+".tmp";//mf.getName();
-            SafFile3 t_df = new SafFile3(stwa.appContext, to_file_temp);
+            t_df = new SafFile3(stwa.appContext, to_file_temp);
+            is = mf.getInputStream();
             os = t_df.getOutputStream();
 
-            int result=copyFile(stwa, sti, mf.getParent(), tf.getParentFile().getPath(), mf.getName(), mf.length(), mf.getInputStream(), os);
+            int result=copyFile(stwa, sti, mf.getParent(), tf.getParentFile().getPath(), mf.getName(), mf.length(), is, os);
+            is = null; os = null; // copyFile() closes them on success
             if (result== SyncTaskItem.SYNC_RESULT_STATUS_CANCEL) {
                 t_df.deleteIfExists();
                 return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
@@ -306,6 +362,12 @@ public class SyncThreadCopyFile {
         } catch(Exception e) {
             putErrorMessage(stwa, sti, e, mf.getPath(), tf.getPath());
             sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+        } finally {
+            closeQuietly(is);
+            closeQuietly(os);
+            if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS && t_df != null) {
+                try { t_df.deleteIfExists(); } catch(Exception ignore) {}
+            }
         }
 
         return sync_result;
@@ -316,14 +378,17 @@ public class SyncThreadCopyFile {
         if (sti.isSyncTestMode()) return SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
 
         int sync_result= SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
+        String to_file_temp=tf.getAppDirectoryCache()+"/"+System.currentTimeMillis();
+        File temp_file=new File(to_file_temp);
+        InputStream is = null;
+        OutputStream os = null;
         try {
-            String to_file_temp=tf.getAppDirectoryCache()+"/"+System.currentTimeMillis();//mf.getName();
-
             SyncThread.createDirectoryToLocalStorage(stwa, sti, tf.getParentFile().getPath());
 
-            File temp_file=new File(to_file_temp);
-            OutputStream os =new FileOutputStream(temp_file);//stwa.appContext.getContentResolver().openOutputStream(from_sf.getUri());
-            int result=copyFile(stwa, sti, mf.getParent(), tf.getParentFile().getPath(), mf.getName(), mf.length(), mf.getInputStream(), os);
+            os = new FileOutputStream(temp_file);
+            is = mf.getInputStream();
+            int result=copyFile(stwa, sti, mf.getParent(), tf.getParentFile().getPath(), mf.getName(), mf.length(), is, os);
+            is = null; os = null; // copyFile() closes them on success
             if (result== SyncTaskItem.SYNC_RESULT_STATUS_CANCEL) {
                 if (temp_file.exists()) temp_file.delete();
                 return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
@@ -355,6 +420,12 @@ public class SyncThreadCopyFile {
         } catch(Exception e) {
             putErrorMessage(stwa, sti, e, mf.getPath(), tf.getPath());
             sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+        } finally {
+            closeQuietly(is);
+            closeQuietly(os);
+            if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS && temp_file.exists()) {
+                try { temp_file.delete(); } catch(Exception ignore) {}
+            }
         }
 
         return sync_result;
@@ -379,24 +450,26 @@ public class SyncThreadCopyFile {
         int buffer_read_bytes = 0;
         long file_read_bytes = 0;
         byte[] buffer = new byte[io_area_size];
-        while ((buffer_read_bytes = ifs.read(buffer)) > 0) {
-            ofs.write(buffer, 0, buffer_read_bytes);
-            file_read_bytes += buffer_read_bytes;
-            if (show_prog && file_size > file_read_bytes) {
-//                int prog=(int)((file_read_bytes * 100) / file_size);
-                SyncThread.showProgressMsg(stwa, sti.getSyncTaskName(), file_name + " " +
-                        stwa.appContext.getString(R.string.msgs_mirror_task_file_copying,(file_read_bytes * 100) / file_size));
+        boolean cancelled = false;
+        try {
+            while ((buffer_read_bytes = ifs.read(buffer)) > 0) {
+                ofs.write(buffer, 0, buffer_read_bytes);
+                file_read_bytes += buffer_read_bytes;
+                if (show_prog && file_size > file_read_bytes) {
+                    SyncThread.showProgressMsg(stwa, sti.getSyncTaskName(), file_name + " " +
+                            stwa.appContext.getString(R.string.msgs_mirror_task_file_copying,(file_read_bytes * 100) / file_size));
+                }
+                if (SyncThread.isTaskCancelled(true, stwa.gp.syncThreadCtrl)) {
+                    cancelled = true;
+                    return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
+                }
             }
-            if (SyncThread.isTaskCancelled(true, stwa.gp.syncThreadCtrl)) {
-                ifs.close();
-                ofs.flush();
-                ofs.close();
-                return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
-            }
+            try { ofs.flush(); } catch(IOException ignore) {}
+        } finally {
+            try { ifs.close(); } catch(IOException ignore) {}
+            try { ofs.close(); } catch(IOException ignore) {}
         }
-        ifs.close();
-        ofs.flush();
-        ofs.close();
+        if (cancelled) return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
 
         long file_read_time = System.currentTimeMillis() - read_begin_time;
 

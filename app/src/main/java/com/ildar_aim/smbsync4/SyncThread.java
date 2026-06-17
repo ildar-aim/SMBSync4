@@ -869,9 +869,17 @@ public class SyncThread extends Thread {
     }
 
     private int performSync(SyncTaskItem sti) {
-        int sync_result = 0;
+        int sync_result = SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
         mStwa.syncBeginTime = System.currentTimeMillis();
         mStwa.retryCount=sti.getSyncOptionRetryCount();
+        // Reject unsupported task types early to avoid silent SUCCESS fallthrough.
+        // Bidirectional Sync (S) is defined but not implemented.
+        if (sti.getSyncTaskType().equals(SyncTaskItem.SYNC_TASK_TYPE_SYNC)) {
+            String be = "Bidirectional Sync mode is not supported in this build (task type=S). Aborting task: " + sti.getSyncTaskName();
+            showMsg(mStwa, true, sti.getSyncTaskName(), "E", "", "", be);
+            mGp.syncThreadCtrl.setThreadMessage(be);
+            return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+        }
         String from, from_temp, to, to_temp;
         if (sti.getSourceFolderType().equals(SyncTaskItem.SYNC_FOLDER_TYPE_LOCAL) &&
                 sti.getDestinationFolderType().equals(SyncTaskItem.SYNC_FOLDER_TYPE_LOCAL)) {
@@ -879,6 +887,19 @@ public class SyncThread extends Thread {
             from=replaceKeywordExecutionDateValue(from_temp, mStwa.syncBeginTime);
 
             to = buildStorageDir(sti.getDestinationStorageUuid(), sti.getDestinationDirectoryName());
+
+            // CRITICAL: Reject configurations where source contains destination or
+            // vice versa. Without this guard, every Mirror/Copy run would nest one
+            // more level of folders inside the destination, eventually exhausting
+            // disk space and corrupting the filesystem. Move mode would delete BOTH
+            // source and destination on cycle.
+            if (isPathContainedIn(from, to) || isPathContainedIn(to, from)) {
+                String be = mStwa.appContext.getString(R.string.msgs_mirror_invalid_folder_combination, from, to)
+                        + " (source and destination overlap; one contains the other)";
+                showMsg(mStwa, true, sti.getSyncTaskName(), "E", "", "", be);
+                mGp.syncThreadCtrl.setThreadMessage(be);
+                return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+            }
 
             mStwa.util.addDebugMsg(1, "I", "Sync Local-To-Local From=" + from + ", To=" + to);
 
@@ -892,6 +913,10 @@ public class SyncThread extends Thread {
                 sync_result = SyncThreadSyncFile.syncMirrorLocalToLocal(mStwa, sti, from, to);
             } else if (sti.getSyncTaskType().equals(SyncTaskItem.SYNC_TASK_TYPE_ARCHIVE)) {
                 sync_result = SyncThreadArchiveFile.syncArchiveLocalToLocal(mStwa, sti, from, to);
+            } else {
+                String be = "Unsupported sync task type: "+sti.getSyncTaskType();
+                showMsg(mStwa, true, sti.getSyncTaskName(), "E", "", "", be);
+                mGp.syncThreadCtrl.setThreadMessage(be);
             }
         } else if (sti.getSourceFolderType().equals(SyncTaskItem.SYNC_FOLDER_TYPE_LOCAL) &&
                 sti.getDestinationFolderType().equals(SyncTaskItem.SYNC_FOLDER_TYPE_ZIP)) {
@@ -1209,6 +1234,21 @@ public class SyncThread extends Thread {
             if (dir.startsWith("/")) return base + dir;
             else return base + "/" + dir;
         }
+    }
+
+    /**
+     * Returns true if {@code child} is the same as {@code parent} or is contained
+     * inside {@code parent}. Used to detect source-contains-destination cycles
+     * (and vice versa) which would otherwise nest the destination forever and
+     * potentially destroy the user's data in Move mode.
+     */
+    static public boolean isPathContainedIn(String parent, String child) {
+        if (parent == null || child == null) return false;
+        // Normalize trailing slashes for comparison
+        String p = parent.endsWith("/") ? parent : parent + "/";
+        String ch = child.endsWith("/") ? child : child + "/";
+        if (p.equals(ch)) return true;
+        return ch.startsWith(p);
     }
 
     static public String buildSmbHostUrl(String addr, String share, String dir) {
@@ -1737,6 +1777,13 @@ public class SyncThread extends Thread {
                 } catch (InterruptedException e) {
                     stwa.util.addLogMsg("E", sti.getSyncTaskName(), "InterruptedException occured");
                     printStackTraceElement(stwa, e.getStackTrace());
+                    // CRITICAL: when the wait is interrupted (e.g., worker killed by
+                    // Realme/HiOS App Sleep), the user never confirmed. Default the
+                    // result to FALSE to prevent destructive operations from proceeding
+                    // without user confirmation. Also cancel the task so we don't keep
+                    // trying.
+                    result = false;
+                    cancelTask(stwa.gp.syncThreadCtrl);
                 }
             }
         }
@@ -1789,6 +1836,10 @@ public class SyncThread extends Thread {
             } catch (InterruptedException e) {
                 stwa.util.addLogMsg("E", sti.getSyncTaskName(), "InterruptedException occured");
                 printStackTraceElement(stwa, e.getStackTrace());
+                // CRITICAL: same as sendConfirmRequest — default to FALSE on interrupt
+                // so destructive archive ops don't proceed without confirmation.
+                result = false;
+                cancelTask(stwa.gp.syncThreadCtrl);
             }
         }
         if (stwa.logLevel>=2) stwa.util.addDebugMsg(2, "I", "sendArchiveConfirmRequest result=" + result, ", rc=" + rc);
@@ -2283,25 +2334,29 @@ public class SyncThread extends Thread {
 
         if (directory_include) {
             boolean excluded=false;
-            if (stwa.fileExcludeFilterFileNamePattern == null) {
-                //nop
-            } else {
+            // CRITICAL FIX: previously this block was gated on
+            // `fileExcludeFilterFileNamePattern == null`, which incorrectly skipped
+            // the directory-path exclude check when only that one was configured.
+            // Additionally, the file-name exclude check was guarded by
+            // `if (included)` which is always false at this point — making the
+            // file-name exclude filter completely dead code. In Mirror mode this
+            // caused files matching the user's exclude pattern to be wrongly
+            // DELETED from the destination (orphan delete saw them as "selected").
+            {
                 Matcher mt;
-                if (stwa.fileExcludeFilterWithDirectoryPathPattern!=null) {
+                if (stwa.fileExcludeFilterWithDirectoryPathPattern != null) {
                     mt = stwa.fileExcludeFilterWithDirectoryPathPattern.matcher(relative_file_path);
                     if (mt.find()) {
-                        included = false;
-                        excluded=true;
+                        excluded = true;
                     }
                 }
-                if (included) {
+                if (!excluded && stwa.fileExcludeFilterFileNamePattern != null) {
                     mt = stwa.fileExcludeFilterFileNamePattern.matcher(source_file_name);
                     if (mt.find()) {
-                        included = false;
-                        excluded=true;
+                        excluded = true;
                     }
                 }
-                if (stwa.logLevel>=debug_level_3) stwa.util.addDebugMsg(debug_level_3, "I", "isFileSelected Exclude file result=" + included);
+                if (stwa.logLevel>=debug_level_3) stwa.util.addDebugMsg(debug_level_3, "I", "isFileSelected Exclude check result, excluded=" + excluded);
             }
             if (!excluded) {
                 if (stwa.fileIncludeFilterFileNamePattern == null) {
@@ -2718,6 +2773,12 @@ public class SyncThread extends Thread {
         synchronized(tc) {
             tc.setDisabled();
             tc.releaseWriteLock();
+            // CRITICAL: wake up any threads sleeping on tc.wait() (e.g.,
+            // waitRetryInterval which waits up to 30 seconds). Without
+            // notifyAll() the cancel takes effect only after the wait
+            // expires naturally — bad UX, can prevent fast cancel during
+            // SMB retries.
+            tc.notifyAll();
         }
     }
 

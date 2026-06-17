@@ -1207,28 +1207,64 @@ public class TaskListImportExport {
     final static private String CONFIG_FILE_NAME = "config.xml";
     synchronized public static String saveTaskListToAppDirectory(Context c, GlobalParameters gp, CommonUtilities cu,
                                                     ArrayList<SyncTaskItem> sync_task_list, ArrayList<ScheduleListAdapter.ScheduleListItem> schedule_list, ArrayList<GroupListAdapter.GroupListItem>group_list) {
+        // Atomic save: write to a temp file first, then rename to the final location.
+        // Without this, a process kill (Realme/HiOS App Sleep) or OS OOM during the
+        // write would leave the config half-written and the user would lose ALL task
+        // configurations on next load. The temp file is in the same directory so the
+        // rename is an atomic POSIX operation.
+        final String CONFIG_FILE_TEMP = CONFIG_FILE_NAME + ".tmp";
+        PrintWriter pw = null;
         try {
             SecretKey sk = KeyStoreUtils.getStoredKey(c, KeyStoreUtils.KEY_STORE_ALIAS);
             EncryptUtilV3.CipherParms cp_int = EncryptUtilV3.initCipherEnv(sk, KeyStoreUtils.KEY_STORE_ALIAS);
 
             String config_data = SyncConfiguration.createXmlData(c, gp, cu, sync_task_list, schedule_list, group_list, ENCRYPT_MODE_ENCRYPT_VITAL_DATA, cp_int);
             if (config_data!=null) {
-                OutputStream os = c.openFileOutput(CONFIG_FILE_NAME, Context.MODE_PRIVATE);
+                OutputStream os = c.openFileOutput(CONFIG_FILE_TEMP, Context.MODE_PRIVATE);
                 BufferedOutputStream bos = new BufferedOutputStream(os, GENERAL_IO_BUFFER_SIZE);
-                PrintWriter pw = new PrintWriter(bos);
+                pw = new PrintWriter(bos);
                 long cal_crc=SyncConfiguration.calculateSyncConfigCrc32(config_data.replaceAll("\n", ""));
-//            log.info("saved crc="+cal_crc);
                 pw.println(SYNC_TASK_CONFIG_FILE_IDENTIFIER_PREFIX+cal_crc+SYNC_TASK_CONFIG_FILE_IDENTIFIER_SUFFIX);
                 pw.println(config_data);
 
                 pw.flush();
                 pw.close();
+                pw = null;
+
+                // Atomically replace the live config file with the freshly written temp
+                java.io.File files_dir = c.getFilesDir();
+                java.io.File temp_file = new java.io.File(files_dir, CONFIG_FILE_TEMP);
+                java.io.File live_file = new java.io.File(files_dir, CONFIG_FILE_NAME);
+                if (!temp_file.renameTo(live_file)) {
+                    // Some Android versions cannot rename over an existing target.
+                    // Delete and retry as a fallback (still atomic in practice because
+                    // the temp file content is fully fsync'd by close()).
+                    if (live_file.exists() && !live_file.delete()) {
+                        log.error("saveTaskListToAppDirectory: cannot delete live config file before rename: "+live_file);
+                        temp_file.delete();
+                        return null;
+                    }
+                    if (!temp_file.renameTo(live_file)) {
+                        log.error("saveTaskListToAppDirectory: rename failed: "+temp_file+" -> "+live_file);
+                        temp_file.delete();
+                        return null;
+                    }
+                }
             }
             return config_data;
         } catch (Exception e) {
             e.printStackTrace();
             log.error(CommonUtilities.getExecutedMethodName()+" failed.", e);
             return null;
+        } finally {
+            // Make sure the writer is closed and any orphan temp file is removed
+            if (pw != null) {
+                try { pw.close(); } catch(Exception ignore) {}
+                try {
+                    java.io.File temp_file = new java.io.File(c.getFilesDir(), CONFIG_FILE_TEMP);
+                    if (temp_file.exists()) temp_file.delete();
+                } catch(Exception ignore) {}
+            }
         }
     }
 
@@ -1340,13 +1376,14 @@ public class TaskListImportExport {
                                                        ArrayList<SyncTaskItem> sync_task_list, ArrayList<ScheduleListAdapter.ScheduleListItem> schedule_list,
                                                        ArrayList<SettingParameterItem> setting_parm_list, ArrayList<GroupListAdapter.GroupListItem> group_list) {
         boolean result = false;
+        InputStream fis = null;
         try {
             SecretKey priv_key = KeyStoreUtils.getStoredKey(c, KeyStoreUtils.KEY_STORE_ALIAS);
             EncryptUtilV3.CipherParms cp_int = null;
             if (priv_key != null) {
                 cp_int = EncryptUtilV3.initCipherEnv(priv_key, KeyStoreUtils.KEY_STORE_ALIAS);
 
-                InputStream fis = c.openFileInput(CONFIG_FILE_NAME);
+                fis = c.openFileInput(CONFIG_FILE_NAME);
 
                 String[] config_array = SyncConfiguration.createConfigurationDataArray(c, gp, cu, fis);
                 result=SyncConfiguration.isSavedSyncTaskListFile(c, gp, cu, config_array);
@@ -1358,6 +1395,11 @@ public class TaskListImportExport {
         } catch (Exception e) {
             e.printStackTrace();
             log.error(CommonUtilities.getExecutedMethodName()+" failed.", e);
+        } finally {
+            // Always close the input stream — previously this was leaked on every
+            // load (called by SyncReceiver, ActivityMain, etc), eventually
+            // exhausting the per-process file descriptor table.
+            if (fis != null) try { fis.close(); } catch(Exception ignore) {}
         }
         return result;
     }

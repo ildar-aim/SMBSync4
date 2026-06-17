@@ -78,6 +78,10 @@ public class SyncWorker extends Worker {
 
 
     final static public String WORKER_TAG="SyncWorker";
+    /** Private monitor object for wait/notify between SyncWorker.doWork() and the
+     *  SyncThread completion callback. Synchronizing on a String literal would lock
+     *  the JVM-wide interned string, which is dangerous. */
+    private final Object mWorkerCompleteLock = new Object();
 //    final static public String WORKER_ACTION_KEY="worker_action_key";
 //    final static public String WORKER_SYNC_REUEST_ITEM_KEY="worker_sync_request_key";
 
@@ -113,6 +117,10 @@ public class SyncWorker extends Worker {
         mUtil.addDebugMsg(1, "I", "onStopped entered");
         mWorkerStopped=true;
         mGp.syncThreadCtrl.setDisabled();
+        // OEMs like Realme UI / HiOS may kill the Worker without going through
+        // the doWork() return path. Release any held wakelocks here so the device
+        // doesn't drain battery indefinitely.
+        try { mGp.releaseWakeLock(mUtil); } catch (Exception e) { mUtil.addDebugMsg(1, "W", "releaseWakeLock in onStopped: "+e.getMessage()); }
     }
 
     @Override
@@ -162,7 +170,7 @@ public class SyncWorker extends Worker {
                             } else {
                                 showSyncEndNotificationMessage(result_code);
                                 mGp.notificationLastShowedMessage = "";
-                                synchronized(WORKER_TAG) {WORKER_TAG.notify();}
+                                synchronized(mWorkerCompleteLock) {mWorkerCompleteLock.notifyAll();}
                             }
                         }
                     }
@@ -175,15 +183,34 @@ public class SyncWorker extends Worker {
                             mGp.syncRequestQueue.clear();
                             showSyncEndNotificationMessage(SyncTaskItem.SYNC_RESULT_STATUS_ERROR);
                             mGp.notificationLastShowedMessage = "";
-                            synchronized(WORKER_TAG) {WORKER_TAG.notify();}
+                            synchronized(mWorkerCompleteLock) {mWorkerCompleteLock.notifyAll();}
                         }
                     }
                 });
 
                 startSyncThread(ntfy_thread);
 
-                //Wait until SyncThread ended
-                synchronized(WORKER_TAG) {try {WORKER_TAG.wait();} catch (Exception e) {e.printStackTrace();}}
+                // Wait until SyncThread ends. Use a bounded wait + loop with a worker
+                // stopped flag check, in case the SyncThread crashes before notify
+                // (would otherwise hang the worker indefinitely until WorkManager kills it).
+                // The 10-hour bound matches WAKELOCK_MAX_DURATION_MS.
+                final long MAX_SYNC_WAIT_MS = GlobalParameters.WAKELOCK_MAX_DURATION_MS;
+                long deadline = System.currentTimeMillis() + MAX_SYNC_WAIT_MS;
+                synchronized(mWorkerCompleteLock) {
+                    while (mGp.syncThreadActive && !mWorkerStopped) {
+                        long remaining = deadline - System.currentTimeMillis();
+                        if (remaining <= 0) {
+                            mUtil.addLogMsg("E", "", "SyncWorker wait timeout reached, aborting");
+                            break;
+                        }
+                        try {
+                            mWorkerCompleteLock.wait(Math.min(remaining, 60_000L));
+                        } catch (InterruptedException e) {
+                            mUtil.addDebugMsg(1, "W", "SyncWorker wait interrupted");
+                            break;
+                        }
+                    }
+                }
 
             } else {
                 mUtil.addDebugMsg(1, "I", CommonUtilities.getExecutedMethodName()," Queued task does not exist");
@@ -200,6 +227,10 @@ public class SyncWorker extends Worker {
         mUtil.addDebugMsg(1, "I", "SyncWorker ended");
 
         mGp.setSyncWorkerActive(false);
+
+        // Release any wakelocks that may still be held in case the sync was
+        // killed/cancelled before the listener callbacks fired.
+        try { mGp.releaseWakeLock(mUtil); } catch (Exception e) { mUtil.addDebugMsg(1, "W", "releaseWakeLock in terminateWorker: "+e.getMessage()); }
 
         mUtil.flushLog();
         CommonUtilities.saveMessageList(mContext, mGp);
@@ -408,6 +439,13 @@ public class SyncWorker extends Worker {
         lu.addDebugMsg(1, "I", "startSyncWorkerByAction action="+action+", schedule="+schedule_item_name+", task="+task_name_list);
         if (action.equals(SCHEDULE_INTENT_TIMER_EXPIRED)) {
             ScheduleListAdapter.ScheduleListItem sched_item=ScheduleUtils.getScheduleItem(gp.syncScheduleList, schedule_item_name);
+            // CRITICAL: null-check sched_item BEFORE accessing fields. If the user
+            // deleted the schedule between alarm-set time and alarm-fire time, the
+            // lookup returns null and the previous code crashed the receiver with NPE.
+            if (sched_item == null) {
+                lu.addDebugMsg(1, "W", "startSyncWorkerByAction: schedule no longer exists, ignoring: "+schedule_item_name);
+                return;
+            }
             sri.schedule_name=schedule_item_name;
             sri.requestor=SYNC_REQUEST_SCHEDULE;
             sri.schedule_name = sched_item.scheduleName;
@@ -416,18 +454,14 @@ public class SyncWorker extends Worker {
             sri.start_delay_time_after_wifi_on = sched_item.syncDelayAfterWifiOn;
             sri.overrideSyncOptionCharge = sched_item.syncOverrideOptionCharge;
             sri.requestor_display = HistoryListAdapter.HistoryListItem.getSyncStartRequestorDisplayName(c, sri.requestor);
-            if (sched_item!=null) {
-                if (sched_item.syncTaskList.equals("")) {
-                    lu.addDebugMsg(1, "I", "startSyncWorkerByAction schedule auto sync");
-                    buildAutoSyncTaskList(c, gp, lu, sri);
-                } else {
-                    lu.addDebugMsg(1, "I", "startSyncWorkerByAction schedule task list="+sched_item.syncTaskList);
-                    buildSyncTaskListFromList(c, gp, lu, sri, sched_item.syncTaskList);
-                }
-                beginSyncWorker(c, gp, lu, sri);
+            if (sched_item.syncTaskList.equals("")) {
+                lu.addDebugMsg(1, "I", "startSyncWorkerByAction schedule auto sync");
+                buildAutoSyncTaskList(c, gp, lu, sri);
             } else {
-
+                lu.addDebugMsg(1, "I", "startSyncWorkerByAction schedule task list="+sched_item.syncTaskList);
+                buildSyncTaskListFromList(c, gp, lu, sri, sched_item.syncTaskList);
             }
+            beginSyncWorker(c, gp, lu, sri);
         } else if (action.equals(START_SYNC_INTENT)) {
             sri.requestor=SYNC_REQUEST_EXTERNAL;
             sri.requestor_display = HistoryListAdapter.HistoryListItem.getSyncStartRequestorDisplayName(c, sri.requestor);
@@ -448,7 +482,14 @@ public class SyncWorker extends Worker {
 
     static public void beginSyncWorker(Context c, GlobalParameters gp, CommonUtilities lu, SyncRequestItem sri) {
         if (sri.sync_task_list.size()>0) {
-            gp.syncRequestQueue.add(sri);
+            // CRITICAL: ArrayBlockingQueue.add() throws IllegalStateException
+            // when the queue is full (capacity 1000). If a frozen Realme/HiOS
+            // device has accumulated many pending alarms, this would crash the
+            // receiver. Use offer() and log if rejected.
+            if (!gp.syncRequestQueue.offer(sri)) {
+                lu.addLogMsg("E", "", "Sync request queue is full ("+gp.syncRequestQueue.size()+"); request rejected. requestor="+sri.requestor);
+                return;
+            }
             if (gp.isSyncWorkerActive()) {
                 lu.addDebugMsg(1, "I", "SyncWorker is already started.");
             } else {

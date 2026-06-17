@@ -389,17 +389,32 @@ public class GlobalParameters {
     public void loadConfigList(Context c, CommonUtilities cu) {
         if (cu.getLogLevel()>0) cu.addDebugMsg(1, "I", "config load started");
         acquireConfigurationLock();
-        if (!configListLoaded) {
-            configListLoaded=true;
-            ArrayList<SyncTaskItem>stl=new ArrayList<SyncTaskItem>();
-            ArrayList<ScheduleListAdapter.ScheduleListItem>sl=new ArrayList<ScheduleListAdapter.ScheduleListItem>();
-            ArrayList<GroupListAdapter.GroupListItem>gl=new ArrayList<GroupListAdapter.GroupListItem>();
-            TaskListImportExport.loadTaskListFromAppDirectory(c, this, cu, stl, sl, null, gl);
-            syncTaskList.addAll(stl);
-            syncScheduleList.addAll(sl);
-            syncGroupList.addAll(gl);
+        try {
+            if (!configListLoaded) {
+                configListLoaded=true;
+                ArrayList<SyncTaskItem>stl=new ArrayList<SyncTaskItem>();
+                ArrayList<ScheduleListAdapter.ScheduleListItem>sl=new ArrayList<ScheduleListAdapter.ScheduleListItem>();
+                ArrayList<GroupListAdapter.GroupListItem>gl=new ArrayList<GroupListAdapter.GroupListItem>();
+                try {
+                    TaskListImportExport.loadTaskListFromAppDirectory(c, this, cu, stl, sl, null, gl);
+                    syncTaskList.addAll(stl);
+                    syncScheduleList.addAll(sl);
+                    syncGroupList.addAll(gl);
+                } catch(Throwable e) {
+                    // If config load throws (corrupted XML, OOM, etc.), reset the
+                    // loaded flag so the next call can retry. Without this fix the
+                    // lock would also be permanently held and deadlock the app.
+                    configListLoaded=false;
+                    cu.addLogMsg("E", "loadConfigList failed: "+e.getMessage());
+                    throw e;
+                }
+            }
+        } finally {
+            // CRITICAL: must always release the lock; previously this was outside
+            // a try/finally, so any exception during load left the WriteLock held
+            // forever and deadlocked every subsequent acquire across the whole app.
+            releaseConfigurationLock();
         }
-        releaseConfigurationLock();
         if (cu.getLogLevel()>0) cu.addDebugMsg(1, "I", "config load ended");
     }
 
@@ -829,6 +844,11 @@ public class GlobalParameters {
         }
     }
 
+    /** Maximum wakelock duration: 10 hours. Auto-released after this timeout
+     *  to protect against leaks if the worker is killed by aggressive OEMs
+     *  (Realme UI, HiOS, MIUI, etc.) before releaseWakeLock() runs. */
+    public static final long WAKELOCK_MAX_DURATION_MS = 10L * 60L * 60L * 1000L;
+
     public void acquireWakeLock(Context c, CommonUtilities util) {
         if (settingWifiLockRequired) {
             if (!mWifiLock.isHeld()) {
@@ -839,13 +859,13 @@ public class GlobalParameters {
         isScreenOn(c,util);
         if ((settingPreventSyncStartDelay)) {// && isScreenOn(c, util))) {// && !activityIsBackground) {
             if (!mDimWakeLock.isHeld()) {
-                mDimWakeLock.acquire();
-                util.addDebugMsg(1, "I", "Dim wakelock acquired");
+                mDimWakeLock.acquire(WAKELOCK_MAX_DURATION_MS);
+                util.addDebugMsg(1, "I", "Dim wakelock acquired (timeout="+WAKELOCK_MAX_DURATION_MS+"ms)");
             }
         } else {
             if (!mPartialWakeLock.isHeld()) {
-                mPartialWakeLock.acquire();
-                util.addDebugMsg(1, "I", "Partial wakelock acquired");
+                mPartialWakeLock.acquire(WAKELOCK_MAX_DURATION_MS);
+                util.addDebugMsg(1, "I", "Partial wakelock acquired (timeout="+WAKELOCK_MAX_DURATION_MS+"ms)");
             }
         }
     }

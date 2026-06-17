@@ -136,23 +136,27 @@ public class SyncThreadArchiveFile {
                 sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, sti.isSyncOptionUseSmallIoBuffer());
                 if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
                     temp_file.setLastModified(mf.lastModified());
-                    boolean rc=mf.delete();
-                    if (rc) {
-                        SafFile3 temp_sf=new SafFile3(stwa.appContext, temp_path);
-                        temp_sf.moveTo(tf);
-                        if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                    SafFile3 temp_sf=new SafFile3(stwa.appContext, temp_path);
+                    tf.deleteIfExists();
+                    boolean move_ok = temp_sf.moveTo(tf);
+                    if (!move_ok || !tf.exists()) {
+                        stwa.util.addLogMsg("E", sti.getSyncTaskName(), "Archive moveTo failed: "+tf.getPath()+" err="+temp_sf.getLastErrorMessage());
+                        temp_sf.deleteIfExists();
+                        sync_result = SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                    } else {
+                        boolean rc=mf.delete();
+                        if (rc) {
                             stwa.totalCopyCount++;
                             SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
                                     stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
                             stwa.totalDeleteCount++;
                             SyncThread.scanMediaFile(stwa, sti, mf);
                             SyncThread.scanMediaFile(stwa, sti, tf);
+                        } else {
+                            stwa.util.addLogMsg("W", sti.getSyncTaskName(), from_path, " ",
+                                    stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete, mf.getName()));
+                            sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
                         }
-                    } else {
-                        temp_file.delete();
-                        stwa.util.addLogMsg("W", sti.getSyncTaskName(), from_path, " ",
-                                stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete, mf.getName()));
-                        sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
                     }
                 }
             }
@@ -181,20 +185,25 @@ public class SyncThreadArchiveFile {
 
                     SafFile3 temp_sf=new SafFile3(stwa.appContext, temp_path);
                     tf.deleteIfExists();
-                    boolean rc=mf.delete();
-                    if (rc) {
-                        temp_sf.renameTo(tf);
-                        stwa.totalCopyCount++;
-                        SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
-                                stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
-                        stwa.totalDeleteCount++;
-                        SyncThread.scanMediaFile(stwa, sti, mf);
-                        SyncThread.scanMediaFile(stwa, sti, tf);
+                    boolean rename_ok = temp_sf.renameTo(tf);
+                    if (!rename_ok || !tf.exists()) {
+                        stwa.util.addLogMsg("E", sti.getSyncTaskName(), "Archive renameTo failed: "+tf.getPath()+" err="+temp_sf.getLastErrorMessage());
+                        temp_sf.deleteIfExists();
+                        sync_result = SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
                     } else {
-                        temp_file.delete();
-                        stwa.util.addLogMsg("W", sti.getSyncTaskName(), from_path, " ",
-                                stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete, mf.getName()));
-                        sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                        boolean rc=mf.delete();
+                        if (rc) {
+                            stwa.totalCopyCount++;
+                            SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
+                                    stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
+                            stwa.totalDeleteCount++;
+                            SyncThread.scanMediaFile(stwa, sti, mf);
+                            SyncThread.scanMediaFile(stwa, sti, tf);
+                        } else {
+                            stwa.util.addLogMsg("W", sti.getSyncTaskName(), from_path, " ",
+                                    stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete, mf.getName()));
+                            sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                        }
                     }
                 }
             }
@@ -609,13 +618,23 @@ public class SyncThreadArchiveFile {
                 if (sync_result!= SyncTaskItem.SYNC_RESULT_STATUS_ERROR) stwa.retryCount=sti.getSyncOptionRetryCount();
                 if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
                     tf.deleteIfExists();
-                    temp_saf.renameTo(tf);
-                    stwa.totalCopyCount++;
-                    SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
-                            stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
-                    mf.delete();
-                    stwa.totalDeleteCount++;
-                    SyncThread.scanMediaFile(stwa, sti, tf);
+                    boolean rename_ok = temp_saf.renameTo(tf);
+                    if (!rename_ok || !tf.exists()) {
+                        stwa.util.addLogMsg("E", sti.getSyncTaskName(), "Archive renameTo failed: "+tf.getPath()+" err="+temp_saf.getLastErrorMessage());
+                        temp_saf.deleteIfExists();
+                        sync_result = SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                    } else {
+                        stwa.totalCopyCount++;
+                        SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
+                                stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
+                        try {
+                            mf.delete();
+                            stwa.totalDeleteCount++;
+                        } catch(JcifsException de) {
+                            stwa.util.addLogMsg("W", sti.getSyncTaskName(), "Source delete failed after archive: "+from_path+" err="+de.getMessage());
+                        }
+                        SyncThread.scanMediaFile(stwa, sti, tf);
+                    }
                 }
             }
         } else {
@@ -656,13 +675,23 @@ public class SyncThreadArchiveFile {
                 if (sync_result!= SyncTaskItem.SYNC_RESULT_STATUS_ERROR) stwa.retryCount=sti.getSyncOptionRetryCount();
                 if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
                     temp_file.setLastModified(mf.getLastModified());
-                    temp_saf.moveTo(tf);
-                    stwa.totalCopyCount++;
-                    SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
-                            stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
-                    mf.delete();
-                    stwa.totalDeleteCount++;
-                    SyncThread.scanMediaFile(stwa, sti, tf);
+                    boolean move_ok = temp_saf.moveTo(tf);
+                    if (!move_ok || !tf.exists()) {
+                        stwa.util.addLogMsg("E", sti.getSyncTaskName(), "Archive moveTo failed: "+tf.getPath()+" err="+temp_saf.getLastErrorMessage());
+                        temp_saf.deleteIfExists();
+                        sync_result = SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                    } else {
+                        stwa.totalCopyCount++;
+                        SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
+                                stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
+                        try {
+                            mf.delete();
+                            stwa.totalDeleteCount++;
+                        } catch(JcifsException de) {
+                            stwa.util.addLogMsg("W", sti.getSyncTaskName(), "Source delete error after archive: "+from_path+" err="+de.getMessage());
+                        }
+                        SyncThread.scanMediaFile(stwa, sti, tf);
+                    }
                 }
             }
         } else {

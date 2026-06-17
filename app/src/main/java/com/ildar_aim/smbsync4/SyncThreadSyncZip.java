@@ -129,7 +129,11 @@ public class SyncThreadSyncZip {
                                     if (!bzf.isAborted()) {
                                         SafFile3 dest=new SafFile3(stwa.appContext, dest_file_path);
                                         dest.deleteIfExists();
-                                        tmp.renameTo(dest);
+                                        if (!tmp.renameTo(dest)) {
+                                            stwa.util.addLogMsg("E", sti.getSyncTaskName(), "ZIP renameTo failed (mirror): "+dest_file_path+" err="+tmp.getLastErrorMessage());
+                                            tmp.deleteIfExists();
+                                            sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                                        }
                                     } else {
                                         sync_result= SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
                                         tmp.deleteIfExists();
@@ -224,7 +228,11 @@ public class SyncThreadSyncZip {
                                 if (!bzf.isAborted()) {
                                     SafFile3 dest=new SafFile3(stwa.appContext, dest_file_path);
                                     dest.deleteIfExists();
-                                    tmp.renameTo(dest);
+                                    if (!tmp.renameTo(dest)) {
+                                        stwa.util.addLogMsg("E", sti.getSyncTaskName(), "ZIP renameTo failed (copy): "+dest_file_path+" err="+tmp.getLastErrorMessage());
+                                        tmp.deleteIfExists();
+                                        sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                                    }
                                 } else {
                                     sync_result= SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
                                     tmp.deleteIfExists();
@@ -307,11 +315,17 @@ public class SyncThreadSyncZip {
                                 if (!bzf.isAborted()) {
                                     SafFile3 dest=new SafFile3(stwa.appContext, dest_file_path);
                                     dest.deleteIfExists();
-                                    tmp.renameTo(dest);
-                                    for(SafFile3 del_sf:remove_list) {
-                                        SyncThreadSyncFile.deleteLocalItem(stwa, sti, mf);
-                                        SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, mf.getName(),
-                                                "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                    if (!tmp.renameTo(dest)) {
+                                        stwa.util.addLogMsg("E", sti.getSyncTaskName(), "ZIP renameTo failed (move): "+dest_file_path+" err="+tmp.getLastErrorMessage());
+                                        tmp.deleteIfExists();
+                                        sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                                    } else {
+                                        // Rename succeeded — only now safe to delete the moved sources
+                                        for(SafFile3 del_sf:remove_list) {
+                                            SyncThreadSyncFile.deleteLocalItem(stwa, sti, del_sf);
+                                            SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, del_sf.getName(),
+                                                    "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                        }
                                     }
                                 } else {
                                     sync_result= SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;

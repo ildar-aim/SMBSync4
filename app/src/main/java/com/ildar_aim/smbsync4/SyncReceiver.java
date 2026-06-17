@@ -45,43 +45,53 @@ public class SyncReceiver extends BroadcastReceiver {
 
     @Override
     final public void onReceive(Context c, Intent received_intent) {
+        // 60-second wakelock timeout: enough for boot/timer handling on slow OEMs
+        // (Realme/HiOS) where saveTaskListToAppDirectory + setTimer can take several
+        // seconds. The previous 1-second timeout was too short and the device could
+        // sleep mid-handler. The receiver itself is bounded by Android's 10-second
+        // BroadcastReceiver ANR limit, so 60s is a safe upper bound.
         PowerManager.WakeLock wl =((PowerManager) c.getSystemService(Context.POWER_SERVICE))
-                        .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "Receiver");
-        try {wl.acquire(1000); } catch(Exception e) {};
-        mContext = c;
-        if (mGp == null) {
-            mGp =GlobalWorkArea.getGlobalParameter(c);
-        }
-        if (mUtil == null) mUtil = new CommonUtilities(c, "Receiver", mGp, null);
-        mGp.loadConfigList(c, mUtil);
+                        .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "SMBSync4:Receiver");
+        try {wl.acquire(60 * 1000L); } catch(Exception e) {}
+        try {
+            mContext = c;
+            if (mGp == null) {
+                mGp =GlobalWorkArea.getGlobalParameter(c);
+            }
+            if (mUtil == null) mUtil = new CommonUtilities(c, "Receiver", mGp, null);
+            mGp.loadConfigList(c, mUtil);
 
-        String action = received_intent.getAction();
-        mUtil.addDebugMsg(1, "I", "Receiver received action=" + action);
-        if (action != null) {
-            if (action.equals(Intent.ACTION_BOOT_COMPLETED) ||
-                    action.equals(Intent.ACTION_DATE_CHANGED) ||
-                    action.equals(Intent.ACTION_TIMEZONE_CHANGED) ||
-                    action.equals(Intent.ACTION_TIME_CHANGED)){
-//                    action.equals(Intent.ACTION_PACKAGE_REPLACED)) {
-                for (ScheduleListAdapter.ScheduleListItem si : mGp.syncScheduleList) si.scheduleLastExecTime = System.currentTimeMillis();
-                TaskListImportExport.saveTaskListToAppDirectory(c, mGp, mUtil, mGp.syncTaskList, mGp.syncScheduleList, mGp.syncGroupList);
-                ScheduleUtils.setTimer(mContext, mGp, mUtil.getLogUtil());
-            } else if (action.equals(SCHEDULE_INTENT_TIMER_EXPIRED)) {
-                if (received_intent.getExtras().containsKey(SCHEDULE_SCHEDULE_NAME_KEY)) {
-                    SyncWorker.startSyncWorkerByAction(mContext, mGp, mUtil, SCHEDULE_INTENT_TIMER_EXPIRED,
-                            received_intent.getStringExtra(SCHEDULE_SCHEDULE_NAME_KEY), "");
-                    String[] schedule_list=received_intent.getStringExtra(SCHEDULE_SCHEDULE_NAME_KEY).split(",");
-                    for (String sched_name:schedule_list) {
-                        if (ScheduleUtils.getScheduleItem(mGp.syncScheduleList, sched_name) != null) {
-                            ScheduleUtils.getScheduleItem(mGp.syncScheduleList, sched_name).scheduleLastExecTime = System.currentTimeMillis();
-                        }
-                    }
+            String action = received_intent.getAction();
+            mUtil.addDebugMsg(1, "I", "Receiver received action=" + action);
+            if (action != null) {
+                if (action.equals(Intent.ACTION_BOOT_COMPLETED) ||
+                        action.equals(Intent.ACTION_DATE_CHANGED) ||
+                        action.equals(Intent.ACTION_TIMEZONE_CHANGED) ||
+                        action.equals(Intent.ACTION_TIME_CHANGED)){
+                    for (ScheduleListAdapter.ScheduleListItem si : mGp.syncScheduleList) si.scheduleLastExecTime = System.currentTimeMillis();
                     TaskListImportExport.saveTaskListToAppDirectory(c, mGp, mUtil, mGp.syncTaskList, mGp.syncScheduleList, mGp.syncGroupList);
                     ScheduleUtils.setTimer(mContext, mGp, mUtil.getLogUtil());
+                } else if (action.equals(SCHEDULE_INTENT_TIMER_EXPIRED)) {
+                    if (received_intent.getExtras().containsKey(SCHEDULE_SCHEDULE_NAME_KEY)) {
+                        SyncWorker.startSyncWorkerByAction(mContext, mGp, mUtil, SCHEDULE_INTENT_TIMER_EXPIRED,
+                                received_intent.getStringExtra(SCHEDULE_SCHEDULE_NAME_KEY), "");
+                        String[] schedule_list=received_intent.getStringExtra(SCHEDULE_SCHEDULE_NAME_KEY).split(",");
+                        for (String sched_name:schedule_list) {
+                            if (ScheduleUtils.getScheduleItem(mGp.syncScheduleList, sched_name) != null) {
+                                ScheduleUtils.getScheduleItem(mGp.syncScheduleList, sched_name).scheduleLastExecTime = System.currentTimeMillis();
+                            }
+                        }
+                        TaskListImportExport.saveTaskListToAppDirectory(c, mGp, mUtil, mGp.syncTaskList, mGp.syncScheduleList, mGp.syncGroupList);
+                        ScheduleUtils.setTimer(mContext, mGp, mUtil.getLogUtil());
+                    }
+                } else {
+                    mUtil.addDebugMsg(1, "I", "Receiver ignored action=" + action);
                 }
-            } else {
-                mUtil.addDebugMsg(1, "I", "Receiver ignored action=" + action);
             }
+        } finally {
+            // Release the wakelock as soon as the receiver work is done; do not rely
+            // on the timeout to release it.
+            try { if (wl != null && wl.isHeld()) wl.release(); } catch(Exception e) {}
         }
     }
 
