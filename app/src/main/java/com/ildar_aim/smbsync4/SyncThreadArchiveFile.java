@@ -374,41 +374,68 @@ public class SyncThreadArchiveFile {
                 String dir=tf.getParent();
                 JcifsFile jf_dir=new JcifsFile(dir,stwa.destinationSmbAuth);
                 if (!jf_dir.exists()) jf_dir.mkdirs();
-                while (stwa.retryCount > 0) {
-                    sync_result= copyFile(stwa, sti, mf.getInputStream(),
-                            tf.getOutputStream(), from_path, to_path,
-                            tf.getName(), sti.isSyncOptionUseSmallIoBuffer());
-                    if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
-                        stwa.retryCount--;
-                        if (stwa.retryCount > 0)
-                            sync_result = waitRetryInterval(stwa);
-                        if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_CANCEL)
+                // H3: write to a temp file and atomically rename, deleting the source only
+                // AFTER the rename is verified. Writing straight to the final name left a
+                // corrupt partial there on any interruption, and a truncated-but-"success"
+                // write would delete the source (data loss).
+                String to_file_temp = dir+"/"+System.currentTimeMillis()+".tmp";
+                JcifsFile temp_out = new JcifsFile(to_file_temp, stwa.destinationSmbAuth);
+                try {
+                    while (stwa.retryCount > 0) {
+                        sync_result= copyFile(stwa, sti, mf.getInputStream(),
+                                temp_out.getOutputStream(), from_path, to_path,
+                                tf.getName(), sti.isSyncOptionUseSmallIoBuffer());
+                        if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
+                            stwa.retryCount--;
+                            if (stwa.retryCount > 0)
+                                sync_result = waitRetryInterval(stwa);
+                            if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_CANCEL)
+                                break;
+                        } else {
                             break;
-                    } else {
-                        break;
-                    }
-                }
-                if (sync_result!= SyncTaskItem.SYNC_RESULT_STATUS_ERROR) stwa.retryCount=sti.getSyncOptionRetryCount();
-                if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
-                    boolean rc=mf.delete();
-                    if (rc) {
-                        stwa.totalCopyCount++;
-                        SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
-                                stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
-                        if (!sti.isSyncTestMode()) {
-                            try {
-                                tf.setLastModified(mf.lastModified());
-                            } catch(JcifsException e) {
-                                // nop
-                            }
-                            stwa.totalDeleteCount++;
-                            SyncThread.scanMediaFile(stwa, sti, mf);
                         }
-                    } else {
-                        tf.delete();
-                        stwa.util.addLogMsg("W", sti.getSyncTaskName(), from_path, " ",
-                                stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete, mf.getName()));
-                        sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                    }
+                    if (sync_result!= SyncTaskItem.SYNC_RESULT_STATUS_ERROR) stwa.retryCount=sti.getSyncOptionRetryCount();
+                    if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                        try {
+                            temp_out.setLastModified(mf.lastModified());
+                        } catch(JcifsException e) {
+                            // nop
+                        }
+                        long src_len = mf.length();
+                        if (tf.exists()) tf.delete();
+                        try {
+                            temp_out.renameTo(tf);
+                        } catch(JcifsException re) {
+                            stwa.util.addLogMsg("E", sti.getSyncTaskName(), "Archive renameTo Error="+re.getMessage());
+                            sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                        }
+                        if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS &&
+                                (!tf.exists() || (src_len>0 && tf.length()!=src_len))) {
+                            stwa.util.addLogMsg("E", sti.getSyncTaskName(), "Archive SMB write verification failed (rename/size); source kept: "+from_path);
+                            try { if (tf.exists()) tf.delete(); } catch(Exception ignore) {}
+                            sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                        }
+                        if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                            // Rename verified — only now safe to delete the moved source.
+                            boolean rc=mf.delete();
+                            if (rc) {
+                                stwa.totalCopyCount++;
+                                SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
+                                        stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
+                                stwa.totalDeleteCount++;
+                                SyncThread.scanMediaFile(stwa, sti, mf);
+                            } else {
+                                try { if (tf.exists()) tf.delete(); } catch(Exception ignore) {}
+                                stwa.util.addLogMsg("W", sti.getSyncTaskName(), from_path, " ",
+                                        stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete, mf.getName()));
+                                sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                            }
+                        }
+                    }
+                } finally {
+                    if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                        try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
                     }
                 }
             }
@@ -874,30 +901,57 @@ public class SyncThreadArchiveFile {
                 String dir=tf.getParent();
                 JcifsFile jf_dir=new JcifsFile(dir,stwa.destinationSmbAuth);
                 if (!jf_dir.exists()) jf_dir.mkdirs();
-                while (stwa.retryCount > 0) {
-                    sync_result= copyFile(stwa, sti, mf.getInputStream(), tf.getOutputStream(), from_path, to_path, file_name, sti.isSyncOptionUseSmallIoBuffer());
-                    if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
-                        stwa.retryCount--;
-                        if (stwa.retryCount > 0)
-                            sync_result = waitRetryInterval(stwa);
-                        if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_CANCEL)
+                // H3: write to a temp file and atomically rename, deleting the source only
+                // AFTER the rename is verified (see moveFileLocalToSmb).
+                String to_file_temp = dir+"/"+System.currentTimeMillis()+".tmp";
+                JcifsFile temp_out = new JcifsFile(to_file_temp, stwa.destinationSmbAuth);
+                try {
+                    while (stwa.retryCount > 0) {
+                        sync_result= copyFile(stwa, sti, mf.getInputStream(), temp_out.getOutputStream(), from_path, to_path, file_name, sti.isSyncOptionUseSmallIoBuffer());
+                        if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
+                            stwa.retryCount--;
+                            if (stwa.retryCount > 0)
+                                sync_result = waitRetryInterval(stwa);
+                            if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_CANCEL)
+                                break;
+                        } else {
                             break;
-                    } else {
-                        break;
+                        }
                     }
-                }
-                if (sync_result!= SyncTaskItem.SYNC_RESULT_STATUS_ERROR) stwa.retryCount=sti.getSyncOptionRetryCount();
-                if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
-                    stwa.totalCopyCount++;
-                    SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
-                            stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
-                    try {
-                        tf.setLastModified(mf.getLastModified());
-                    } catch(JcifsException e) {
-                        // nop
+                    if (sync_result!= SyncTaskItem.SYNC_RESULT_STATUS_ERROR) stwa.retryCount=sti.getSyncOptionRetryCount();
+                    if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                        try {
+                            temp_out.setLastModified(mf.getLastModified());
+                        } catch(JcifsException e) {
+                            // nop
+                        }
+                        long src_len = mf.length();
+                        if (tf.exists()) tf.delete();
+                        try {
+                            temp_out.renameTo(tf);
+                        } catch(JcifsException re) {
+                            stwa.util.addLogMsg("E", sti.getSyncTaskName(), "Archive renameTo Error="+re.getMessage());
+                            sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                        }
+                        if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS &&
+                                (!tf.exists() || (src_len>0 && tf.length()!=src_len))) {
+                            stwa.util.addLogMsg("E", sti.getSyncTaskName(), "Archive SMB write verification failed (rename/size); source kept: "+from_path);
+                            try { if (tf.exists()) tf.delete(); } catch(Exception ignore) {}
+                            sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                        }
+                        if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                            stwa.totalCopyCount++;
+                            SyncThread.showArchiveMsg(stwa, false, sti.getSyncTaskName(), "I", from_path, to_path, mf.getName(), tf.getName(),
+                                    stwa.appContext.getString(R.string.msgs_mirror_task_file_archived));
+                            // Rename verified — only now safe to delete the moved source.
+                            mf.delete();
+                            stwa.totalDeleteCount++;
+                        }
                     }
-                    mf.delete();
-                    stwa.totalDeleteCount++;
+                } finally {
+                    if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                        try { if (temp_out.exists()) temp_out.delete(); } catch(Exception ignore) {}
+                    }
                 }
             }
         } else {
