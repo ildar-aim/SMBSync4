@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!-- About -->
+        <string name="msgs_about_dlg_func_btn">الوظائف</string>
+        <string name="msgs_about_dlg_privacy_btn">سياسة الخصوصية</string>
+        <string name="msgs_about_dlg_change_btn">سجل التغييرات</string>
+        <string name="msgs_dlg_title_about">حول SMBSync4</string>
+        <string name="msgs_dlg_title_about_func_desc">SMBSync4_about_EN_Desc.md</string>
+        <string name="msgs_dlg_title_about_privacy_desc">SMBSync4_about_EN_Privacy.md</string>
+        <string name="msgs_dlg_title_about_change_desc">SMBSync4_about_EN_Change.md</string>
+        <string name="msgs_about_dlg_licenses_btn">التراخيص</string>
+        <string name="msgs_dlg_title_about_licenses_desc">SMBSync4_about_EN_Licenses.md</string>
+    <!-- Export/Import -->
+        <string name="msgs_export_import_profile_title">اختر المهام والإعدادات للاستيراد</string>
+        <string name="msgs_export_import_profile_listing">عرض ملفات الإعدادات</string>
+        <string name="msgs_export_import_profile_setting_parms">استعادة إعدادات التطبيق العامة</string>
+        <string name="msgs_export_import_profile_schedule_parms">استعادة إعدادات جدولة المهام</string>
+        <string name="msgs_export_import_profile_group_parms">استعادة إعدادات المجموعات</string>
+        <string name="msgs_export_import_profile_select_all">تحديد الكل</string>
+        <string name="msgs_export_import_profile_unselect_all">إلغاء تحديد الكل</string>
+        <string name="msgs_export_import_profile_confirm_override">بعض المهام المختارة للاستعادة لها نفس اسم المهام الموجودة حاليًا. هل تريد الكتابة فوق المهام التالية بالمهام المستوردة؟</string>
+        <string name="msgs_export_import_profile_import_success">تم استيراد المهمة (المهام) التالية بنجاح</string>
+        <string name="msgs_export_import_profile_import_success_from_smbsync2">تم استيراد مهام المزامنة التالية في وضع الاختبار. نوصي بشدة باختبارها للتأكد من عدم وجود حذف أو كتابة فوق غير مقصودة للملفات.</string>
+        <string name="msgs_export_import_profile_import_failed">فشل الاستيراد، تحقق من علامة تبويب الرسائل للأخطاء.</string>
+        <string name="msgs_export_import_profile_reset_current_profile">حذف جميع المهام الموجودة قبل الاستيراد</string>
+        <string name="msgs_export_import_profile_import_settings">إعدادات التطبيق العامة</string>
+        <string name="msgs_export_import_profile_import_schedule">إعدادات جدولة المهام</string>
+        <string name="msgs_export_import_profile_hdr_task_list">قائمة المهام</string>
+        <string name="msgs_export_import_profile_no_import_items">لم يتم استيراد أي عناصر.</string>
+        <string name="msgs_export_import_profile_specified_file_was_not_sync_task_saved_file">الملف المحدد ليس ملف حفظ قائمة مهام المزامنة. الملف=%s</string>
+        <string name="msgs_export_import_profile_error_occured_while_import_task_list">حدث خطأ أثناء استيراد قائمة المهام. يرجى التحقق من الخطأ في علامة تبويب الرسائل.</string>
+        <string name="msgs_import_autosave_dlg_title">استيراد قائمة المهام وإعدادات التطبيق</string>
+        <string name="msgs_import_autosave_dlg_select_exported_file">اختر ملفًا آخر</string>
+        <string name="msgs_import_autosave_dlg_autosave_list">ملفات الإعدادات المحفوظة تلقائيًا</string>
+        <string name="msgs_import_autosave_dlg_manual_save_list">ملفات الإعدادات المنسوخة احتياطيًا بواسطة المستخدم</string>
+        <string name="msgs_import_autosave_dlg_autosave_failed">فشلت محاولة الحفظ التلقائي لإعدادات المزامنة</string>
+        <string name="msgs_import_autosave_dlg_autosave_completed">تم حفظ الإعدادات</string>
+        <string name="msgs_import_autosave_dlg_autosave_enty_item">%s</string>
+        <string name="msgs_import_autosave_dlg_autosave_enty_item_latest">%s (آخر ملف محفوظ)</string>
+        <string name="msgs_export_import_profile_smb_account_name_password_not_restored">فشل استيراد اسم الحساب أو كلمة مرور الحساب أو كلمة مرور ZIP المستخدمة في المهام التالية. إذا قمت بالحفظ التلقائي لمهمة المزامنة ثم أعدت تثبيت التطبيق، فلن تتمكن من فك تشفير اسم الحساب وكلمة مرور الحساب وكلمة مرور ZIP. قم بتحرير مهمة المزامنة وأعد كتابة إعدادات تسجيل دخول المستخدم.</string>
+        <string name="msgs_export_import_pswd_password_title">حماية الإعدادات بكلمة مرور</string>
+        <string name="msgs_export_import_pswd_password_protect">حماية ملف النسخ الاحتياطي بكلمة مرور</string>
+        <string name="msgs_export_import_pswd_specify_password">يرجى تحديد كلمة المرور.</string>
+        <string name="msgs_export_import_pswd_password_required">أدخل كلمة المرور لملف النسخ الاحتياطي للإعدادات.</string>
+        <string name="msgs_export_import_pswd_invalid_password">كلمة المرور غير صحيحة. حاول مرة أخرى.</string>
+        <string name="msgs_export_import_pswd_btn_cancel">إلغاء</string>
+        <string name="msgs_export_import_task_list_btn_ok">استيراد</string>
+        <string name="msgs_export_import_pswd_btn_ok">موافق</string>
+        <string name="msgs_export_import_pswd_hint_password">كلمة المرور</string>
+        <string name="msgs_export_import_pswd_hint_confirm">تأكيد كلمة المرور</string>
+        <string name="msgs_export_import_pswd_unmatched_confirm_pswd">كلمة المرور وتأكيد كلمة المرور غير متطابقتين.</string>
+    <!-- Help -->
+        <string name="msgs_help_sync_task_file">SMBSync4_Help_EN_task.md</string>
+        <string name="msgs_help_sync_task_title">مساعدة مهمة المزامنة</string>
+        <string name="msgs_help_sync_folder_external_file">SMBSync4_Help_EN_folder_external.md</string>
+        <string name="msgs_help_sync_folder_external_title">مساعدة المجلد المحلي</string>
+        <string name="msgs_help_sync_folder_keyword">SMBSync4_Help_EN_folder_keyword.md</string>
+        <string name="msgs_help_sync_folder_keyword_title">مساعدة المعلمات</string>
+        <string name="msgs_help_sync_folder_smb_file">SMBSync4_Help_EN_folder_smb.md</string>
+        <string name="msgs_help_sync_folder_smb_title">مساعدة خادم SMB</string>
+        <string name="msgs_help_sync_folder_zip_file">SMBSync4_Help_EN_folder_zip.md</string>
+        <string name="msgs_help_sync_folder_zip_title">مساعدة ملف ZIP</string>
+        <string name="msgs_help_directory_filter_file">SMBSync4_Help_EN_directory_filter.md</string>
+        <string name="msgs_help_directory_filter_title">مساعدة فلتر الدليل</string>
+        <string name="msgs_help_file_filter_file">SMBSync4_Help_EN_file_filter.md</string>
+        <string name="msgs_help_file_filter_title">مساعدة فلتر الملفات</string>
+        <string name="msgs_help_ip_address_filter_file">SMBSync4_Help_EN_ip_address_filter.md</string>
+        <string name="msgs_help_ip_address_filter_title">مساعدة فلتر عنوان IP</string>
+        <string name="msgs_help_schedule_file">SMBSync4_Help_EN_schedule.md</string>
+        <string name="msgs_help_schedule_title">مساعدة الجدولة</string>
+        <string name="msgs_help_group_file">SMBSync4_Help_EN_group.md</string>
+        <string name="msgs_help_group_title">مساعدة المجموعة</string>
+    <!-- Log management -->
+        <string name="msgs_log_management_enable_log_file_warning">إذا تابعت، سيتم تسجيل البيانات التالية في ملف السجل:\nإصدار Android، اسم الجهاز، اسم الدليل، اسم الملف، اسم حساب SMB، عنوان IP، اسم واجهة الشبكة، إعدادات النظام، معلومات التطبيق</string>
+        <string name="msgs_log_management_send_log_file_warning">إرسال ملف السجل بالبريد الإلكتروني إلى المطور. يحتوي ملف السجل على إصدار Android واسم الجهاز واسم الدليل واسم الملف واسم حساب SMB وعنوان IP واسم واجهة الشبكة وإعدادات النظام ومعلومات التطبيق.\n1.اضغط على زر المعاينة للتحقق من محتويات ملف temp_log.txt الذي سيتم إرساله (إذا ظهرت شاشة اختيار التطبيق، فاختر التطبيق المفضل لعرض الملف النصي.)\n
+2.بعد التأكد مما ترسله، اضغط على زر \"إرسال\" لوصف سؤالك أو مشكلتك.\n
+3.إذا كنت تريد حماية ملف ZIP بكلمة مرور، أدخل كلمة المرور وكلمة المرور للتأكيد.\n
+4.اضغط على زر الإرسال واختر البريد الإلكتروني في مربع حوار اختيار البريد الإلكتروني.\n
+5.يرجى إرسال البريد الإلكتروني.\n
+6.إذا قمت بحماية ملف ZIP بكلمة مرور، اضغط على زر إرسال كلمة مرور ملف ZIP لإرسالها بالبريد الإلكتروني.</string>
+        <string name="msgs_log_management_title">إدارة ملفات السجل</string>
+        <string name="settings_mgt_dir">settings_mgt_dir</string>
+        <string name="settings_mgt_dir_title">موقع ملفات الإدارة</string>
+    <!-- Application password -->
+        <string name="msgs_security_application_password_create_title">إنشاء كلمة مرور التطبيق</string>
+        <string name="msgs_security_application_password_create_min_length_is_4_digit">كلمة المرور تتطلب 4 أحرف أو أكثر.</string>
+        <string name="msgs_security_application_password_create_forget_recovery">إذا نسيت كلمة المرور، يرجى تهيئة التطبيق أو إعادة تثبيته.</string>
+        <string name="msgs_security_application_password_create_forget_warning">إذا نسيت كلمة المرور، ستحتاج إلى تهيئة التطبيق أو إعادة تثبيته. هل تريد المتابعة؟</string>
+        <string name="msgs_security_stored_sectret_key_change_title">المفتاح الداخلي</string>
+        <string name="msgs_security_stored_sectret_key_change_message">لا يمكن فك تشفير كلمة مرور التطبيق لأن المفتاح المخزن في Android Keystore قد تم تغييره بعد إنشاء كلمة مرور التطبيق.\nيرجى اتباع الخطوات التالية لاستعادتها.\n1. احفظ قائمة المهام إن أمكن.\n2.أعد تثبيت SMBSync4 (إلغاء التثبيت ثم التثبيت)\n3. استيراد قائمة المهام المحفوظة (أو استيراد قائمة المهام المحفوظة تلقائيًا)
+</string>
+        <string name="msgs_security_stored_sectret_key_change_error">خطأ في المفتاح الداخلي</string>
+        <string name="msgs_security_stored_sectret_key_save_error">خطأ في حفظ رمز التحقق من المفتاح الداخلي</string>
+        <string name="msgs_security_application_password_auth_title">مصادقة كلمة مرور التطبيق</string>
+        <string name="msgs_security_application_password_auth_specify_password">يرجى إدخال كلمة مرور التطبيق</string>
+        <string name="msgs_security_application_password_auth_wrong_password_specified">كلمة المرور غير صحيحة.</string>
+        <string name="msgs_security_application_password_authentaication_error">خطأ في مصادقة كلمة مرور التطبيق</string>
+        <string name="msgs_security_application_password_creation_error">خطأ في إنشاء كلمة مرور التطبيق</string>
+    <!-- Main -->
+        <string name="msgs_auto_sync_task_not_found">لم يتم العثور على مهمة المزامنة التلقائية.</string>
+        <string name="msgs_add_sync_profile">إضافة مهمة مزامنة</string>
+        <string name="msgs_audit_hostname_not_spec">حدد اسم الخادم البعيد أو عنوان IP.</string>
+        <string name="msgs_audit_hostport_not_spec">حدد رقم منفذ الخادم البعيد.</string>
+        <string name="msgs_audit_msgs_local_dir">يحتوي اسم الدليل المحلي على الحرف %s. تمت إزالة الأحرف غير الصالحة.</string>
+        <string name="msgs_audit_share_not_spec">حدد اسم المشاركة.</string>
+        <string name="msgs_clear_log_message">مسح رسائل السجل</string>
+        <string name="msgs_cont_button_diabled_by_sync">تم تجاهل العملية المطلوبة أثناء المزامنة.</string>
+        <string name="msgs_copy_sync_profile">نسخ مهمة المزامنة</string>
+        <string name="msgs_create_profile_error">فشل إنشاء ملف النسخ الاحتياطي للإعدادات: %s</string>
+        <string name="msgs_current_dir">الدليل الحالي:</string>
+        <string name="msgs_delete_following_profile">هل تريد حذف المهمة (المهام) التالية؟</string>
+        <string name="msgs_dir_empty">تعذر العثور على الدليل</string>
+        <string name="msgs_duplicate_task_name">اسم المهمة مكرر.</string>
+        <string name="msgs_sync_task_name_length_invalid">يجب ألا يتجاوز اسم المهمة %s حرفًا</string>
+        <string name="msgs_task_name_rename_with_schedule_group_task_list">عند إعادة تسمية المهمة، سيتم تغيير اسم المهمة في الجدول/المجموعة أيضًا.</string>
+        <string name="msgs_task_name_remove_with_schedule_group_task_list">عند حذف المهمة، سيتم حذف اسم المهمة من الجدول/المجموعة أيضًا.</string>
+        <string name="msgs_task_name_contains_invalid_character">يحتوي اسم المهمة على أحرف غير صالحة: \"%s\"</string>
+        <string name="msgs_edit_sync_profile">تحرير مهمة المزامنة</string>
+        <string name="msgs_export_prof_fail">فشل تصدير إعدادات المزامنة.</string>
+        <string name="msgs_export_prof_success">تم تصدير إعدادات المزامنة بنجاح.</string>
+        <string name="msgs_export_prof_title">تصدير إعدادات المزامنة</string>
+        <string name="msgs_extra_data_sync_profile_type_error">تم إلغاء المزامنة: الطلب المستلم من التطبيق الخارجي ليس نصًا</string>
+        <string name="msgs_filelist_cancel">تم إلغاء إنشاء قائمة الملفات البعيدة.</string>
+        <string name="msgs_filelist_error">حدث خطأ أثناء إنشاء قائمة ملفات SMB.</string>
+        <string name="msgs_filter_edit_dlg_title">تحرير الفلتر</string>
+        <string name="msgs_filter_list_dlg_add">إضافة</string>
+        <string name="msgs_filter_list_dlg_add_dir_filter">إضافة فلتر دليل</string>
+        <string name="msgs_filter_list_dlg_close">إغلاق</string>
+        <string name="msgs_filter_list_dlg_dir_filter">فلتر الدليل</string>
+        <string name="msgs_filter_list_dlg_file_filter">فلتر اسم الملف</string>
+        <string name="msgs_filter_list_dlg_filter_added">تمت إضافة الفلتر \"%s\".</string>
+        <string name="msgs_filter_list_dlg_filter_hint">فلتر</string>
+        <string name="msgs_filter_list_dlg_not_specified">لم يتم تحديد فلتر.</string>
+        <string name="msgs_filter_list_duplicate_filter_specified">\"%s\" موجود بالفعل.</string>
+        <string name="msgs_filter_list_filter_deleted">تم حذف هذا الإدخال.</string>
+        <string name="msgs_filter_list_filter_was_changed">تم تغيير المحتوى، هل تريد الإلغاء بدون حفظ؟</string>
+        <string name="msgs_filter_list_filter_start_or_end_char_not_allowed_slash">لا يُسمح بأن يبدأ أو ينتهي الفلتر بـ \"/\". يرجى إزالة \"/\". الفلتر=%s</string>
+        <string name="msgs_filter_list_filter_not_allowed_slash_asterisk">\"/*\" في النهاية غير صالح. يجب إزالة \"/*\". الفلتر=%s</string>
+        <string name="msgs_filter_list_filter_match_any_where_not_allowed_asterisk_slash">للفلاتر التي تبدأ بـ \"\\\"، \"*/\" غير صالح. يرجى إزالة \"*/\". الفلتر=%s</string>
+        <string name="msgs_filter_list_filter_not_allowed_asterisk_only">لا يمكنك استخدام فلتر \"*\" فقط. يرجى التحديد مثل \"*abc\" إلخ.</string>
+        <string name="msgs_filter_list_filter_not_allowed_multiple_asterisk">لا يمكنك استخدام فلتر بسلسلة من \"*\" مثل \"**\". يرجى التحديد مثل \"*a*\".</string>
+        <string name="msgs_filter_list_filter_not_allowed_blank_with_asterisk">لا يمكنك استخدام مسافات قبل وبعد \"*\".</string>
+        <string name="msgs_filter_list_filter_not_allowed_multiple_back_slash">لا يمكنك استخدام \"\\\" إلا في الحرف الأول. يرجى إزالة \"\\\" من غير الحرف الأول. الفلتر=%s</string>
+        <string name="msgs_filter_list_filter_contains_not_allowed_character">يحتوي على أحرف غير قابلة للاستخدام. الأحرف=\"%1$s\"، الفلتر=%2$s</string>
+        <string name="msgs_filter_list_match_any_where_change_to_exclude">تم تغيير الفلتر إلى استبعاد لأنه يحتوي على \"\\\".\nالفلتر=%s</string>
+        <string name="msgs_filter_list_invalid_ip_address">عنوان IP غير صالح.</string>
+        <string name="msgs_hist_cont_label_copy">نسخ إلى الحافظة</string>
+        <string name="msgs_hist_cont_label_delete">حذف عنصر السجل</string>
+        <string name="msgs_hist_cont_label_move_bottom">الانتقال إلى الأسفل</string>
+        <string name="msgs_hist_cont_label_move_top">الانتقال إلى الأعلى</string>
+        <string name="msgs_hist_cont_label_select_all">تحديد جميع عناصر السجل</string>
+        <string name="msgs_hist_cont_label_share">مشاركة</string>
+        <string name="msgs_hist_cont_label_unselect_all">إلغاء تحديد جميع عناصر السجل</string>
+        <string name="msgs_import_prof_fail">فشل استيراد ملف الإعدادات</string>
+        <string name="msgs_import_prof_fail_no_valid_item">%s لا يحتوي على إعدادات مزامنة صالحة</string>
+        <string name="msgs_info_storage_copy_clipboard">نسخ</string>
+        <string name="msgs_info_storage_copy_completed">تم النسخ إلى الحافظة</string>
+        <string name="msgs_info_storage_send_btn_title">إرسال إلى المطور</string>
+        <string name="msgs_info_storage_title">معلومات التخزين</string>
+        <string name="msgs_your_problem_title">مشكلتك/سؤالك حول SMBSync4</string>
+        <string name="msgs_your_problem_msg">يرجى ملء تفاصيل مشكلتك أو سؤالك حول SMBSync4.</string>
+        <string name="msgs_your_problem_hint">مثال: لا يتعرف SMBSync4 على بطاقة SD.</string>
+        <string name="msgs_your_problem_no_desc">لم يتم وصف المشكلة/السؤال، لا يمكننا الرد إلا إذا تم وصف مشكلة/سؤال SMBSync4.</string>
+        <string name="msgs_log_activate_pinned">تم تعطيل التمرير التلقائي</string>
+        <string name="msgs_log_confirm_clear_all_msg">هل تريد حذف جميع إدخالات الرسائل؟</string>
+        <string name="msgs_log_inactivate_pinned">تم تفعيل التمرير التلقائي</string>
+        <string name="msgs_log_msg_cleared">تم مسح رسائل السجل</string>
+        <string name="msgs_log_msg_filter_title">فلتر</string>
+        <string name="msgs_log_msg_filter_info">معلومات</string>
+        <string name="msgs_log_msg_filter_warn">تحذير</string>
+        <string name="msgs_log_msg_filter_error">خطأ</string>
+        <string name="msgs_log_msg_filter_string_find_string">نص البحث</string>
+        <string name="msgs_log_msg_filter_string_find_button">بحث</string>
+        <string name="msgs_log_msg_filter_string_reset_button">إعادة تعيين</string>
+        <string name="msgs_log_msg_filter_string_find_case_sensitive">A/a</string>
+        <string name="msgs_main_suppress_start_sync_confirmation_message_msg">هل تريد بدء المهام التالية؟</string>
+        <string name="msgs_main_suppress_start_sync_confirmation_message_suppress">تعطيل هذا الإشعار (يمكن تفعيله في إعدادات المزامنة)</string>
+        <string name="msgs_main_suppress_add_external_storage_notification_title">إشعار بإضافة وحدة تخزين SDCARD/USB</string>
+        <string name="msgs_main_suppress_add_external_storage_notification_msg">تم اكتشاف وحدة تخزين SDCARD/USB جديدة، هل تريد إضافة وحدة تخزين SDCARD/USB؟</string>
+        <string name="msgs_main_suppress_add_external_storage_notification_suppress">تعطيل هذا الإشعار (يمكن تفعيله في إعدادات المزامنة)</string>
+        <string name="msgs_main_external_storage_select_activity_not_found_msg">فشل تشغيل النشاط لمنح إذن الكتابة على وحدة التخزين الخارجية.</string>
+        <string name="msgs_main_external_storage_select_required_cancel_msg">لا يمكن تنفيذ المهام التي تستخدم وحدة تخزين SDCARD/USB حتى يتم منح الوصول إلى وحدة تخزين SDCARD/USB.</string>
+        <string name="msgs_main_external_storage_select_retry_select_msg">لم يتم اختيار الدليل الجذر لوحدة التخزين. هل تريد إعادة الاختيار؟</string>
+        <string name="msgs_main_external_storage_uuid_duplicated">لا يمكن استخدام المعرفات الفريدة التالية لأنها مكررة. قم بتهيئة بطاقة MicroSD أو محرك USB OTG لاستخدامه.</string>
+        <string name="msgs_main_external_storage_uuid_unusable">الوسائط غير مركبة</string>
+        <string name="msgs_main_external_storage_request_permission">إذن استخدام وحدة تخزين SDCARD/USB</string>
+        <string name="msgs_main_permission_external_storage_denied_msg">لا يمكن بدء التطبيق لأنه لم يتم منح إذن الوصول إلى التخزين.</string>
+        <string name="msgs_main_permission_external_storage_request_msg">لقراءة وكتابة البيانات والبيانات الإدارية على وحدة التخزين الداخلية، يرجى اتباع الخطوات أدناه لمنح إذن الوصول إلى وحدة التخزين الداخلية.\n
+1. اضغط على زر \"موافق\".\n
+2. اضغط على \"السماح\" في شاشة الأذونات.\n\n
+يرجى الرجوع إلى سياسة الخصوصية للاطلاع على معالجة البيانات والأذونات المطلوبة.\n\n</string>
+        <string name="msgs_main_permission_external_storage_title">إذن التخزين</string>
+        <string name="msgs_main_sync_all_auto_tasks">تنفيذ جميع المهام المهيأة للمزامنة التلقائية.</string>
+        <string name="msgs_main_sync_can_not_sync_no_valid_profile">لا توجد مهام مزامنة متاحة للتنفيذ. يرجى إنشاء مهمة مزامنة.</string>
+        <string name="msgs_main_sync_cancel_confirm">هل تريد إلغاء المزامنة؟</string>
+        <string name="msgs_main_sync_history_copy_completed">تم نسخ العناصر المحددة إلى الحافظة.</string>
+        <string name="msgs_main_sync_history_count_copied">تم النسخ:</string>
+        <string name="msgs_main_sync_history_count_deleted">تم الحذف:</string>
+        <string name="msgs_main_sync_history_count_ignored">تم التجاهل:</string>
+        <string name="msgs_main_sync_history_count_moved">تم النقل:</string>
+        <string name="msgs_main_sync_history_count_replaced">تم الاستبدال:</string>
+        <string name="msgs_main_sync_history_count_retry">إعادة المحاولة:</string>
+        <string name="msgs_main_sync_history_del_conf_all_history">هل تريد حذف كل السجل؟</string>
+        <string name="msgs_main_sync_history_del_conf_selected_history">هل تريد حذف عناصر السجل التالية؟</string>
+        <string name="msgs_main_sync_history_elapsed_time">الوقت المنقضي (ثانية):</string>
+        <string name="msgs_main_sync_history_transfer_speed">متوسط معدل النقل:</string>
+        <string name="msgs_main_sync_history_mode">الوضع:</string>
+        <string name="msgs_main_sync_history_mode_normal">عادي</string>
+        <string name="msgs_main_sync_history_mode_test">اختبار</string>
+        <string name="msgs_main_sync_history_result_log_not_found">تعذر العثور على ملف سجل السجل.</string>
+        <string name="msgs_main_sync_history_result_activity_not_found_for_log_display">لن تتمكن من رؤية التفاصيل لعدم وجود تطبيق لعرض الملف النصي.</string>
+        <string name="msgs_main_sync_history_status_cancel">ملغي</string>
+        <string name="msgs_main_sync_history_status_error">خطأ</string>
+        <string name="msgs_main_sync_history_status_running">قيد التشغيل</string>
+        <string name="msgs_main_sync_history_status_success">نجح</string>
+        <string name="msgs_main_sync_history_status_warning">تحذير</string>
+        <string name="msgs_main_sync_history_status_skip">تم التخطي</string>
+        <string name="msgs_main_sync_list_array_task_auto">تلقائي</string>
+        <string name="msgs_main_sync_list_array_task_manual">يدوي</string>
+        <string name="msgs_main_sync_list_array_task_test">اختبار</string>
+        <string name="msgs_main_sync_list_array_last_sync_time">آخر مزامنة :</string>
+        <string name="msgs_main_sync_list_array_mtype_archive">أرشيف</string>
+        <string name="msgs_main_sync_list_array_mtype_copy">نسخ</string>
+        <string name="msgs_main_sync_list_array_mtype_mirr">مرآة</string>
+        <string name="msgs_main_sync_list_array_mtype_move">نقل</string>
+        <string name="msgs_main_sync_list_array_mtype_sync">مزامنة</string>
+        <string name="msgs_main_sync_list_array_no_last_sync_time">لم يتم تنفيذ مهمة المزامنة.</string>
+        <string name="msgs_main_sync_task_name_list">مهمة المزامنة المبدوءة:</string>
+        <string name="msgs_main_sync_profile">مهمة المزامنة (%s)</string>
+        <string name="msgs_main_sync_profile_dlg_archive">أرشيف</string>
+        <string name="msgs_main_sync_profile_dlg_copy">نسخ</string>
+        <string name="msgs_main_sync_profile_dlg_diff_time_value_option_1">1</string>
+        <string name="msgs_main_sync_profile_dlg_diff_time_value_option_10">10</string>
+        <string name="msgs_main_sync_profile_dlg_diff_time_value_option_3">3</string>
+        <string name="msgs_main_sync_profile_dlg_diff_time_value_option_prompt">تفاوت فرق الوقت (ثانية)</string>
+        <string name="msgs_main_sync_profile_dlg_invalid_source_destination_combination_external">مجلدا المصدر والوجهة كلاهما مجلدات محلية بأدلة مكررة. يرجى تغيير أحدهما إلى دليل مختلف.</string>
+        <string name="msgs_main_sync_profile_dlg_invalid_source_destination_combination_same_dir">توجد أسماء أدلة مكررة في كل من المصدر والوجهة. يجب أن تكون أسماء أدلة المصدر والوجهة مختلفة.</string>
+        <string name="msgs_main_sync_profile_dlg_invalid_source_destination_combination_sdcard">مجلدا المصدر والوجهة كلاهما مجلدات محلية بأدلة مكررة. يرجى تغيير أحدهما إلى دليل مختلف.</string>
+        <string name="deleted_msgs_main_sync_profile_dlg_invalid_source_destination_cobination_smb">مجلدا المصدر والوجهة على SMB متطابقان. يجب اختيار أسماء أدلة مصدر ووجهة مختلفة.</string>
+        <string name="msgs_main_sync_profile_dlg_mirror">مرآة</string>
+        <string name="msgs_main_sync_profile_dlg_move">نقل</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_address_or_name">حدد عنوان IP أو اسم مضيف خادم SMB.</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_port_number">حدد رقم منفذ خادم SMB.</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_share_name">حدد اسم مشاركة SMB.</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_userid_pswd">حدد اسم حساب SMB وكلمة المرور أو كلمة المرور فقط.</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_pswd">حدد كلمة مرور مضيف SMB.</string>
+        <string name="msgs_main_sync_profile_dlg_sync">مزامنة</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_sdcard_not_auth_please_edit_source">الكتابة على وحدة التخزين الخارجية غير مسموح بها، حرر مجلد المصدر واسمح بالكتابة على وحدة التخزين الخارجية.</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_sdcard_not_auth_please_edit_destination">الوصول إلى وحدة تخزين SDCARD/USB غير مسموح به، يرجى تحرير مجلد الوجهة للسماح بالوصول إلى وحدة تخزين SDCARD/USB.</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_sdcard_not_auth_press_select_btn">الوصول إلى وحدة تخزين SDCARD/USB غير مسموح به، يرجى الضغط على زر \"السماح باستخدام وحدة تخزين SDCARD/USB\" للسماح بالوصول إلى وحدة التخزين.</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_sdcard_not_mounted">%s غير مركب.</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_type_local">محلي</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_type_prompt">اختر نوع المجلد</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_type_smb">خادم SMB</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_type_zip">مجلد ZIP</string>
+        <string name="msgs_main_sync_profile_dlg_syncopt_prompt">اختر خيار المزامنة</string>
+        <string name="msgs_main_sync_profile_dlg_destination_directory_not_specified">لم يتم تحديد دليل وجهة لهذه المهمة. قد يحدث حذف أو كتابة فوق غير متوقعة. هل تريد المتابعة؟</string>
+        <string name="msgs_main_sync_profile_dlg_title_source">تحرير مجلد المصدر</string>
+        <string name="msgs_main_sync_profile_dlg_title_destination">تحرير مجلد الوجهة</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_prompt">بدء المزامنة فقط في حالة WiFi المحددة</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_off">التشغيل حتى عند إيقاف التشغيل</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_connect_any_ap">عند الاتصال بنقطة وصول</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_connect_private_address">عنوان IP خاص فقط</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_connect_specific_address">مسجل في قائمة عناوين IP</string>
+        <string name="msgs_main_sync_select_task_no_auto_task">لم يتم اختيار مهمة المزامنة.</string>
+        <string name="msgs_main_sync_selected_tasks">تنفيذ مهمة المزامنة المحددة</string>
+        <string name="msgs_main_sync_selected_task_not_found">المهمة المحددة غير موجودة: %s</string>
+        <string name="msgs_main_sync_specified_sync_task_not_scheduled">لن يتم تنفيذ مهمة المزامنة المحددة لأنه تم تجاهلها.</string>
+        <string name="msgs_main_sync_test_mode_warnning">المهمة المحددة مهيأة للاختبار فقط. لن يتم نسخ أو حذف أي ملفات. هل تريد تنفيذ المهمة؟</string>
+        <string name="msgs_main_sync_task_press_add_button_to_create_new_sync_task">اضغط على زر الإضافة لإنشاء مهمة مزامنة جديدة.</string>
+        <string name="msgs_move_to_bottom">نقل للأسفل</string>
+        <string name="msgs_move_to_top">نقل للأعلى</string>
+        <string name="msgs_msg_cont_label_clear">مسح الرسالة</string>
+        <string name="msgs_msg_cont_label_move_bottom">الانتقال إلى الأسفل</string>
+        <string name="msgs_msg_cont_label_move_top">الانتقال إلى الأعلى</string>
+        <string name="msgs_msg_cont_label_search">تبديل عرض البحث</string>
+        <string name="msgs_msg_cont_label_pinned_active">تعطيل التمرير التلقائي</string>
+        <string name="msgs_msg_cont_label_pinned_inactive">تفعيل التمرير التلقائي</string>
+        <string name="msgs_no_profile_entry">لا توجد مهام</string>
+        <string name="msgs_notification_smbsync_active">تم تشغيل SMBSync4.</string>
+        <string name="msgs_notification_sync_active">المزامنة نشطة.</string>
+        <string name="msgs_override">هل تريد الكتابة فوق؟</string>
+        <string name="msgs_task_cont_label_auto">تعيين كتلقائي</string>
+        <string name="msgs_task_cont_label_add_sync">إنشاء مهمة مزامنة</string>
+        <string name="msgs_task_cont_label_copy">نسخ المهمة</string>
+        <string name="msgs_task_cont_label_delete">حذف المهمة</string>
+        <string name="msgs_task_cont_label_down">نقل للأسفل</string>
+        <string name="msgs_task_cont_label_manual">تعيين كيدوي</string>
+        <string name="msgs_task_cont_label_rename">إعادة تسمية المهمة</string>
+        <string name="msgs_task_cont_label_select_all">تحديد جميع المهام</string>
+        <string name="msgs_task_cont_label_sync">تنفيذ جميع مهام المزامنة المحددة</string>
+        <string name="msgs_task_cont_label_sync_specific">بدء مهمة المزامنة (%s)</string>
+        <string name="msgs_task_cont_label_unselect_all">إلغاء تحديد جميع المهام</string>
+        <string name="msgs_task_cont_label_up">نقل للأعلى</string>
+        <string name="msgs_task_cont_to_auto_task">هل تريد أن تكون المهام التالية \"مهام تلقائية\"؟</string>
+        <string name="msgs_task_cont_to_manual_task">هل تريد أن تكون المهام التالية \"يدوية\"؟</string>
+        <string name="msgs_task_edit_sync_folder_dlg_change_wifi_confition_to_any">إذا كان المصدر أو الوجهة على خادم SMB: هل تريد تعيين بدء المزامنة فقط في حالة WiFi المحددة إلى \"متصل بأي نقطة وصول\"؟</string>
+        <string name="msgs_task_edit_sync_folder_dlg_change_wifi_confition_has_private">إذا كان المصدر أو الوجهة على خادم SMB: هل تريد تعيين بدء المزامنة فقط في حالة WiFi المحددة إلى \"لديه عنوان خاص\"؟</string>
+        <string name="msgs_task_edit_sync_folder_dlg_change_destination_folder_to_local">عند تعيين SMB كمجلد المصدر، لا يمكنك اختيار ZIP كمجلد الوجهة. لذلك، تم تغيير مجلد الوجهة إلى محلي.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_directory">الدليل</string>
+        <string name="msgs_task_edit_sync_folder_dlg_dirlist">عرض الأدلة</string>
+        <string name="msgs_task_edit_sync_folder_dlg_folder_type">نوع المجلد</string>
+        <string name="msgs_task_edit_sync_folder_dlg_local_storage">التخزين</string>
+        <string name="msgs_task_edit_sync_folder_dlg_select_local_storage">اختيار التخزين</string>
+        <string name="msgs_task_edit_sync_folder_dlg_search_smb_server_and_configure">البحث عن خادم SMB وتهيئته</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parameters">تحرير معلمات خادم SMB</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_select_smb_share_name">اختيار اسم مشاركة SMB</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_specify_correct_account">قم بتفويض الحساب أو حدد اسم الحساب الصحيح واضغط على زر \"تحديث قائمة المشاركات\".</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_specify_enable_account">تم تحديد اسم حساب لا يمكن تسجيل الدخول به. حدد اسم الحساب الصحيح وانقر على زر \"تحديث قائمة المشاركات\".</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_specify_correct_account_password">اسم الحساب أو كلمة المرور غير صحيحة. حدد اسم الحساب وكلمة المرور الصحيحين وانقر على زر \"تحديث قائمة المشاركات\".</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_account_password_not_specified">لم يتم تحديد اسم الحساب أو كلمة المرور. حدد اسم الحساب وكلمة المرور الصحيحين وانقر على زر \"تحديث قائمة المشاركات\".</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_chose_parameters">اختيار معلمات خادم SMB</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_refresh_share_list">تحديث قائمة المشاركات</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_account_password">حساب وكلمة مرور خادم SMB</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_port_number">رقم المنفذ</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_password">كلمة المرور</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_port">رقم المنفذ</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_server">اسم مضيف الخادم/عنوان IP</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_share">اسم المشاركة</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_share_list">قائمة المشاركات</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_use_port_number">استخدام رقم المنفذ</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_username">اسم الحساب</string>
+        <string name="msgs_task_edit_sync_folder_dlg_search_remote_server">البحث عن خادم SMB</string>
+        <string name="msgs_task_edit_sync_folder_dlg_select_sdcard">السماح باستخدام وحدة تخزين SDCARD/USB</string>
+        <string name="msgs_task_edit_sync_folder_dlg_show_password">إظهار كلمة المرور</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_hdr">بروتوكول SMB</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_select_title">اختيار بروتوكول SMB</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_smb1">استخدام SMB V1</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_smbv23">استخدام SMB V2/3</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_suggestion_message">بروتوكول SMB الحالي لا يسمح لك بالاتصال بخادم SMB، يرجى تغيير بروتوكول SMB.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_import_failed_source_folder_smb_account_password">حساب أو كلمة مرور SMB في مجلد المصدر فارغ لأنه لا يمكن فك تشفيره. يرجى تحرير مجلد المصدر وتصحيح حساب أو كلمة مرور SMB.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_import_failed_destination_folder_smb_account_password">حساب أو كلمة مرور SMB في مجلد الوجهة فارغ لأنه لا يمكن فك تشفيره. يرجى تحرير مجلد الوجهة وتصحيح حساب أو كلمة مرور SMB.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_use_user_pass">استخدام اسم الحساب وكلمة المرور</string>
+        <string name="msgs_task_edit_sync_folder_dlg_import_failed_destination_folder_zip_password">كلمة مرور ZIP لمجلد الوجهة فارغة لأنه لا يمكن فك تشفيرها. حرر مجلد الوجهة وغيّر كلمة المرور إلى الصحيحة.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_title">نسبة الضغط</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_fastest">الأصغر</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_fast">صغير</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_normal">عادي</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_maximum">الأقصى</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_diff_zip_password">كلمة المرور وكلمة مرور التأكيد غير متطابقتين.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_title_zip_password">كلمة المرور</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_title_zip_confirm_password">تأكيد كلمة المرور</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_none">بدون</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_zip_crypto">ZipCrypto</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_aes128">AES 128 بت</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_aes256">AES 256 بت</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_select_msg">اختيار طريقة التشفير</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_title">طريقة التشفير</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_filelist">عرض الملفات</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_directoryname">اسم الدليل</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_filename">ملف ZIP</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_select_file_title">اختيار ملف ZIP</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_specify_zip_file_name">حدد اسم ملف ZIP</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_specify_zip_password">حدد كلمة مرور ملف ZIP</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_time_stamp">إلحاق الطابع الزمني باسم ملف ZIP</string>
+        <string name="msgs_task_sync_folder_dlg_confirm_msg_nosave">تم تغيير إعدادات مهمة المزامنة. هل تريد الخروج بدون حفظ؟</string>
+        <string name="msgs_task_sync_task_dlg_active">مزامنة تلقائية</string>
+        <string name="msgs_task_sync_task_dlg_change_source_and_destination">تبديل المصدر والوجهة</string>
+        <string name="msgs_task_sync_task_dlg_swap_warning_title">تبديل المصدر والوجهة</string>
+        <string name="msgs_task_sync_task_dlg_swap_warning_message">قد يؤدي عكس اتجاه المزامنة إلى حذف غير متوقع للملفات والأدلة.\nيوصى بشدة بتفعيل وضع الاختبار والتأكد من عدم إزالة أو استبدال أي ملفات أو أدلة بشكل غير مقصود.</string>
+        <string name="msgs_task_sync_task_dlg_swap_directory_name_parameter_removed">في مجلد المصدر، المتغيرات المتعلقة بتاريخ ووقت التصوير غير متاحة وقد تمت إزالتها.</string>
+        <string name="msgs_task_sync_task_dlg_dir_name_has_invalid_char">تمت إزالة الأحرف غير الصالحة من اسم الدليل المحدد (\", :, \\, ?, *, &lt;, &gt;, \|)</string>
+        <string name="msgs_task_sync_task_dlg_file_filter_not_specified">لم يتم تحديد فلتر اسم الملف</string>
+        <string name="msgs_task_sync_task_dlg_file_filter_sync_all_file">جميع الملفات</string>
+        <string name="msgs_task_sync_task_dlg_file_name_has_invalid_char">تمت إزالة الأحرف غير الصالحة من اسم الملف المحدد (/, \", :, \\, ?, *, &lt;, &gt;, \|)</string>
+        <string name="msgs_task_sync_task_dlg_share_name_has_invalid_char">احتوى اسم المشاركة على أحرف غير قابلة للاستخدام، لذا تمت إزالتها. (\" / \\ [ ] : | &lt;, &gt;, + = ; , ? *)</string>
+        <string name="msgs_task_sync_task_dlg_dir_name_remove_redundant_separator">تمت إزالة الفاصل الزائد \"/\" في اسم الدليل.</string>
+        <string name="msgs_task_sync_task_dlg_source">مجلد المصدر</string>
+        <string name="msgs_task_sync_task_dlg_sync_type">نوع المزامنة</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_archive">أرشيف</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_copy">نسخ</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_mirror">مرآة</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_move">نقل</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_prompt">اختر نوع المزامنة</string>
+        <string name="msgs_task_sync_task_dlg_destination">مجلد الوجهة</string>
+        <string name="msgs_task_sync_task_dlg_task_name">اسم مهمة المزامنة</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_add_current_addr">إضافة عنوان IP الحالي</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_edit_title">تحرير عنوان IP</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_hint">عنوان IP</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_list">قائمة عناوين IP للشبكة اللاسلكية</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_title">تحرير فلتر عنوان IP</string>
+        <string name="msgs_task_sync_task_dlg_wifi_address_list">قائمة عناوين IP للشبكة اللاسلكية</string>
+        <string name="msgs_task_sync_task_dlg_task_stop_condition_stop">إيقاف</string>
+        <string name="msgs_task_sync_task_dlg_task_stop_condition_skip_uncondition">تجاهل</string>
+        <string name="msgs_task_sync_task_dlg_task_stop_condition_skip_network">شبكة</string>
+        <string name="msgs_task_sync_task_dlg_wifi_address_not_specified">لم يتم تحديد عنوان IP للشبكة اللاسلكية.</string>
+        <string name="msgs_task_sync_task_dlg_wifi_ap_not_connected">الشبكة اللاسلكية غير متصلة بنقطة الوصول المحددة.</string>
+        <string name="msgs_task_sync_task_dlg_wifi_duplicate_addr_specified">%s موجود بالفعل.</string>
+        <string name="msgs_task_sync_task_dlg_wifi_duplicate_ap_specified">%s موجود بالفعل.</string>
+        <string name="msgs_task_sync_task_filter_edit_dlg_title">تحرير الفلتر</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_add">إضافة</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_delete">حذف</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_dir_list">قائمة الأدلة</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_exclude">استبعاد</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_filter_enabled">مفعّل</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_filter_disabled">معطّل</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_source_directory">دليل المصدر:</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_file_filter">فلتر اسم الملف</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_filter_hint">فلتر</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_include">تضمين</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_not_specified">غير محدد</string>
+        <string name="msgs_task_sync_task_filter_title">الفلاتر:</string>
+        <string name="msgs_task_sync_task_sync_file_type_add_audio_title">إضافة صوت</string>
+        <string name="msgs_task_sync_task_sync_file_type_add_image_title">إضافة صورة</string>
+        <string name="msgs_task_sync_task_sync_file_type_add_video_title">إضافة فيديو</string>
+        <string name="msgs_task_sync_task_sync_file_type_add_filter_title">هل تريد إضافة ما يلي إلى فلتر الملفات؟</string>
+        <string name="msgs_task_sync_task_sync_file_type_not_added">تم تسجيل جميع الامتدادات.</string>
+        <string name="msgs_task_sync_task_sync_file_type_added_type">تمت إضافة ما يلي.</string>
+        <string name="msgs_task_sync_task_sync_file_type_specific">اختيار الملفات للمزامنة</string>
+        <string name="msgs_task_sync_task_sync_file_name_filter">فلتر اسم الملف</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter">فلتر حجم الملف</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_dialog_title">مزامنة الملفات إذا كان حجمها:</string>
+        <string name="msgs_task_sync_task_sync_file_size_ignore_file_size_0_byte_file">تجاهل الملفات ذات حجم 0 بايت</string>
+        <string name="msgs_task_sync_task_sync_file_size_size_hint">الحجم</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_dialog_title">اختيار وحدة فلتر حجم الملف</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_byte">بايت</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_kib">KiB</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_mib">MiB</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_gib">GiB</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_type_none">أي حجم</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_type_less_than">أقل من</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_type_greater_than">أكبر من</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_error_file_size_not_specified">لم يتم تحديد حجم الملف.</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_error_file_size_can_not_be_more_than_5_digits">لا يمكن أن يتجاوز حجم الملف 5 أرقام</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_error_file_size_must_be_greater_than_0">يجب أن يكون حجم الملف أكبر من أو يساوي 1</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter">فلتر تاريخ آخر تعديل للملف</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter_dialog_title">تضمين الملفات إذا كان تاريخ التعديل:</string>
+        <string name="msgs_task_sync_task_sync_file_date_hint">يوم</string>
+        <string name="msgs_task_sync_task_sync_file_date_type_none">أي تاريخ</string>
+        <string name="msgs_task_sync_task_sync_file_date_type_older_than">أقدم من</string>
+        <string name="msgs_task_sync_task_sync_file_date_type_newer_than">أحدث من</string>
+        <string name="msgs_task_sync_task_sync_file_date_type_after_sync_begin_day">في يوم بدء المزامنة أو بعده</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_not_specified">لم يتم تحديد تاريخ التحديث.</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_must_be_greater_than_0">يرجى تحديد يوم واحد على الأقل كتاريخ تحديث.</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_must_be_less_3_digit">لا يمكن أن يتجاوز تاريخ التحديث 3 أرقام.</string>
+        <string name="msgs_task_sync_task_sync_option">الخيارات:</string>
+        <string name="msgs_task_sync_task_sync_option_allowance_last_mod_time">الحد الأدنى المسموح به لفرق الوقت (بالثواني) بين ملفات المصدر والوجهة</string>
+        <string name="msgs_task_sync_task_sync_option_sync_allow_all_ip_address">السماح بالمزامنة مع جميع عناوين IP (بما في ذلك العامة)</string>
+        <string name="msgs_task_sync_task_sync_option_confirm_required">التأكيد قبل الكتابة الفوقية/الحذف</string>
+        <string name="msgs_task_sync_task_sync_option_delete_first_when_mirror">حذف الملفات قبل المزامنة (وضع المرآة فقط)</string>
+        <string name="msgs_task_sync_task_sync_option_diff_file_size_greater_than_destination">مقارنة الحجم فقط (تعتبر الملفات مختلفة فقط إذا كان حجم المصدر أكبر من الوجهة)</string>
+        <string name="msgs_task_sync_task_sync_option_diff_file_use_file_size">استخدام حجم الملف لتحديد ما إذا كانت الملفات مختلفة</string>
+        <string name="msgs_task_sync_task_sync_option_diff_file_use_last_mod_time">استخدام وقت آخر تعديل لتحديد ما إذا كانت الملفات مختلفة</string>
+        <string name="msgs_task_sync_task_sync_option_empty_directory">تضمين الأدلة الفارغة</string>
+        <string name="msgs_task_sync_task_sync_option_hidden_directory">تضمين الأدلة المخفية</string>
+        <string name="msgs_task_sync_task_sync_option_hidden_file">تضمين الملفات المخفية</string>
+        <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter_warn_dialog_title">إزالة الأدلة والملفات المستبعدة بالفلتر</string>
+        <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter_warn_dialog">تحذير: سيتم حذف جميع الملفات والمجلدات غير الموجودة في دليل المصدر وتلك غير المضمنة في الفلاتر المحددة من دليل الوجهة!\nيوصى بشدة بالاختبار والتأكد من عدم إزالة ملفات أو أدلة غير مقصودة.</string>
+        <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter">إزالة الأدلة والملفات المستبعدة بالفلتر</string>
+        <string name="msgs_task_sync_task_sync_option_ignore_never_overwrite_destination_file_if_it_is_newer_than_the_source_file_option_enabled">تم تخطي مزامنة الملف لأن خيار \"عدم الكتابة فوق ملف الوجهة إذا كان أحدث من ملف المصدر\" مفعّل.</string>
+        <string name="msgs_task_sync_task_sync_option_ignore_unusable_character_used_directory_file_name">تخطي أسماء الأدلة والملفات التي تحتوي على أحرف غير صالحة (\", :, \\, ?, *, &lt;, &gt;, \|)</string>
+        <string name="msgs_task_sync_task_sync_option_source_root_dir_file">تتضمن المزامنة الملفات الموجودة مباشرة في جذر دليل المصدر</string>
+        <string name="msgs_task_sync_task_sync_option_never_overwrite_destination_file_if_it_is_newer_than_the_source_file">عدم الكتابة فوق ملف الوجهة إذا كان أحدث من ملف المصدر</string>
+        <string name="msgs_task_sync_task_sync_option_never_overwrite_destination_file_if_it_is_newer_than_the_source_file_warning">تحذير: نتائج غير متوقعة محتملة!\nإذا كنت تعيش في منطقة بها توقيت صيفي أو إذا قمت بتغيير المناطق الزمنية، فقد يظهر ملف الوجهة بشكل خاطئ بوقت أقدم من المصدر إذا تم تعديله خلال فترة تغيير التوقيت الصيفي/المنطقة الزمنية. يوصى بشدة بتفعيل خيار \"التأكيد قبل الكتابة الفوقية/الحذف\". يرجى التحقق من محتويات الملف قبل الكتابة فوقه.</string>
+        <string name="msgs_task_sync_task_sync_option_copy_no_compare_title">تحذير الكتابة فوق ملف الوجهة</string>
+        <string name="msgs_task_sync_task_sync_option_copy_no_compare_warning">لم يتم اختيار \"استخدام حجم الملف لتحديد ما إذا كانت الملفات مختلفة\" و\"استخدام وقت آخر تعديل لتحديد ما إذا كانت الملفات مختلفة\" وسيتم دائمًا الكتابة فوق ملف الوجهة.</string>
+        <string name="msgs_task_sync_task_sync_option_diff_file_ignore_dst_difference">تجاهل فرق التوقيت الصيفي بين الملفات</string>
+        <string name="msgs_task_sync_task_sync_option_offset_of_dst_time_value">فرق الوقت بين التوقيت الصيفي والتوقيت القياسي (دقائق)</string>
+        <string name="msgs_task_sync_task_sync_option_offset_of_dst_time_value_title">اختيار إزاحة التوقيت الصيفي (دقائق)</string>
+        <string name="msgs_task_sync_task_sync_option_not_set_file_last_modified">عدم تعيين وقت آخر تعديل لملف الوجهة ليتطابق مع ملف المصدر</string>
+        <string name="msgs_task_sync_task_sync_option_not_set_file_last_modified_warning">عند التفعيل، لا يمكن أن يكون وقت آخر تعديل لملف الوجهة مماثلاً لملف المصدر، لذا يتم نسخ الملف في كل مرة يتم فيها المزامنة. استخدم هذا الخيار عندما لا تستطيع الوجهة تعيين وقت آخر تعديل، على سبيل المثال.\nإذا تم تفعيل هذا الخيار، يمكنك منع نسخ الملفات في كل مرة بتعطيل \"استخدام وقت آخر تعديل لتحديد ما إذا كانت الملفات مختلفة\".</string>
+        <string name="msgs_task_sync_task_sync_option_perform_overriden_copy_move">الكتابة فوق ملف (ملفات) الوجهة</string>
+        <string name="msgs_task_sync_task_sync_option_retry_if_error_occured">إعادة المحاولة عند خطأ الشبكة</string>
+        <string name="msgs_task_sync_task_sync_option_show_special_option">إظهار الخيارات المتقدمة</string>
+        <string name="msgs_task_sync_task_sync_option_network_adv_options">خيارات الشبكة المتقدمة:</string>
+        <string name="msgs_task_sync_task_sync_option_error_title">خيار الخطأ</string>
+        <string name="msgs_task_sync_task_sync_option_error_prompt">اختيار خيار الخطأ</string>
+        <string name="msgs_task_sync_task_sync_option_error_stop">إيقاف المزامنة</string>
+        <string name="msgs_task_sync_task_sync_option_error_skip_network">بدء المهام اللاحقة حتى لو لم تتوافق مع خيارات الشبكة</string>
+        <string name="msgs_task_sync_task_sync_option_error_ignore">تجاهل جميع الأخطاء وبدء المهام اللاحقة</string>
+        <string name="msgs_task_sync_task_sync_option_error_ignore_warning_message">إذا تم تعيين هذا الخيار على \"إيقاف\"، حتى لو انتهت مهمة المزامنة بخطأ، سيتم تنفيذ المهمة اللاحقة. قم بتعطيل هذا فقط إذا كنت تريد التأكد من تنفيذ المهمة التالية.</string>
+        <string name="msgs_task_sync_task_sync_option_sub_dir">تضمين الأدلة الفرعية</string>
+        <string name="msgs_task_sync_task_sync_option_sync_when_charging">تنفيذ مهام المزامنة فقط أثناء الشحن</string>
+        <string name="msgs_task_sync_task_sync_option_test_mode">وضع الاختبار (عدم نسخ أو حذف الملفات)</string>
+        <string name="msgs_task_sync_task_sync_option_wifi_condition_title">خيار الشبكة:</string>
+        <string name="msgs_task_sync_task_sync_sub_directory_sync_all_sub_directory">جميع الأدلة الفرعية</string>
+        <string name="msgs_task_sync_task_option_remove_directory_if_empty_when_move">حذف دليل المصدر عندما يكون فارغًا (فقط عندما يكون خيار المزامنة هو النقل)</string>
+        <string name="msgs_task_sync_task_sync_sub_directory_specific">اختيار أدلة فرعية</string>
+        <string name="msgs_task_sync_task_sync_use_small_ioarea">تحديد مخزن الكتابة لـ SMB I/O بـ 16 KB</string>
+        <string name="msgs_task_sync_task_option_confirm_exif_date">إذا تعذر تحديد التاريخ والوقت من بيانات EXIF، يتم عرض رسالة تأكيد</string>
+        <string name="msgs_task_sync_task_option_ignore_source_file_that_file_size_gt_4gb">تجاهل ملفات المصدر التي يزيد حجمها عن 4GB عند المزامنة إلى وحدة تخزين SDCARD/USB</string>
+        <string name="msgs_task_sync_task_option_ignore_file_name_length_gt_specified_length">تجاهل الملفات التي يتجاوز طول اسمها الطول المحدد.</string>
+        <string name="msgs_task_sync_task_sync_ignore_file_name_length_gt_specified_value_not_specified">حدد طول اسم الملف للتجاهل</string>
+        <string name="msgs_task_sync_task_sync_ignore_file_name_length_gt_specified_value_gt_0">حدد طول اسم ملف للتجاهل أكبر من أو يساوي 0</string>
+        <string name="msgs_task_sync_task_sync_ignore_file_name_length_gt_specified_value_le_255">حدد طول اسم ملف للتجاهل 255 أو أقل</string>
+        <string name="msgs_task_sync_folder_dlg_archive_ignore_source_directory_hierarchy">حفظ جميع الملفات في دليل الوجهة بدون إنشاء أدلة فرعية</string>
+        <string name="msgs_progress_spin_dlg_sync_cancel">إلغاء</string>
+        <string name="msgs_task_twoway_sync_conflict_keep_conflict_file">الاحتفاظ بملف تعارض المزامنة ثنائية الاتجاه</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle">معالجة ملفات التعارض</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_ask_user">سؤال المستخدم</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_skip_sync_file">تخطي مزامنة الملف</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_copy_newer">نسخ ملفات التاريخ الأحدث</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_copy_older">نسخ ملفات التاريخ الأقدم</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_copy_from_source_to_destination">النسخ من المصدر إلى الوجهة</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_copy_from_destination_to_source">النسخ من الوجهة إلى المصدر</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_prompt">اختيار معالجة ملفات التعارض</string>
+        <string name="msgs_task_sync_task_edit_keyword">تحرير المعلمة</string>
+        <string name="msgs_task_sync_task_edit_directory_name_keyword">تحرير معلمة اسم الدليل</string>
+        <string name="msgs_task_sync_task_edit_file_name_keyword">تحرير معلمة اسم الملف</string>
+        <string name="msgs_task_sync_task_edit_keyword_label_original_name">الاسم الأصلي</string>
+        <string name="msgs_task_sync_task_edit_keyword_label_new_name">الاسم المحوّل</string>
+        <string name="msgs_task_sync_task_edit_keyword_quit_warning">تم تغيير المعلمات. هل تريد الخروج؟</string>
+        <string name="msgs_task_sync_task_edit_keyword_mirror_can_not_used_taken_date">يتم استخدام متغير متعلق بتاريخ ووقت التصوير في مجلد الوجهة.(%s) لا يمكن استخدامه مع المرآة ويجب إزالته.</string>
+        <string name="msgs_rename_profile">إعادة تسمية المهمة</string>
+        <string name="msgs_save_to_profile_error">فشل حفظ ملف إعدادات المزامنة: %s</string>
+        <string name="msgs_select_export_file">اختيار وجهة التصدير</string>
+        <string name="msgs_select_import_file">اختيار ملف الاستيراد</string>
+        <string name="msgs_select_local_dir">اختيار الدليل المحلي</string>
+        <string name="msgs_select_remote_dir">اختيار دليل SMB</string>
+        <string name="msgs_select_remote_share">اختيار مشاركة SMB</string>
+        <string name="msgs_share_list_not_obtained">تعذر الحصول على قائمة مشاركات SMB. يرجى التحقق من:\n- تهيئة المشاركات على جانب خادم SMB\n- تقديم اسم المستخدم/كلمة المرور الصحيحة المطلوبة من الخادم</string>
+        <string name="msgs_smbsync_main_restart_by_destroyed">تمت إعادة تشغيل التطبيق بعد إيقافه. لتعطيل إعادة التشغيل، فعّل \"عدم الاحتفاظ بالأنشطة\" في الإعدادات > خيارات المطور.</string>
+        <string name="msgs_smbsync_main_restart_by_killed">تمت إعادة تشغيل التطبيق لأنه تم إيقافه عند انتقاله إلى الخلفية.</string>
+        <string name="msgs_smbsync_main_settings_restart_title">إعادة تشغيل التطبيق</string>
+        <string name="msgs_smbsync_main_settings_jcifs_changed_restart">تم تغيير إعدادات SMBv1. لن يكون هذا التغيير فعالاً حتى يتم إعادة تشغيل التطبيق. هل تريد الخروج من التطبيق الآن؟</string>
+        <string name="msgs_smbsync_ui_settings_language_changed_restart">يوصى بإعادة تشغيل التطبيق بعد تغيير السمة أو اللغة. انقر على \"إعادة التشغيل\" لإعادة التشغيل الآن. إذا كنت تريد إعادة التشغيل لاحقًا، انقر على \"لاحقًا\"</string>
+        <string name="msgs_smbsync_ui_settings_language_changed_restart_later">لاحقًا</string>
+        <string name="msgs_smbsync_ui_settings_language_changed_restart_immediate">إعادة التشغيل</string>
+        <string name="msgs_smbsync_main_start">تم بدء التطبيق.</string>
+        <string name="msgs_smnsync_main_kill_application">هل تريد إيقاف التطبيق؟</string>
+        <string name="msgs_specify_task_name">يرجى تحديد اسم للمهمة</string>
+        <string name="msgs_tab_name_history">السجل</string>
+        <string name="msgs_tab_name_schedule">الجدولة</string>
+        <string name="msgs_tab_name_msg">الرسائل</string>
+        <string name="msgs_tab_name_task">المهام</string>
+        <string name="msgs_tab_name_group">المجموعة</string>
+        <string name="msgs_terminate_application">الخروج من SMBSync4.</string>
+    <!-- Privacy Policy confirm -->
+        <string name="msgs_privacy_policy_title">سياسة الخصوصية</string>
+        <string name="msgs_privacy_policy_show_privacy_policy">عرض سياسة الخصوصية</string>
+    <!-- Search -->
+        <string name="msgs_find_view_search_word_hint">نص البحث</string>
+        <string name="msgs_find_view_search_prev_label">نتائج البحث السابقة</string>
+        <string name="msgs_find_view_search_next_label">نتائج البحث التالية</string>
+    <!-- Maintenance -->
+        <string name="msgs_progress_spin_dlg_housekeep_running">جارٍ صيانة ملفات بيانات التطبيق</string>
+        <string name="msgs_progress_spin_dlg_housekeep_cancel">إلغاء الصيانة</string>
+        <string name="msgs_progress_spin_dlg_housekeep_cancel_confirm">تأكيد إلغاء صيانة ملفات بيانات التطبيق؟</string>
+        <string name="msgs_maintenance_last_mod_list_confirm_start_msg">صيانة ملفات بيانات التطبيق.\nلا يمكن تنفيذ أي مهام مزامنة أثناء صيانة ملفات بيانات التطبيق. هل تريد تشغيل عملية الصيانة؟</string>
+        <string name="msgs_maintenance_last_mod_list_can_not_start_msg">لا يمكن إجراء صيانة ملفات بيانات التطبيق أثناء تشغيل مهمة المزامنة.</string>
+        <string name="msgs_maintenance_last_mod_list_cancel_msg">تم إلغاء صيانة ملفات بيانات التطبيق.</string>
+        <string name="msgs_maintenance_last_mod_list_del_count">تم حذف %s عنصر من قائمة الملفات المعدّلة أخيرًا.</string>
+        <string name="msgs_maintenance_last_mod_list_end_msg">اكتملت صيانة ملفات بيانات التطبيق.</string>
+        <string name="msgs_maintenance_last_mod_list_start_msg">بدأت صيانة ملفات بيانات التطبيق.</string>
+        <string name="msgs_maintenance_result_log_list_del_count">تم حذف %s ملف سجل تاريخ.</string>
+        <string name="msgs_maintenance_result_log_list_del_file">تم حذف %s.</string>
+        <string name="msgs_maintenance_result_log_list_del_title">تم العثور على ملفات وأدلة غير مرتبطة بسجلات التاريخ في دليل سجل التاريخ. هل تريد إزالة هذه الملفات؟</string>
+    <!-- Menu -->
+        <string name="msgs_menu_sync_all_auto">تنفيذ جميع مهام المزامنة التلقائية</string>
+        <string name="msgs_menu_sync_selected">تنفيذ مزامنة المهام المحددة</string>
+        <string name="msgs_menu_export">تصدير الإعدادات</string>
+        <string name="msgs_menu_import">استيراد الإعدادات</string>
+        <string name="msgs_menu_log_management">إدارة السجلات</string>
+        <string name="msgs_menu_show_hide_filter">إظهار/إخفاء الفلتر</string>
+        <string name="msgs_menu_about">حول SMBSync4</string>
+        <string name="msgs_menu_settings">الإعدادات</string>
+        <string name="msgs_menu_housekeep">صيانة قاعدة البيانات</string>
+        <string name="msgs_menu_kill">إيقاف التطبيق</string>
+        <string name="msgs_menu_list_storage_info">معلومات النظام</string>
+        <string name="msgs_menu_request_all_file_access">إذن الوصول لجميع الملفات</string>
+        <string name="msgs_menu_show_battery_optimization_screen">تحسين البطارية</string>
+    <!-- Mirror -->
+        <string name="msgs_mirror_confirm_archive_date_time_from_file_cancel">[تم إلغاء عملية الأرشفة بواسطة المستخدم]</string>
+        <string name="msgs_mirror_confirm_archive_date_time_from_file_confirm">لا يمكن الحصول على تاريخ ووقت التقاط الصورة من بيانات EXIF. هل تريد استخدام تاريخ ووقت تحديث الملف بدلاً من ذلك؟ (قم بتعطيل خيار \"التأكيد\" للأرشفة في مهمة المزامنة هذه لتجنب هذه الرسالة في المستقبل)</string>
+        <string name="msgs_mirror_confirm_copy_cancel">[تم إلغاء عملية النسخ بواسطة المستخدم]</string>
+        <string name="msgs_mirror_confirm_copy_confirm">تأكيد الكتابة فوق الملف \n%s\n(قم بتعطيل خيار \"التأكيد قبل الكتابة الفوقية/الحذف\" في مهمة المزامنة هذه لتجنب هذه الرسالة في المستقبل)</string>
+        <string name="msgs_mirror_confirm_delete_cancel">[تم إلغاء عملية الحذف بواسطة المستخدم]</string>
+        <string name="msgs_mirror_confirm_delete_dir_confirm">تأكيد حذف الدليل \n%s\n(قم بتعطيل خيار \"التأكيد قبل الكتابة الفوقية/الحذف\" في مهمة المزامنة هذه لتجنب هذه الرسالة في المستقبل)</string>
+        <string name="msgs_mirror_confirm_delete_file_confirm">تأكيد حذف الملف \n%s\n(قم بتعطيل خيار \"التأكيد قبل الكتابة الفوقية/الحذف\" في مهمة المزامنة هذه لتجنب هذه الرسالة في المستقبل)</string>
+        <string name="msgs_mirror_confirm_delete_zip_item_file_confirm">هل تريد حذف الملفات في ملف ZIP؟\n%s\n(قم بتعطيل خيار \"التأكيد قبل الكتابة الفوقية/الحذف\" في مهمة المزامنة هذه لتجنب هذه الرسالة في المستقبل)</string>
+        <string name="msgs_mirror_confirm_delete_zip_item_dir_confirm">هل تريد حذف الأدلة في ملف ZIP؟\n%s\n(قم بتعطيل خيار \"التأكيد قبل الكتابة الفوقية/الحذف\" في مهمة المزامنة هذه لتجنب هذه الرسالة في المستقبل)</string>
+        <string name="msgs_mirror_file_zip_split_archive_can_not_be_used">لا يمكن استخدام الأرشيف المقسم.</string>
+        <string name="msgs_mirror_confirm_move_cancel">[تم إلغاء عملية النقل بواسطة المستخدم]</string>
+        <string name="msgs_mirror_confirm_move_confirm">تأكيد نقل الملف\nالنقل من: %1$s \nالوجهة: %2$s \n(إذا لم تكن بحاجة للتأكيد، قم بإلغاء تحديد \"التأكيد\" في مهمة المزامنة.)</string>
+        <string name="msgs_mirror_confirm_no_btn">لا</string>
+        <string name="msgs_mirror_confirm_noall_btn">لا للكل</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_archive">اضغط هنا لتأكيد أرشفة الملف.</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_copy">اضغط هنا لتأكيد الكتابة فوق الملف.</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_delete_dir">اضغط هنا لتأكيد حذف الدليل.</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_delete_file">اضغط هنا لتأكيد حذف الملف.</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_move">اضغط هنا لتأكيد نقل الملف.</string>
+        <string name="msgs_mirror_confirm_task_cancel_btn">إلغاء المزامنة</string>
+        <string name="msgs_mirror_confirm_yes_btn">نعم</string>
+        <string name="msgs_mirror_confirm_yesall_btn">نعم لجميع ما يلي</string>
+        <string name="msgs_mirror_taken_date_can_not_obtain_from_the_file">تم استخدام وقت آخر تعديل للملف لأنه لا يمكن الحصول على تاريخ ووقت التصوير من بيانات EXIF/البيانات الوصفية للملف. الملف=</string>
+        <string name="msgs_mirror_taken_date_convert_error">تم استخدام وقت آخر تعديل للملف لأنه حدث خطأ في تحويل تاريخ التصوير. الملف=</string>
+        <string name="msgs_mirror_directory_with_same_name_as_the_file_found">تم إيقاف المزامنة لأن مسار الوجهة يحتوي على دليل بنفس اسم الملف المراد نسخه. الملف=</string>
+        <string name="msgs_mirror_ignore_file_name_gt_255_byte">تم تجاهل الملف لأن طول اسم الملف يتجاوز %1$s بايت. اسم الملف بالبايت=%2$s، اسم الملف=%3$s</string>
+        <string name="msgs_mirror_external_sdcard_not_mounted">تم إلغاء المزامنة لأن وحدة تخزين SDCARD/USB غير مركبة.</string>
+        <string name="msgs_mirror_external_sdcard_select_required">تم إلغاء المزامنة لأنه لا يمكن الوصول إلى وحدة تخزين SDCARD/USB. UUID=%s</string>
+        <string name="msgs_mirror_file_ignored_file_size_gt_4gb">تم تجاهله لأن حجم الملف يتجاوز 4GB. الملف=%s</string>
+        <string name="msgs_mirror_directory_ignored_because_access_not_granted">تم تجاهل الدليل لأنه غير قابل للوصول. الدليل=%s</string>
+        <string name="msgs_mirror_file_ignored_because_access_not_granted">تم تجاهل الملف لأنه غير قابل للوصول. الملف=%s</string>
+        <string name="msgs_mirror_directory_ignored_because_sync_sub_directory_disabled">تم تجاهل الأدلة الفرعية لأن \"تضمين الأدلة الفرعية\" معطّل. الدليل=%s</string>
+        <string name="msgs_mirror_file_set_last_modified_failed">فشل setLastModified(). فعّل \"عدم تعيين وقت آخر تعديل لملف الوجهة ليتطابق مع ملف المصدر\" في خيارات مهمة المزامنة.</string>
+        <string name="msgs_mirror_file_zip_update_zip_file">جارٍ تحديث ملف ZIP.</string>
+        <string name="msgs_mirror_ignore_override_copy_file">تم تجاهل نسخ الملف لأن خيار \"الكتابة فوق ملف (ملفات) الوجهة\" معطّل لهذه المهمة.</string>
+        <string name="msgs_mirror_ignore_override_move_file">تم تجاهل نقل الملف لأن خيار \"الكتابة فوق ملف (ملفات) الوجهة\" معطّل لهذه المهمة.</string>
+        <string name="msgs_mirror_invalid_folder_combination">تركيبة نوع المجلد غير صالحة. المصدر=%1$s، الوجهة=%2$s</string>
+        <string name="msgs_mirror_invalid_file_directory_name_character_error">يحتوي اسم ملف أو دليل المصدر على أحرف غير صالحة للوجهة. قم بتحرير الاسم للسماح بالمزامنة. الحرف: %1$s، المسار: %2$s</string>
+        <string name="msgs_mirror_invalid_file_directory_name_character_skipped">تم استبعاد الملف أو الدليل من عملية المزامنة لأن اسم المصدر يحتوي على أحرف غير صالحة للوجهة. الحرف: %1$s، المسار: %2$s</string>
+        <string name="msgs_mirror_remote_addr_not_connected">تعذر الاتصال بمضيف SMB=%s</string>
+        <string name="msgs_mirror_remote_addr_not_connected_with_port">تعذر الاتصال بمضيف SMB %1$s على المنفذ %2$s</string>
+        <string name="msgs_mirror_remote_name_not_found">تعذر العثور على اسم مضيف SMB. حاول استخدام عنوان IP الخاص به. اسم المضيف=%s</string>
+        <string name="msgs_mirror_same_directory_ignored">تم تجاهل الدليل لأن الوجهة والمصدر متماثلان. الدليل=%s</string>
+        <string name="msgs_mirror_same_file_ignored">تم تجاهل الملف لأنه لا يمكن مزامنة نفس الملف في المصدر والوجهة. الملف=%s</string>
+        <string name="msgs_mirror_smb_addr_not_connected">تعذر الاتصال بخادم SMB المحدد. الخادم=%s</string>
+        <string name="msgs_mirror_smb_addr_not_connected_with_port">تعذر الاتصال بخادم SMB المحدد. عنوان IP=%1$s، المنفذ=%2$s</string>
+        <string name="msgs_mirror_smb_invalid_port_specified">رقم المنفذ غير صالح: %s</string>
+        <string name="msgs_mirror_smb_name_not_found">تعذر العثور على اسم مضيف خادم SMB المحدد. اسم المضيف=%s</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_address_conn_other">تم إيقاف المزامنة. محول الشبكة اللاسلكية ليس لديه عنوان IP المحدد.</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_ap_conn_other">تم إيقاف المزامنة. غير متصل بنقطة الوصول اللاسلكية المحددة.</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_ap_not_connected">تم إيقاف المزامنة. غير متصل بنقطة وصول WiFi.</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_connect_not_local_addr">تم إيقاف المزامنة. عنوان الشبكة ليس عنوان IP خاصًا.</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_is_off">تم إيقاف المزامنة. الشبكة اللاسلكية متوقفة.</string>
+        <string name="msgs_mirror_sync_can_not_start_ip_address_not_obtained">تم إيقاف المزامنة. لا يمكن الحصول على عنوان الشبكة.</string>
+        <string name="msgs_mirror_sync_can_not_start_ip_address_is_global">تم إيقاف المزامنة لأن عنوان الشبكة ليس عنوانًا خاصًا (%s). يرجى تفعيل جميع عناوين IP في خيارات المزامنة عندما تريد إجراء المزامنة.</string>
+        <string name="msgs_mirror_sync_cancelled_battery_option_not_satisfied">تم إيقاف المزامنة. الجهاز لا يتم شحنه.</string>
+        <string name="msgs_mirror_sync_request_ended">انتهى طلب المزامنة. الطالب=%s</string>
+        <string name="msgs_mirror_sync_request_started">بدأ طلب المزامنة. الطالب=%s</string>
+        <string name="msgs_mirror_sync_skipped_wifi_address_conn_other">تم تخطي مهمة المزامنة لأن عنوان الشبكة اللاسلكية لا يتطابق مع عنوان IP المحدد.</string>
+        <string name="msgs_mirror_sync_skipped_wifi_ap_conn_other">تم تخطي مهمة المزامنة لأن الشبكة اللاسلكية غير متصلة بنقطة وصول WiFi المحددة.</string>
+        <string name="msgs_mirror_sync_start_was_delayed">تم تشغيل الشبكة اللاسلكية لبدء المهام المخططة. تم تعيين المزامنة للبدء بعد %s ثانية...</string>
+        <string name="msgs_mirror_sync_wifi_can_not_enabled">تعذر تشغيل WiFi.</string>
+        <string name="msgs_mirror_task_avg_rate">متوسط معدل النقل = %s</string>
+        <string name="msgs_mirror_task_dir_create">[تم إنشاء المجلد]</string>
+        <string name="msgs_mirror_task_dir_create_failed">فشل إنشاء الدليل.</string>
+        <string name="msgs_mirror_task_dir_deleted">[تم حذف المجلد]</string>
+        <string name="msgs_mirror_task_dir_moved">[تم نقل المجلد]</string>
+        <string name="msgs_mirror_task_file_archived">[تمت الأرشفة]</string>
+        <string name="msgs_mirror_task_file_copied">[تم نسخ الملف]</string>
+        <string name="msgs_mirror_task_file_copying">جارٍ نسخ الملف… %s %% [مكتمل]</string>
+        <string name="msgs_mirror_task_file_deleted">[تم حذف الملف]</string>
+        <string name="msgs_mirror_task_file_moved">[تم نقل الملف]</string>
+        <string name="msgs_mirror_task_file_replaced">[تمت الكتابة فوق الملف]</string>
+        <string name="msgs_mirror_task_file_failed">[فشلت المزامنة]</string>
+        <string name="msgs_mirror_task_file_ignored">[تم التخطي]</string>
+        <string name="msgs_mirror_task_dir_delete_failed">فشل حذف الدليل.</string>
+        <string name="msgs_mirror_task_file_moving">جارٍ نقل الملف. %s%% مكتمل.</string>
+        <string name="msgs_mirror_task_file_delete_failed">تعذر حذف الملف. الملف=%s</string>
+        <string name="msgs_mirror_task_file_move_failed_delete">تعذر نقل الملف (لا يمكن حذف الملف المصدر). الملف=%s</string>
+        <string name="msgs_mirror_task_source_not_found">لم يتم العثور على ملف أو دليل المصدر. الملف=%s</string>
+        <string name="msgs_mirror_task_no_of_copy">عدد النسخ=%1$s، عدد النقل=%2$s، عدد الاستبدال=%3$s، عدد الحذف=%4$s، عدد التجاهل=%5$s، الوقت المنقضي=%6$s</string>
+        <string name="msgs_mirror_task_result_cancel">تم الإلغاء.</string>
+        <string name="msgs_mirror_task_result_error_ended">انتهت مهمة المزامنة بخطأ.</string>
+        <string name="msgs_mirror_task_result_skip">تم تخطي مهمة المزامنة.</string>
+        <string name="msgs_mirror_task_result_error_ignored">تم تجاهل الخطأ بسبب إعداد خيار معالجة الأخطاء.</string>
+        <string name="msgs_mirror_task_result_ok">انتهت مهمة المزامنة بنجاح.</string>
+        <string name="msgs_mirror_task_result_stats">عدد النسخ=%1$s، عدد الحذف=%2$s، عدد التجاهل=%3$s، عدد التحذيرات=%4$s، عدد إعادة المحاولة=%5$s، عدد الأخطاء=%6$s</string>
+        <string name="msgs_mirror_task_started">بدأت مهمة المزامنة.</string>
+        <string name="msgs_mirror_task_success_end">انتهت بنجاح.</string>
+        <string name="msgs_mirror_task_sync_request_error_detected">انتهت المزامنة بأخطاء.</string>
+        <string name="msgs_mirror_task_was_cancelled">تم الإلغاء.</string>
+    <!-- Scan network -->
+        <string name="msgs_scan_progress_spin_dlg_addr_cancel">إلغاء البحث</string>
+        <string name="msgs_scan_ip_address_select_title">البحث عن خادم SMB</string>
+        <string name="msgs_scan_ip_address_scan_btn">بحث</string>
+        <string name="msgs_scan_ip_address_press_scan_btn">حدد نطاق عنوان IP، ثم اضغط على زر البحث</string>
+        <string name="msgs_scan_ip_address_not_detected">لم يتم العثور على خادم SMB.</string>
+        <string name="msgs_scan_ip_address_select_detected_host">اختر اسم المضيف أو عنوان IP من نتائج البحث</string>
+        <string name="msgs_scan_ip_address_scan_result_title">نتائج البحث</string>
+        <string name="msgs_ip_address_scan_progress">جارٍ البحث عن مضيف SMB… %s%% مكتمل.</string>
+        <string name="msgs_ip_address_range_dlg_begin">البداية</string>
+        <string name="msgs_ip_address_range_dlg_end">النهاية</string>
+        <string name="msgs_ip_address_range_dlg_begin_notspecified">حدد بداية نطاق العنوان.</string>
+        <string name="msgs_ip_address_range_dlg_addr_range_error">يجب أن يكون نطاق العنوان من 1 إلى 254.</string>
+        <string name="msgs_ip_address_range_dlg_begin_range_error">يجب أن يكون عنوان البداية من 1 إلى 254.</string>
+        <string name="msgs_ip_address_range_dlg_end_notspecified">حدد نهاية نطاق العنوان.</string>
+        <string name="msgs_ip_address_range_dlg_begin_addr_gt_end_addr">يجب أن يكون عنوان النهاية من 2 إلى 254.</string>
+        <string name="msgs_ip_address_range_dlg_end_range_error">يجب أن يكون عنوان النهاية أكبر من عنوان البداية.</string>
+        <string name="msgs_ip_address_range_dlg_not_private">لا يمكن البحث في غير العناوين الخاصة.</string>
+        <string name="msgs_scan_not_started_because_wifi_off">البحث غير ممكن لأن WiFi متوقف. يرجى تشغيل WiFi للبحث عن خادم SMB.</string>
+        <string name="msgs_progress_dlg_canceling">جارٍ الإلغاء…</string>
+        <string name="msgs_progress_spin_dlg_filelist_getting">جارٍ الحصول على قائمة الملفات…</string>
+        <string name="msgs_progress_spin_dlg_filelist_cancel">إلغاء</string>
+    <!-- Scheduler -->
+        <string name="msgs_menu_scheduler">الجدولة</string>
+        <string name="msgs_scheduler_main_dlg_hdr_title_schedule_name">اسم الجدول</string>
+        <string name="msgs_scheduler_main_dlg_hdr_title_add">إضافة جدول</string>
+        <string name="msgs_scheduler_main_dlg_hdr_title_add_new_schedule_name">جدول جديد</string>
+        <string name="msgs_scheduler_main_dlg_hdr_title_edit">تحرير الجدول</string>
+        <string name="msgs_scheduler_main_dlg_hdr_enable">تفعيل الجدول</string>
+        <string name="msgs_scheduler_main_dlg_hdr_edit_prof">تحرير قائمة مهام المزامنة</string>
+        <string name="msgs_scheduler_main_dlg_hdr_sun">أحد</string>
+        <string name="msgs_scheduler_main_dlg_hdr_mon">اثنين</string>
+        <string name="msgs_scheduler_main_dlg_hdr_tue">ثلاثاء</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wed">أربعاء</string>
+        <string name="msgs_scheduler_main_dlg_hdr_thu">خميس</string>
+        <string name="msgs_scheduler_main_dlg_hdr_fri">جمعة</string>
+        <string name="msgs_scheduler_main_dlg_hdr_sat">سبت</string>
+        <string name="msgs_scheduler_main_dlg_hdr_month">الشهر</string>
+        <string name="msgs_scheduler_main_dlg_hdr_day">اليوم</string>
+        <string name="msgs_scheduler_main_dlg_hdr_hour">الساعة</string>
+        <string name="msgs_scheduler_main_dlg_hdr_minute">الدقيقة</string>
+        <string name="msgs_scheduler_main_dlg_hdr_schedule_type">نوع الجدول</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on">إذا كان WiFi متوقفًا، فعّله لبدء المهام المجدولة</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on_delayed_time">بعد تشغيل WiFi، تأخير المزامنة بـ:</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on_delayed_1">5 ثوانٍ</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on_delayed_2">10 ثوانٍ</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on_delayed_3">30 ثانية</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_off">إيقاف WiFi مرة أخرى بعد اكتمال المهام المجدولة.</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option">تغيير خيارات مهمة المزامنة</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option_charge">تغيير خيار \"تنفيذ مهام المزامنة فقط أثناء الشحن\"</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option_charge_rg_0">عدم التغيير</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option_charge_rg_1">مفعّل</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option_charge_rg_2">معطّل</string>
+        <string name="msgs_scheduler_main_dlg_hdr_interval_schedule_reset">إعادة تعيين وقت بدء الفاصل الزمني إلى آخر حدث مزامنة.</string>
+        <string name="msgs_scheduler_main_dlg_hdr_schedule_time">وقت الجدول : %s</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_prompt">اختيار نوع الجدول</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_every_hour">كل ساعة</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_every_day">كل يوم</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_every_month">كل شهر</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_day_of_week">يوم من الأسبوع</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_interval">فاصل زمني</string>
+        <string name="msgs_scheduler_main_spinner_sched_day_prompt">اختيار أيام الجدول</string>
+        <string name="msgs_scheduler_main_spinner_sched_hours_prompt">اختيار ساعات الجدول</string>
+        <string name="msgs_scheduler_main_spinner_sched_minutes_prompt">اختيار دقائق الجدول</string>
+        <string name="msgs_scheduler_info_last_day_of_the_month">اليوم الأخير</string>
+        <string name="msgs_scheduler_main_last_day_of_the_month">المزامنة في اليوم الأخير من كل شهر</string>
+        <string name="msgs_scheduler_main_last_day_of_the_month_warning">إذا كان اليوم المحدد لا يوجد في بعض الأشهر، فسيتم تخطي المزامنة في تلك الأشهر. مثلاً: إذا اخترت 29 وشهر فبراير به 28 يومًا فقط، أو اخترت 31 والشهر به 30 يومًا فقط. اختر خيار \"المزامنة في اليوم الأخير من الشهر\" لضمان تنفيذ المهمة في اليوم الأخير من كل شهر.</string>
+        <string name="msgs_scheduler_edit_synclist_dlg_hdr_title">قائمة مهام المزامنة</string>
+        <string name="msgs_scheduler_edit_synclist_dlg_hdr_sync_all_sync_profile">تنفيذ جميع مهام المزامنة التلقائية</string>
+        <string name="msgs_scheduler_edit_sync_prof_list_not_specified">يرجى تحديد مهام المزامنة المراد جدولتها بالضغط على زر \"تحرير قائمة مهام المزامنة\" أدناه.</string>
+        <string name="msgs_scheduler_info_next_schedule_time">وقت المزامنة التالي هو %s</string>
+        <string name="msgs_scheduler_info_next_schedule_main_info">المزامنة التالية: %1$s، (%2$s)</string>
+        <string name="msgs_scheduler_info_next_schedule_main_error">لا يمكن العثور على المهمة المحددة في الجدول.\nالجدول: %1$s، المهمة: %2$s</string>
+        <string name="msgs_scheduler_info_schedule_disabled">جدول المزامنة معطّل</string>
+        <string name="msgs_scheduler_info_schedule_enabled">جدول المزامنة مفعّل</string>
+        <string name="msgs_scheduler_info_sync_all_active_profile">تنفيذ جميع مهام المزامنة التلقائية</string>
+        <string name="msgs_scheduler_info_sync_selected_profile">مهمة (مهام) المزامنة %s</string>
+        <string name="msgs_scheduler_info_sync_task_was_not_found">لم يتم العثور على اسم مهمة المزامنة المحددة، الاسم= (%s)</string>
+        <string name="msgs_scheduler_info_sync_task_was_deleted_or_renamed">تم حذف أو إعادة تسمية مهمة المزامنة.</string>
+        <string name="msgs_scheduler_info_sync_task_list_was_empty">قائمة مهام المزامنة فارغة</string>
+        <string name="msgs_scheduler_main_dw_not_selected">يرجى اختيار يوم واحد من الأسبوع على الأقل.</string>
+        <string name="msgs_schedule_list_edit_dlg_title">تحرير قائمة الجداول</string>
+        <string name="msgs_schedule_list_edit_dlg_error_sync_list_name_already_exists">اسم مهمة المزامنة هذا موجود بالفعل. استخدم اسمًا مختلفًا.</string>
+        <string name="msgs_schedule_list_edit_dlg_error_sync_list_name_does_not_specified">لم يتم تحديد اسم جدول المهام.</string>
+        <string name="msgs_schedule_list_edit_dlg_error_schedule_name_contains_unusabel_character">حرف غير صالح في اسم الجدول: \"%s\".</string>
+        <string name="msgs_schedule_cont_label_add">إضافة جدول</string>
+        <string name="msgs_schedule_cont_label_activate">تفعيل</string>
+        <string name="msgs_schedule_cont_label_inactivate">تعطيل</string>
+        <string name="msgs_schedule_cont_label_delete">حذف الجدول</string>
+        <string name="msgs_schedule_cont_label_copy">نسخ</string>
+        <string name="msgs_schedule_cont_label_rename">إعادة تسمية</string>
+        <string name="msgs_schedule_cont_label_select_all">تحديد الكل</string>
+        <string name="msgs_schedule_cont_label_unselect_all">إلغاء تحديد الكل</string>
+        <string name="msgs_schedule_confirm_msg_delete">هل تريد حذف العنصر (العناصر) التالي؟ سيتم تطبيق النتائج فورًا ولا يمكن التراجع عنها.</string>
+        <string name="msgs_schedule_confirm_msg_enable">هل تريد تفعيل العنصر (العناصر) التالي؟ سيتم تطبيق النتائج فورًا ولا يمكن التراجع عنها.</string>
+        <string name="msgs_schedule_confirm_msg_disable">هل تريد تعطيل العنصر (العناصر) التالي؟ سيتم تطبيق النتائج فورًا ولا يمكن التراجع عنها.</string>
+        <string name="msgs_schedule_confirm_msg_rename_warning">هل تريد تغيير اسم الجدول؟ سيتم تطبيق النتائج فورًا ولا يمكن التراجع عنها.</string>
+        <string name="msgs_schedule_confirm_msg_rename_duplicate_name">اسم الجدول مكرر.</string>
+        <string name="msgs_schedule_confirm_msg_nosave">تم تغيير الجدول. هل تريد الخروج بدون حفظ؟</string>
+        <string name="msgs_schedule_rename_schedule">إعادة تسمية الجدول</string>
+        <string name="msgs_schedule_rename_schedule_error">خطأ في إعادة تسمية الجدول، لا يمكن العثور على عنصر الجدول.</string>
+        <string name="msgs_schedule_list_edit_no_schedule">اضغط على زر الإضافة لإنشاء جدول جديد.</string>
+        <string name="msgs_schedule_list_edit_scheduler_disabled">لم تتم المزامنة المجدولة لأن الجدول معطّل. لتفعيل المزامنة المجدولة، اضغط على مفتاح التبديل أمام العنصر المجدول.</string>
+        <string name="msgs_schedule_list_edit_confirm_scheduler_to_enabled">هل تريد تفعيل الجدول؟</string>
+        <string name="msgs_schedule_list_edit_confirm_scheduler_to_disabled">هل تريد تعطيل الجدول؟</string>
+        <string name="msgs_schedule_list_edit_scheduler_toggle_enable_disable">تبديل تفعيل أو تعطيل الجدول.</string>
+        <string name="msgs_schedule_list_edit_multi_sched_warn">سيتم دمج الجداول وخيارات WiFi للمهام المتعددة لمنع عمليات المزامنة المكررة.</string>
+        <string name="msgs_schedule_sync_task_start_label">تنفيذ الجدول (%s)</string>
+        <string name="msgs_schedule_sync_task_start_error">خطأ في تنفيذ الجدول</string>
+        <string name="msgs_schedule_battery_optimization_warning_title">تحسين البطارية</string>
+        <string name="msgs_schedule_battery_optimization_warning_msg">قد تفشل المزامنة المجدولة لأن تحسين البطارية مفعّل. هل تريد تغيير إعداد تحسين البطارية؟</string>
+    <!-- Group -->
+        <string name="msgs_menu_group">المجموعة</string>
+        <string name="msgs_group_edit_title_add">إضافة مجموعة</string>
+        <string name="msgs_group_edit_title_edit">تحرير المجموعة</string>
+        <string name="msgs_group_edit_title_new_group_name">مجموعة جديدة</string>
+        <string name="msgs_group_name_for_shortcut1">الزر1</string>
+        <string name="msgs_group_name_for_shortcut2">الزر2</string>
+        <string name="msgs_group_name_for_shortcut3">الزر3</string>
+        <string name="msgs_group_name_for_sync_button">زر المزامنة</string>
+        <string name="msgs_group_button_not_assigned">لا شيء</string>
+        <string name="msgs_group_select_button_title">اختيار زر</string>
+        <string name="msgs_group_label_button">الزر المعيّن :</string>
+        <string name="msgs_group_label_assign_button">تعيين الزر</string>
+        <string name="msgs_group_main_dlg_hdr_enable">تفعيل المجموعة</string>
+        <string name="msgs_group_main_dlg_hdr_disabled">معطّل</string>
+        <string name="msgs_group_edit_enable_sync_group">هل تريد تفعيل المهام التالية؟</string>
+        <string name="msgs_group_edit_disable_sync_group">هل تريد تعطيل المهام التالية؟</string>
+        <string name="msgs_group_main_dlg_hdr_auto_task_only">مزامنة المهام التلقائية فقط</string>
+        <string name="msgs_group_main_dlg_hdr_task_list">قائمة المهام</string>
+        <string name="msgs_group_main_dlg_hdr_group_name">اسم المجموعة</string>
+        <string name="msgs_group_exec_sync_task_no_auto_task_exists">المهمة التلقائية غير موجودة. المجموعة=%1$s</string>
+        <string name="msgs_group_exec_sync_task_no_sync_task_exists">المهمة غير موجودة. المجموعة=%1$s، المهمة=%2$s</string>
+        <string name="msgs_group_edit_sync_task_list_not_specified">اضغط على زر قائمة المهام لتحديد المهام المراد مزامنتها.</string>
+        <string name="msgs_group_info_sync_task_was_deleted_or_renamed">تم حذف أو إعادة تسمية مهمة المزامنة. المهمة=%s</string>
+        <string name="msgs_group_list_edit_dlg_error_sync_list_name_already_exists">اسم المجموعة هذا موجود بالفعل. استخدم اسمًا مختلفًا.</string>
+        <string name="msgs_group_list_edit_dlg_error_sync_list_name_does_not_specified">لم يتم تحديد اسم المجموعة.</string>
+        <string name="msgs_group_list_edit_dlg_error_schedule_name_contains_unusabel_character">حرف غير صالح في اسم المجموعة: \"%s\".</string>
+        <string name="msgs_group_can_not_sync_specified_task_does_not_exists">تعذر العثور على المهمة المحددة في المجموعة. المهمة=(%s)</string>
+        <string name="msgs_group_cont_label_add">إضافة مجموعة</string>
+        <string name="msgs_group_cont_label_up">نقل للأعلى</string>
+        <string name="msgs_group_cont_label_down">نقل للأسفل</string>
+        <string name="msgs_group_cont_label_activate">تفعيل المجموعة</string>
+        <string name="msgs_group_cont_label_inactivate">تعطيل المجموعة</string>
+        <string name="msgs_group_cont_label_delete">حذف المجموعة</string>
+        <string name="msgs_group_cont_label_copy">نسخ المجموعة</string>
+        <string name="msgs_group_cont_label_rename">إعادة تسمية المجموعة</string>
+        <string name="msgs_group_confirm_msg_delete">هل تريد حذف العنصر (العناصر) التالي؟ سيتم تطبيق النتائج فورًا ولا يمكن التراجع عنها.</string>
+        <string name="msgs_group_confirm_msg_enable">هل تريد تفعيل العنصر (العناصر) التالي؟ سيتم تطبيق النتائج فورًا ولا يمكن التراجع عنها.</string>
+        <string name="msgs_group_confirm_msg_disable">هل تريد تعطيل العنصر (العناصر) التالي؟ سيتم تطبيق النتائج فورًا ولا يمكن التراجع عنها.</string>
+        <string name="msgs_group_confirm_msg_rename_warning">هل تريد تغيير اسم المجموعة؟ سيتم تطبيق النتائج فورًا ولا يمكن التراجع عنها.</string>
+        <string name="msgs_group_list_edit_no_group">انقر على زر الإضافة لإنشاء مجموعة.</string>
+        <string name="msgs_group_list_edit_confirm_group_to_enabled">هل تريد تفعيل المجموعة؟</string>
+    <!-- edit Sync task list -->
+        <string name="msgs_edit_sync_task_list_delete_sync_task">هل تريد حذف المهام التالية؟</string>
+        <string name="msgs_edit_sync_task_list_add_sync_task_no_task_exists_for_add">لا توجد مهام يمكن إضافتها.</string>
+        <string name="msgs_edit_sync_task_list_dlg_title">تحرير قائمة مهام المزامنة</string>
+        <string name="msgs_edit_sync_task_list_add_sync_task_btn_title">إضافة مهمة مزامنة</string>
+        <string name="msgs_edit_sync_task_list_info_sync_task_list_was_empty">لم يتم تحديد مهمة مزامنة. انقر على زر \"إضافة مهمة مزامنة\" لإضافة مهمة.</string>
+        <string name="msgs_edit_sync_task_list_error_specified_task_does_not_exists">المهمة غير موجودة. المهمة=%s</string>
+        <string name="msgs_edit_sync_task_list_cont_label_select_all">تحديد الكل</string>
+        <string name="msgs_edit_sync_task_list_cont_label_unselect_all">إلغاء تحديد الكل</string>
+        <string name="msgs_edit_sync_task_list_cont_label_remove_sync_task">إزالة مهمة المزامنة</string>
+        <string name="msgs_edit_sync_task_list_cont_label_add_sync_task">إضافة مهمة مزامنة</string>
+        <string name="msgs_edit_sync_task_list_help_title">مساعدة تحرير قائمة مهام المزامنة</string>
+        <string name="msgs_edit_sync_task_list_add_task_list_guide">اختر المهمة التي تريد إضافتها وانقر على زر \"إضافة\".</string>
+        <string name="msgs_edit_sync_task_list_help_file">SMBSync4_Help_EN_edit_sync_task_list.md</string>
+        <string name="msgs_edit_sync_task_list_confirm_msg_nosave">تم تغيير قائمة المهام. هل تريد الخروج بدون حفظ؟</string>
+    <!-- Sync Button -->
+        <string name="msgs_main_sync_button_confirmation_message_title">تأكيد بدء المزامنة</string>
+        <string name="msgs_main_sync_button_confirmation_message_msg">هل تريد بدء المهام التالية؟</string>
+        <string name="msgs_main_sync_button_start_error_task_not_found">لم يتم العثور على مهام لبدء المزامنة. المهمة=%1$s</string>
+        <string name="msgs_main_sync_button_start_error_auto_task_does_not_exists">المهمة التلقائية غير موجودة.</string>
+        <string name="msgs_main_sync_button_confirmation_message_suppress">تعطيل هذا الإشعار (يمكن تفعيله في إعدادات المزامنة)</string>
+    <!-- Shortcut -->
+        <string name="msgs_main_shortcut_title">اختصار SMBSync4</string>
+        <string name="msgs_main_shorcut_confirmation_message_title">تأكيد بدء SMBSync4</string>
+        <string name="msgs_main_shorcut_confirmation_message_msg">هل تريد بدء المهام التالية؟</string>
+        <string name="msgs_main_shortcut_start_error_task_not_found">(%1$s) لم يتم العثور على مهام لبدء المزامنة. المهمة=%2$s</string>
+        <string name="msgs_main_shortcut_start_error_auto_task_does_not_exists">(%s) المهمة التلقائية غير موجودة.</string>
+        <string name="msgs_main_shortcut_not_assigned">(%s) لم يتم تعيين مجموعة.\nهل تريد بدء مزامنة المهام التالية؟</string>
+        <string name="msgs_main_shortcut_group_disabled">(%1$s) المجموعة المعيّنة(%2$s) معطّلة.\nهل تريد بدء مزامنة المهام التالية؟</string>
+        <string name="msgs_main_shorcut_confirmation_message_suppress">تعطيل هذا الإشعار (يمكن تفعيله في إعدادات المزامنة)</string>
+        <string name="msgs_main_shortcut_group_only_sync_auto_task">(%s) هل تريد بدء \"المهمة التلقائية\"؟</string>
+        <string name="msgs_main_shortcut_group_specific_sync_task">(%s) هل تريد بدء المهام التالية؟</string>
+        <string name="msgs_main_shortcut_start_error_sync_already_started">(%s) تم تجاهل طلب بدء المزامنة لأنها بدأت بالفعل.</string>
+        <string name="msgs_main_shortcut_button_label_button1">الزر1</string>
+        <string name="msgs_main_shortcut_button_label_button2">الزر2</string>
+        <string name="msgs_main_shortcut_button_label_button3">الزر3</string>
+    <!-- svc -->
+        <string name="msgs_svc_can_not_start_sync_task_disabled">لأن مهمة المزامنة معطّلة، لم يكن من الممكن بدؤها.</string>
+        <string name="msgs_svc_received_start_request_from_scheduler">تم استلام طلب مزامنة من مجدول SMBSync4.</string>
+        <string name="msgs_svc_received_start_request_from_scheduler_task_not_found">تم استلام طلب مزامنة من مجدول SMBSync4، لكن تم تجاهله لأن هذه المهمة غير موجودة:</string>
+        <string name="msgs_svc_received_start_request_from_scheduler_no_task_list">تم إيقاف التنفيذ لأن مهمة المزامنة غير موجودة.</string>
+        <string name="msgs_svc_received_start_request_from_external">تم استلام طلب مزامنة من تطبيق خارجي.</string>
+        <string name="msgs_svc_received_start_request_from_external_task_not_found">تم استلام طلب مزامنة من تطبيق خارجي، لكن تم تجاهله لأن مهمة المزامنة المحددة غير موجودة:</string>
+        <string name="msgs_svc_received_start_request_from_external_group_not_found">تم استلام طلب مزامنة من تطبيق خارجي، لكن تم تجاهله لأن مجموعة المزامنة المحددة غير موجودة. المجموعة=%s  </string>
+        <string name="msgs_svc_received_start_request_from_external_no_task_list">تم إيقاف التنفيذ لأن مهمة المزامنة غير موجودة.</string>
+        <string name="msgs_svc_received_start_request_from_external_no_task_specified">تم إيقاف التنفيذ لأنه لم يتم تحديد مهمة مزامنة.</string>
+        <string name="msgs_svc_received_start_request_from_external_auto_task">تم بدء مهمة المزامنة التلقائية لأنه لم يتم تحديد مهمة مزامنة.</string>
+        <string name="msgs_svc_received_start_request_from_shortcut">تم استلام طلب مزامنة من اختصار.</string>
+        <string name="msgs_svc_received_start_request_ignored_duplicate_request">تم تجاهل طلب المزامنة لأنه تمت معالجته بالفعل. المعرف=%s</string>
+        <string name="msgs_svc_received_start_request_ignored_task_is_error">تم تجاهل مهمة المزامنة لأنها في حالة خطأ. المهمة=%1$s، الطالب=%2$s</string>
+        <string name="msgs_svc_received_start_request_ignored_already_task_queued">تم تجاهل مهمة المزامنة لأنها في قائمة الانتظار بالفعل. المهمة=%1$s، الطالب=%2$s</string>
+        <string name="msgs_svc_received_start_request_ignored_already_task_queued_schedule">تم تجاهل مهمة المزامنة لأنها في قائمة الانتظار بالفعل. الجدول=%1$s، المهمة=%2$s، الطالب=%3$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted">تم قبول طلب بدء مهمة المزامنة. المهمة=%1$s، الطالب=%2$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted_schedule">تم قبول طلب بدء مهمة المزامنة. الجدول=%1$s، المهمة=%2$s، الطالب=%3$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted_but_not_executed_title">تم تجاهل طلب المزامنة التالي لأن المزامنة السابقة انتهت بأخطاء أو تم إلغاؤها.</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted_but_not_executed_msg">المهمة=%1$s، الطالب=%2$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted_but_not_executed_msg_schedule">الجدول=%1$s، المهمة=%2$s، الطالب=%3$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_intent_activity">نشاط</string>
+        <string name="msgs_svc_received_start_sync_task_request_intent_external">خارجي</string>
+        <string name="msgs_svc_received_start_sync_task_request_intent_shortcut">اختصار</string>
+        <string name="msgs_svc_received_start_sync_task_request_intent_schedule">جدول</string>
+    <!-- sync archive -->
+        <string name="msgs_sync_folder_archive_option">خيارات الأرشيف</string>
+        <string name="msgs_sync_folder_archive_file_type">الأرشفة لامتدادات الملفات التالية:</string>
+        <string name="msgs_sync_folder_archive_retention_period">أرشفة الملفات إذا:</string>
+        <string name="msgs_sync_folder_archive_output_image">الملفات والأدلة المحفوظة </string>
+        <string name="msgs_sync_folder_archive_add_taken_date_button">الأزرار أدناه تضيف معلمات متعلقة بتاريخ ووقت التصوير.</string>
+        <string name="msgs_sync_folder_archive_add_sync_begin_date_button">الزر أدناه يضيف معلمة لتاريخ ووقت بدء المزامنة.</string>
+        <string name="msgs_sync_folder_archive_add_original_file_name_button">الزر أدناه يضيف معلمة لاسم الملف</string>
+        <string name="msgs_sync_folder_archive_add_constants_button">الزر أدناه يضيف حرفًا.</string>
+        <string name="msgs_sync_folder_archive_seq_number_title">زيادة أسماء الملفات بإلحاق</string>
+        <string name="msgs_sync_folder_archive_btn_title_date">التاريخ (YYYY-MM-DD)</string>
+        <string name="msgs_sync_folder_archive_btn_title_time">الوقت (HH-MM-SS)</string>
+        <string name="msgs_sync_folder_archive_btn_title_original_name">الاسم الأصلي</string>
+        <string name="msgs_sync_folder_archive_btn_title_day_of_year">يوم السنة</string>
+        <string name="msgs_sync_folder_archive_btn_title_yyyy">YYYY</string>
+        <string name="msgs_sync_folder_archive_btn_title_yy">YY</string>
+        <string name="msgs_sync_folder_archive_btn_title_mm">MM</string>
+        <string name="msgs_sync_folder_archive_btn_title_dd">DD</string>
+        <string name="msgs_sync_folder_archive_btn_title_hh">HH</string>
+        <string name="msgs_sync_folder_archive_btn_title_min">MIN</string>
+        <string name="msgs_sync_folder_archive_btn_title_sec">SEC</string>
+        <string name="msgs_sync_folder_archive_btn_title_week_number">رقم الأسبوع</string>
+        <string name="msgs_sync_folder_archive_btn_title_week_day">يوم الأسبوع (%1$s،%2$s...)</string>
+        <string name="msgs_sync_folder_archive_btn_title_week_day_long">يوم الأسبوع (%1$s،%2$s...)</string>
+        <string name="msgs_sync_folder_archive_zip_folder_not_supported">تم التغيير إلى مجلد محلي لأنه لا يمكن استخدام مجلد ZIP عندما تكون طريقة المزامنة هي الأرشيف.</string>
+        <string name="deleted_msgs_sync_folder_archive_zip_folder_not_supported_error">تم تجاهل الطلب لأنه لا يمكن استخدام ملفات ZIP كوجهات لنوع مزامنة الأرشيف.</string>
+        <string name="msgs_sync_folder_archive_btn_title_year">السنة</string>
+        <string name="msgs_sync_folder_archive_btn_title_month">الشهر</string>
+        <string name="msgs_sync_folder_archive_btn_title_day">اليوم</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_prompt_title">اختيار الرقم التسلسلي للإلحاق</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_0">عدم التغيير</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_2">تسلسل من رقمين (01-99)</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_3">تسلسل من 3 أرقام (001-999)</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_4">تسلسل من 4 أرقام (0001-9999)</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_5">تسلسل من 5 أرقام (00001-99999)</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_6">تسلسل من 6 أرقام (000001-999999)</string>
+        <string name="msgs_sync_folder_archive_period_prompt_title">اختيار الصور للأرشفة</string>
+        <string name="msgs_sync_folder_archive_period_0_days">أي تاريخ (الكل)</string>
+        <string name="msgs_sync_folder_archive_period_7_days">أقدم من 7 أيام</string>
+        <string name="msgs_sync_folder_archive_period_30_days">أقدم من 30 يومًا</string>
+        <string name="msgs_sync_folder_archive_period_60_days">أقدم من 60 يومًا</string>
+        <string name="msgs_sync_folder_archive_period_90_days">أقدم من 90 يومًا</string>
+        <string name="msgs_sync_folder_archive_period_180_days">أقدم من 180 يومًا</string>
+        <string name="msgs_sync_folder_archive_period_1_years">أقدم من سنة واحدة</string>
+    <!-- storage_permission -->
+        <string name="msgs_storage_permission_title">إذن استخدام التخزين</string>
+        <string name="msgs_storage_permission_msg_select_storage">اختر التخزين الذي تريد الإذن له.</string>
+        <string name="msgs_storage_permission_msg_no_storage_requiring_permissions">لا يوجد تخزين يتطلب أذونات.</string>
+        <string name="msgs_storage_permission_msg_grant_permission_failed_null">فشل منح إذن الكتابة على التخزين لأنه تم إرجاع بيانات نية فارغة.</string>
+        <string name="msgs_storage_permission_msg_add_uuid_failed">فشل إضافة UUID.</string>
+        <string name="msgs_storage_permission_msg_saf_error_occured">خطأ في طلب إذن SAF</string>
+        <string name="msgs_storage_permission_all_file_access_title">الوصول لجميع الملفات</string>
+        <string name="msgs_storage_permission_all_file_access_image">all_file_access_desc_en.png</string>
+        <string name="msgs_storage_permission_all_file_access_request_message">يتطلب SMBSync4 إذن \"الوصول لجميع الملفات\" لمزامنة الأدلة المختلفة التي تحددها. يرجى مراجعة سياسة خصوصية التطبيق للاطلاع على البيانات المجمعة والأذونات المطلوبة.\nيرجى اتباع الخطوات التالية للسماح بـ \"الوصول لجميع الملفات\".\n0. اضغط على \"التالي\" في أسفل الشاشة.\n1. اضغط على \"SMBSync4\" في شاشة \"الوصول لجميع الملفات\" التي تظهر.\n2. قم بتشغيل المفتاح على الجانب الأيمن من الشاشة.\n3. تأكد من أن المفتاح على الجانب الأيمن من الشاشة أزرق اللون.\n4. ارجع إلى شاشة التطبيق بمفتاح الرجوع.</string>
+        <string name="msgs_storage_permission_all_file_access_button_text">التالي</string>
+        <string name="msgs_storage_permission_all_file_access_denied_message">لا يمكنك تشغيل التطبيق حتى يتم السماح بـ \"الوصول لجميع الملفات\". إذا كنت تريد السماح به، يرجى بدء التطبيق مرة أخرى.</string>
+        <string name="msgs_storage_permission_all_file_access_error_message">تعذر عرض شاشة إذن \"الوصول لجميع الملفات\".\nالخطأ=%s</string>
+    <!-- Setting main -->
+        <string name="settings_security_title">الأمان</string>
+        <string name="settings_security_application_password_title">كلمة مرور التطبيق</string>
+        <string name="settings_security_application_password">settings_application_password</string>
+        <string name="settings_security_application_password_setting_title">تعيين مستوى الأمان</string>
+        <string name="settings_security_application_password_created">تم إنشاء كلمة مرور التطبيق.</string>
+        <string name="settings_security_application_password_not_created">لم يتم إنشاء كلمة مرور التطبيق بعد.</string>
+        <string name="settings_security_application_password_label_create">إنشاء كلمة المرور</string>
+        <string name="settings_security_application_password_label_remove">إزالة كلمة المرور</string>
+        <string name="settings_security_application_password_label_change">تغيير كلمة المرور</string>
+        <string name="settings_security_application_password_desc_create">إنشاء كلمة مرور التطبيق</string>
+        <string name="settings_security_application_password_desc_change">تغيير كلمة مرور التطبيق</string>
+        <string name="settings_security_application_password_desc_remove">إزالة كلمة مرور التطبيق</string>
+        <string name="settings_security_application_password_confirm_remove">هل تريد إزالة كلمة مرور التطبيق؟</string>
+        <string name="settings_security_application_password_protect_title">إعدادات حماية كلمة المرور</string>
+        <string name="settings_security_application_password_use_app_startup_title">طلب كلمة المرور عند بدء التطبيق</string>
+        <string name="settings_security_application_password_use_app_startup">settings_security_application_password_use_app_startup</string>
+        <string name="settings_security_application_password_use_edit_task_title">طلب كلمة المرور عند تحرير مهمة</string>
+        <string name="settings_security_application_password_use_edit_task">settings_security_application_password_use_edit_task</string>
+        <string name="settings_security_application_password_use_export_task_title">طلب كلمة المرور عند تصدير إعدادات المزامنة</string>
+        <string name="settings_security_application_password_use_export_task">settings_security_application_password_use_export_task</string>
+        <string name="settings_security_init_smb_account_password_title">أعد إدخال اسم الحساب وكلمة المرور في تحرير مجلد SMB.</string>
+        <string name="settings_security_init_smb_account_password">settings_security_init_smb_account_password</string>
+        <string name="settings_security_use_auth_timeout_title">مطالبة المستخدم بإعادة المصادقة بعد 30 دقيقة</string>
+        <string name="settings_security_use_auth_timeout">settings_security_use_auth_timeout</string>
+        <string name="settings_security_init_zip_passowrd_title">أعد إدخال كلمة المرور عند تحرير مجلد ZIP.</string>
+        <string name="settings_security_init_zip_passowrd">settings_security_init_zip_passowrd</string>
+        <string name="settings_security_hide_show_smb_passowrd_title">عدم عرض زر \"إظهار كلمة المرور\" في شاشة تحرير مجلد SMB</string>
+        <string name="settings_security_hide_show_smb_passowrd">settings_security_hide_show_smb_passowrd</string>
+        <string name="settings_security_hide_show_zip_passowrd_title">عدم عرض زر \"إظهار كلمة المرور\" في شاشة تحرير مجلد ZIP</string>
+        <string name="settings_security_hide_show_zip_passowrd">settings_security_hide_show_zip_passowrd</string>
+        <string name="settings_device_orientation_portrait">settings_device_orientation_portrait</string>
+        <string name="settings_device_orientation_portrait_summary_ena">عرض التطبيق في الوضع العمودي</string>
+        <string name="settings_device_orientation_portrait_title">فرض الوضع العمودي</string>
+        <string name="settings_device_orientation_landscape_tablet">settings_device_orientation_landscape_tablet</string>
+        <string name="settings_device_orientation_landscape_tablet_summary_ena">عرض العرض متعدد الألواح دائمًا في الوضع الأفقي حتى على الشاشات منخفضة الكثافة</string>
+        <string name="settings_device_orientation_landscape_tablet_title">عرض الجهاز اللوحي في الوضع الأفقي</string>
+        <string name="settings_exit_clean">settings_exit_clean</string>
+        <string name="settings_exit_clean_summary_ena">إذا تم إيقاف عملية التطبيق، الخروج بشكل نظيف</string>
+        <string name="settings_exit_clean_title">الخروج النظيف</string>
+        <string name="settings_exported_profile_encryption">settings_exported_profile_encryption</string>
+        <string name="settings_force_screen_on_while_sync">settings_force_screen_on_while_sync</string>
+        <string name="settings_force_screen_on_while_sync_summary_ena">تنبيه الجهاز وإبقاء الشاشة مضاءة عند بدء المزامنة (فعّل إذا لم تبدأ أو تكتمل المزامنة أثناء السكون)</string>
+        <string name="settings_force_screen_on_while_sync_title">فرض تشغيل الشاشة أثناء المزامنة</string>
+        <string name="settings_main_title">الإعدادات</string>
+        <string name="settings_misc_title">متنوعات</string>
+        <string name="settings_no_compress_file_type">settings_no_compress_file_type</string>
+        <string name="settings_no_compress_file_type_title">عدم ضغط أنواع الملفات هذه</string>
+        <string name="settings_no_compress_file_type_hint">نوع الملف</string>
+        <string name="settings_notification_message_when_sync_ended">settings_notification_message_when_sync_ended</string>
+        <string name="settings_notification_message_when_sync_ended_dialog_title">اختيار الإشعارات المراد عرضها</string>
+        <string-array name="settings_notification_message_when_sync_ended_list_entries">
+            <item>تعطيل جميع الإشعارات</item>
+            <item>إظهار جميع الإشعارات</item>
+            <item>فقط للمهام المكتملة بنجاح</item>
+            <item>فقط للمهام المكتملة بأخطاء</item>
+        </string-array >
+        <string-array name="settings_notification_message_when_sync_ended_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </string-array >
+        <string name="settings_notification_message_when_sync_ended_summary_always">إظهار جميع الإشعارات</string>
+        <string name="settings_notification_message_when_sync_ended_summary_error">إظهار الإشعارات فقط للمهام المكتملة بأخطاء</string>
+        <string name="settings_notification_message_when_sync_ended_summary_no">تعطيل الإشعارات</string>
+        <string name="settings_notification_message_when_sync_ended_summary_success">إظهار الإشعارات فقط للمهام المكتملة بنجاح</string>
+        <string name="settings_notification_message_when_sync_ended_title">رسائل الإشعارات</string>
+        <string name="settings_other_title">أخرى</string>
+        <string name="settings_playback_ringtone_volume">settings_playback_ringtone_volume</string>
+        <string name="settings_playback_ringtone_volume_disabled">لم يتم تعيين صوت الإشعار الافتراضي.</string>
+        <string name="settings_playback_ringtone_volume_summary">%s%% من حجم صوت النظام</string>
+        <string name="settings_playback_ringtone_volume_title">حجم صوت الإشعار</string>
+        <string name="settings_playback_ringtone_when_sync_ended">settings_playback_ringtone_when_sync_ended</string>
+        <string name="settings_playback_ringtone_when_sync_ended_dialog_title">اختيار متى يتم تشغيل صوت الإشعار الافتراضي</string>
+        <string-array name="settings_playback_ringtone_when_sync_ended_list_entries">
+            <item>تعطيل صوت الإشعار</item>
+            <item>تشغيل لجميع المهام المكتملة</item>
+            <item>تشغيل فقط للمهام المكتملة بنجاح</item>
+            <item>تشغيل فقط للمهام المكتملة بأخطاء</item>
+        </string-array >
+        <string-array name="settings_playback_ringtone_when_sync_ended_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </string-array >
+        <string name="settings_playback_ringtone_when_sync_ended_summary_always">تشغيل صوت الإشعار الافتراضي لجميع المهام المكتملة</string>
+        <string name="settings_playback_ringtone_when_sync_ended_summary_error">تشغيل صوت الإشعار الافتراضي للمهام المكتملة بأخطاء</string>
+        <string name="settings_playback_ringtone_when_sync_ended_summary_no">تعطيل صوت الإشعار</string>
+        <string name="settings_playback_ringtone_when_sync_ended_summary_success">تشغيل صوت الإشعار الافتراضي للمهام المكتملة بنجاح</string>
+        <string name="settings_playback_ringtone_when_sync_ended_title">صوت الإشعار</string>
+        <string name="settings_smb_client_response_timeout">settings_smb_client_reponse_timeout</string>
+        <string name="settings_smb_set_default_value_text">استعادة القيم الافتراضية</string>
+        <string name="settings_smb_set_default_value_key">settings_smb_set_default_value</string>
+        <string name="settings_smb_client_response_timeout_dialog_title">مهلة اتصال الخادم (SMBv1/2/3)</string>
+        <string-array name="settings_smb_client_response_timeout_list_entries">
+            <item>30000</item>
+            <item>45000</item>
+            <item>60000</item>
+            <item>120000</item>
+        </string-array >
+        <string-array name="settings_smb_client_response_timeout_list_values">
+            <item>30000</item>
+            <item>45000</item>
+            <item>60000</item>
+            <item>120000</item>
+        </string-array >
+        <string name="settings_smb_client_response_timeout_summary">مهلة الاستجابة</string>
+        <string name="settings_smb_client_response_timeout_title">مهلة اتصال الخادم (SMBv1/2/3)</string>
+        <string name="settings_smb_disable_plain_text_passwords">settings_smb_disable_plain_text_passwords</string>
+        <string name="settings_smb_disable_plain_text_passwords_summary_ena">تشفير كلمات المرور دائمًا</string>
+        <string name="settings_smb_disable_plain_text_passwords_title">تشفير كلمات المرور (SMBv1)</string>
+        <string name="settings_smb_lm_compatibility">settings_smb_lm_compatibility</string>
+        <string name="settings_smb_lm_compatibility_dialog_title">مستوى LmCompatibility</string>
+        <string-array name="settings_smb_lm_compatibility_list_entries">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+        </string-array >
+        <string-array name="settings_smb_lm_compatibility_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+        </string-array >
+        <string name="settings_smb_lm_compatibility_summary">مستوى LmCompatibility</string>
+        <string name="settings_smb_lm_compatibility_title">مستوى LmCompatibility (SMBv1)</string>
+        <string name="settings_smb_title">إعدادات SMB</string>
+        <string name="settings_smb_use_extended_security">settings_smb_use_extended_security</string>
+        <string name="settings_smb_use_extended_security_summary_ena">استخدام الأمان الموسع</string>
+        <string name="settings_smb_use_extended_security_title">استخدام الأمان الموسع (SMBv1)</string>
+        <string name="settings_suppress_add_external_storage_notification">settings_suppress_add_external_storage_notification</string>
+        <string name="settings_suppress_add_external_storage_notification_summary_ena">عدم إظهار إشعار إضافة وحدة تخزين SDCARD/USB</string>
+        <string name="settings_suppress_add_external_storage_notification_title">إشعار إضافة وحدة تخزين SDCARD/USB</string>
+        <string name="settings_suppress_start_sync_confirmation_message">settings_suppress_start_sync_confirmation_message</string>
+        <string name="settings_suppress_start_sync_confirmation_message_summary_ena">عدم المطالبة ببدء المزامنة بزر المزامنة.</string>
+        <string name="settings_suppress_start_sync_confirmation_message_title">زر المزامنة</string>
+        <string name="settings_suppress_shortcut1_confirmation_message">settings_suppress_shortcut1_confirmation_message</string>
+        <string name="settings_suppress_shortcut1_confirmation_message_summary_ena">عدم المطالبة ببدء المزامنة بالاختصار</string>
+        <string name="settings_suppress_shortcut1_confirmation_message_title">زر الاختصار 1</string>
+        <string name="settings_suppress_shortcut2_confirmation_message">settings_suppress_shortcut2_confirmation_message</string>
+        <string name="settings_suppress_shortcut2_confirmation_message_summary_ena">عدم المطالبة ببدء المزامنة بالاختصار</string>
+        <string name="settings_suppress_shortcut2_confirmation_message_title">زر الاختصار 2</string>
+        <string name="settings_suppress_shortcut3_confirmation_message">settings_suppress_shortcut3_confirmation_message</string>
+        <string name="settings_suppress_shortcut3_confirmation_message_summary_ena">عدم المطالبة ببدء المزامنة بالاختصار</string>
+        <string name="settings_suppress_shortcut3_confirmation_message_title">زر الاختصار 3</string>
+        <string name="settings_sync_history_log">settings_sync_history_log</string>
+        <string name="settings_sync_history_log_summary_ena">الاحتفاظ بسجل تفصيلي لتاريخ المزامنة</string>
+        <string name="settings_sync_history_log_title">سجل المزامنة</string>
+        <string name="settings_sync_title">المزامنة</string>
+        <string name="settings_ui_title">واجهة المستخدم</string>
+        <string name="settings_screen_theme_language">settings_screen_theme_language</string>
+        <string name="settings_screen_theme_language_title">اللغة</string>
+        <string name="settings_screen_theme_language_dialog_title">تغيير اللغة</string>
+        <string-array name="settings_screen_theme_language_list_entries">
+            <item>إعدادات النظام</item>
+            <item>Deutsch (de)</item>
+            <item>English (en)</item>
+            <item>Français (fr)</item>
+            <item>Italiano (it)</item>
+            <item>日本語 (ja)</item>
+            <item>русский (ru)</item>
+            <item>中文 (zh)</item>
+        </string-array >
+        <string-array name="settings_screen_theme_language_list_values">
+            <item>system</item>
+            <item>de</item>
+            <item>en</item>
+            <item>fr</item>
+            <item>it</item>
+            <item>ja</item>
+            <item>ru</item>
+            <item>zh</item>
+        </string-array >
+        <string name="settings_screen_theme">settings_screen_theme</string>
+        <string name="settings_screen_theme_title">سمة الشاشة</string>
+        <string name="settings_screen_theme_dialog_title">سمة الشاشة</string>
+        <string-array name="settings_screen_theme_list_entries">
+            <item>قياسي</item>
+            <item>سمة فاتحة</item>
+            <item>سمة داكنة</item>
+        </string-array >
+        <string-array name="settings_screen_theme_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+        </string-array >
+        <string name="settings_display_font_scale_factor">settings_display_font_scale_factor</string>
+        <string name="settings_display_font_scale_factor_title">حجم النص</string>
+        <string name="settings_display_font_scale_factor_dialog_title">اختيار حجم النص</string>
+        <string-array name="settings_display_font_scale_factor_list_entries">
+            <item>صغير(80&#65130;)</item>
+            <item>عادي(100&#65130;)</item>
+            <item>كبير(120&#65130;)</item>
+            <item>الأكبر(160&#65130;)</item>
+        </string-array >
+        <string-array name="settings_display_font_scale_factor_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </string-array >
+        <string name="settings_vibrate_when_sync_ended">settings_vibrate_when_sync_ended</string>
+        <string name="settings_vibrate_when_sync_ended_dialog_title">اختيار متى يتم الاهتزاز عند الإشعارات</string>
+        <string-array name="settings_vibrate_when_sync_ended_list_entries">
+            <item>عدم الاهتزاز عند الإشعارات</item>
+            <item>الاهتزاز لجميع المهام المكتملة</item>
+            <item>فقط للمهام المكتملة بنجاح</item>
+            <item>فقط للمهام المكتملة بأخطاء</item>
+        </string-array >
+        <string-array name="settings_vibrate_when_sync_ended_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </string-array >
+        <string name="settings_vibrate_when_sync_ended_summary_always">الاهتزاز عند الإشعار لجميع المهام المكتملة</string>
+        <string name="settings_vibrate_when_sync_ended_summary_error">الاهتزاز عند الإشعار للمهام المكتملة بأخطاء</string>
+        <string name="settings_vibrate_when_sync_ended_summary_no">عدم الاهتزاز عند الإشعارات</string>
+        <string name="settings_vibrate_when_sync_ended_summary_success">الاهتزاز عند الإشعار للمهام المكتملة بنجاح</string>
+        <string name="settings_vibrate_when_sync_ended_title">الاهتزاز عند الإشعارات</string>
+        <string name="settings_wifi_lock">settings_wifi_lock</string>
+        <string name="settings_wifi_lock_title">قفل WiFi</string>
+        <string name="settings_wifi_lock_summary_ena">إبقاء راديو WiFi مستيقظًا حتى اكتمال المزامنة</string>
+</resources>

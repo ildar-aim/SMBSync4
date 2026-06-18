@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!-- About -->
+        <string name="msgs_about_dlg_func_btn">İşlevler</string>
+        <string name="msgs_about_dlg_privacy_btn">Gizlilik Politikası</string>
+        <string name="msgs_about_dlg_change_btn">Değişiklik Günlüğü</string>
+        <string name="msgs_dlg_title_about">SMBSync4 Hakkında</string>
+        <string name="msgs_dlg_title_about_func_desc">SMBSync4_about_EN_Desc.md</string>
+        <string name="msgs_dlg_title_about_privacy_desc">SMBSync4_about_EN_Privacy.md</string>
+        <string name="msgs_dlg_title_about_change_desc">SMBSync4_about_EN_Change.md</string>
+        <string name="msgs_about_dlg_licenses_btn">Lisanslar</string>
+        <string name="msgs_dlg_title_about_licenses_desc">SMBSync4_about_EN_Licenses.md</string>
+    <!-- Export/Import -->
+        <string name="msgs_export_import_profile_title">İçe aktarılacak görevleri ve ayarları seçin</string>
+        <string name="msgs_export_import_profile_listing">Yapılandırma dosyalarını listele</string>
+        <string name="msgs_export_import_profile_setting_parms">Genel uygulama ayarlarını geri yükle</string>
+        <string name="msgs_export_import_profile_schedule_parms">Görev zamanlama ayarlarını geri yükle</string>
+        <string name="msgs_export_import_profile_group_parms">Grup ayarlarını geri yükle</string>
+        <string name="msgs_export_import_profile_select_all">Tümünü seç</string>
+        <string name="msgs_export_import_profile_unselect_all">Tüm seçimi kaldır</string>
+        <string name="msgs_export_import_profile_confirm_override">Geri yüklenecek bazı görevler, mevcut görevlerle aynı ada sahip. Aşağıdaki görevler içe aktarılan görevlerle üzerine yazılsın mı?</string>
+        <string name="msgs_export_import_profile_import_success">Aşağıdaki görev(ler) başarıyla içe aktarıldı</string>
+        <string name="msgs_export_import_profile_import_success_from_smbsync2">Aşağıdaki senkronizasyon görevleri test modunda içe aktarıldı. İstenmeyen dosya silme veya üzerine yazma olmadığından emin olmak için bunları test etmenizi şiddetle tavsiye ederiz.</string>
+        <string name="msgs_export_import_profile_import_failed">İçe aktarma başarısız oldu, hatalar için Mesajlar sekmesini kontrol edin.</string>
+        <string name="msgs_export_import_profile_reset_current_profile">İçe aktarmadan önce mevcut tüm görevleri sil</string>
+        <string name="msgs_export_import_profile_import_settings">Genel uygulama ayarları</string>
+        <string name="msgs_export_import_profile_import_schedule">Görev zamanlama ayarları</string>
+        <string name="msgs_export_import_profile_hdr_task_list">Görev listesi</string>
+        <string name="msgs_export_import_profile_no_import_items">İçe aktarılan öğe yok.</string>
+        <string name="msgs_export_import_profile_specified_file_was_not_sync_task_saved_file">Belirtilen dosya bir senkronizasyon görev listesi kayıt dosyası değil. Dosya=%s</string>
+        <string name="msgs_export_import_profile_error_occured_while_import_task_list">Görev listesi içe aktarılırken bir hata oluştu. Lütfen mesajlar sekmesindeki hatayı kontrol edin.</string>
+        <string name="msgs_import_autosave_dlg_title">Görev listesini ve uygulama ayarlarını içe aktar</string>
+        <string name="msgs_import_autosave_dlg_select_exported_file">Başka bir dosya seç</string>
+        <string name="msgs_import_autosave_dlg_autosave_list">Otomatik kaydedilmiş ayar dosyaları</string>
+        <string name="msgs_import_autosave_dlg_manual_save_list">Kullanıcı tarafından yedeklenen ayar dosyaları</string>
+        <string name="msgs_import_autosave_dlg_autosave_failed">Senkronizasyon ayarlarını otomatik kaydetme girişimi başarısız oldu</string>
+        <string name="msgs_import_autosave_dlg_autosave_completed">Ayarlar kaydedildi</string>
+        <string name="msgs_import_autosave_dlg_autosave_enty_item">%s</string>
+        <string name="msgs_import_autosave_dlg_autosave_enty_item_latest">%s (Son kaydedilen dosya)</string>
+        <string name="msgs_export_import_profile_smb_account_name_password_not_restored">Aşağıdaki görevlerde kullanılan hesap adı, hesap parolası veya ZIP parolası içe aktarılamadı. Senkronizasyon görevini otomatik kaydedip ardından uygulamayı yeniden yüklerseniz, hesap adı, hesap parolası ve ZIP parolası şifresi çözülemez. Senkronizasyon görevini düzenleyin ve kullanıcı giriş ayarlarını yeniden yazın.</string>
+        <string name="msgs_export_import_pswd_password_title">Ayarlar Parola Koruması</string>
+        <string name="msgs_export_import_pswd_password_protect">Yedek dosyasını parola ile koru</string>
+        <string name="msgs_export_import_pswd_specify_password">Lütfen parolayı belirtin.</string>
+        <string name="msgs_export_import_pswd_password_required">Ayarlar yedek dosyası için parolayı girin.</string>
+        <string name="msgs_export_import_pswd_invalid_password">Parola yanlış. Tekrar deneyin.</string>
+        <string name="msgs_export_import_pswd_btn_cancel">İptal</string>
+        <string name="msgs_export_import_task_list_btn_ok">İçe Aktar</string>
+        <string name="msgs_export_import_pswd_btn_ok">Tamam</string>
+        <string name="msgs_export_import_pswd_hint_password">Parola</string>
+        <string name="msgs_export_import_pswd_hint_confirm">Parola onayı</string>
+        <string name="msgs_export_import_pswd_unmatched_confirm_pswd">Parola ve onay parolası eşleşmiyor.</string>
+    <!-- Help -->
+        <string name="msgs_help_sync_task_file">SMBSync4_Help_EN_task.md</string>
+        <string name="msgs_help_sync_task_title">Senkronizasyon Görevi Yardımı</string>
+        <string name="msgs_help_sync_folder_external_file">SMBSync4_Help_EN_folder_external.md</string>
+        <string name="msgs_help_sync_folder_external_title">Yerel Klasör Yardımı</string>
+        <string name="msgs_help_sync_folder_keyword">SMBSync4_Help_EN_folder_keyword.md</string>
+        <string name="msgs_help_sync_folder_keyword_title">Parametre Yardımı</string>
+        <string name="msgs_help_sync_folder_smb_file">SMBSync4_Help_EN_folder_smb.md</string>
+        <string name="msgs_help_sync_folder_smb_title">SMB Sunucu Yardımı</string>
+        <string name="msgs_help_sync_folder_zip_file">SMBSync4_Help_EN_folder_zip.md</string>
+        <string name="msgs_help_sync_folder_zip_title">ZIP Dosyası Yardımı</string>
+        <string name="msgs_help_directory_filter_file">SMBSync4_Help_EN_directory_filter.md</string>
+        <string name="msgs_help_directory_filter_title">Dizin filtresi yardımı</string>
+        <string name="msgs_help_file_filter_file">SMBSync4_Help_EN_file_filter.md</string>
+        <string name="msgs_help_file_filter_title">Dosya filtresi yardımı</string>
+        <string name="msgs_help_ip_address_filter_file">SMBSync4_Help_EN_ip_address_filter.md</string>
+        <string name="msgs_help_ip_address_filter_title">IP Adresi filtresi yardımı</string>
+        <string name="msgs_help_schedule_file">SMBSync4_Help_EN_schedule.md</string>
+        <string name="msgs_help_schedule_title">Zamanlama yardımı</string>
+        <string name="msgs_help_group_file">SMBSync4_Help_EN_group.md</string>
+        <string name="msgs_help_group_title">Grup yardımı</string>
+    <!-- Log management -->
+        <string name="msgs_log_management_enable_log_file_warning">Devam ederseniz, aşağıdaki veriler günlük dosyasına kaydedilecektir:\nAndroid sürümü, Cihaz adı, Dizin adı, Dosya adı, SMB Hesap adı, IP adresi, Ağ arayüzü adı, Sistem ayarları, Uygulama bilgisi</string>
+        <string name="msgs_log_management_send_log_file_warning">Günlük dosyasını geliştiriciye E-Posta ile gönderin. Günlük dosyası Android sürümü, Cihaz adı, Dizin adı, Dosya adı, SMB Hesap adı, IP adresi, Ağ arayüzü adı, Sistem ayarları ve Uygulama bilgisi içerir.\n1.Gönderilecek temp_log.txt dosyasının içeriğini kontrol etmek için Önizleme düğmesine basın (uygulama seçim ekranı görüntülenirse, metin dosyasını görüntülemek için FAVORI uygulamayı seçin.)\n
+2.Göndereceğiniz içeriği onayladıktan sonra, sorunuzu veya sorununuzu açıklamak için \"Gönder\" düğmesine basın.\n
+3.ZIP dosyasını parola ile korumak istiyorsanız, parolayı ve onay parolasını girin.\n
+4.Gönder düğmesine basın ve E-Posta Seçimi iletişim kutusunda E-Posta\'yı seçin.\n
+5.Lütfen e-postayı gönderin.\n
+6.ZIP dosyasını parola ile koruduysanız, ZIP Dosya Parolasını Gönder düğmesine dokunarak e-posta ile gönderin.</string>
+        <string name="msgs_log_management_title">Günlük Dosyalarını Yönet</string>
+        <string name="settings_mgt_dir">settings_mgt_dir</string>
+        <string name="settings_mgt_dir_title">Yönetim Dosyalarının Konumu</string>
+    <!-- Application password -->
+        <string name="msgs_security_application_password_create_title">Uygulama parolası oluştur</string>
+        <string name="msgs_security_application_password_create_min_length_is_4_digit">Parola en az 4 karakter gerektirir.</string>
+        <string name="msgs_security_application_password_create_forget_recovery">Parolanızı unutursanız lütfen uygulamayı sıfırlayın veya yeniden yükleyin.</string>
+        <string name="msgs_security_application_password_create_forget_warning">Parolanızı unutursanız, uygulamayı sıfırlamanız veya yeniden yüklemeniz gerekecektir. Devam edilsin mi?</string>
+        <string name="msgs_security_stored_sectret_key_change_title">Dahili anahtar</string>
+        <string name="msgs_security_stored_sectret_key_change_message">Uygulama parolası oluşturulduktan sonra Android Keystore\'da depolanan anahtar değiştirildiği için uygulama parolası çözümlenemiyor.\nKurtarmak için lütfen aşağıdaki adımları izleyin.\n1. Mümkünse görev listenizi kaydedin.\n2.SMBSync4\'ü yeniden yükleyin (Kaldırın ve Yükleyin)\n3. Kaydedilmiş görev listesini içe aktarın (veya otomatik kaydedilmiş görev listesini içe aktarın)
+</string>
+        <string name="msgs_security_stored_sectret_key_change_error">Dahili anahtar hatası</string>
+        <string name="msgs_security_stored_sectret_key_save_error">Dahili anahtar doğrulama kodu kaydetme hatası</string>
+        <string name="msgs_security_application_password_auth_title">Uygulama parolası doğrulama</string>
+        <string name="msgs_security_application_password_auth_specify_password">Lütfen uygulama parolasını belirtin</string>
+        <string name="msgs_security_application_password_auth_wrong_password_specified">Parola yanlış.</string>
+        <string name="msgs_security_application_password_authentaication_error">Uygulama parolası doğrulama hatası</string>
+        <string name="msgs_security_application_password_creation_error">Uygulama parolası oluşturma hatası</string>
+    <!-- Main -->
+        <string name="msgs_auto_sync_task_not_found">Otomatik senkronizasyon görevi bulunamadı.</string>
+        <string name="msgs_add_sync_profile">Senkronizasyon görevi ekle</string>
+        <string name="msgs_audit_hostname_not_spec">Uzak sunucu adını veya IP adresini belirtin.</string>
+        <string name="msgs_audit_hostport_not_spec">Uzak sunucunun port numarasını belirtin.</string>
+        <string name="msgs_audit_msgs_local_dir">Yerel dizin adı %s karakterini içeriyor. Geçersiz karakter kaldırıldı.</string>
+        <string name="msgs_audit_share_not_spec">Paylaşım adını belirtin.</string>
+        <string name="msgs_clear_log_message">Günlük mesajlarını temizle</string>
+        <string name="msgs_cont_button_diabled_by_sync">İstenen işlem senkronizasyon sırasında yoksayıldı.</string>
+        <string name="msgs_copy_sync_profile">Senkronizasyon görevini kopyala</string>
+        <string name="msgs_create_profile_error">Ayarlar yedek dosyası oluşturulamadı: %s</string>
+        <string name="msgs_current_dir">Geçerli dizin:</string>
+        <string name="msgs_delete_following_profile">Aşağıdaki görev(ler) silinsin mi?</string>
+        <string name="msgs_dir_empty">Dizin bulunamadı</string>
+        <string name="msgs_duplicate_task_name">Yinelenen görev adı.</string>
+        <string name="msgs_sync_task_name_length_invalid">Görev adı %s karakterden uzun olmamalıdır</string>
+        <string name="msgs_task_name_rename_with_schedule_group_task_list">Görev yeniden adlandırıldığında, zamanlama/gruptaki görev adı da değiştirilir.</string>
+        <string name="msgs_task_name_remove_with_schedule_group_task_list">Görev silindiğinde, zamanlama/gruptaki görev adı da silinir.</string>
+        <string name="msgs_task_name_contains_invalid_character">Görev adı geçersiz karakterler içeriyor: \"%s\"</string>
+        <string name="msgs_edit_sync_profile">Senkronizasyon Görevini Düzenle</string>
+        <string name="msgs_export_prof_fail">Senkronizasyon ayarları dışa aktarılamadı.</string>
+        <string name="msgs_export_prof_success">Senkronizasyon ayarları başarıyla dışa aktarıldı.</string>
+        <string name="msgs_export_prof_title">Senkronizasyon Ayarlarını Dışa Aktar.</string>
+        <string name="msgs_extra_data_sync_profile_type_error">Senkronizasyon iptal edildi: harici uygulamadan alınan istek bir dize değil</string>
+        <string name="msgs_filelist_cancel">Uzak dosya listesi oluşturma iptal edildi.</string>
+        <string name="msgs_filelist_error">SMB dosya listesi oluşturulurken bir hata oluştu.</string>
+        <string name="msgs_filter_edit_dlg_title">Filtre Düzenle</string>
+        <string name="msgs_filter_list_dlg_add">Ekle</string>
+        <string name="msgs_filter_list_dlg_add_dir_filter">Dizin filtresi ekle</string>
+        <string name="msgs_filter_list_dlg_close">Kapat</string>
+        <string name="msgs_filter_list_dlg_dir_filter">Dizin filtresi</string>
+        <string name="msgs_filter_list_dlg_file_filter">Dosya adı filtresi</string>
+        <string name="msgs_filter_list_dlg_filter_added">\"%s\" filtresi eklendi.</string>
+        <string name="msgs_filter_list_dlg_filter_hint">Filtre</string>
+        <string name="msgs_filter_list_dlg_not_specified">Filtre belirtilmedi.</string>
+        <string name="msgs_filter_list_duplicate_filter_specified">\"%s\" zaten mevcut.</string>
+        <string name="msgs_filter_list_filter_deleted">Bu giriş silindi.</string>
+        <string name="msgs_filter_list_filter_was_changed">İçerik değiştirildi, kaydetmeden iptal etmek istiyor musunuz?</string>
+        <string name="msgs_filter_list_filter_start_or_end_char_not_allowed_slash">Filtrenin başında veya sonunda \"/\" kullanılamaz. Lütfen \"/\" işaretini kaldırın. Filtre=%s</string>
+        <string name="msgs_filter_list_filter_not_allowed_slash_asterisk">Sondaki \"/*\" geçersiz. \"/*\" kaldırılmalıdır. Filtre=%s</string>
+        <string name="msgs_filter_list_filter_match_any_where_not_allowed_asterisk_slash">\"\\\" ile başlayan filtreler için \"*/\" geçersizdir." Lütfen \"*/\" işaretini kaldırın. Filtre=%s</string>
+        <string name="msgs_filter_list_filter_not_allowed_asterisk_only">Yalnızca \"*\" filtresi kullanamazsınız. Lütfen \"*abc\" gibi belirtin.</string>
+        <string name="msgs_filter_list_filter_not_allowed_multiple_asterisk">\"**\" gibi ardışık \"*\" içeren bir filtre kullanamazsınız. Lütfen \"*a*\" gibi belirtin.</string>
+        <string name="msgs_filter_list_filter_not_allowed_blank_with_asterisk">\"*\" işaretinin önünde ve arkasında boşluk kullanamazsınız.</string>
+        <string name="msgs_filter_list_filter_not_allowed_multiple_back_slash">İlk karakter dışında \"\\\" kullanamazsınız. Lütfen ilk harf dışındaki \"\\\" işaretlerini kaldırın. Filtre=%s</string>
+        <string name="msgs_filter_list_filter_contains_not_allowed_character">Kullanılamayan karakterler içeriyor. Karakterler=\"%1$s\", Filtre=%2$s</string>
+        <string name="msgs_filter_list_match_any_where_change_to_exclude">\"\\\" içerdiği için filtre seçimden hariç tutulacak şekilde değiştirildi.\nFiltre=%s</string>
+        <string name="msgs_filter_list_invalid_ip_address">Geçersiz IP adresi.</string>
+        <string name="msgs_hist_cont_label_copy">Panoya kopyala</string>
+        <string name="msgs_hist_cont_label_delete">Geçmiş öğesini sil</string>
+        <string name="msgs_hist_cont_label_move_bottom">Alta taşı</string>
+        <string name="msgs_hist_cont_label_move_top">Üste taşı</string>
+        <string name="msgs_hist_cont_label_select_all">Tüm geçmiş öğelerini seç</string>
+        <string name="msgs_hist_cont_label_share">Paylaş</string>
+        <string name="msgs_hist_cont_label_unselect_all">Tüm geçmiş öğelerinin seçimini kaldır</string>
+        <string name="msgs_import_prof_fail">Ayar dosyası içe aktarılamadı</string>
+        <string name="msgs_import_prof_fail_no_valid_item">%s geçerli senkronizasyon ayarı içermiyor</string>
+        <string name="msgs_info_storage_copy_clipboard">Kopyala</string>
+        <string name="msgs_info_storage_copy_completed">Panoya kopyalandı</string>
+        <string name="msgs_info_storage_send_btn_title">Geliştiriciye gönder</string>
+        <string name="msgs_info_storage_title">Depolama Bilgisi</string>
+        <string name="msgs_your_problem_title">SMBSync4 ile ilgili sorununuz/sorunuz</string>
+        <string name="msgs_your_problem_msg">Lütfen SMBSync4 ile ilgili sorununuzun veya sorunuzun ayrıntılarını doldurun.</string>
+        <string name="msgs_your_problem_hint">Örnek: SD kart SMBSync4 tarafından tanınmıyor.</string>
+        <string name="msgs_your_problem_no_desc">Sorun/soru açıklanmadı, SMBSync4\'ün sorunu/sorusu açıklanmadıkça yanıtlayamayız.</string>
+        <string name="msgs_log_activate_pinned">Otomatik Kaydırma devre dışı</string>
+        <string name="msgs_log_confirm_clear_all_msg">Tüm mesaj girişleri silinsin mi?</string>
+        <string name="msgs_log_inactivate_pinned">Otomatik Kaydırma etkin</string>
+        <string name="msgs_log_msg_cleared">Günlük mesajları temizlendi</string>
+        <string name="msgs_log_msg_filter_title">Filtre</string>
+        <string name="msgs_log_msg_filter_info">Bilgi</string>
+        <string name="msgs_log_msg_filter_warn">Uyarı</string>
+        <string name="msgs_log_msg_filter_error">Hata</string>
+        <string name="msgs_log_msg_filter_string_find_string">Arama dizesi</string>
+        <string name="msgs_log_msg_filter_string_find_button">Ara</string>
+        <string name="msgs_log_msg_filter_string_reset_button">Sıfırla</string>
+        <string name="msgs_log_msg_filter_string_find_case_sensitive">A/a</string>
+        <string name="msgs_main_suppress_start_sync_confirmation_message_msg">Aşağıdaki görevleri başlatmak istiyor musunuz?</string>
+        <string name="msgs_main_suppress_start_sync_confirmation_message_suppress">Bu bildirimi devre dışı bırak (senkronizasyon ayarlarından etkinleştirilebilir)</string>
+        <string name="msgs_main_suppress_add_external_storage_notification_title">SDCARD/USB depolama ekleme bildirimi</string>
+        <string name="msgs_main_suppress_add_external_storage_notification_msg">Yeni bir SDCARD/USB depolama algılandı, SDCARD/USB depolamayı eklemek ister misiniz?</string>
+        <string name="msgs_main_suppress_add_external_storage_notification_suppress">Bu bildirimi devre dışı bırak (senkronizasyon ayarlarından etkinleştirilebilir)</string>
+        <string name="msgs_main_external_storage_select_activity_not_found_msg">Harici depolamaya yazma izni için etkinlik başlatılamadı.</string>
+        <string name="msgs_main_external_storage_select_required_cancel_msg">SDCARD/USB depolamaya erişim izni verilene kadar SDCARD/USB depolamayı kullanan görevler çalıştırılamaz.</string>
+        <string name="msgs_main_external_storage_select_retry_select_msg">Depolamanın kök dizini seçilmedi. Yeniden seçmek ister misiniz?</string>
+        <string name="msgs_main_external_storage_uuid_duplicated">Aşağıdaki UUID\'ler yinelendikleri için kullanılamaz. Kullanmak için bir MicroSD veya USB OTG sürücüsünü biçimlendirin.</string>
+        <string name="msgs_main_external_storage_uuid_unusable">Ortam bağlı değil</string>
+        <string name="msgs_main_external_storage_request_permission">SDCARD/USB depolama kullanım izni</string>
+        <string name="msgs_main_permission_external_storage_denied_msg">Depolama erişim izni verilmediği için uygulama başlatılamaz.</string>
+        <string name="msgs_main_permission_external_storage_request_msg">Dahili depolamaya veri ve yönetim verileri okumak ve yazmak için lütfen aşağıdaki adımları izleyerek dahili depolamaya erişim izni verin.\n
+1. \"Tamam\" düğmesine dokunun.\n
+2. İzin ekranında \"İzin Ver\" seçeneğine dokunun.\n\n
+Veri işleme ve gerekli izinler için lütfen Gizlilik Politikasına bakın.\n\n</string>
+        <string name="msgs_main_permission_external_storage_title">Depolama İzni</string>
+        <string name="msgs_main_sync_all_auto_tasks">Otomatik senkronizasyona ayarlanmış tüm görevleri çalıştır.</string>
+        <string name="msgs_main_sync_can_not_sync_no_valid_profile">Çalıştırılabilecek senkronizasyon görevi yok. Lütfen bir senkronizasyon görevi oluşturun.</string>
+        <string name="msgs_main_sync_cancel_confirm">Senkronizasyon iptal edilsin mi?</string>
+        <string name="msgs_main_sync_history_copy_completed">Seçili öğeler panoya kopyalandı.</string>
+        <string name="msgs_main_sync_history_count_copied">Kopyalanan:</string>
+        <string name="msgs_main_sync_history_count_deleted">Silinen:</string>
+        <string name="msgs_main_sync_history_count_ignored">Yoksayılan:</string>
+        <string name="msgs_main_sync_history_count_moved">Taşınan:</string>
+        <string name="msgs_main_sync_history_count_replaced">Değiştirilen:</string>
+        <string name="msgs_main_sync_history_count_retry">Yeniden denenen:</string>
+        <string name="msgs_main_sync_history_del_conf_all_history">Tüm geçmiş silinsin mi?</string>
+        <string name="msgs_main_sync_history_del_conf_selected_history">Aşağıdaki geçmiş öğeleri silinsin mi?</string>
+        <string name="msgs_main_sync_history_elapsed_time">Geçen süre(Sn):</string>
+        <string name="msgs_main_sync_history_transfer_speed">Ortalama aktarım hızı:</string>
+        <string name="msgs_main_sync_history_mode">Mod:</string>
+        <string name="msgs_main_sync_history_mode_normal">Normal</string>
+        <string name="msgs_main_sync_history_mode_test">Test</string>
+        <string name="msgs_main_sync_history_result_log_not_found">Geçmiş günlük dosyası bulunamadı.</string>
+        <string name="msgs_main_sync_history_result_activity_not_found_for_log_display">Metin dosyasını görüntüleyecek uygulama olmadığı için ayrıntıları göremezsiniz.</string>
+        <string name="msgs_main_sync_history_status_cancel">İptal edildi</string>
+        <string name="msgs_main_sync_history_status_error">Hata</string>
+        <string name="msgs_main_sync_history_status_running">Çalışıyor</string>
+        <string name="msgs_main_sync_history_status_success">Başarılı</string>
+        <string name="msgs_main_sync_history_status_warning">Uyarı</string>
+        <string name="msgs_main_sync_history_status_skip">Atlandı</string>
+        <string name="msgs_main_sync_list_array_task_auto">OTOMATİK</string>
+        <string name="msgs_main_sync_list_array_task_manual">MANUEL</string>
+        <string name="msgs_main_sync_list_array_task_test">TEST</string>
+        <string name="msgs_main_sync_list_array_last_sync_time">Son senk. :</string>
+        <string name="msgs_main_sync_list_array_mtype_archive">ARŞİV</string>
+        <string name="msgs_main_sync_list_array_mtype_copy">KOPYALA</string>
+        <string name="msgs_main_sync_list_array_mtype_mirr">AYNA</string>
+        <string name="msgs_main_sync_list_array_mtype_move">TAŞI</string>
+        <string name="msgs_main_sync_list_array_mtype_sync">SENK</string>
+        <string name="msgs_main_sync_list_array_no_last_sync_time">Senkronizasyon görevi henüz çalıştırılmadı.</string>
+        <string name="msgs_main_sync_task_name_list">Başlatılan senkronizasyon görevi:</string>
+        <string name="msgs_main_sync_profile">Senkronizasyon görevi (%s)</string>
+        <string name="msgs_main_sync_profile_dlg_archive">Arşiv</string>
+        <string name="msgs_main_sync_profile_dlg_copy">Kopyala</string>
+        <string name="msgs_main_sync_profile_dlg_diff_time_value_option_1">1</string>
+        <string name="msgs_main_sync_profile_dlg_diff_time_value_option_10">10</string>
+        <string name="msgs_main_sync_profile_dlg_diff_time_value_option_3">3</string>
+        <string name="msgs_main_sync_profile_dlg_diff_time_value_option_prompt">Zaman farkı toleransı (sn)</string>
+        <string name="msgs_main_sync_profile_dlg_invalid_source_destination_combination_external">Kaynak ve hedef klasörlerin ikisi de yinelenen dizinlere sahip yerel klasörlerdir. Lütfen birini farklı bir dizine değiştirin.</string>
+        <string name="msgs_main_sync_profile_dlg_invalid_source_destination_combination_same_dir">Hem kaynak hem de hedefte yinelenen dizin adları var. Kaynak ve hedef dizin adları farklı olmalıdır.</string>
+        <string name="msgs_main_sync_profile_dlg_invalid_source_destination_combination_sdcard">Kaynak ve hedef klasörlerin ikisi de yinelenen dizinlere sahip yerel klasörlerdir. Lütfen birini farklı bir dizine değiştirin.</string>
+        <string name="deleted_msgs_main_sync_profile_dlg_invalid_source_destination_cobination_smb">Kaynak ve hedef SMB klasörleri aynı. Farklı kaynak ve hedef dizin adları seçmelisiniz.</string>
+        <string name="msgs_main_sync_profile_dlg_mirror">Ayna</string>
+        <string name="msgs_main_sync_profile_dlg_move">Taşı</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_address_or_name">SMB sunucusunun IP adresini veya ana bilgisayar adını belirtin.</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_port_number">SMB sunucusunun port numarasını belirtin.</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_share_name">SMB paylaşım adını belirtin.</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_userid_pswd">SMB Ana Bilgisayar hesap adını ve parolasını veya yalnızca parolayı belirtin.</string>
+        <string name="msgs_main_sync_profile_dlg_specify_host_pswd">SMB Ana Bilgisayar parolasını belirtin.</string>
+        <string name="msgs_main_sync_profile_dlg_sync">Senkronize Et</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_sdcard_not_auth_please_edit_source">Harici depolamaya yazma izni verilmedi, kaynak klasörü düzenleyin ve harici depolamaya yazmaya izin verin.</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_sdcard_not_auth_please_edit_destination">SDCARD/USB depolamaya erişime izin verilmedi, lütfen hedef klasörü düzenleyerek SDCARD/USB depolamaya erişime izin verin.</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_sdcard_not_auth_press_select_btn">SDCARD/USB depolamaya erişime izin verilmedi, lütfen depolamaya erişim izni vermek için \"SDCARD/USB depolama kullanımına izin ver\" düğmesine tıklayın.</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_sdcard_not_mounted">%s bağlı değil.</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_type_local">Yerel</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_type_prompt">Klasör türünü seçin</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_type_smb">SMB Sunucu</string>
+        <string name="msgs_main_sync_profile_dlg_sync_folder_type_zip">ZIP Klasörü</string>
+        <string name="msgs_main_sync_profile_dlg_syncopt_prompt">Senkronizasyon seçeneğini seçin</string>
+        <string name="msgs_main_sync_profile_dlg_destination_directory_not_specified">Bu görev için hedef dizin belirtilmedi. Öngörülemeyen silme veya üzerine yazma işlemleri gerçekleşebilir. Devam edilsin mi?</string>
+        <string name="msgs_main_sync_profile_dlg_title_source">Kaynak klasörü düzenle</string>
+        <string name="msgs_main_sync_profile_dlg_title_destination">Hedef klasörü düzenle</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_prompt">Yalnızca belirtilen WiFi koşulunda senkronizasyonu başlat</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_off">Kapalı olsa bile çalıştır</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_connect_any_ap">AP\'ye bağlandığında</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_connect_private_address">Yalnızca özel IP adresi</string>
+        <string name="msgs_main_sync_profile_dlg_wifi_option_wifi_connect_specific_address">IP adresi listesinde kayıtlı</string>
+        <string name="msgs_main_sync_select_task_no_auto_task">Senkronizasyon görevi seçilmedi.</string>
+        <string name="msgs_main_sync_selected_tasks">Seçili senkronizasyon görevini çalıştır</string>
+        <string name="msgs_main_sync_selected_task_not_found">Seçili görev mevcut değil: %s</string>
+        <string name="msgs_main_sync_specified_sync_task_not_scheduled">Belirtilen senkronizasyon görevi yoksayıldığı için çalıştırılmayacak.</string>
+        <string name="msgs_main_sync_test_mode_warnning">Seçili görev yalnızca test için yapılandırılmış. Hiçbir dosya kopyalanmayacak veya silinmeyecek. Görev çalıştırılsın mı?</string>
+        <string name="msgs_main_sync_task_press_add_button_to_create_new_sync_task">Yeni senkronizasyon görevi oluşturmak için ekle düğmesine basın.</string>
+        <string name="msgs_move_to_bottom">Aşağı taşı</string>
+        <string name="msgs_move_to_top">Yukarı taşı</string>
+        <string name="msgs_msg_cont_label_clear">Mesajı temizle</string>
+        <string name="msgs_msg_cont_label_move_bottom">Alta taşı</string>
+        <string name="msgs_msg_cont_label_move_top">Üste taşı</string>
+        <string name="msgs_msg_cont_label_search">Arama görünümünü aç/kapat</string>
+        <string name="msgs_msg_cont_label_pinned_active">Otomatik kaydırmayı devre dışı bırak</string>
+        <string name="msgs_msg_cont_label_pinned_inactive">Otomatik kaydırmayı etkinleştir</string>
+        <string name="msgs_no_profile_entry">Görev yok</string>
+        <string name="msgs_notification_smbsync_active">SMBSync4 başlatıldı.</string>
+        <string name="msgs_notification_sync_active">senkronizasyon etkin.</string>
+        <string name="msgs_override">üzerine yazılsın mı?</string>
+        <string name="msgs_task_cont_label_auto">Otomatiğe ayarla</string>
+        <string name="msgs_task_cont_label_add_sync">Senkronizasyon görevi oluştur</string>
+        <string name="msgs_task_cont_label_copy">Görevi kopyala</string>
+        <string name="msgs_task_cont_label_delete">Görevi sil</string>
+        <string name="msgs_task_cont_label_down">Aşağı taşı</string>
+        <string name="msgs_task_cont_label_manual">Manüele ayarla</string>
+        <string name="msgs_task_cont_label_rename">Görevi yeniden adlandır</string>
+        <string name="msgs_task_cont_label_select_all">Tüm görevleri seç</string>
+        <string name="msgs_task_cont_label_sync">Seçili tüm senkronizasyon görevlerini çalıştır</string>
+        <string name="msgs_task_cont_label_sync_specific">Senkronizasyon görevini başlat (%s)</string>
+        <string name="msgs_task_cont_label_unselect_all">Tüm görevlerin seçimini kaldır</string>
+        <string name="msgs_task_cont_label_up">Yukarı taşı</string>
+        <string name="msgs_task_cont_to_auto_task">Aşağıdaki görevleri \"otomatik görev\" yapmak istiyor musunuz?</string>
+        <string name="msgs_task_cont_to_manual_task">Aşağıdaki görevleri \"manuel\" yapmak istiyor musunuz?</string>
+        <string name="msgs_task_edit_sync_folder_dlg_change_wifi_confition_to_any">Kaynak veya hedef SMB sunucusundaysa: Yalnızca belirtilen WiFi koşulunda senkronizasyonu başlat seçeneği \"Herhangi bir AP\'ye bağlı\" olarak ayarlansın mı?</string>
+        <string name="msgs_task_edit_sync_folder_dlg_change_wifi_confition_has_private">Kaynak veya hedef SMB sunucusundaysa: Yalnızca belirtilen WiFi koşulunda senkronizasyonu başlat seçeneği \"Özel adrese sahip\" olarak ayarlansın mı?</string>
+        <string name="msgs_task_edit_sync_folder_dlg_change_destination_folder_to_local">SMB kaynak klasör olarak ayarlandığında, hedef klasör olarak ZIP seçemezsiniz. Bu nedenle hedef klasör yerele değiştirildi.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_directory">Dizin</string>
+        <string name="msgs_task_edit_sync_folder_dlg_dirlist">Dizinleri Listele</string>
+        <string name="msgs_task_edit_sync_folder_dlg_folder_type">Klasör türü</string>
+        <string name="msgs_task_edit_sync_folder_dlg_local_storage">Depolama</string>
+        <string name="msgs_task_edit_sync_folder_dlg_select_local_storage">Depolama seç</string>
+        <string name="msgs_task_edit_sync_folder_dlg_search_smb_server_and_configure">SMB sunucusunu bul ve yapılandır</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parameters">SMB sunucu parametrelerini düzenle</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_select_smb_share_name">SMB paylaşım adını seçin</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_specify_correct_account">Hesabı yetkilendirin veya doğru hesap adını belirtip \"Paylaşım listesini yenile\" düğmesine basın.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_specify_enable_account">Oturum açamayan bir hesap adı belirtildi. Doğru hesap adını belirtip \"Paylaşım listesini yenile\" düğmesine tıklayın.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_specify_correct_account_password">Hesap adı veya parola yanlış. Doğru hesap adı ve parolayı belirtip \"Paylaşım listesini yenile\" düğmesine tıklayın.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_account_password_not_specified">Hesap adı veya parola belirtilmedi. Doğru hesap adı ve parolayı belirtip \"Paylaşım listesini yenile\" düğmesine tıklayın.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_parm_chose_parameters">SMB sunucu parametrelerini seçin</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_refresh_share_list">Paylaşım Listesini Yenile</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_account_password">SMB Sunucu hesabı ve parolası</string>
+        <string name="msgs_task_edit_sync_folder_dlg_edit_smb_server_port_number">Port numarası</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_password">Parola</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_port">Port numarası</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_server">Sunucu ana bilgisayar adı/IP adresi</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_share">Paylaşım adı</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_share_list">Paylaşım listesi</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_use_port_number">Port numarası kullan</string>
+        <string name="msgs_task_edit_sync_folder_dlg_remote_smb_username">Hesap adı</string>
+        <string name="msgs_task_edit_sync_folder_dlg_search_remote_server">SMB sunucu ara</string>
+        <string name="msgs_task_edit_sync_folder_dlg_select_sdcard">SDCARD/USB depolama kullanımına izin ver</string>
+        <string name="msgs_task_edit_sync_folder_dlg_show_password">Parolayı göster</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_hdr">SMB protokolü</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_select_title">SMB protokolünü seçin</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_smb1">SMB V1 Kullan</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_smbv23">SMB V2/3 Kullan</string>
+        <string name="msgs_task_edit_sync_folder_dlg_smb_protocol_suggestion_message">Mevcut SMB protokolü SMB sunucusuna bağlanmanıza izin vermiyor, lütfen SMB protokolünü değiştirin.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_import_failed_source_folder_smb_account_password">Kaynak klasördeki SMB hesabı veya parolası şifresi çözülemediği için boştur. Lütfen kaynak klasörü düzenleyin ve SMB hesabını veya parolasını düzeltin.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_import_failed_destination_folder_smb_account_password">Hedef klasördeki SMB hesabı veya parolası şifresi çözülemediği için boştur. Lütfen hedef klasörü düzenleyin ve SMB hesabını veya parolasını düzeltin.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_use_user_pass">Hesap adı ve parola kullan</string>
+        <string name="msgs_task_edit_sync_folder_dlg_import_failed_destination_folder_zip_password">Hedef klasörün ZIP parolası şifresi çözülemediği için boştur. Hedef klasörü düzenleyin ve parolayı doğru olanla değiştirin.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_title">Sıkıştırma oranı</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_fastest">En küçük</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_fast">Küçük</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_normal">Normal</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_comp_level_maximum">Maksimum</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_diff_zip_password">Parola ve onay parolası eşleşmiyor.</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_title_zip_password">Parola</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_title_zip_confirm_password">Parola onayı</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_none">Yok</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_zip_crypto">ZipCrypto</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_aes128">AES 128 Bit</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_aes256">AES 256 Bit</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_select_msg">Şifreleme Yöntemini Seçin</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_encrypt_title">Şifreleme yöntemi</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_filelist">Dosyaları Listele</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_directoryname">Dizin adı</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_filename">Zip dosyası</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_select_file_title">ZIP dosyası seçin</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_specify_zip_file_name">ZIP dosya adını belirtin</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_specify_zip_password">ZIP dosya parolasını belirtin</string>
+        <string name="msgs_task_edit_sync_folder_dlg_zip_time_stamp">ZIP dosya adına zaman damgası ekle</string>
+        <string name="msgs_task_sync_folder_dlg_confirm_msg_nosave">Senkronizasyon görevi ayarları değişti. Kaydetmeden çıkılsın mı?</string>
+        <string name="msgs_task_sync_task_dlg_active">Otomatik senkronizasyon</string>
+        <string name="msgs_task_sync_task_dlg_change_source_and_destination">Kaynak ve hedefi değiştir</string>
+        <string name="msgs_task_sync_task_dlg_swap_warning_title">Kaynak ve hedefi değiştir</string>
+        <string name="msgs_task_sync_task_dlg_swap_warning_message">Senkronizasyon yönünü tersine çevirmek, dosya ve dizinlerin beklenmedik şekilde silinmesine neden olabilir.\nTest modunu etkinleştirmeniz ve hiçbir dosya veya dizinin istemeden kaldırılmadığından veya değiştirilmediğinden emin olmanız şiddetle önerilir.</string>
+        <string name="msgs_task_sync_task_dlg_swap_directory_name_parameter_removed">Kaynak klasörde, çekim tarihi ve saatiyle ilgili değişkenler kullanılamaz ve kaldırılmıştır.</string>
+        <string name="msgs_task_sync_task_dlg_dir_name_has_invalid_char">Belirtilen dizin adından geçersiz karakterler kaldırıldı (\", :, \\, ?, *, &lt;, &gt;, \|)</string>
+        <string name="msgs_task_sync_task_dlg_file_filter_not_specified">Dosya adı filtresi belirtilmedi</string>
+        <string name="msgs_task_sync_task_dlg_file_filter_sync_all_file">Tüm dosyalar</string>
+        <string name="msgs_task_sync_task_dlg_file_name_has_invalid_char">Belirtilen dosya adından geçersiz karakterler kaldırıldı (/, \", :, \\, ?, *, &lt;, &gt;, \|)</string>
+        <string name="msgs_task_sync_task_dlg_share_name_has_invalid_char">Paylaşım adı kullanılamayan karakterler içerdiği için bunlar kaldırıldı. (\" / \\ [ ] : | &lt;, &gt;, + = ; , ? *)</string>
+        <string name="msgs_task_sync_task_dlg_dir_name_remove_redundant_separator">Dizin adındaki fazla \"/\" ayırıcısı kaldırıldı.</string>
+        <string name="msgs_task_sync_task_dlg_source">Kaynak klasör</string>
+        <string name="msgs_task_sync_task_dlg_sync_type">Senkronizasyon türü</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_archive">Arşiv</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_copy">Kopyala</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_mirror">Ayna</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_move">Taşı</string>
+        <string name="msgs_task_sync_task_dlg_sync_type_prompt">Senkronizasyon türünü seçin</string>
+        <string name="msgs_task_sync_task_dlg_destination">Hedef klasör</string>
+        <string name="msgs_task_sync_task_dlg_task_name">Senkronizasyon görev adı</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_add_current_addr">Geçerli IP adresini ekle</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_edit_title">IP Adresini Düzenle</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_hint">IP Adresi</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_list">Kablosuz LAN IP adresi listesi</string>
+        <string name="msgs_task_sync_task_dlg_wifi_addr_title">IP adresi filtresini düzenle</string>
+        <string name="msgs_task_sync_task_dlg_wifi_address_list">Kablosuz LAN IP adresi listesi</string>
+        <string name="msgs_task_sync_task_dlg_task_stop_condition_stop">DURDUR</string>
+        <string name="msgs_task_sync_task_dlg_task_stop_condition_skip_uncondition">YOKSAY</string>
+        <string name="msgs_task_sync_task_dlg_task_stop_condition_skip_network">AĞ</string>
+        <string name="msgs_task_sync_task_dlg_wifi_address_not_specified">Kablosuz LAN IP adresi belirtilmedi.</string>
+        <string name="msgs_task_sync_task_dlg_wifi_ap_not_connected">Kablosuz LAN belirtilen erişim noktasına bağlı değil.</string>
+        <string name="msgs_task_sync_task_dlg_wifi_duplicate_addr_specified">%s zaten mevcut.</string>
+        <string name="msgs_task_sync_task_dlg_wifi_duplicate_ap_specified">%s zaten mevcut.</string>
+        <string name="msgs_task_sync_task_filter_edit_dlg_title">Filtre düzenle</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_add">Ekle</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_delete">Sil</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_dir_list">Dizin listesi</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_exclude">Hariç tut</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_filter_enabled">Etkin</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_filter_disabled">Devre dışı</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_source_directory">Kaynak dizin:</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_file_filter">Dosya adı filtresi</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_filter_hint">Filtre</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_include">Dahil et</string>
+        <string name="msgs_task_sync_task_filter_list_dlg_not_specified">Belirtilmedi</string>
+        <string name="msgs_task_sync_task_filter_title">Filtreler:</string>
+        <string name="msgs_task_sync_task_sync_file_type_add_audio_title">Ses ekle</string>
+        <string name="msgs_task_sync_task_sync_file_type_add_image_title">Resim ekle</string>
+        <string name="msgs_task_sync_task_sync_file_type_add_video_title">Video ekle</string>
+        <string name="msgs_task_sync_task_sync_file_type_add_filter_title">Aşağıdakileri dosya filtresine eklemek istiyor musunuz?</string>
+        <string name="msgs_task_sync_task_sync_file_type_not_added">Tüm uzantılar zaten kayıtlı.</string>
+        <string name="msgs_task_sync_task_sync_file_type_added_type">Aşağıdakiler eklendi.</string>
+        <string name="msgs_task_sync_task_sync_file_type_specific">Senkronizasyon için dosyaları seçin</string>
+        <string name="msgs_task_sync_task_sync_file_name_filter">Dosya adı filtresi</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter">Dosya boyutu filtresi</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_dialog_title">Boyutlarına göre dosyaları senkronize et:</string>
+        <string name="msgs_task_sync_task_sync_file_size_ignore_file_size_0_byte_file">0 Bayt boyutundaki dosyaları yoksay</string>
+        <string name="msgs_task_sync_task_sync_file_size_size_hint">Boyut</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_dialog_title">Dosya boyutu filtresi birimini seçin</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_byte">Bayt</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_kib">KiB</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_mib">MiB</string>
+        <string name="msgs_task_sync_task_sync_file_size_unit_gib">GiB</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_type_none">Herhangi</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_type_less_than">Küçüktür</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_type_greater_than">Büyüktür</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_error_file_size_not_specified">Dosya boyutu belirtilmedi.</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_error_file_size_can_not_be_more_than_5_digits">Dosya boyutu 5 basamaktan fazla olamaz</string>
+        <string name="msgs_task_sync_task_sync_file_size_filter_error_file_size_must_be_greater_than_0">Dosya boyutu 1 veya daha büyük olmalıdır</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter">Dosya son değiştirilme filtresi</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter_dialog_title">Değiştirilme tarihi şu ise dosyaları dahil et:</string>
+        <string name="msgs_task_sync_task_sync_file_date_hint">Gün</string>
+        <string name="msgs_task_sync_task_sync_file_date_type_none">Herhangi</string>
+        <string name="msgs_task_sync_task_sync_file_date_type_older_than">Daha eski</string>
+        <string name="msgs_task_sync_task_sync_file_date_type_newer_than">Daha yeni</string>
+        <string name="msgs_task_sync_task_sync_file_date_type_after_sync_begin_day">Senkronizasyon başlangıç günü veya sonrası</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_not_specified">Güncelleme tarihi belirtilmedi.</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_must_be_greater_than_0">Güncelleme tarihi olarak en az bir gün belirtin.</string>
+        <string name="msgs_task_sync_task_sync_file_date_filter_error_update_date_must_be_less_3_digit">Güncelleme tarihi 3 basamaktan fazla olamaz.</string>
+        <string name="msgs_task_sync_task_sync_option">Seçenekler:</string>
+        <string name="msgs_task_sync_task_sync_option_allowance_last_mod_time">Kaynak ve hedef dosyalar arasında izin verilen minimum zaman farkı (saniye)</string>
+        <string name="msgs_task_sync_task_sync_option_sync_allow_all_ip_address">Tüm IP adresleriyle senkronizasyona izin ver (genel dahil)</string>
+        <string name="msgs_task_sync_task_sync_option_confirm_required">Üzerine yazma/silme öncesi onay iste</string>
+        <string name="msgs_task_sync_task_sync_option_delete_first_when_mirror">Senkronizasyondan önce dosyaları sil (yalnızca Ayna modu)</string>
+        <string name="msgs_task_sync_task_sync_option_diff_file_size_greater_than_destination">Yalnızca boyut karşılaştırması (dosyalar yalnızca kaynağın boyutu hedeften büyükse farklı kabul edilir)</string>
+        <string name="msgs_task_sync_task_sync_option_diff_file_use_file_size">Dosyaların farklı olup olmadığını belirlemek için dosya boyutunu kullan</string>
+        <string name="msgs_task_sync_task_sync_option_diff_file_use_last_mod_time">Dosyaların farklı olup olmadığını belirlemek için son değiştirilme zamanını kullan</string>
+        <string name="msgs_task_sync_task_sync_option_empty_directory">Boş dizinleri dahil et</string>
+        <string name="msgs_task_sync_task_sync_option_hidden_directory">Gizli dizinleri dahil et</string>
+        <string name="msgs_task_sync_task_sync_option_hidden_file">Gizli dosyaları dahil et</string>
+        <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter_warn_dialog_title">Filtre tarafından hariç tutulan dizin ve dosyaları kaldır</string>
+        <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter_warn_dialog">Uyarı: Kaynak dizininde bulunmayan ve tanımlanan filtreler tarafından dahil edilmeyen tüm dosya ve klasörler Hedef dizininden silinecektir!\nTest yapmanız ve istenmeyen dosya veya dizinlerin kaldırılmadığından emin olmanız şiddetle önerilir.</string>
+        <string name="msgs_task_sync_task_sync_option_remove_dir_file_excluded_by_filter">Filtre tarafından hariç tutulan dizin ve dosyaları kaldır</string>
+        <string name="msgs_task_sync_task_sync_option_ignore_never_overwrite_destination_file_if_it_is_newer_than_the_source_file_option_enabled">\"Kaynak dosyadan daha yeni ise hedef dosyanın üzerine yazma\" seçeneği etkin olduğu için dosya senkronizasyonu atlandı.</string>
+        <string name="msgs_task_sync_task_sync_option_ignore_unusable_character_used_directory_file_name">Geçersiz karakterler içeren dizin ve dosya adlarını atla (\", :, \\, ?, *, &lt;, &gt;, \|)</string>
+        <string name="msgs_task_sync_task_sync_option_source_root_dir_file">Senkronizasyon, kaynak dizinin kök klasöründe bulunan dosyaları da içerir</string>
+        <string name="msgs_task_sync_task_sync_option_never_overwrite_destination_file_if_it_is_newer_than_the_source_file">Kaynak dosyadan daha yeni ise hedef dosyanın üzerine yazma</string>
+        <string name="msgs_task_sync_task_sync_option_never_overwrite_destination_file_if_it_is_newer_than_the_source_file_warning">UYARI: Beklenmedik Sonuçlar Olabilir!\nYaz saati uygulaması olan bir bölgede yaşıyorsanız veya saat dilimleri arasında geçiş yapıyorsanız, hedef dosya, yaz saati/saat dilimi değişikliği aralığında değiştirildiyse kaynaktan yanlışlıkla daha eski bir zaman gösterebilir. \"Üzerine yazma/silme öncesi onay iste\" seçeneğini etkinleştirmeniz şiddetle önerilir. Lütfen üzerine yazmadan önce dosyanın içeriğini doğrulayın.</string>
+        <string name="msgs_task_sync_task_sync_option_copy_no_compare_title">Hedef dosya üzerine yazma uyarısı</string>
+        <string name="msgs_task_sync_task_sync_option_copy_no_compare_warning">\"Dosyaların farklı olup olmadığını belirlemek için dosya boyutunu kullan\" ve \"Dosyaların farklı olup olmadığını belirlemek için son değiştirilme zamanını kullan\" seçeneklerinin ikisi de seçilmedi ve hedef dosya her zaman üzerine yazılacak.</string>
+        <string name="msgs_task_sync_task_sync_option_diff_file_ignore_dst_difference">Dosyalar arasındaki Yaz Saati Uygulaması farkını yoksay</string>
+        <string name="msgs_task_sync_task_sync_option_offset_of_dst_time_value">Yaz saati ile standart saat arasındaki zaman farkı (dakika)</string>
+        <string name="msgs_task_sync_task_sync_option_offset_of_dst_time_value_title">Yaz Saati Uygulaması farkını seçin (dakika)</string>
+        <string name="msgs_task_sync_task_sync_option_not_set_file_last_modified">Hedef dosyanın son değiştirilme zamanını kaynak dosyayla eşleştirme</string>
+        <string name="msgs_task_sync_task_sync_option_not_set_file_last_modified_warning">Etkinleştirildiğinde, hedef dosyanın son değiştirilme zamanı kaynak dosyayla aynı olamaz, bu nedenle dosya her senkronizasyonda kopyalanır. Bu seçeneği, hedefin son değiştirilme zamanını ayarlayamadığı durumlarda kullanın.\nBu seçenek etkinleştirilirse, \"Dosyaların farklı olup olmadığını belirlemek için son değiştirilme zamanını kullan\" seçeneğini devre dışı bırakarak dosyaların her seferinde kopyalanmasını önleyebilirsiniz.</string>
+        <string name="msgs_task_sync_task_sync_option_perform_overriden_copy_move">Hedef dosya(lar)ın üzerine yaz</string>
+        <string name="msgs_task_sync_task_sync_option_retry_if_error_occured">Ağ hatasında yeniden dene</string>
+        <string name="msgs_task_sync_task_sync_option_show_special_option">Gelişmiş seçenekleri göster</string>
+        <string name="msgs_task_sync_task_sync_option_network_adv_options">Ağ gelişmiş seçenekleri:</string>
+        <string name="msgs_task_sync_task_sync_option_error_title">Hata seçeneği</string>
+        <string name="msgs_task_sync_task_sync_option_error_prompt">Hata Seçeneğini Seçin</string>
+        <string name="msgs_task_sync_task_sync_option_error_stop">Senkronizasyonu durdur</string>
+        <string name="msgs_task_sync_task_sync_option_error_skip_network">Ağ seçeneklerine uymasalar bile sonraki görevleri başlat</string>
+        <string name="msgs_task_sync_task_sync_option_error_ignore">Tüm hataları yoksay ve sonraki görevleri başlat</string>
+        <string name="msgs_task_sync_task_sync_option_error_ignore_warning_message">Bu seçenek \"Durdur\" olarak ayarlanırsa, bir senkronizasyon görevi hatayla sonlansa bile sonraki görev yine de çalıştırılır. Bunu yalnızca sonraki görevin çalıştırılmasından emin olmak istiyorsanız devre dışı bırakın.</string>
+        <string name="msgs_task_sync_task_sync_option_sub_dir">Alt dizinleri dahil et</string>
+        <string name="msgs_task_sync_task_sync_option_sync_when_charging">Senkronizasyon görevlerini yalnızca şarj olurken çalıştır</string>
+        <string name="msgs_task_sync_task_sync_option_test_mode">Test modu (dosyaları kopyalama veya silme)</string>
+        <string name="msgs_task_sync_task_sync_option_wifi_condition_title">Ağ Seçeneği:</string>
+        <string name="msgs_task_sync_task_sync_sub_directory_sync_all_sub_directory">Tüm alt dizinler</string>
+        <string name="msgs_task_sync_task_option_remove_directory_if_empty_when_move">Boş olduğunda kaynak dizini sil (yalnızca Senkronizasyon seçeneği Taşı olduğunda)</string>
+        <string name="msgs_task_sync_task_sync_sub_directory_specific">Alt dizinleri seçin</string>
+        <string name="msgs_task_sync_task_sync_use_small_ioarea">SMB I/O yazma arabelleğini 16 KB ile sınırla</string>
+        <string name="msgs_task_sync_task_option_confirm_exif_date">EXIF verilerinden tarih ve saat belirlenemezse, bir onay mesajı görüntülenir</string>
+        <string name="msgs_task_sync_task_option_ignore_source_file_that_file_size_gt_4gb">SDCARD/USB depolamaya senkronize ederken 4GB\'den büyük kaynak dosyaları yoksay</string>
+        <string name="msgs_task_sync_task_option_ignore_file_name_length_gt_specified_length">Dosya adı uzunluğu belirtilen uzunluktan fazla olan dosyaları yoksay.</string>
+        <string name="msgs_task_sync_task_sync_ignore_file_name_length_gt_specified_value_not_specified">Yoksayılacak dosya adı uzunluğunu belirtin</string>
+        <string name="msgs_task_sync_task_sync_ignore_file_name_length_gt_specified_value_gt_0">0\'dan büyük veya eşit bir dosya adı uzunluğu belirtin</string>
+        <string name="msgs_task_sync_task_sync_ignore_file_name_length_gt_specified_value_le_255">Yoksayılacak dosya adı uzunluğunu 255 veya daha az belirtin</string>
+        <string name="msgs_task_sync_folder_dlg_archive_ignore_source_directory_hierarchy">Tüm dosyaları alt dizin oluşturmadan hedef dizine kaydet</string>
+        <string name="msgs_progress_spin_dlg_sync_cancel">İptal</string>
+        <string name="msgs_task_twoway_sync_conflict_keep_conflict_file">Çift yönlü senkronizasyon çakışma dosyasını koru</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle">Çakışma dosyalarının işlenmesi</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_ask_user">Kullanıcıya sor</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_skip_sync_file">Dosya senkronizasyonunu atla</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_copy_newer">Yeni tarihli dosyaları kopyala</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_copy_older">Eski tarihli dosyaları kopyala</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_copy_from_source_to_destination">Kaynaktan hedefe kopyala</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_copy_from_destination_to_source">Hedeften kaynağa kopyala</string>
+        <string name="msgs_task_twoway_sync_conflict_copy_rurle_prompt">Çakışma dosyası işleme yöntemini seçin</string>
+        <string name="msgs_task_sync_task_edit_keyword">Parametre Düzenle</string>
+        <string name="msgs_task_sync_task_edit_directory_name_keyword">Dizin adı parametresini düzenle</string>
+        <string name="msgs_task_sync_task_edit_file_name_keyword">Dosya adı parametresini düzenle</string>
+        <string name="msgs_task_sync_task_edit_keyword_label_original_name">Orijinal Ad</string>
+        <string name="msgs_task_sync_task_edit_keyword_label_new_name">Dönüştürülmüş ad</string>
+        <string name="msgs_task_sync_task_edit_keyword_quit_warning">Parametreler değiştirildi. Çıkmak istiyor musunuz?</string>
+        <string name="msgs_task_sync_task_edit_keyword_mirror_can_not_used_taken_date">Hedef klasörde çekim tarihi ve saatiyle ilgili bir değişken kullanılıyor.(%s) Ayna tarafından kullanılamaz ve kaldırılmalıdır.</string>
+        <string name="msgs_rename_profile">Görevi yeniden adlandır</string>
+        <string name="msgs_save_to_profile_error">Senkronizasyon ayarları dosyası kaydedilemedi: %s</string>
+        <string name="msgs_select_export_file">Dışa aktarma hedefini seçin</string>
+        <string name="msgs_select_import_file">İçe aktarma dosyasını seçin</string>
+        <string name="msgs_select_local_dir">Yerel dizin seçin</string>
+        <string name="msgs_select_remote_dir">SMB dizini seçin</string>
+        <string name="msgs_select_remote_share">SMB paylaşımı seçin</string>
+        <string name="msgs_share_list_not_obtained">SMB paylaşımlarının listesi alınamadı. Lütfen kontrol edin:\n- SMB sunucu tarafındaki paylaşım yapılandırması\n- sunucunun gerektirdiği doğru kullanıcı adı/parola sağlandı mı</string>
+        <string name="msgs_smbsync_main_restart_by_destroyed">Uygulama sonlandırıldıktan sonra yeniden başlatıldı. Yeniden başlatmayı devre dışı bırakmak için Ayarlar > Geliştirici Seçenekleri\'nde \"Etkinlikleri saklamayın\" seçeneğini etkinleştirin.</string>
+        <string name="msgs_smbsync_main_restart_by_killed">Uygulama arka plana geçtiğinde sonlandırıldığı için yeniden başlatıldı.</string>
+        <string name="msgs_smbsync_main_settings_restart_title">Uygulama yeniden başlatılıyor</string>
+        <string name="msgs_smbsync_main_settings_jcifs_changed_restart">SMBv1 ayarları değiştirildi. Bu değişiklik uygulama yeniden başlatılana kadar geçerli olmayacaktır. Uygulama şimdi kapatılsın mı?</string>
+        <string name="msgs_smbsync_ui_settings_language_changed_restart">Tema veya dil değiştirildikten sonra uygulamayı yeniden başlatmanız önerilir. Şimdi yeniden başlatmak için \"Yeniden Başlat\"a, daha sonra yeniden başlatmak için \"Daha Sonra\"ya tıklayın</string>
+        <string name="msgs_smbsync_ui_settings_language_changed_restart_later">Daha Sonra</string>
+        <string name="msgs_smbsync_ui_settings_language_changed_restart_immediate">Yeniden Başlat</string>
+        <string name="msgs_smbsync_main_start">Uygulama başlatıldı.</string>
+        <string name="msgs_smnsync_main_kill_application">Uygulama sonlandırılsın mı?</string>
+        <string name="msgs_specify_task_name">Lütfen görev için bir ad belirtin</string>
+        <string name="msgs_tab_name_history">Geçmiş</string>
+        <string name="msgs_tab_name_schedule">Zamanlama</string>
+        <string name="msgs_tab_name_msg">Mesajlar</string>
+        <string name="msgs_tab_name_task">Görevler</string>
+        <string name="msgs_tab_name_group">Grup</string>
+        <string name="msgs_terminate_application">SMBSync4\'ten çık.</string>
+    <!-- Privacy Policy confirm -->
+        <string name="msgs_privacy_policy_title">Gizlilik Politikası</string>
+        <string name="msgs_privacy_policy_show_privacy_policy">Gizlilik Politikasını Göster</string>
+    <!-- Search -->
+        <string name="msgs_find_view_search_word_hint">Arama dizesi</string>
+        <string name="msgs_find_view_search_prev_label">Önceki arama sonuçları</string>
+        <string name="msgs_find_view_search_next_label">Sonraki Arama Sonuçları</string>
+    <!-- Maintenance -->
+        <string name="msgs_progress_spin_dlg_housekeep_running">Uygulama veri dosyalarının bakımı yapılıyor</string>
+        <string name="msgs_progress_spin_dlg_housekeep_cancel">Bakımı iptal et</string>
+        <string name="msgs_progress_spin_dlg_housekeep_cancel_confirm">Uygulama veri dosyalarının bakımı iptal edilsin mi?</string>
+        <string name="msgs_maintenance_last_mod_list_confirm_start_msg">Uygulama veri dosyalarının bakımı.\nBakım çalışırken hiçbir senkronizasyon görevi çalıştırılamaz. Bakım işlemi çalıştırılsın mı?</string>
+        <string name="msgs_maintenance_last_mod_list_can_not_start_msg">Senkronizasyon görevi çalışırken uygulama veri dosyalarının bakımı yapılamaz.</string>
+        <string name="msgs_maintenance_last_mod_list_cancel_msg">Uygulama veri dosyalarının bakımı iptal edildi.</string>
+        <string name="msgs_maintenance_last_mod_list_del_count">Son değiştirilmiş dosyalar listesinden %s öğe silindi.</string>
+        <string name="msgs_maintenance_last_mod_list_end_msg">Uygulama veri dosyalarının bakımı tamamlandı.</string>
+        <string name="msgs_maintenance_last_mod_list_start_msg">Uygulama veri dosyalarının bakımı başladı.</string>
+        <string name="msgs_maintenance_result_log_list_del_count">%s geçmiş günlük dosyası silindi.</string>
+        <string name="msgs_maintenance_result_log_list_del_file">%s silindi.</string>
+        <string name="msgs_maintenance_result_log_list_del_title">Geçmiş günlük dizininde geçmiş günlükleriyle ilgili olmayan dosya ve dizinler bulundu. Bu dosyalar kaldırılsın mı?</string>
+    <!-- Menu -->
+        <string name="msgs_menu_sync_all_auto">Tüm otomatik senkronizasyon görevlerini çalıştır</string>
+        <string name="msgs_menu_sync_selected">Seçili görevlerin senkronizasyonunu çalıştır</string>
+        <string name="msgs_menu_export">Ayarları dışa aktar</string>
+        <string name="msgs_menu_import">Ayarları içe aktar</string>
+        <string name="msgs_menu_log_management">Günlük yönetimi</string>
+        <string name="msgs_menu_show_hide_filter">Filtreyi göster/gizle</string>
+        <string name="msgs_menu_about">SMBSync4 Hakkında</string>
+        <string name="msgs_menu_settings">Ayarlar</string>
+        <string name="msgs_menu_housekeep">Veritabanı bakımı</string>
+        <string name="msgs_menu_kill">Uygulamayı sonlandır</string>
+        <string name="msgs_menu_list_storage_info">Sistem bilgisi</string>
+        <string name="msgs_menu_request_all_file_access">Tüm Dosya Erişimi izni</string>
+        <string name="msgs_menu_show_battery_optimization_screen">Pil optimizasyonu</string>
+    <!-- Mirror -->
+        <string name="msgs_mirror_confirm_archive_date_time_from_file_cancel">[Arşiv işlemi kullanıcı tarafından iptal edildi]</string>
+        <string name="msgs_mirror_confirm_archive_date_time_from_file_confirm">Görüntü çekim zamanı ve tarihi EXIF verilerinden alınamıyor. Bunun yerine dosya güncelleme zamanı ve tarihi kullanılsın mı? (Gelecekte bu mesajı önlemek için bu senkronizasyon görevinin \"Onayla\" arşivleme seçeneğini devre dışı bırakın)</string>
+        <string name="msgs_mirror_confirm_copy_cancel">[Kopyalama işlemi kullanıcı tarafından iptal edildi]</string>
+        <string name="msgs_mirror_confirm_copy_confirm">Dosyanın üzerine yazma onayı \n%s\n(Gelecekte bu mesajı önlemek için bu senkronizasyon görevinin \"Üzerine yazma/silme öncesi onay iste\" seçeneğini devre dışı bırakın)</string>
+        <string name="msgs_mirror_confirm_delete_cancel">[Silme işlemi kullanıcı tarafından iptal edildi]</string>
+        <string name="msgs_mirror_confirm_delete_dir_confirm">Dizin silme onayı \n%s\n(Gelecekte bu mesajı önlemek için bu senkronizasyon görevinin \"Üzerine yazma/silme öncesi onay iste\" seçeneğini devre dışı bırakın)</string>
+        <string name="msgs_mirror_confirm_delete_file_confirm">Dosya silme onayı \n%s\n(Gelecekte bu mesajı önlemek için bu senkronizasyon görevinin \"Üzerine yazma/silme öncesi onay iste\" seçeneğini devre dışı bırakın)</string>
+        <string name="msgs_mirror_confirm_delete_zip_item_file_confirm">ZIP dosyasındaki dosyalar silinsin mi?\n%s\n(Gelecekte bu mesajı önlemek için bu senkronizasyon görevinin \"Üzerine yazma/silme öncesi onay iste\" seçeneğini devre dışı bırakın)</string>
+        <string name="msgs_mirror_confirm_delete_zip_item_dir_confirm">ZIP dosyasındaki dizinler silinsin mi?\n%s\n(Gelecekte bu mesajı önlemek için bu senkronizasyon görevinin \"Üzerine yazma/silme öncesi onay iste\" seçeneğini devre dışı bırakın)</string>
+        <string name="msgs_mirror_file_zip_split_archive_can_not_be_used">Bölünmüş arşiv kullanılamaz.</string>
+        <string name="msgs_mirror_confirm_move_cancel">[Taşıma işlemi kullanıcı tarafından iptal edildi]</string>
+        <string name="msgs_mirror_confirm_move_confirm">Dosya taşıma onayı\nBuradan taşı: %1$s \nHedef: %2$s \n(Onay gerekmiyorsa, senkronizasyon görevinde \"Onayla\" seçeneğinin işaretini kaldırın.)</string>
+        <string name="msgs_mirror_confirm_no_btn">Hayır</string>
+        <string name="msgs_mirror_confirm_noall_btn">Tümüne hayır</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_archive">Dosya arşivlemeyi onaylamak için buraya dokunun.</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_copy">Dosya üzerine yazmayı onaylamak için buraya dokunun.</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_delete_dir">Dizin silmeyi onaylamak için buraya dokunun.</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_delete_file">Dosya silmeyi onaylamak için buraya dokunun.</string>
+        <string name="msgs_mirror_confirm_please_check_confirm_msg_move">Dosya taşımayı onaylamak için buraya dokunun.</string>
+        <string name="msgs_mirror_confirm_task_cancel_btn">Senkronizasyonu iptal et</string>
+        <string name="msgs_mirror_confirm_yes_btn">Evet</string>
+        <string name="msgs_mirror_confirm_yesall_btn">Sonraki tümü için evet</string>
+        <string name="msgs_mirror_taken_date_can_not_obtain_from_the_file">Çekim tarihi ve saati dosyanın EXIF/meta verilerinden alınamadığı için dosyanın son değiştirilme zamanı kullanıldı. Dosya=</string>
+        <string name="msgs_mirror_taken_date_convert_error">Çekim tarihi dönüştürmesinde hata oluştuğu için dosyanın son değiştirilme zamanı kullanıldı. Dosya=</string>
+        <string name="msgs_mirror_directory_with_same_name_as_the_file_found">Hedef yolda kopyalanan dosyayla aynı ada sahip bir dizin bulunduğu için senkronizasyon iptal edildi. Dosya=</string>
+        <string name="msgs_mirror_ignore_file_name_gt_255_byte">Dosya adının uzunluğu %1$s baytı aştığı için dosya yoksayıldı. Bayt olarak dosya adı=%2$s, dosya adı=%3$s</string>
+        <string name="msgs_mirror_external_sdcard_not_mounted">SDCARD/USB depolama bağlı olmadığı için senkronizasyon iptal edildi.</string>
+        <string name="msgs_mirror_external_sdcard_select_required">SDCARD/USB depolamaya erişilemediği için senkronizasyon iptal edildi. UUID=%s</string>
+        <string name="msgs_mirror_file_ignored_file_size_gt_4gb">Dosya boyutu 4GB\'yi aştığı için yoksayıldı. Dosya=%s</string>
+        <string name="msgs_mirror_directory_ignored_because_access_not_granted">Dizine erişilemediği için dizin yoksayıldı. Dizin=%s</string>
+        <string name="msgs_mirror_file_ignored_because_access_not_granted">Dosyaya erişilemediği için dosya yoksayıldı. Dosya=%s</string>
+        <string name="msgs_mirror_directory_ignored_because_sync_sub_directory_disabled">\"Alt dizinleri dahil et\" devre dışı olduğu için alt dizinler yoksayıldı. Dizin=%s</string>
+        <string name="msgs_mirror_file_set_last_modified_failed">setLastModified() başarısız oldu. Senkronizasyon görevi seçeneklerinde \"Hedef dosyanın son değiştirilme zamanını kaynak dosyayla eşleştirme\" seçeneğini etkinleştirin.</string>
+        <string name="msgs_mirror_file_zip_update_zip_file">ZIP dosyası güncelleniyor.</string>
+        <string name="msgs_mirror_ignore_override_copy_file">Bu görev için \"Hedef dosya(lar)ın üzerine yaz\" seçeneği devre dışı olduğu için dosya kopyalama yoksayıldı.</string>
+        <string name="msgs_mirror_ignore_override_move_file">Bu görev için \"Hedef dosya(lar)ın üzerine yaz\" seçeneği devre dışı olduğu için dosya taşıma yoksayıldı.</string>
+        <string name="msgs_mirror_invalid_folder_combination">Geçersiz klasör türü kombinasyonu. Kaynak=%1$s, Hedef=%2$s</string>
+        <string name="msgs_mirror_invalid_file_directory_name_character_error">Kaynak dosya veya dizin adı, hedef için geçersiz karakterler içeriyor. Senkronizasyona izin vermek için adı düzenleyin. Karakter: %1$s, Yol: %2$s</string>
+        <string name="msgs_mirror_invalid_file_directory_name_character_skipped">Kaynak adı hedefe geçerli olmayan karakterler içerdiği için dosya veya dizin senkronizasyon işleminden hariç tutuldu. Karakter: %1$s, Yol: %2$s</string>
+        <string name="msgs_mirror_remote_addr_not_connected">SMB ana bilgisayarına bağlanılamıyor=%s</string>
+        <string name="msgs_mirror_remote_addr_not_connected_with_port">SMB ana bilgisayarı %1$s, port %2$s üzerinden bağlanılamıyor</string>
+        <string name="msgs_mirror_remote_name_not_found">SMB ana bilgisayar adı bulunamadı. IP adresini kullanmayı deneyin. Ana Bilgisayar Adı=%s</string>
+        <string name="msgs_mirror_same_directory_ignored">Hedef ve kaynak aynı olduğu için dizin yoksayıldı. Dizin=%s</string>
+        <string name="msgs_mirror_same_file_ignored">Kaynak ve hedefte aynı dosya senkronize edilemediği için dosya yoksayıldı. Dosya=%s</string>
+        <string name="msgs_mirror_smb_addr_not_connected">Belirtilen SMB sunucusuna bağlanılamıyor. Sunucu=%s</string>
+        <string name="msgs_mirror_smb_addr_not_connected_with_port">Belirtilen SMB sunucusuna bağlanılamıyor. IP adresi=%1$s, port=%2$s</string>
+        <string name="msgs_mirror_smb_invalid_port_specified">Geçersiz port numarası: %s</string>
+        <string name="msgs_mirror_smb_name_not_found">Belirtilen SMB sunucu ana bilgisayar adı bulunamadı. Ana bilgisayar adı=%s</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_address_conn_other">Senkronizasyon iptal edildi. Kablosuz adaptörde belirtilen IP adresi yok.</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_ap_conn_other">Senkronizasyon iptal edildi. Belirtilen kablosuz erişim noktasına bağlı değil.</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_ap_not_connected">Senkronizasyon iptal edildi. WiFi erişim noktasına bağlı değil.</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_connect_not_local_addr">Senkronizasyon iptal edildi. Ağ adresi özel bir IP değil.</string>
+        <string name="msgs_mirror_sync_can_not_start_wifi_is_off">Senkronizasyon iptal edildi. Kablosuz LAN kapalı.</string>
+        <string name="msgs_mirror_sync_can_not_start_ip_address_not_obtained">Senkronizasyon iptal edildi. Ağ adresi alınamıyor.</string>
+        <string name="msgs_mirror_sync_can_not_start_ip_address_is_global">Ağ adresi özel bir adres olmadığı için senkronizasyon iptal edildi (%s). Senkronizasyon yapmak istediğinizde lütfen Senkronizasyon Seçeneklerinde tüm IP adreslerini etkinleştirin.</string>
+        <string name="msgs_mirror_sync_cancelled_battery_option_not_satisfied">Senkronizasyon iptal edildi. Cihaz şarj olmuyor.</string>
+        <string name="msgs_mirror_sync_request_ended">Senkronizasyon isteği sona erdi. İstekte bulunan=%s</string>
+        <string name="msgs_mirror_sync_request_started">Senkronizasyon isteği başlatıldı. İstekte bulunan=%s</string>
+        <string name="msgs_mirror_sync_skipped_wifi_address_conn_other">Kablosuz LAN adresi belirtilen IP adresiyle eşleşmediği için senkronizasyon görevi atlandı.</string>
+        <string name="msgs_mirror_sync_skipped_wifi_ap_conn_other">Kablosuz LAN belirtilen WiFi erişim noktasına bağlı olmadığı için senkronizasyon görevi atlandı.</string>
+        <string name="msgs_mirror_sync_start_was_delayed">Planlanan görevleri başlatmak için kablosuz LAN açıldı. Senkronizasyon %s saniye sonra başlayacak şekilde ayarlandı...</string>
+        <string name="msgs_mirror_sync_wifi_can_not_enabled">WiFi açılamadı.</string>
+        <string name="msgs_mirror_task_avg_rate">Ortalama aktarım hızı = %s</string>
+        <string name="msgs_mirror_task_dir_create">[Klasör oluşturuldu]</string>
+        <string name="msgs_mirror_task_dir_create_failed">dizin oluşturulamadı.</string>
+        <string name="msgs_mirror_task_dir_deleted">[Klasör silindi]</string>
+        <string name="msgs_mirror_task_dir_moved">[Klasör taşındı]</string>
+        <string name="msgs_mirror_task_file_archived">[Arşivlendi]</string>
+        <string name="msgs_mirror_task_file_copied">[Dosya kopyalandı]</string>
+        <string name="msgs_mirror_task_file_copying">Dosya kopyalanıyor… %s %% [tamamlandı]</string>
+        <string name="msgs_mirror_task_file_deleted">[Dosya silindi]</string>
+        <string name="msgs_mirror_task_file_moved">[Dosya taşındı]</string>
+        <string name="msgs_mirror_task_file_replaced">[Dosya üzerine yazıldı]</string>
+        <string name="msgs_mirror_task_file_failed">[Senkronizasyon Başarısız]</string>
+        <string name="msgs_mirror_task_file_ignored">[Atlandı]</string>
+        <string name="msgs_mirror_task_dir_delete_failed">Dizin silinemedi.</string>
+        <string name="msgs_mirror_task_file_moving">Dosya taşınıyor. %s%%tamamlandı.</string>
+        <string name="msgs_mirror_task_file_delete_failed">Dosya silinemedi. Dosya=%s</string>
+        <string name="msgs_mirror_task_file_move_failed_delete">Dosya taşınamadı (kaynak dosya silinemiyor). Dosya=%s</string>
+        <string name="msgs_mirror_task_source_not_found">Kaynak dosya veya dizin bulunamadı. Dosya=%s</string>
+        <string name="msgs_mirror_task_no_of_copy">Kopya sayısı=%1$s, Taşıma sayısı=%2$s, Değiştirme sayısı=%3$s, Silme sayısı=%4$s, Yoksayma sayısı=%5$s, Geçen süre=%6$s</string>
+        <string name="msgs_mirror_task_result_cancel">iptal edildi.</string>
+        <string name="msgs_mirror_task_result_error_ended">Senkronizasyon görevi hatayla sona erdi.</string>
+        <string name="msgs_mirror_task_result_skip">Senkronizasyon görevi atlandı.</string>
+        <string name="msgs_mirror_task_result_error_ignored">Hata işleme seçeneği ayarı nedeniyle hata yoksayıldı.</string>
+        <string name="msgs_mirror_task_result_ok">Senkronizasyon görevi başarıyla tamamlandı.</string>
+        <string name="msgs_mirror_task_result_stats">Kopya sayısı=%1$s, Silme sayısı=%2$s, Yoksayma sayısı=%3$s, Uyarı sayısı=%4$s, Yeniden deneme sayısı=%5$s, Hata sayısı=%6$s</string>
+        <string name="msgs_mirror_task_started">Senkronizasyon görevi başlatıldı.</string>
+        <string name="msgs_mirror_task_success_end">başarıyla tamamlandı.</string>
+        <string name="msgs_mirror_task_sync_request_error_detected">Senkronizasyon hatalarla sona erdi.</string>
+        <string name="msgs_mirror_task_was_cancelled">iptal edildi.</string>
+    <!-- Scan network -->
+        <string name="msgs_scan_progress_spin_dlg_addr_cancel">Aramayı iptal et</string>
+        <string name="msgs_scan_ip_address_select_title">SMB Sunucu Ara</string>
+        <string name="msgs_scan_ip_address_scan_btn">Ara</string>
+        <string name="msgs_scan_ip_address_press_scan_btn">IP adresi aralığını belirtin, ardından Ara düğmesine basın</string>
+        <string name="msgs_scan_ip_address_not_detected">SMB sunucu bulunamadı.</string>
+        <string name="msgs_scan_ip_address_select_detected_host">Arama sonuçlarından ana bilgisayar adı veya IP adresi seçin</string>
+        <string name="msgs_scan_ip_address_scan_result_title">Arama Sonuçları</string>
+        <string name="msgs_ip_address_scan_progress">SMB ana bilgisayar aranıyor… %s%% tamamlandı.</string>
+        <string name="msgs_ip_address_range_dlg_begin">Başlangıç</string>
+        <string name="msgs_ip_address_range_dlg_end">Bitiş</string>
+        <string name="msgs_ip_address_range_dlg_begin_notspecified">Adres aralığının başlangıcını belirtin.</string>
+        <string name="msgs_ip_address_range_dlg_addr_range_error">Adres aralığı 1 ile 254 arasında olmalıdır.</string>
+        <string name="msgs_ip_address_range_dlg_begin_range_error">Başlangıç adresi 1 ile 254 arasında olmalıdır.</string>
+        <string name="msgs_ip_address_range_dlg_end_notspecified">Adres aralığının bitişini belirtin.</string>
+        <string name="msgs_ip_address_range_dlg_begin_addr_gt_end_addr">Bitiş adresi 2 ile 254 arasında olmalıdır.</string>
+        <string name="msgs_ip_address_range_dlg_end_range_error">Bitiş adresi başlangıç adresinden büyük olmalıdır.</string>
+        <string name="msgs_ip_address_range_dlg_not_private">Özel adresler dışında arama yapılamaz.</string>
+        <string name="msgs_scan_not_started_because_wifi_off">WiFi kapalı olduğu için arama yapılamıyor. SMB sunucunuzu aramak için lütfen WiFi\'yi açın.</string>
+        <string name="msgs_progress_dlg_canceling">İptal ediliyor…</string>
+        <string name="msgs_progress_spin_dlg_filelist_getting">Dosya listesi alınıyor…</string>
+        <string name="msgs_progress_spin_dlg_filelist_cancel">İptal</string>
+    <!-- Scheduler -->
+        <string name="msgs_menu_scheduler">Zamanlama</string>
+        <string name="msgs_scheduler_main_dlg_hdr_title_schedule_name">Zamanlama adı</string>
+        <string name="msgs_scheduler_main_dlg_hdr_title_add">Zamanlama Ekle</string>
+        <string name="msgs_scheduler_main_dlg_hdr_title_add_new_schedule_name">Yeni Zamanlama</string>
+        <string name="msgs_scheduler_main_dlg_hdr_title_edit">Zamanlama Düzenle</string>
+        <string name="msgs_scheduler_main_dlg_hdr_enable">Zamanlamayı etkinleştir</string>
+        <string name="msgs_scheduler_main_dlg_hdr_edit_prof">Senkronizasyon görev listesini düzenle</string>
+        <string name="msgs_scheduler_main_dlg_hdr_sun">Paz</string>
+        <string name="msgs_scheduler_main_dlg_hdr_mon">Pzt</string>
+        <string name="msgs_scheduler_main_dlg_hdr_tue">Sal</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wed">Çar</string>
+        <string name="msgs_scheduler_main_dlg_hdr_thu">Per</string>
+        <string name="msgs_scheduler_main_dlg_hdr_fri">Cum</string>
+        <string name="msgs_scheduler_main_dlg_hdr_sat">Cmt</string>
+        <string name="msgs_scheduler_main_dlg_hdr_month">Ay</string>
+        <string name="msgs_scheduler_main_dlg_hdr_day">Gün</string>
+        <string name="msgs_scheduler_main_dlg_hdr_hour">Saat</string>
+        <string name="msgs_scheduler_main_dlg_hdr_minute">Dakika</string>
+        <string name="msgs_scheduler_main_dlg_hdr_schedule_type">Zamanlama türü</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on">WiFi kapalıysa, zamanlanmış görevleri başlatmak için aç</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on_delayed_time">WiFi açıldıktan sonra senkronizasyonu geciktir:</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on_delayed_1">5 Sn</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on_delayed_2">10 Sn</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_on_delayed_3">30 Sn</string>
+        <string name="msgs_scheduler_main_dlg_hdr_wifi_off">Zamanlanmış görevler tamamlandığında WiFi\'yi tekrar kapat.</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option">Senkronizasyon görev seçeneklerini değiştir</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option_charge">\"Senkronizasyon görevlerini yalnızca şarj olurken çalıştır\" seçeneğini değiştir</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option_charge_rg_0">Değiştirme</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option_charge_rg_1">Etkin</string>
+        <string name="msgs_scheduler_main_dlg_hdr_override_sync_option_charge_rg_2">Devre dışı</string>
+        <string name="msgs_scheduler_main_dlg_hdr_interval_schedule_reset">Aralık başlangıç zamanını son senkronizasyon olayına sıfırla.</string>
+        <string name="msgs_scheduler_main_dlg_hdr_schedule_time">Zamanlama saati : %s</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_prompt">Zamanlama türünü seçin</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_every_hour">Her saat</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_every_day">Her gün</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_every_month">Her ay</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_day_of_week">Haftanın günü</string>
+        <string name="msgs_scheduler_main_spinner_sched_type_interval">Aralık</string>
+        <string name="msgs_scheduler_main_spinner_sched_day_prompt">Zamanlama günlerini seçin</string>
+        <string name="msgs_scheduler_main_spinner_sched_hours_prompt">Zamanlama saatlerini seçin</string>
+        <string name="msgs_scheduler_main_spinner_sched_minutes_prompt">Zamanlama dakikalarını seçin</string>
+        <string name="msgs_scheduler_info_last_day_of_the_month">Son gün</string>
+        <string name="msgs_scheduler_main_last_day_of_the_month">Her ayın son gününde senkronize et</string>
+        <string name="msgs_scheduler_main_last_day_of_the_month_warning">Seçilen gün bazı aylarda bulunmuyorsa, o aylarda senkronizasyon atlanacaktır. Örn: 29\'u seçerseniz ve Şubat\'ın sadece 28 günü varsa veya 31\'i seçerseniz ve ayın sadece 30 günü varsa. Görevin her ayın son gününde çalıştırılmasını sağlamak için \"Ayın son gününde senkronize et\" seçeneğini seçin.</string>
+        <string name="msgs_scheduler_edit_synclist_dlg_hdr_title">Senkronizasyon görev listesi</string>
+        <string name="msgs_scheduler_edit_synclist_dlg_hdr_sync_all_sync_profile">Tüm otomatik senkronizasyon görevlerini çalıştır</string>
+        <string name="msgs_scheduler_edit_sync_prof_list_not_specified">Lütfen aşağıdaki \"Senkronizasyon görev listesini düzenle\" düğmesine basarak zamanlanacak senkronizasyon görevlerini belirtin.</string>
+        <string name="msgs_scheduler_info_next_schedule_time">Sonraki senkronizasyon zamanı: %s</string>
+        <string name="msgs_scheduler_info_next_schedule_main_info">Sonraki senk.: %1$s, (%2$s)</string>
+        <string name="msgs_scheduler_info_next_schedule_main_error">Zamanlamada belirtilen görev bulunamıyor.\nZamanlama: %1$s, Görev: %2$s</string>
+        <string name="msgs_scheduler_info_schedule_disabled">Senkronizasyon zamanlaması devre dışı</string>
+        <string name="msgs_scheduler_info_schedule_enabled">Senkronizasyon zamanlaması etkin</string>
+        <string name="msgs_scheduler_info_sync_all_active_profile">Tüm otomatik senkronizasyon görevlerini çalıştır</string>
+        <string name="msgs_scheduler_info_sync_selected_profile">Senkronizasyon görev(ler)i %s</string>
+        <string name="msgs_scheduler_info_sync_task_was_not_found">Belirtilen senkronizasyon görev adı bulunamadı, Ad= (%s)</string>
+        <string name="msgs_scheduler_info_sync_task_was_deleted_or_renamed">Senkronizasyon görevi zaten silinmiş veya yeniden adlandırılmış.</string>
+        <string name="msgs_scheduler_info_sync_task_list_was_empty">Boş senkronizasyon görev listesi</string>
+        <string name="msgs_scheduler_main_dw_not_selected">Lütfen en az bir gün seçin.</string>
+        <string name="msgs_schedule_list_edit_dlg_title">Zamanlama listesini düzenle</string>
+        <string name="msgs_schedule_list_edit_dlg_error_sync_list_name_already_exists">Bu senkronizasyon görev adı zaten mevcut. Farklı bir ad kullanın.</string>
+        <string name="msgs_schedule_list_edit_dlg_error_sync_list_name_does_not_specified">Görev zamanlama adı belirtilmedi.</string>
+        <string name="msgs_schedule_list_edit_dlg_error_schedule_name_contains_unusabel_character">Zamanlama adında geçersiz karakter: \"%s\".</string>
+        <string name="msgs_schedule_cont_label_add">Zamanlama ekle</string>
+        <string name="msgs_schedule_cont_label_activate">Etkinleştir</string>
+        <string name="msgs_schedule_cont_label_inactivate">Devre dışı bırak</string>
+        <string name="msgs_schedule_cont_label_delete">Zamanlamayı sil</string>
+        <string name="msgs_schedule_cont_label_copy">Kopyala</string>
+        <string name="msgs_schedule_cont_label_rename">Yeniden adlandır</string>
+        <string name="msgs_schedule_cont_label_select_all">Tümünü seç</string>
+        <string name="msgs_schedule_cont_label_unselect_all">Tüm seçimi kaldır</string>
+        <string name="msgs_schedule_confirm_msg_delete">Aşağıdaki öğe(ler) silinsin mi? Sonuçlar hemen yansıtılır ve geri alınamaz.</string>
+        <string name="msgs_schedule_confirm_msg_enable">Aşağıdaki öğe(ler) etkinleştirilsin mi? Sonuçlar hemen yansıtılır ve geri alınamaz.</string>
+        <string name="msgs_schedule_confirm_msg_disable">Aşağıdaki öğe(ler) devre dışı bırakılsın mı? Sonuçlar hemen yansıtılır ve geri alınamaz.</string>
+        <string name="msgs_schedule_confirm_msg_rename_warning">Zamanlama adı değiştirilsin mi? Sonuçlar hemen yansıtılır ve geri alınamaz.</string>
+        <string name="msgs_schedule_confirm_msg_rename_duplicate_name">Yinelenen zamanlama adı.</string>
+        <string name="msgs_schedule_confirm_msg_nosave">Zamanlama değiştirildi. Kaydetmeden çıkılsın mı?</string>
+        <string name="msgs_schedule_rename_schedule">Zamanlamayı yeniden adlandır</string>
+        <string name="msgs_schedule_rename_schedule_error">renameSchedule hatası, zamanlama öğesi bulunamıyor.</string>
+        <string name="msgs_schedule_list_edit_no_schedule">Yeni zamanlama oluşturmak için ekle düğmesine basın.</string>
+        <string name="msgs_schedule_list_edit_scheduler_disabled">Zamanlama devre dışı olduğu için zamanlanmış senkronizasyon gerçekleştirilmedi. Zamanlanmış bir senkronizasyonu etkinleştirmek için zamanlanmış öğenin önündeki aç/kapat düğmesine dokunun.</string>
+        <string name="msgs_schedule_list_edit_confirm_scheduler_to_enabled">Zamanlama etkinleştirilsin mi?</string>
+        <string name="msgs_schedule_list_edit_confirm_scheduler_to_disabled">Zamanlama devre dışı bırakılsın mı?</string>
+        <string name="msgs_schedule_list_edit_scheduler_toggle_enable_disable">Zamanlamayı Etkinleştir veya Devre Dışı Bırak.</string>
+        <string name="msgs_schedule_list_edit_multi_sched_warn">Birden fazla görevin zamanlama ve WiFi seçenekleri, yinelenen senkronizasyon işlemlerini önlemek için birleştirilecektir.</string>
+        <string name="msgs_schedule_sync_task_start_label">Zamanlamayı çalıştır (%s)</string>
+        <string name="msgs_schedule_sync_task_start_error">Zamanlama çalıştırma hatası</string>
+        <string name="msgs_schedule_battery_optimization_warning_title">Pil Optimizasyonu</string>
+        <string name="msgs_schedule_battery_optimization_warning_msg">Pil optimizasyonu etkin olduğu için zamanlanmış senkronizasyon başarısız olabilir. Pil optimizasyonu ayarını değiştirmek ister misiniz?</string>
+    <!-- Group -->
+        <string name="msgs_menu_group">Grup</string>
+        <string name="msgs_group_edit_title_add">Grup ekle</string>
+        <string name="msgs_group_edit_title_edit">Grubu düzenle</string>
+        <string name="msgs_group_edit_title_new_group_name">Yeni Grup</string>
+        <string name="msgs_group_name_for_shortcut1">Düğme1</string>
+        <string name="msgs_group_name_for_shortcut2">Düğme2</string>
+        <string name="msgs_group_name_for_shortcut3">Düğme3</string>
+        <string name="msgs_group_name_for_sync_button">Senk düğmesi</string>
+        <string name="msgs_group_button_not_assigned">Hiçbiri</string>
+        <string name="msgs_group_select_button_title">Bir düğme seçin</string>
+        <string name="msgs_group_label_button">Atanmış Düğme :</string>
+        <string name="msgs_group_label_assign_button">Düğme Ataması</string>
+        <string name="msgs_group_main_dlg_hdr_enable">Grubu etkinleştir</string>
+        <string name="msgs_group_main_dlg_hdr_disabled">Devre dışı</string>
+        <string name="msgs_group_edit_enable_sync_group">Aşağıdaki görevleri etkinleştirmek ister misiniz?</string>
+        <string name="msgs_group_edit_disable_sync_group">Aşağıdaki görevleri devre dışı bırakmak ister misiniz?</string>
+        <string name="msgs_group_main_dlg_hdr_auto_task_only">Yalnızca Otomatik görevleri senkronize et</string>
+        <string name="msgs_group_main_dlg_hdr_task_list">Görev listesi</string>
+        <string name="msgs_group_main_dlg_hdr_group_name">Grup adı</string>
+        <string name="msgs_group_exec_sync_task_no_auto_task_exists">Otomatik görev mevcut değil. Grup=%1$s</string>
+        <string name="msgs_group_exec_sync_task_no_sync_task_exists">Görev mevcut değil. Grup=%1$s, Görev=%2$s</string>
+        <string name="msgs_group_edit_sync_task_list_not_specified">Senkronize edilecek görevleri belirtmek için Görev Listesi düğmesine basın.</string>
+        <string name="msgs_group_info_sync_task_was_deleted_or_renamed">Bir senkronizasyon görevi silinmiş veya yeniden adlandırılmış. Görev=%s</string>
+        <string name="msgs_group_list_edit_dlg_error_sync_list_name_already_exists">Bu grup adı zaten mevcut. Farklı bir ad kullanın.</string>
+        <string name="msgs_group_list_edit_dlg_error_sync_list_name_does_not_specified">Grup adı belirtilmedi.</string>
+        <string name="msgs_group_list_edit_dlg_error_schedule_name_contains_unusabel_character">Grup adında geçersiz karakter: \"%s\".</string>
+        <string name="msgs_group_can_not_sync_specified_task_does_not_exists">Grupta belirtilen görev bulunamadı. Görev=(%s)</string>
+        <string name="msgs_group_cont_label_add">Grup ekle</string>
+        <string name="msgs_group_cont_label_up">Yukarı taşı</string>
+        <string name="msgs_group_cont_label_down">Aşağı taşı</string>
+        <string name="msgs_group_cont_label_activate">Grubu etkinleştir</string>
+        <string name="msgs_group_cont_label_inactivate">Grubu Devre Dışı Bırak</string>
+        <string name="msgs_group_cont_label_delete">Grubu sil</string>
+        <string name="msgs_group_cont_label_copy">Grubu kopyala</string>
+        <string name="msgs_group_cont_label_rename">Grubu yeniden adlandır</string>
+        <string name="msgs_group_confirm_msg_delete">Aşağıdaki öğe(ler) silinsin mi? Sonuçlar hemen yansıtılır ve geri alınamaz.</string>
+        <string name="msgs_group_confirm_msg_enable">Aşağıdaki öğe(ler) etkinleştirilsin mi? Sonuçlar hemen yansıtılır ve geri alınamaz.</string>
+        <string name="msgs_group_confirm_msg_disable">Aşağıdaki öğe(ler) devre dışı bırakılsın mı? Sonuçlar hemen yansıtılır ve geri alınamaz.</string>
+        <string name="msgs_group_confirm_msg_rename_warning">Grup adı değiştirilsin mi? Sonuçlar hemen yansıtılır ve geri alınamaz.</string>
+        <string name="msgs_group_list_edit_no_group">Grup oluşturmak için Ekle düğmesine tıklayın.</string>
+        <string name="msgs_group_list_edit_confirm_group_to_enabled">Grubu etkinleştirmek istiyor musunuz?</string>
+    <!-- edit Sync task list -->
+        <string name="msgs_edit_sync_task_list_delete_sync_task">Aşağıdaki görevleri silmek ister misiniz?</string>
+        <string name="msgs_edit_sync_task_list_add_sync_task_no_task_exists_for_add">Eklenebilecek görev yok.</string>
+        <string name="msgs_edit_sync_task_list_dlg_title">Senkronizasyon görev listesini düzenle</string>
+        <string name="msgs_edit_sync_task_list_add_sync_task_btn_title">Senkronizasyon görevi ekle</string>
+        <string name="msgs_edit_sync_task_list_info_sync_task_list_was_empty">Hiçbir senkronizasyon görevi belirtilmedi. Görev eklemek için \"Senkronizasyon Görevi Ekle\" düğmesine tıklayın.</string>
+        <string name="msgs_edit_sync_task_list_error_specified_task_does_not_exists">Görev mevcut değil. Görev=%s</string>
+        <string name="msgs_edit_sync_task_list_cont_label_select_all">Tümünü seç</string>
+        <string name="msgs_edit_sync_task_list_cont_label_unselect_all">Tüm seçimi kaldır</string>
+        <string name="msgs_edit_sync_task_list_cont_label_remove_sync_task">Senkronizasyon Görevini Kaldır</string>
+        <string name="msgs_edit_sync_task_list_cont_label_add_sync_task">Senkronizasyon Görevi Ekle</string>
+        <string name="msgs_edit_sync_task_list_help_title">Senkronizasyon görev listesi düzenleme yardımı</string>
+        <string name="msgs_edit_sync_task_list_add_task_list_guide">Eklemek istediğiniz görevi seçin ve \"Ekle\" düğmesine tıklayın.</string>
+        <string name="msgs_edit_sync_task_list_help_file">SMBSync4_Help_EN_edit_sync_task_list.md</string>
+        <string name="msgs_edit_sync_task_list_confirm_msg_nosave">Görev listesi değiştirildi. Kaydetmeden çıkılsın mı?</string>
+    <!-- Sync Button -->
+        <string name="msgs_main_sync_button_confirmation_message_title">Senkronizasyon başlatma onayı</string>
+        <string name="msgs_main_sync_button_confirmation_message_msg">Aşağıdaki görevleri başlatmak istiyor musunuz?</string>
+        <string name="msgs_main_sync_button_start_error_task_not_found">Senkronizasyonu başlatacak görev bulunamadı. Görev=%1$s</string>
+        <string name="msgs_main_sync_button_start_error_auto_task_does_not_exists">Otomatik görev mevcut değil.</string>
+        <string name="msgs_main_sync_button_confirmation_message_suppress">Bu bildirimi devre dışı bırak (senkronizasyon ayarlarından etkinleştirilebilir)</string>
+    <!-- Shortcut -->
+        <string name="msgs_main_shortcut_title">SMBSync4 Kısayolu</string>
+        <string name="msgs_main_shorcut_confirmation_message_title">SMBSync4 başlatma onayı</string>
+        <string name="msgs_main_shorcut_confirmation_message_msg">Aşağıdaki görevleri başlatmak istiyor musunuz?</string>
+        <string name="msgs_main_shortcut_start_error_task_not_found">(%1$s) Senkronizasyonu başlatacak görev bulunamadı. Görev=%2$s</string>
+        <string name="msgs_main_shortcut_start_error_auto_task_does_not_exists">(%s) Otomatik görev mevcut değil.</string>
+        <string name="msgs_main_shortcut_not_assigned">(%s) Hiçbir grup atanmadı.\nAşağıdaki görevleri senkronize etmeye başlamak istiyor musunuz?</string>
+        <string name="msgs_main_shortcut_group_disabled">(%1$s) Atanan grup(%2$s) devre dışı.\nAşağıdaki görevleri senkronize etmeye başlamak istiyor musunuz?</string>
+        <string name="msgs_main_shorcut_confirmation_message_suppress">Bu bildirimi devre dışı bırak (senkronizasyon ayarlarından etkinleştirilebilir)</string>
+        <string name="msgs_main_shortcut_group_only_sync_auto_task">(%s) \"Otomatik görev\"leri başlatmak istiyor musunuz?</string>
+        <string name="msgs_main_shortcut_group_specific_sync_task">(%s) Aşağıdaki görevleri başlatmak istiyor musunuz?</string>
+        <string name="msgs_main_shortcut_start_error_sync_already_started">(%s) Senkronizasyon zaten başlatılmış olduğu için başlatma isteği yoksayıldı.</string>
+        <string name="msgs_main_shortcut_button_label_button1">Düğme1</string>
+        <string name="msgs_main_shortcut_button_label_button2">Düğme2</string>
+        <string name="msgs_main_shortcut_button_label_button3">Düğme3</string>
+    <!-- svc -->
+        <string name="msgs_svc_can_not_start_sync_task_disabled">Senkronizasyon görevi devre dışı olduğu için başlatılamadı.</string>
+        <string name="msgs_svc_received_start_request_from_scheduler">SMBSync4 zamanlayıcısından senkronizasyon isteği alındı.</string>
+        <string name="msgs_svc_received_start_request_from_scheduler_task_not_found">SMBSync4 zamanlayıcısından senkronizasyon isteği alındı, ancak bu görev mevcut olmadığı için yoksayıldı:</string>
+        <string name="msgs_svc_received_start_request_from_scheduler_no_task_list">Senkronizasyon görevi mevcut olmadığı için çalıştırma iptal edildi.</string>
+        <string name="msgs_svc_received_start_request_from_external">Harici bir uygulamadan senkronizasyon isteği alındı.</string>
+        <string name="msgs_svc_received_start_request_from_external_task_not_found">Harici bir uygulamadan senkronizasyon isteği alındı, ancak belirtilen senkronizasyon görevi mevcut olmadığı için yoksayıldı:</string>
+        <string name="msgs_svc_received_start_request_from_external_group_not_found">Harici bir uygulamadan senkronizasyon isteği alındı, ancak belirtilen senkronizasyon grubu mevcut olmadığı için yoksayıldı. Grup=%s  </string>
+        <string name="msgs_svc_received_start_request_from_external_no_task_list">Senkronizasyon görevi mevcut olmadığı için çalıştırma iptal edildi.</string>
+        <string name="msgs_svc_received_start_request_from_external_no_task_specified">Senkronizasyon görevi belirtilmediği için çalıştırma iptal edildi.</string>
+        <string name="msgs_svc_received_start_request_from_external_auto_task">Senkronizasyon görevi belirtilmediği için otomatik senkronizasyon görevi başlatıldı.</string>
+        <string name="msgs_svc_received_start_request_from_shortcut">Kısayoldan senkronizasyon isteği alındı.</string>
+        <string name="msgs_svc_received_start_request_ignored_duplicate_request">Senkronizasyon isteği zaten işlendiği için yoksayıldı. ID=%s</string>
+        <string name="msgs_svc_received_start_request_ignored_task_is_error">Senkronizasyon görevi hata durumunda olduğu için yoksayıldı. Görev=%1$s, İstekte bulunan=%2$s</string>
+        <string name="msgs_svc_received_start_request_ignored_already_task_queued">Senkronizasyon görevi zaten kuyruğa alındığı için yoksayıldı. Görev=%1$s, İstekte bulunan=%2$s</string>
+        <string name="msgs_svc_received_start_request_ignored_already_task_queued_schedule">Senkronizasyon görevi zaten kuyruğa alındığı için yoksayıldı. Zamanlama=%1$s, Görev=%2$s, İstekte bulunan=%3$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted">Senkronizasyon görevi başlatma isteği kabul edildi. Görev=%1$s, İstekte bulunan=%2$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted_schedule">Senkronizasyon görevi başlatma isteği kabul edildi. Zamanlama=%1$s, Görev=%2$s, İstekte bulunan=%3$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted_but_not_executed_title">Önceki senkronizasyon hatalarla sona erdiği veya iptal edildiği için aşağıdaki senkronizasyon isteği yoksayıldı.</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted_but_not_executed_msg">Görev=%1$s, İstekte bulunan=%2$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_accepted_but_not_executed_msg_schedule">Zamanlama=%1$s, Görev=%2$s, İstekte bulunan=%3$s</string>
+        <string name="msgs_svc_received_start_sync_task_request_intent_activity">ETKİNLİK</string>
+        <string name="msgs_svc_received_start_sync_task_request_intent_external">HARİCİ</string>
+        <string name="msgs_svc_received_start_sync_task_request_intent_shortcut">KISAYOL</string>
+        <string name="msgs_svc_received_start_sync_task_request_intent_schedule">ZAMANLAMA</string>
+    <!-- sync archive -->
+        <string name="msgs_sync_folder_archive_option">Arşiv Seçenekleri</string>
+        <string name="msgs_sync_folder_archive_file_type">Aşağıdaki dosya uzantıları için arşivle:</string>
+        <string name="msgs_sync_folder_archive_retention_period">Şu koşulda arşivle:</string>
+        <string name="msgs_sync_folder_archive_output_image">Kaydedilen dosyalar ve dizinler </string>
+        <string name="msgs_sync_folder_archive_add_taken_date_button">Aşağıdaki düğmeler çekim tarihi ve saatiyle ilgili parametreler ekler.</string>
+        <string name="msgs_sync_folder_archive_add_sync_begin_date_button">Aşağıdaki düğme senkronizasyon başlangıç tarihi ve saati için parametre ekler.</string>
+        <string name="msgs_sync_folder_archive_add_original_file_name_button">Aşağıdaki düğme dosya adı için parametre ekler</string>
+        <string name="msgs_sync_folder_archive_add_constants_button">Aşağıdaki düğme bir karakter ekler.</string>
+        <string name="msgs_sync_folder_archive_seq_number_title">Sıra numarası ekleyerek dosya adlarını artır</string>
+        <string name="msgs_sync_folder_archive_btn_title_date">Tarih (YYYY-AA-GG)</string>
+        <string name="msgs_sync_folder_archive_btn_title_time">Saat (SS-DD-SN)</string>
+        <string name="msgs_sync_folder_archive_btn_title_original_name">Orijinal Ad</string>
+        <string name="msgs_sync_folder_archive_btn_title_day_of_year">YILIN GÜNÜ</string>
+        <string name="msgs_sync_folder_archive_btn_title_yyyy">YYYY</string>
+        <string name="msgs_sync_folder_archive_btn_title_yy">YY</string>
+        <string name="msgs_sync_folder_archive_btn_title_mm">AA</string>
+        <string name="msgs_sync_folder_archive_btn_title_dd">GG</string>
+        <string name="msgs_sync_folder_archive_btn_title_hh">SS</string>
+        <string name="msgs_sync_folder_archive_btn_title_min">DK</string>
+        <string name="msgs_sync_folder_archive_btn_title_sec">SN</string>
+        <string name="msgs_sync_folder_archive_btn_title_week_number">HAFTA NUMARASI</string>
+        <string name="msgs_sync_folder_archive_btn_title_week_day">HAFTA GÜNÜ (%1$s,%2$s...)</string>
+        <string name="msgs_sync_folder_archive_btn_title_week_day_long">HAFTA GÜNÜ (%1$s,%2$s...)</string>
+        <string name="msgs_sync_folder_archive_zip_folder_not_supported">Senkronizasyon yöntemi arşiv olduğunda ZIP klasörü kullanılamadığı için yerel klasöre değiştirildi.</string>
+        <string name="deleted_msgs_sync_folder_archive_zip_folder_not_supported_error">Arşiv senkronizasyon türü için Zip dosyaları hedef olarak kullanılamadığından istek yoksayıldı.</string>
+        <string name="msgs_sync_folder_archive_btn_title_year">Yıl</string>
+        <string name="msgs_sync_folder_archive_btn_title_month">Ay</string>
+        <string name="msgs_sync_folder_archive_btn_title_day">Gün</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_prompt_title">Eklenecek sıra numarasını seçin</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_0">Değiştirme</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_2">2 basamaklı sıra (01-99)</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_3">3 basamaklı sıra (001-999)</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_4">4 basamaklı sıra (0001-9999)</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_5">5 basamaklı sıra (00001-99999)</string>
+        <string name="msgs_sync_folder_archive_suffix_seq_digit_6">6 basamaklı sıra (000001-999999)</string>
+        <string name="msgs_sync_folder_archive_period_prompt_title">Arşivlenecek fotoğrafları seçin</string>
+        <string name="msgs_sync_folder_archive_period_0_days">Herhangi bir tarih (Tümü)</string>
+        <string name="msgs_sync_folder_archive_period_7_days">7 günden eski</string>
+        <string name="msgs_sync_folder_archive_period_30_days">30 günden eski</string>
+        <string name="msgs_sync_folder_archive_period_60_days">60 günden eski</string>
+        <string name="msgs_sync_folder_archive_period_90_days">90 günden eski</string>
+        <string name="msgs_sync_folder_archive_period_180_days">180 günden eski</string>
+        <string name="msgs_sync_folder_archive_period_1_years">1 yıldan eski</string>
+    <!-- storage_permission -->
+        <string name="msgs_storage_permission_title">Depolama kullanım izni</string>
+        <string name="msgs_storage_permission_msg_select_storage">İzin vermek istediğiniz depolamayı seçin.</string>
+        <string name="msgs_storage_permission_msg_no_storage_requiring_permissions">İzin gerektiren depolama bulunamadı.</string>
+        <string name="msgs_storage_permission_msg_grant_permission_failed_null">Boş intent verisi döndürüldüğü için depolama yazma izni başarısız oldu.</string>
+        <string name="msgs_storage_permission_msg_add_uuid_failed">UUID ekleme başarısız oldu.</string>
+        <string name="msgs_storage_permission_msg_saf_error_occured">SAF İzin isteği hatası</string>
+        <string name="msgs_storage_permission_all_file_access_title">Tüm Dosya Erişimi</string>
+        <string name="msgs_storage_permission_all_file_access_image">all_file_access_desc_en.png</string>
+        <string name="msgs_storage_permission_all_file_access_request_message">SMBSync4, belirlediğiniz çeşitli dizinlere senkronizasyon yapabilmek için \"Tüm Dosyalara Erişim\" iznini gerektirir. Toplanacak veriler ve gerekli izinler için lütfen uygulamanın gizlilik politikasını kontrol edin.\n\"Tüm dosyalara erişim\"e izin vermek için lütfen aşağıdaki adımları izleyin.\n0. Ekranın altındaki \"İleri\" düğmesine dokunun.\n1. Görüntülenen \"Tüm dosyalara erişim\" ekranında \"SMBSync4\"e dokunun.\n2. Ekranın sağ tarafındaki düğmeyi açın.\n3. Ekranın sağ tarafındaki düğmenin mavi olduğunu doğrulayın.\n4. Geri tuşuyla uygulama ekranına dönün.</string>
+        <string name="msgs_storage_permission_all_file_access_button_text">İleri</string>
+        <string name="msgs_storage_permission_all_file_access_denied_message">\"Tüm Dosya Erişimi\"ne izin verilene kadar uygulamayı başlatamazsınız. İzin vermek istiyorsanız, lütfen uygulamayı yeniden başlatın.</string>
+        <string name="msgs_storage_permission_all_file_access_error_message">\"Tüm Dosya Erişimi\" izin ekranı görüntülenemedi.\nHata=%s</string>
+    <!-- Setting main -->
+        <string name="settings_security_title">Güvenlik</string>
+        <string name="settings_security_application_password_title">Uygulama Parolası</string>
+        <string name="settings_security_application_password">settings_application_password</string>
+        <string name="settings_security_application_password_setting_title">Güvenlik seviyesini ayarla</string>
+        <string name="settings_security_application_password_created">Uygulama parolası oluşturuldu.</string>
+        <string name="settings_security_application_password_not_created">Uygulama parolası henüz oluşturulmadı.</string>
+        <string name="settings_security_application_password_label_create">Parola Oluştur</string>
+        <string name="settings_security_application_password_label_remove">Parolayı Kaldır</string>
+        <string name="settings_security_application_password_label_change">Parolayı Değiştir</string>
+        <string name="settings_security_application_password_desc_create">Uygulama parolası oluştur</string>
+        <string name="settings_security_application_password_desc_change">Uygulama parolasını değiştir</string>
+        <string name="settings_security_application_password_desc_remove">Uygulama parolasını kaldır</string>
+        <string name="settings_security_application_password_confirm_remove">Uygulama parolası kaldırılsın mı?</string>
+        <string name="settings_security_application_password_protect_title">Parola koruma ayarları</string>
+        <string name="settings_security_application_password_use_app_startup_title">Uygulama başlangıcında parola iste</string>
+        <string name="settings_security_application_password_use_app_startup">settings_security_application_password_use_app_startup</string>
+        <string name="settings_security_application_password_use_edit_task_title">Görev düzenlerken parola iste</string>
+        <string name="settings_security_application_password_use_edit_task">settings_security_application_password_use_edit_task</string>
+        <string name="settings_security_application_password_use_export_task_title">Senkronizasyon ayarlarını dışa aktarırken parola iste</string>
+        <string name="settings_security_application_password_use_export_task">settings_security_application_password_use_export_task</string>
+        <string name="settings_security_init_smb_account_password_title">SMB klasörünü Düzenle\'de hesap adını ve parolayı yeniden girin.</string>
+        <string name="settings_security_init_smb_account_password">settings_security_init_smb_account_password</string>
+        <string name="settings_security_use_auth_timeout_title">30 dakika sonra kullanıcının yeniden doğrulanmasını gerektir</string>
+        <string name="settings_security_use_auth_timeout">settings_security_use_auth_timeout</string>
+        <string name="settings_security_init_zip_passowrd_title">ZIP klasörünü düzenlerken parolayı yeniden girin.</string>
+        <string name="settings_security_init_zip_passowrd">settings_security_init_zip_passowrd</string>
+        <string name="settings_security_hide_show_smb_passowrd_title">SMB klasörü düzenleme ekranında \"Parolayı Göster\" düğmesini gösterme</string>
+        <string name="settings_security_hide_show_smb_passowrd">settings_security_hide_show_smb_passowrd</string>
+        <string name="settings_security_hide_show_zip_passowrd_title">ZIP klasörü düzenleme ekranında \"Parolayı Göster\" düğmesini gösterme</string>
+        <string name="settings_security_hide_show_zip_passowrd">settings_security_hide_show_zip_passowrd</string>
+        <string name="settings_device_orientation_portrait">settings_device_orientation_portrait</string>
+        <string name="settings_device_orientation_portrait_summary_ena">Uygulamayı dikey modda görüntüle</string>
+        <string name="settings_device_orientation_portrait_title">Dikey Modu Zorla</string>
+        <string name="settings_device_orientation_landscape_tablet">settings_device_orientation_landscape_tablet</string>
+        <string name="settings_device_orientation_landscape_tablet_summary_ena">Düşük yoğunluklu bir ekranda bile yatay yönde her zaman çoklu bölme görünümünü göster</string>
+        <string name="settings_device_orientation_landscape_tablet_title">Yatay Modda Tablet Görünümü</string>
+        <string name="settings_exit_clean">settings_exit_clean</string>
+        <string name="settings_exit_clean_summary_ena">Uygulama işlemi sonlandırılırsa, düzgün şekilde çık</string>
+        <string name="settings_exit_clean_title">Düzgün Çıkış</string>
+        <string name="settings_exported_profile_encryption">settings_exported_profile_encryption</string>
+        <string name="settings_force_screen_on_while_sync">settings_force_screen_on_while_sync</string>
+        <string name="settings_force_screen_on_while_sync_summary_ena">Senkronizasyon başladığında cihazı uyandır ve ekranı açık tut (uyku sırasında senkronizasyon başlamaz veya tamamlanmazsa etkinleştirin)</string>
+        <string name="settings_force_screen_on_while_sync_title">Senkronizasyon Sırasında Ekranı Açık Tut</string>
+        <string name="settings_main_title">Ayarlar</string>
+        <string name="settings_misc_title">Çeşitli</string>
+        <string name="settings_no_compress_file_type">settings_no_compress_file_type</string>
+        <string name="settings_no_compress_file_type_title">Bu Dosya Türlerini Sıkıştırma</string>
+        <string name="settings_no_compress_file_type_hint">Dosya türü</string>
+        <string name="settings_notification_message_when_sync_ended">settings_notification_message_when_sync_ended</string>
+        <string name="settings_notification_message_when_sync_ended_dialog_title">Görüntülenecek bildirimleri seçin</string>
+        <string-array name="settings_notification_message_when_sync_ended_list_entries">
+            <item>Tüm bildirimleri devre dışı bırak</item>
+            <item>Tüm bildirimleri göster</item>
+            <item>Yalnızca başarıyla tamamlanan görevler için</item>
+            <item>Yalnızca hatayla tamamlanan görevler için</item>
+        </string-array >
+        <string-array name="settings_notification_message_when_sync_ended_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </string-array >
+        <string name="settings_notification_message_when_sync_ended_summary_always">Tüm bildirimleri göster</string>
+        <string name="settings_notification_message_when_sync_ended_summary_error">Yalnızca hatayla tamamlanan görevler için bildirim göster</string>
+        <string name="settings_notification_message_when_sync_ended_summary_no">Bildirimleri devre dışı bırak</string>
+        <string name="settings_notification_message_when_sync_ended_summary_success">Yalnızca başarıyla tamamlanan görevler için bildirim göster</string>
+        <string name="settings_notification_message_when_sync_ended_title">Bildirim Mesajları</string>
+        <string name="settings_other_title">Diğer</string>
+        <string name="settings_playback_ringtone_volume">settings_playback_ringtone_volume</string>
+        <string name="settings_playback_ringtone_volume_disabled">Varsayılan bildirim sesi ayarlanmadı.</string>
+        <string name="settings_playback_ringtone_volume_summary">Sistem ses seviyesinin %s%%\'i</string>
+        <string name="settings_playback_ringtone_volume_title">Bildirim Ses Düzeyi</string>
+        <string name="settings_playback_ringtone_when_sync_ended">settings_playback_ringtone_when_sync_ended</string>
+        <string name="settings_playback_ringtone_when_sync_ended_dialog_title">Varsayılan bildirim sesinin ne zaman çalınacağını seçin</string>
+        <string-array name="settings_playback_ringtone_when_sync_ended_list_entries">
+            <item>Bildirim sesini devre dışı bırak</item>
+            <item>Tüm tamamlanan görevler için çal</item>
+            <item>Yalnızca başarıyla tamamlanan görevler için çal</item>
+            <item>Yalnızca hatayla tamamlanan görevler için çal</item>
+        </string-array >
+        <string-array name="settings_playback_ringtone_when_sync_ended_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </string-array >
+        <string name="settings_playback_ringtone_when_sync_ended_summary_always">Tüm tamamlanan görevler için varsayılan bildirim sesini çal</string>
+        <string name="settings_playback_ringtone_when_sync_ended_summary_error">Hatayla tamamlanan görevler için varsayılan bildirim sesini çal</string>
+        <string name="settings_playback_ringtone_when_sync_ended_summary_no">Bildirim sesini devre dışı bırak</string>
+        <string name="settings_playback_ringtone_when_sync_ended_summary_success">Başarıyla tamamlanan görevler için varsayılan bildirim sesini çal</string>
+        <string name="settings_playback_ringtone_when_sync_ended_title">Bildirim Sesi</string>
+        <string name="settings_smb_client_response_timeout">settings_smb_client_reponse_timeout</string>
+        <string name="settings_smb_set_default_value_text">Varsayılan değerleri geri yükle</string>
+        <string name="settings_smb_set_default_value_key">settings_smb_set_default_value</string>
+        <string name="settings_smb_client_response_timeout_dialog_title">Sunucu Bağlantı Zaman Aşımı (SMBv1/2/3)</string>
+        <string-array name="settings_smb_client_response_timeout_list_entries">
+            <item>30000</item>
+            <item>45000</item>
+            <item>60000</item>
+            <item>120000</item>
+        </string-array >
+        <string-array name="settings_smb_client_response_timeout_list_values">
+            <item>30000</item>
+            <item>45000</item>
+            <item>60000</item>
+            <item>120000</item>
+        </string-array >
+        <string name="settings_smb_client_response_timeout_summary">Yanıt zaman aşımı</string>
+        <string name="settings_smb_client_response_timeout_title">Sunucu Bağlantı Zaman Aşımı (SMBv1/2/3)</string>
+        <string name="settings_smb_disable_plain_text_passwords">settings_smb_disable_plain_text_passwords</string>
+        <string name="settings_smb_disable_plain_text_passwords_summary_ena">Parolaları Her Zaman Şifrele</string>
+        <string name="settings_smb_disable_plain_text_passwords_title">Parolaları Şifrele(SMBv1)</string>
+        <string name="settings_smb_lm_compatibility">settings_smb_lm_compatibility</string>
+        <string name="settings_smb_lm_compatibility_dialog_title">LmCompatibility Düzeyi</string>
+        <string-array name="settings_smb_lm_compatibility_list_entries">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+        </string-array >
+        <string-array name="settings_smb_lm_compatibility_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+        </string-array >
+        <string name="settings_smb_lm_compatibility_summary">LmCompatibility Düzeyi</string>
+        <string name="settings_smb_lm_compatibility_title">LmCompatibility Düzeyi(SMBv1)</string>
+        <string name="settings_smb_title">SMB Ayarları</string>
+        <string name="settings_smb_use_extended_security">settings_smb_use_extended_security</string>
+        <string name="settings_smb_use_extended_security_summary_ena">Genişletilmiş Güvenlik Kullan</string>
+        <string name="settings_smb_use_extended_security_title">Genişletilmiş Güvenlik Kullan(SMBv1)</string>
+        <string name="settings_suppress_add_external_storage_notification">settings_suppress_add_external_storage_notification</string>
+        <string name="settings_suppress_add_external_storage_notification_summary_ena">SDCARD/USB depolama ekleme bildirimini gösterme</string>
+        <string name="settings_suppress_add_external_storage_notification_title">SDCARD/USB depolama ekleme bildirimi</string>
+        <string name="settings_suppress_start_sync_confirmation_message">settings_suppress_start_sync_confirmation_message</string>
+        <string name="settings_suppress_start_sync_confirmation_message_summary_ena">Senkronizasyon düğmesiyle senkronizasyon başlatma onayı isteme.</string>
+        <string name="settings_suppress_start_sync_confirmation_message_title">senkronizasyon düğmesi</string>
+        <string name="settings_suppress_shortcut1_confirmation_message">settings_suppress_shortcut1_confirmation_message</string>
+        <string name="settings_suppress_shortcut1_confirmation_message_summary_ena">Kısayol ile senkronizasyon başlatma onayı isteme</string>
+        <string name="settings_suppress_shortcut1_confirmation_message_title">Kısayol düğmesi1</string>
+        <string name="settings_suppress_shortcut2_confirmation_message">settings_suppress_shortcut2_confirmation_message</string>
+        <string name="settings_suppress_shortcut2_confirmation_message_summary_ena">Kısayol ile senkronizasyon başlatma onayı isteme</string>
+        <string name="settings_suppress_shortcut2_confirmation_message_title">Kısayol düğmesi2</string>
+        <string name="settings_suppress_shortcut3_confirmation_message">settings_suppress_shortcut3_confirmation_message</string>
+        <string name="settings_suppress_shortcut3_confirmation_message_summary_ena">Kısayol ile senkronizasyon başlatma onayı isteme</string>
+        <string name="settings_suppress_shortcut3_confirmation_message_title">Kısayol düğmesi3</string>
+        <string name="settings_sync_history_log">settings_sync_history_log</string>
+        <string name="settings_sync_history_log_summary_ena">Ayrıntılı senkronizasyon geçmişi günlüğü tut</string>
+        <string name="settings_sync_history_log_title">Senkronizasyon geçmişi</string>
+        <string name="settings_sync_title">Senkronizasyon</string>
+        <string name="settings_ui_title">Kullanıcı Arayüzü</string>
+        <string name="settings_screen_theme_language">settings_screen_theme_language</string>
+        <string name="settings_screen_theme_language_title">Dil</string>
+        <string name="settings_screen_theme_language_dialog_title">Dili Değiştir</string>
+        <string-array name="settings_screen_theme_language_list_entries">
+            <item>Sistem ayarları</item>
+            <item>Deutsch (de)</item>
+            <item>English (en)</item>
+            <item>Français (fr)</item>
+            <item>Italiano (it)</item>
+            <item>日本語 (ja)</item>
+            <item>русский (ru)</item>
+            <item>中文 (zh)</item>
+        </string-array >
+        <string-array name="settings_screen_theme_language_list_values">
+            <item>system</item>
+            <item>de</item>
+            <item>en</item>
+            <item>fr</item>
+            <item>it</item>
+            <item>ja</item>
+            <item>ru</item>
+            <item>zh</item>
+        </string-array >
+        <string name="settings_screen_theme">settings_screen_theme</string>
+        <string name="settings_screen_theme_title">Ekran teması</string>
+        <string name="settings_screen_theme_dialog_title">Ekran teması</string>
+        <string-array name="settings_screen_theme_list_entries">
+            <item>Standart</item>
+            <item>Açık tema</item>
+            <item>Koyu tema</item>
+        </string-array >
+        <string-array name="settings_screen_theme_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+        </string-array >
+        <string name="settings_display_font_scale_factor">settings_display_font_scale_factor</string>
+        <string name="settings_display_font_scale_factor_title">Yazı boyutu</string>
+        <string name="settings_display_font_scale_factor_dialog_title">Yazı boyutunu seçin</string>
+        <string-array name="settings_display_font_scale_factor_list_entries">
+            <item>Küçük(80&#65130;)</item>
+            <item>Normal(100&#65130;)</item>
+            <item>Büyük(120&#65130;)</item>
+            <item>En Büyük(160&#65130;)</item>
+        </string-array >
+        <string-array name="settings_display_font_scale_factor_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </string-array >
+        <string name="settings_vibrate_when_sync_ended">settings_vibrate_when_sync_ended</string>
+        <string name="settings_vibrate_when_sync_ended_dialog_title">Bildirimlerde ne zaman titreşim yapılacağını seçin</string>
+        <string-array name="settings_vibrate_when_sync_ended_list_entries">
+            <item>Bildirimlerde asla titreşim yapma</item>
+            <item>Tüm tamamlanan görevler için titreşim yap</item>
+            <item>Yalnızca başarıyla tamamlanan görevler için</item>
+            <item>Yalnızca hatayla tamamlanan görevler için</item>
+        </string-array >
+        <string-array name="settings_vibrate_when_sync_ended_list_values">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </string-array >
+        <string name="settings_vibrate_when_sync_ended_summary_always">Tüm tamamlanan görevler için bildirimde titreşim yap</string>
+        <string name="settings_vibrate_when_sync_ended_summary_error">Hatayla tamamlanan görevler için bildirimde titreşim yap</string>
+        <string name="settings_vibrate_when_sync_ended_summary_no">Bildirimlerde asla titreşim yapma</string>
+        <string name="settings_vibrate_when_sync_ended_summary_success">Başarıyla tamamlanan görevler için bildirimde titreşim yap</string>
+        <string name="settings_vibrate_when_sync_ended_title">Bildirimlerde Titreşim</string>
+        <string name="settings_wifi_lock">settings_wifi_lock</string>
+        <string name="settings_wifi_lock_title">WiFi Kilitleme</string>
+        <string name="settings_wifi_lock_summary_ena">Senkronizasyon tamamlanana kadar WiFi radyosunu açık tut</string>
+</resources>
