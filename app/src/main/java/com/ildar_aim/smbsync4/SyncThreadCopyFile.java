@@ -450,26 +450,43 @@ public class SyncThreadCopyFile {
         int buffer_read_bytes = 0;
         long file_read_bytes = 0;
         byte[] buffer = new byte[io_area_size];
-        boolean cancelled = false;
         try {
-            while ((buffer_read_bytes = ifs.read(buffer)) > 0) {
-                ofs.write(buffer, 0, buffer_read_bytes);
-                file_read_bytes += buffer_read_bytes;
-                if (show_prog && file_size > file_read_bytes) {
-                    SyncThread.showProgressMsg(stwa, sti.getSyncTaskName(), file_name + " " +
-                            stwa.appContext.getString(R.string.msgs_mirror_task_file_copying,(file_read_bytes * 100) / file_size));
+            // H2: terminate on EOF (-1), NOT on a 0-length read. Some streams (notably
+            // network/SMB) may legally return 0 without being at end-of-file; treating 0
+            // as EOF would silently truncate the copy and report success.
+            while ((buffer_read_bytes = ifs.read(buffer)) != -1) {
+                if (buffer_read_bytes > 0) {
+                    ofs.write(buffer, 0, buffer_read_bytes);
+                    file_read_bytes += buffer_read_bytes;
+                    if (show_prog && file_size > file_read_bytes) {
+                        SyncThread.showProgressMsg(stwa, sti.getSyncTaskName(), file_name + " " +
+                                stwa.appContext.getString(R.string.msgs_mirror_task_file_copying,(file_read_bytes * 100) / file_size));
+                    }
                 }
                 if (SyncThread.isTaskCancelled(true, stwa.gp.syncThreadCtrl)) {
-                    cancelled = true;
                     return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
                 }
             }
-            try { ofs.flush(); } catch(IOException ignore) {}
+            // H1: flush+close the OUTPUT on the success path and let any failure propagate.
+            // close() performs the final flush of buffered/network data; swallowing it (as
+            // before) meant a failed write (disk full, USB removed, SMB drop) was reported as
+            // SUCCESS, promoting a TRUNCATED file to the target and, in Move mode, deleting
+            // the source afterwards. A failure here now surfaces as IOException which callers
+            // map to ERROR (temp file discarded, source kept).
+            ofs.flush();
+            ofs.close();
+            ofs = null;
         } finally {
             try { ifs.close(); } catch(IOException ignore) {}
-            try { ofs.close(); } catch(IOException ignore) {}
+            if (ofs != null) { try { ofs.close(); } catch(IOException ignore) {} }
         }
-        if (cancelled) return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
+
+        // H1 (defense in depth): when the source size is known, verify we wrote all of it.
+        if (file_size > 0 && file_read_bytes != file_size) {
+            stwa.util.addLogMsg("E", sti.getSyncTaskName(),
+                "Copy size mismatch, source="+file_size+", written="+file_read_bytes+", file="+file_name);
+            throw new IOException("Incomplete copy: wrote "+file_read_bytes+" of "+file_size+" bytes for "+file_name);
+        }
 
         long file_read_time = System.currentTimeMillis() - read_begin_time;
 

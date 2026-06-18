@@ -880,6 +880,23 @@ public class SyncThread extends Thread {
             mGp.syncThreadCtrl.setThreadMessage(be);
             return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
         }
+        // SAFETY: a Mirror whose DESTINATION resolves to a bare volume/share root (empty or
+        // "/" destination directory) would delete every file on that volume/share not present
+        // in the source. buildStorageDir()/buildSmbHostUrl() return the root when the directory
+        // name is empty, so refuse rather than risk wiping a whole volume. Scoped to Mirror +
+        // LOCAL/SMB destination (Copy/Move don't delete dest-side; a whole-volume *source*
+        // stays allowed for legitimate full-volume backups).
+        if (sti.getSyncTaskType().equals(SyncTaskItem.SYNC_TASK_TYPE_MIRROR) &&
+                (sti.getDestinationFolderType().equals(SyncTaskItem.SYNC_FOLDER_TYPE_LOCAL) ||
+                 sti.getDestinationFolderType().equals(SyncTaskItem.SYNC_FOLDER_TYPE_SMB))) {
+            String ddn = sti.getDestinationDirectoryName();
+            if (ddn == null || ddn.trim().equals("") || ddn.trim().equals("/")) {
+                String be = "Mirror refused: destination directory is empty, which resolves to the entire volume/share root and would delete all files on it. Specify a destination sub-directory. Task: " + sti.getSyncTaskName();
+                showMsg(mStwa, true, sti.getSyncTaskName(), "E", "", "", be);
+                mGp.syncThreadCtrl.setThreadMessage(be);
+                return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+            }
+        }
         String from, from_temp, to, to_temp;
         if (sti.getSourceFolderType().equals(SyncTaskItem.SYNC_FOLDER_TYPE_LOCAL) &&
                 sti.getDestinationFolderType().equals(SyncTaskItem.SYNC_FOLDER_TYPE_LOCAL)) {
@@ -986,6 +1003,18 @@ public class SyncThread extends Thread {
             from=replaceKeywordExecutionDateValue(from_temp, mStwa.syncBeginTime);
 
             to = buildSmbHostUrl(mStwa.destinationSmbHost, sti.getDestinationSmbShareName(), sti.getDestinationDirectoryName())+"/";
+
+            // CRITICAL: same overlap guard as Local-To-Local (was missing here). SMB-To-SMB
+            // Mirror/Copy with a destination nested under the source (or vice versa) nests
+            // folders forever and fills the share; Move mode would delete BOTH source and
+            // destination on cycle.
+            if (isPathContainedIn(from, to) || isPathContainedIn(to, from)) {
+                String be = mStwa.appContext.getString(R.string.msgs_mirror_invalid_folder_combination, from, to)
+                        + " (source and destination overlap; one contains the other)";
+                showMsg(mStwa, true, sti.getSyncTaskName(), "E", "", "", be);
+                mGp.syncThreadCtrl.setThreadMessage(be);
+                return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+            }
 
             mStwa.util.addDebugMsg(1, "I", "Sync SMB-To-SMB From=" + from + ", To=" + to);
 

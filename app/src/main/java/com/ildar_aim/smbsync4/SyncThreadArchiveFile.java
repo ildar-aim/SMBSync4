@@ -1066,7 +1066,9 @@ public class SyncThreadArchiveFile {
         long file_size = ifs.available();
         boolean show_prog = (file_size > SHOW_PROGRESS_THRESHOLD_VALUE);
         byte[] buffer = new byte[io_area_size];
-        while ((buffer_read_bytes = ifs.read(buffer)) > 0) {
+        // H2: stop on EOF (-1), not on a 0-length read, to avoid silently truncating the
+        // copy (and then deleting the source on a Move/Archive). write(...,0) is a no-op.
+        while ((buffer_read_bytes = ifs.read(buffer)) != -1) {
             ofs.write(buffer, 0, buffer_read_bytes);
             file_read_bytes += buffer_read_bytes;
             if (show_prog && file_size > file_read_bytes) {
