@@ -1332,43 +1332,49 @@ public class SyncThreadArchiveFile {
     static final public String[] getFileExifDateTime(SyncThreadWorkArea stwa, SyncTaskItem sti, InputStream fis,
                                                      InputStream fis_retry, long last_mod, String file_name) {
         String[] date_time=null;
-        if (file_name.endsWith(".mp4") || file_name.endsWith(".mov") ) {
-            date_time=getMp4ExifDateTime(stwa, fis);
-        } else {
-            try {
-                date_time=getExifDateTime(stwa, fis);//, buff);
-                fis.close();
-                if (date_time==null || date_time[0]==null) {
-                    if (stwa.logLevel>=1) stwa.util.addDebugMsg(1,"W","Read exif date and time failed, name="+file_name);
-                    if (Build.VERSION.SDK_INT>=24) {
-                        ExifInterface ei = new ExifInterface(fis_retry);
-                        String dt=ei.getAttribute(ExifInterface.TAG_DATETIME);
-                        if (dt!=null) {
-                            date_time=new String[2];
-                            if (dt.endsWith("Z")) {
-                                String[] date=dt.split("T");
-                                date_time[0]=date[0].replaceAll(":", "/");//Date
-                                date_time[1]=date[1].substring(0,date[1].length()-1);//Time
+        try {
+            if (file_name.endsWith(".mp4") || file_name.endsWith(".mov") ) {
+                date_time=getMp4ExifDateTime(stwa, fis);
+            } else {
+                try {
+                    date_time=getExifDateTime(stwa, fis);//, buff);
+                    if (date_time==null || date_time[0]==null) {
+                        if (stwa.logLevel>=1) stwa.util.addDebugMsg(1,"W","Read exif date and time failed, name="+file_name);
+                        if (Build.VERSION.SDK_INT>=24) {
+                            ExifInterface ei = new ExifInterface(fis_retry);
+                            String dt=ei.getAttribute(ExifInterface.TAG_DATETIME);
+                            if (dt!=null) {
+                                date_time=new String[2];
+                                if (dt.endsWith("Z")) {
+                                    String[] date=dt.split("T");
+                                    date_time[0]=date[0].replaceAll(":", "/");//Date
+                                    date_time[1]=date[1].substring(0,date[1].length()-1);//Time
+                                } else {
+                                    String[] date=dt.split(" ");
+                                    date_time[0]=date[0].replaceAll(":", "/");//Date
+                                    date_time[1]=date[1];//Time
+                                }
                             } else {
-                                String[] date=dt.split(" ");
-                                date_time[0]=date[0].replaceAll(":", "/");//Date
-                                date_time[1]=date[1];//Time
+                                if (stwa.logLevel>=1) stwa.util.addDebugMsg(1,"I","Read exif date and time failed by ExifInterface, name="+file_name);
                             }
-                        } else {
-                            if (stwa.logLevel>=1) stwa.util.addDebugMsg(1,"I","Read exif date and time failed by ExifInterface, name="+file_name);
                         }
-                        fis_retry.close();
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    putExceptionMessage(stwa, e.getStackTrace(), e.getMessage());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                putExceptionMessage(stwa, e.getStackTrace(), e.getMessage());
             }
+        } finally {
+            // Always close BOTH per-file streams the callers opened. Previously fis was
+            // leaked for every .mp4/.mov (the video branch never closed it) and on the
+            // EXIF-parse exception path, exhausting file descriptors during large
+            // photo/video archive runs ("too many open files").
+            try { fis.close(); } catch(Exception e) {}
+            try { fis_retry.close(); } catch(Exception e) {}
         }
 //        if (date_time==null || date_time[0]==null) {
 //            date_time= StringUtil.convDateTimeTo_YearMonthDayHourMinSec(last_mod).split(" ");
 //        }
-        try {fis_retry.close();} catch(Exception e) {};
         return date_time;
     }
 

@@ -1138,6 +1138,11 @@ public class TaskListImportExport {
                 final String imp_list=imp_list_temp;
                 final String imp_smb=imp_error_temp;
 
+                // The imported lists are now the authoritative in-memory config; clear any
+                // prior load-failure flag so the save below is not blocked by the data-loss
+                // guard in saveTaskListToAppDirectory().
+                mGp.configListLoaded=true;
+                mGp.configLoadFailed=false;
                 final String config_data= saveTaskListToAppDirectory(mActivity, mGp, mUtil, mGp.syncTaskList, mGp.syncScheduleList, mGp.syncGroupList);
                 if (config_data!=null) {
                     NotifyEvent ntfy_success=new NotifyEvent(mActivity);
@@ -1205,8 +1210,30 @@ public class TaskListImportExport {
     }
 
     final static private String CONFIG_FILE_NAME = "config.xml";
+    /** True if the app-directory config file exists and is non-empty. Lets callers tell
+     *  a genuine first run (no file yet) apart from a failed load of a file that is
+     *  actually present on disk. */
+    public static boolean appConfigFileExists(Context c) {
+        try {
+            java.io.File f = new java.io.File(c.getFilesDir(), CONFIG_FILE_NAME);
+            return f.exists() && f.length() > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     synchronized public static String saveTaskListToAppDirectory(Context c, GlobalParameters gp, CommonUtilities cu,
                                                     ArrayList<SyncTaskItem> sync_task_list, ArrayList<ScheduleListAdapter.ScheduleListItem> schedule_list, ArrayList<GroupListAdapter.GroupListItem>group_list) {
+        // DATA-LOSS GUARD: if the on-disk config could not be loaded (KeyStore not ready
+        // at boot, key rotated, unreadable/parse failure), the in-memory lists are NOT
+        // authoritative. Refuse to overwrite the existing config with them — otherwise a
+        // boot / date / time / timezone broadcast (which load-then-saves) would wipe every
+        // task/schedule/group. Import/restore clears the flag once it has authoritative data.
+        if (gp != null && gp.configLoadFailed) {
+            if (cu != null) cu.addLogMsg("W", "", "saveTaskListToAppDirectory skipped: config was not loaded successfully; refusing to overwrite on-disk config to prevent data loss.");
+            else log.error("saveTaskListToAppDirectory skipped: configLoadFailed; refusing to overwrite to prevent data loss.");
+            return null;
+        }
         // Atomic save: write to a temp file first, then rename to the final location.
         // Without this, a process kill (Realme/HiOS App Sleep) or OS OOM during the
         // write would leave the config half-written and the user would lose ALL task

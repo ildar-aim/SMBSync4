@@ -386,28 +386,52 @@ public class GlobalParameters {
     }
 
     public boolean configListLoaded=false;
+    /** True when loading the on-disk app config (config.xml) FAILED while a config
+     *  file actually exists — e.g. the Android KeyStore key was not usable yet at
+     *  boot, the key was rotated/invalidated, or the file could not be decrypted or
+     *  parsed. While this is true the in-memory lists are NOT authoritative and
+     *  saveTaskListToAppDirectory() refuses to write, otherwise a boot / date / time /
+     *  timezone broadcast (which load-then-saves) would overwrite the user's entire
+     *  task/schedule/group config with an empty one. Cleared once a load succeeds or
+     *  the user imports an authoritative config. Volatile: touched from the receiver,
+     *  the Worker and UI threads. */
+    public volatile boolean configLoadFailed=false;
     public void loadConfigList(Context c, CommonUtilities cu) {
         if (cu.getLogLevel()>0) cu.addDebugMsg(1, "I", "config load started");
         acquireConfigurationLock();
         try {
             if (!configListLoaded) {
-                configListLoaded=true;
                 ArrayList<SyncTaskItem>stl=new ArrayList<SyncTaskItem>();
                 ArrayList<ScheduleListAdapter.ScheduleListItem>sl=new ArrayList<ScheduleListAdapter.ScheduleListItem>();
                 ArrayList<GroupListAdapter.GroupListItem>gl=new ArrayList<GroupListAdapter.GroupListItem>();
+                boolean loaded;
                 try {
-                    TaskListImportExport.loadTaskListFromAppDirectory(c, this, cu, stl, sl, null, gl);
-                    syncTaskList.addAll(stl);
-                    syncScheduleList.addAll(sl);
-                    syncGroupList.addAll(gl);
+                    loaded=TaskListImportExport.loadTaskListFromAppDirectory(c, this, cu, stl, sl, null, gl);
                 } catch(Throwable e) {
-                    // If config load throws (corrupted XML, OOM, etc.), reset the
-                    // loaded flag so the next call can retry. Without this fix the
-                    // lock would also be permanently held and deadlock the app.
-                    configListLoaded=false;
+                    // Load threw (corrupted XML, OOM, KeyStore failure, ...). Do NOT mark
+                    // the config as loaded (allow a later retry) and flag the failure so
+                    // no save overwrites the good on-disk config with empty data. Must not
+                    // rethrow: a throw out of SyncReceiver.onReceive crashes the process.
+                    configLoadFailed=true;
                     cu.addLogMsg("E", "loadConfigList failed: "+e.getMessage());
-                    throw e;
+                    return;
                 }
+                if (!loaded && TaskListImportExport.appConfigFileExists(c)) {
+                    // The config file is present but could not be read/decrypted/parsed
+                    // (KeyStore not ready at boot, key rotated, partial file). Treat as a
+                    // transient failure: keep the existing on-disk config, do NOT commit
+                    // the empty lists, do NOT mark loaded (retry later), and flag it so
+                    // callers never persist empty data over the good config.
+                    configLoadFailed=true;
+                    cu.addLogMsg("E", "loadConfigList: config file present but could not be loaded; keeping on-disk config and will retry");
+                    return;
+                }
+                // Load succeeded, or there is genuinely no config file yet (first run).
+                syncTaskList.addAll(stl);
+                syncScheduleList.addAll(sl);
+                syncGroupList.addAll(gl);
+                configListLoaded=true;
+                configLoadFailed=false;
             }
         } finally {
             // CRITICAL: must always release the lock; previously this was outside

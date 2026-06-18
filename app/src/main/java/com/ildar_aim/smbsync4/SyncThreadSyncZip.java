@@ -689,9 +689,11 @@ public class SyncThreadSyncZip {
         long file_read_bytes = mf.length();
         if (sti.isSyncTestMode()) return SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS;
         final String msg_text=move?stwa.appContext.getString(R.string.msgs_mirror_task_file_moving):stwa.appContext.getString(R.string.msgs_mirror_task_file_copying);
+        InputStream is = null;
+        BufferedInputStream ifs = null;
         try {
-            InputStream is = mf.getInputStream();
-            BufferedInputStream ifs = new BufferedInputStream(is, SYNC_IO_BUFFER_SIZE);
+            is = mf.getInputStream();
+            ifs = new BufferedInputStream(is, SYNC_IO_BUFFER_SIZE);
             String to_name = to_dir + "/" + dest_path;
             ZipParameters n_zp=new ZipParameters(zp);
             n_zp.setFileNameInZip(to_name.replace(zp.getDefaultFolderPath(), ""));
@@ -706,7 +708,6 @@ public class SyncThreadSyncZip {
                 }
             };
             bzf.addItem(mf, n_zp, cbl);
-            ifs.close();
             if (SyncThread.isTaskCancelled(true, stwa.gp.syncThreadCtrl)) sync_result= SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
         } catch (Exception e) {
             SyncThread.showMsg(stwa, true, sti.getSyncTaskName(), "I", "", "",
@@ -715,6 +716,12 @@ public class SyncThreadSyncZip {
             SyncThread.printStackTraceElement(stwa, e.getStackTrace());
             stwa.gp.syncThreadCtrl.setThreadMessage(e.getMessage());
             return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+        } finally {
+            // Close the per-file input stream on ALL paths; previously it was closed only
+            // on the success path, leaking a file descriptor for every file that errored
+            // during zip (eventually "too many open files" on a large archive run).
+            if (ifs != null) { try { ifs.close(); } catch(Exception e) {} }
+            else if (is != null) { try { is.close(); } catch(Exception e) {} }
         }
 
         long file_read_time = System.currentTimeMillis() - read_begin_time;

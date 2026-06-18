@@ -68,21 +68,36 @@ public class SyncReceiver extends BroadcastReceiver {
                         action.equals(Intent.ACTION_DATE_CHANGED) ||
                         action.equals(Intent.ACTION_TIMEZONE_CHANGED) ||
                         action.equals(Intent.ACTION_TIME_CHANGED)){
-                    for (ScheduleListAdapter.ScheduleListItem si : mGp.syncScheduleList) si.scheduleLastExecTime = System.currentTimeMillis();
-                    TaskListImportExport.saveTaskListToAppDirectory(c, mGp, mUtil, mGp.syncTaskList, mGp.syncScheduleList, mGp.syncGroupList);
-                    ScheduleUtils.setTimer(mContext, mGp, mUtil.getLogUtil());
-                } else if (action.equals(SCHEDULE_INTENT_TIMER_EXPIRED)) {
-                    if (received_intent.getExtras().containsKey(SCHEDULE_SCHEDULE_NAME_KEY)) {
-                        SyncWorker.startSyncWorkerByAction(mContext, mGp, mUtil, SCHEDULE_INTENT_TIMER_EXPIRED,
-                                received_intent.getStringExtra(SCHEDULE_SCHEDULE_NAME_KEY), "");
-                        String[] schedule_list=received_intent.getStringExtra(SCHEDULE_SCHEDULE_NAME_KEY).split(",");
-                        for (String sched_name:schedule_list) {
-                            if (ScheduleUtils.getScheduleItem(mGp.syncScheduleList, sched_name) != null) {
-                                ScheduleUtils.getScheduleItem(mGp.syncScheduleList, sched_name).scheduleLastExecTime = System.currentTimeMillis();
-                            }
-                        }
+                    if (mGp.configLoadFailed) {
+                        // Config could not be loaded (e.g. KeyStore not ready this early
+                        // after boot). Saving now would persist empty lists over the good
+                        // config, and re-arming the timer with an empty schedule list
+                        // would cancel every alarm. Skip both; the next successful load
+                        // (app launch / Worker) re-arms schedules from the intact config.
+                        mUtil.addLogMsg("W", "", "Boot/time-change: config not loaded yet (KeyStore not ready?); skipping config save and timer rearm to avoid wiping config.");
+                    } else {
+                        for (ScheduleListAdapter.ScheduleListItem si : mGp.syncScheduleList) si.scheduleLastExecTime = System.currentTimeMillis();
                         TaskListImportExport.saveTaskListToAppDirectory(c, mGp, mUtil, mGp.syncTaskList, mGp.syncScheduleList, mGp.syncGroupList);
                         ScheduleUtils.setTimer(mContext, mGp, mUtil.getLogUtil());
+                    }
+                } else if (action.equals(SCHEDULE_INTENT_TIMER_EXPIRED)) {
+                    // getExtras() can be null for a malformed/empty broadcast; guard it
+                    // so the receiver never NPEs (which would crash the app process).
+                    if (received_intent.getExtras() != null && received_intent.getExtras().containsKey(SCHEDULE_SCHEDULE_NAME_KEY)) {
+                        if (mGp.configLoadFailed) {
+                            mUtil.addLogMsg("W", "", "Timer expired but config not loaded yet (KeyStore not ready?); skipping to avoid wiping config and dropping schedules.");
+                        } else {
+                            SyncWorker.startSyncWorkerByAction(mContext, mGp, mUtil, SCHEDULE_INTENT_TIMER_EXPIRED,
+                                    received_intent.getStringExtra(SCHEDULE_SCHEDULE_NAME_KEY), "");
+                            String[] schedule_list=received_intent.getStringExtra(SCHEDULE_SCHEDULE_NAME_KEY).split(",");
+                            for (String sched_name:schedule_list) {
+                                if (ScheduleUtils.getScheduleItem(mGp.syncScheduleList, sched_name) != null) {
+                                    ScheduleUtils.getScheduleItem(mGp.syncScheduleList, sched_name).scheduleLastExecTime = System.currentTimeMillis();
+                                }
+                            }
+                            TaskListImportExport.saveTaskListToAppDirectory(c, mGp, mUtil, mGp.syncTaskList, mGp.syncScheduleList, mGp.syncGroupList);
+                            ScheduleUtils.setTimer(mContext, mGp, mUtil.getLogUtil());
+                        }
                     }
                 } else {
                     mUtil.addDebugMsg(1, "I", "Receiver ignored action=" + action);
