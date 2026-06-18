@@ -59,6 +59,28 @@ public class SyncThreadSyncFile {
 //        return cpc!=null?sf.listFiles(cpc):sf.listFiles();
     }
 
+    /**
+     * Returns true ONLY when a LOCAL/SAF source item can be POSITIVELY confirmed absent
+     * (genuinely gone, not merely unreachable).
+     *
+     * The bundled SafFile3 wrapper swallows every ContentProvider / USB / SD / permission
+     * error and reports exists()==false (verified in the library bytecode). In Mirror mode
+     * a false "source absent" answer makes the engine delete the matching destination item,
+     * so a transient glitch on a USB/SD/SAF source could wipe the destination. We therefore
+     * additionally probe the source's PARENT directory: isDirectory() issues a real
+     * document-type query that only succeeds when the provider is alive and the parent
+     * exists as a directory. If that probe fails we assume an error and report "not
+     * confirmed absent", which keeps the caller on the safe (do-not-delete) path.
+     */
+    static private boolean isSourceConfirmedAbsentLocal(SyncThreadWorkArea stwa, SafFile3 mf) {
+        if (mf==null) return false;
+        if (mf.exists()) return false;                 // present -> definitely not absent
+        SafFile3 parent=mf.getParentFile();
+        if (parent==null) return false;                // cannot verify -> fail safe
+        if (!parent.isDirectory()) return false;       // provider down / parent gone -> fail safe
+        return true;                                   // parent is a live directory; absence is real
+    }
+
     static final private int syncDeleteLocalToLocal(SyncThreadWorkArea stwa, SyncTaskItem sti, String from_base,
                                                     String source_dir, String to_base, String destination_dir, SafFile3 tf, ContentProviderClient cpc, boolean isTakenDateUsed) {
         int sync_result = 0;
@@ -68,6 +90,16 @@ public class SyncThreadSyncFile {
         if (relative_dir.startsWith("/")) relative_dir = relative_dir.substring(1);
         SafFile3 mf = new SafFile3(stwa.appContext, source_dir);
         boolean mf_exists=mf.exists();
+        // C1/C3 GUARD: SafFile3.exists()/isDirectory() return false on ANY provider/USB/SD/
+        // permission error (verified in library bytecode). In Mirror a false "source absent"
+        // makes us delete the matching destination item, so a transient source glitch could
+        // wipe the destination. Only honor an "absent" result when POSITIVELY confirmed;
+        // otherwise treat the source as present so this pass deletes nothing.
+        if (!mf_exists && !isSourceConfirmedAbsentLocal(stwa, mf)) {
+            stwa.util.addLogMsg("W", sti.getSyncTaskName(),
+                "Mirror delete suppressed: source could not be confirmed absent (possible USB/SD/SAF error), destination kept: "+source_dir);
+            mf_exists=true;
+        }
         if (isSafDirectory(tf, cpc)) { // Directory Delete
             boolean isDirectoryToBeProcessed=SyncThread.isDirectoryToBeProcessed(stwa, relative_dir);
             if (isDirectoryToBeProcessed) {
@@ -136,6 +168,13 @@ public class SyncThreadSyncFile {
         if (relative_dir.startsWith("/")) relative_dir = relative_dir.substring(1);
         SafFile3 mf = new SafFile3(stwa.appContext,  source_dir);
         boolean mf_exists=mf.exists();
+        // C1 GUARD: see syncDeleteLocalToLocal. Never delete the SMB destination on an
+        // unconfirmed (possibly error-induced) "source absent" result from SafFile3.
+        if (!mf_exists && !isSourceConfirmedAbsentLocal(stwa, mf)) {
+            stwa.util.addLogMsg("W", sti.getSyncTaskName(),
+                "Mirror delete suppressed: source could not be confirmed absent (possible USB/SD/SAF error), destination kept: "+source_dir);
+            mf_exists=true;
+        }
         try {
             if (tf.isDirectory()) { // Directory Delete
                 boolean isDirectoryToBeProcessed=SyncThread.isDirectoryToBeProcessed(stwa, relative_dir);
@@ -1601,6 +1640,15 @@ public class SyncThreadSyncFile {
         if (del_item.isDirectory()) {
             try {
                 SafFile3[] file_list=del_item.listFiles();
+                // C2 GUARD: SafFile3.listFiles() returns an EMPTY array (not null) on a
+                // provider error, and SAF delete() is RECURSIVE on directories. Refuse to
+                // proceed when the listing could not be obtained, so a swallowed USB/SD/SAF
+                // error can never turn into a recursive wipe of a non-empty tree.
+                if (file_list==null) {
+                    stwa.util.addLogMsg("E", sti.getSyncTaskName(),
+                        "Directory not deleted: contents could not be listed (possible USB/SD/SAF error): "+del_item.getPath());
+                    return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                }
                 if (file_list!=null) {
                     for(SafFile3 child_item:file_list) {
                         sync_result=deleteLocalItem(stwa, sti, child_item);
@@ -1610,6 +1658,14 @@ public class SyncThreadSyncFile {
                     }
                 }
                 if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                    // C2 GUARD: if we enumerated NO children, re-probe provider health before
+                    // the (recursive) SAF delete. A genuinely empty dir reports isDirectory()
+                    // true; a swallowed listing error does not -> never wipe on the latter.
+                    if (file_list.length==0 && !del_item.isDirectory()) {
+                        stwa.util.addLogMsg("E", sti.getSyncTaskName(),
+                            "Directory not deleted: empty listing could not be confirmed (possible USB/SD/SAF error): "+del_item.getPath());
+                        return SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
+                    }
                     boolean del_rc=del_item.delete();
                     if (!del_rc) {
                         stwa.util.addLogMsg("E",sti.getSyncTaskName(), stwa.appContext.getString(R.string.msgs_mirror_task_dir_delete_failed)+" "+del_item.getPath());
