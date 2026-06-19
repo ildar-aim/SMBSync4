@@ -1335,9 +1335,10 @@ public class SyncThreadSyncFile {
                                                     "", stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete, mf.getPath()));
                                         }
                                     } else {
-                                        stwa.totalIgnoreCount++;
-                                        stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path,
-                                                " Move source NOT deleted: destination could not be verified as a complete copy (missing or size mismatch); source kept to prevent data loss");
+                                        // NEW-4 refinement: "unchanged" was decided without a confirmed size match and the
+                                        // destination is NOT a verified complete copy. Copy now (which removes the source on
+                                        // success) instead of skipping -- self-heals, avoids data loss AND a no-progress loop.
+                                        sync_result= moveCopyLocalToSmbFile(stwa, sti, move_file, mf, tf, tf_exists);
                                     }
                                 } else {
                                     if (move_file) stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path, " "+stwa.appContext.getString(R.string.msgs_mirror_confirm_move_cancel));
@@ -1595,9 +1596,10 @@ public class SyncThreadSyncFile {
                                                     "", stwa.appContext.getString(R.string.msgs_mirror_task_file_delete_failed));
                                         }
                                     } else {
-                                        stwa.totalIgnoreCount++;
-                                        stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path,
-                                                " Move source NOT deleted: destination could not be verified as a complete copy (missing or size mismatch); source kept to prevent data loss");
+                                        // NEW-4 refinement: "unchanged" was decided without a confirmed size match and the
+                                        // destination is NOT a verified complete copy. Copy now (which removes the source on
+                                        // success) instead of skipping -- self-heals, avoids data loss AND a no-progress loop.
+                                        sync_result= moveCopySmbToLocalFile(stwa, sti, move_file, mf, tf, tf_exists);
                                     }
                                 } else {
                                     stwa.totalIgnoreCount++;
