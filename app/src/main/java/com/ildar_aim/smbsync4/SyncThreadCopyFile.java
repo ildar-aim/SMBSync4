@@ -334,6 +334,11 @@ public class SyncThreadCopyFile {
             SyncThread.createDirectoryToLocalStorage(stwa, sti, tf.getParentFile());
 
             t_df = new SafFile3(stwa.appContext, to_file_temp);
+            // A4: the temp uses a FIXED name (no timestamp). A prior run killed mid-copy (common on
+            // aggressive-kill OEMs) can leave a stale .tmp here, and SAF "w" mode is not guaranteed
+            // to truncate -- a shorter new copy would inherit the previous run's trailing bytes and
+            // be promoted (renamed) to the real target as a corrupt file. Delete any leftover first.
+            t_df.deleteIfExists();
             is = mf.getInputStream();
             os = t_df.getOutputStream();
 

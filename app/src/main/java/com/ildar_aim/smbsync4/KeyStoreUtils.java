@@ -59,7 +59,16 @@ class KeyStoreUtils {
         KeyStore keyStore = KeyStore.getInstance(PROVIDER);
         keyStore.load(null);
         SecretKey privateKey =null;
-        if (!isStoredKeyExists(c, alias)) {
+        // B1 GUARD: distinguish "alias genuinely absent" (true first run -> generate) from a
+        // TRANSIENT KeyStore error. The previous code asked isStoredKeyExists(), which swallows
+        // every exception and returns false, so a transient failure (keystore2 migration after an
+        // OS/OEM update, keystore daemon not ready at early boot, StrongBox hiccup) looked
+        // IDENTICAL to "absent" and REGENERATED the key here -- permanently orphaning every value
+        // that was encrypted with the old key (all SMB/ZIP credentials). Now we query the
+        // already-loaded store directly so a KeyStore error PROPAGATES (the caller treats it as a
+        // load/save failure and keeps the on-disk data) instead of silently replacing the key.
+        boolean alias_exists = keyStore.containsAlias(alias);
+        if (!alias_exists) {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, PROVIDER);
             keyGenerator.init(new KeyGenParameterSpec.Builder(alias, KeyProperties.PURPOSE_ENCRYPT| KeyProperties.PURPOSE_DECRYPT)
                     .setCertificateSubject(new X500Principal("CN="+alias))
@@ -71,6 +80,12 @@ class KeyStoreUtils {
             privateKey =keyGenerator.generateKey();
         } else {
             privateKey = (SecretKey) keyStore.getKey(alias, null);
+            if (privateKey == null) {
+                // Alias is present but the key could not be retrieved. Do NOT fall through to
+                // regeneration -- that would orphan the data this key protects. Fail loudly so
+                // the caller keeps the existing on-disk config and retries later.
+                throw new IllegalStateException("KeyStore alias '"+alias+"' exists but its key could not be retrieved; refusing to regenerate to avoid orphaning encrypted data");
+            }
         }
         if (log.isDebugEnabled()) log.debug("getStoredKey exit");
 

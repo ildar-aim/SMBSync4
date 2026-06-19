@@ -39,6 +39,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
@@ -133,7 +134,7 @@ public class SyncThreadArchiveFile {
                 File temp_file=new File(temp_path);
                 OutputStream os=new FileOutputStream(temp_file);
 
-                sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, sti.isSyncOptionUseSmallIoBuffer());
+                sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, mf.length(), sti.isSyncOptionUseSmallIoBuffer());
                 if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
                     temp_file.setLastModified(mf.lastModified());
                     SafFile3 temp_sf=new SafFile3(stwa.appContext, temp_path);
@@ -178,7 +179,7 @@ public class SyncThreadArchiveFile {
                 File temp_file=new File(temp_path);
                 OutputStream os=new FileOutputStream(temp_file);
 
-                sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, sti.isSyncOptionUseSmallIoBuffer());
+                sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, mf.length(), sti.isSyncOptionUseSmallIoBuffer());
 
                 if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
                     temp_file.setLastModified(mf.lastModified());
@@ -384,7 +385,7 @@ public class SyncThreadArchiveFile {
                     while (stwa.retryCount > 0) {
                         sync_result= copyFile(stwa, sti, mf.getInputStream(),
                                 temp_out.getOutputStream(), from_path, to_path,
-                                tf.getName(), sti.isSyncOptionUseSmallIoBuffer());
+                                tf.getName(), mf.length(), sti.isSyncOptionUseSmallIoBuffer());
                         if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
                             stwa.retryCount--;
                             if (stwa.retryCount > 0)
@@ -631,7 +632,7 @@ public class SyncThreadArchiveFile {
                 OutputStream os=temp_saf.getOutputStream();
 
                 while ( stwa.retryCount> 0) {
-                    sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, sti.isSyncOptionUseSmallIoBuffer());
+                    sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, mf.length(), sti.isSyncOptionUseSmallIoBuffer());
                     if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
                         stwa.retryCount--;
                         if (stwa.retryCount > 0)
@@ -688,7 +689,7 @@ public class SyncThreadArchiveFile {
                 OutputStream os=new FileOutputStream(temp_file);
 
                 while ( stwa.retryCount> 0) {
-                    sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, sti.isSyncOptionUseSmallIoBuffer());
+                    sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, mf.length(), sti.isSyncOptionUseSmallIoBuffer());
                     if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
                         stwa.retryCount--;
                         if (stwa.retryCount > 0)
@@ -907,7 +908,7 @@ public class SyncThreadArchiveFile {
                 JcifsFile temp_out = new JcifsFile(to_file_temp, stwa.destinationSmbAuth);
                 try {
                     while (stwa.retryCount > 0) {
-                        sync_result= copyFile(stwa, sti, mf.getInputStream(), temp_out.getOutputStream(), from_path, to_path, file_name, sti.isSyncOptionUseSmallIoBuffer());
+                        sync_result= copyFile(stwa, sti, mf.getInputStream(), temp_out.getOutputStream(), from_path, to_path, file_name, mf.length(), sti.isSyncOptionUseSmallIoBuffer());
                         if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
                             stwa.retryCount--;
                             if (stwa.retryCount > 0)
@@ -1102,7 +1103,7 @@ public class SyncThreadArchiveFile {
     final static int SHOW_PROGRESS_THRESHOLD_VALUE=512;
 
     static private int copyFile(SyncThreadWorkArea stwa, SyncTaskItem sti, InputStream ifs, OutputStream ofs, String from_path,
-                                String to_path, String file_name, boolean small_buffer) throws Exception {
+                                String to_path, String file_name, long source_size, boolean small_buffer) throws Exception {
         if (stwa.logLevel>=2) stwa.util.addDebugMsg(2, "I", "copyFile from=", from_path, ", to=", to_path);
 
         int io_area_size=0;
@@ -1117,28 +1118,50 @@ public class SyncThreadArchiveFile {
 
         int buffer_read_bytes = 0;
         long file_read_bytes = 0;
-        long file_size = ifs.available();
+        // A1: use the REAL source length (passed by the caller) for the progress bar and for the
+        // post-copy size verification below. ifs.available() is only a hint (often the buffer or
+        // socket-buffer size, NOT the file size), so it cannot detect a truncated copy.
+        long file_size = source_size;
         boolean show_prog = (file_size > SHOW_PROGRESS_THRESHOLD_VALUE);
         byte[] buffer = new byte[io_area_size];
-        // H2: stop on EOF (-1), not on a 0-length read, to avoid silently truncating the
-        // copy (and then deleting the source on a Move/Archive). write(...,0) is a no-op.
-        while ((buffer_read_bytes = ifs.read(buffer)) != -1) {
-            ofs.write(buffer, 0, buffer_read_bytes);
-            file_read_bytes += buffer_read_bytes;
-            if (show_prog && file_size > file_read_bytes) {
-                SyncThread.showProgressMsg(stwa, sti.getSyncTaskName(), file_name + " " +
-                        stwa.appContext.getString(R.string.msgs_mirror_task_file_copying, (file_read_bytes * 100) / file_size));
+        try {
+            // H2: stop on EOF (-1), not on a 0-length read, to avoid silently truncating the
+            // copy (and then deleting the source on a Move/Archive). write(...,0) is a no-op.
+            while ((buffer_read_bytes = ifs.read(buffer)) != -1) {
+                if (buffer_read_bytes > 0) {
+                    ofs.write(buffer, 0, buffer_read_bytes);
+                    file_read_bytes += buffer_read_bytes;
+                    if (show_prog && file_size > file_read_bytes) {
+                        SyncThread.showProgressMsg(stwa, sti.getSyncTaskName(), file_name + " " +
+                                stwa.appContext.getString(R.string.msgs_mirror_task_file_copying, (file_read_bytes * 100) / file_size));
+                    }
+                }
+                if (SyncThread.isTaskCancelled(true, stwa.gp.syncThreadCtrl)) {
+                    return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
+                }
             }
-            if (SyncThread.isTaskCancelled(true, stwa.gp.syncThreadCtrl)) {
-                ifs.close();
-                ofs.flush();
-                ofs.close();
-                return SyncTaskItem.SYNC_RESULT_STATUS_CANCEL;
-            }
+            // H1: flush+close the OUTPUT on the success path and let any failure propagate, so a
+            // failed final write (disk full, USB removed, SMB drop) surfaces as IOException -> the
+            // caller maps it to ERROR (temp discarded, source kept) instead of deleting the
+            // Archive/Move source after promoting a truncated file.
+            ofs.flush();
+            ofs.close();
+            ofs = null;
+        } finally {
+            // A2: close BOTH streams on EVERY exit (success, cancel, exception). Callers pass
+            // mf.getInputStream()/os inline and keep no reference, so a leak here exhausts the
+            // process file-descriptor table during large photo/video archive runs.
+            try { ifs.close(); } catch(IOException ignore) {}
+            if (ofs != null) { try { ofs.close(); } catch(IOException ignore) {} }
         }
-        ifs.close();
-        ofs.flush();
-        ofs.close();
+
+        // A1: when the source size is known, verify the whole file was written before the caller
+        // treats this as SUCCESS and deletes the Archive/Move source.
+        if (file_size > 0 && file_read_bytes != file_size) {
+            stwa.util.addLogMsg("E", sti.getSyncTaskName(),
+                "Archive copy size mismatch, source="+file_size+", written="+file_read_bytes+", file="+file_name);
+            throw new IOException("Incomplete archive copy: wrote "+file_read_bytes+" of "+file_size+" bytes for "+file_name);
+        }
 
         long file_read_time = System.currentTimeMillis() - read_begin_time;
 

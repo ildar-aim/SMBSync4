@@ -823,6 +823,25 @@ public class SyncConfiguration {
                                                  ArrayList<SettingParameterItem> setting_parm_list,
                                                  ArrayList<GroupListAdapter.GroupListItem> group_list,
                                                  int enc_mode, CipherParms cp_enc) {
+        return buildConfigurationList(c, gp, cu, config_data, sync_task_list, schedule_list, setting_parm_list,
+                group_list, enc_mode, cp_enc, null);
+    }
+
+    /**
+     * B2 GUARD overload: {@code decrypt_failed} (a 1-element holder, may be null) is set to true
+     * when an individual ENCRYPTED, NON-EMPTY credential attribute (SMB account/password, ZIP
+     * password) fails to decrypt (decryptUserData returns null) even though the cipher itself
+     * initialised. The caller (loadTaskListFromAppDirectory) uses this to treat the load of the
+     * LIVE config as failed, so the C4 configLoadFailed guard prevents the next save from
+     * overwriting the still-good on-disk credentials with blanks. We cannot rely on the persisted
+     * folder status-error flag for this (it is saved/reloaded from XML, so it is also set for
+     * tasks that legitimately have no credentials).
+     */
+    public static boolean buildConfigurationList(Context c, GlobalParameters gp, CommonUtilities cu, String config_data,
+                                                 ArrayList<SyncTaskItem> sync_task_list, ArrayList<ScheduleListAdapter.ScheduleListItem> schedule_list,
+                                                 ArrayList<SettingParameterItem> setting_parm_list,
+                                                 ArrayList<GroupListAdapter.GroupListItem> group_list,
+                                                 int enc_mode, CipherParms cp_enc, boolean[] decrypt_failed) {
         boolean result = true;
         try {
             sync_task_list.clear();
@@ -866,9 +885,9 @@ public class SyncConfiguration {
                         } else if (xpp.getName().equals(SYNC_TASK_XML_TAG_OPTION)) {
                             buildSyncTaskOptionFromXml(c, gp, cu, xpp, sync_task_item);
                         } else if (xpp.getName().equals(SYNC_TASK_XML_TAG_SOURCE)) {
-                            buildSyncTaskSourceFolderFromXml(c, gp, cu, xpp, cp_enc, sync_task_item);
+                            buildSyncTaskSourceFolderFromXml(c, gp, cu, xpp, cp_enc, sync_task_item, decrypt_failed);
                         } else if (xpp.getName().equals(SYNC_TASK_XML_TAG_DESTINATION)) {
-                            buildSyncTaskDestinationFolderFromXml(c, gp, cu, xpp, cp_enc, sync_task_item);
+                            buildSyncTaskDestinationFolderFromXml(c, gp, cu, xpp, cp_enc, sync_task_item, decrypt_failed);
                         } else if (xpp.getName().equals(SYNC_TASK_XML_TAG_FILTER_ITEM)) {
                             boolean include = false;
                             boolean enabled = true;
@@ -1157,7 +1176,7 @@ public class SyncConfiguration {
     }
 
     private static void buildSyncTaskSourceFolderFromXml(Context c, GlobalParameters gp, CommonUtilities cu,
-                                                         XmlPullParser xpp, CipherParms cp_int, SyncTaskItem sti) {
+                                                         XmlPullParser xpp, CipherParms cp_int, SyncTaskItem sti, boolean[] decrypt_failed) {
         for (int i = 0; i < xpp.getAttributeCount(); i++) {
             if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_TYPE)) {
                 sti.setSourceFolderType(xpp.getAttributeValue(i));
@@ -1168,8 +1187,10 @@ public class SyncConfiguration {
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_SMB_SERVER_ENCRYPTED_ACCOUNT_NAME)) {
                 if (!xpp.getAttributeValue(i).equals("")) {
                     String dec_str = CommonUtilities.decryptUserData(c, cp_int, xpp.getAttributeValue(i));
-                    if (dec_str == null)
+                    if (dec_str == null) {
                         sti.setSourceFolderStatusError(sti.getSourceFolderStatusError() | SyncTaskItem.SYNC_FOLDER_STATUS_ERROR_ACCOUNT_NAME);
+                        if (decrypt_failed != null) decrypt_failed[0] = true;
+                    }
                     else sti.setSourceSmbAccountName(dec_str);
                 }
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_SMB_SERVER_ACCOUNT_NAME)) {
@@ -1177,8 +1198,10 @@ public class SyncConfiguration {
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_SMB_SERVER_ENCRYPTED_ACCOUNT_PASSWORD)) {
                 if (!xpp.getAttributeValue(i).equals("")) {
                     String dec_str = CommonUtilities.decryptUserData(c, cp_int, xpp.getAttributeValue(i));
-                    if (dec_str == null)
+                    if (dec_str == null) {
                         sti.setSourceFolderStatusError(sti.getSourceFolderStatusError() | SyncTaskItem.SYNC_FOLDER_STATUS_ERROR_ACCOUNT_PASSWORD);
+                        if (decrypt_failed != null) decrypt_failed[0] = true;
+                    }
                     else sti.setSourceSmbPassword(dec_str);
                 }
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_SMB_SERVER_ACCOUNT_PASSWORD)) {
@@ -1215,7 +1238,7 @@ public class SyncConfiguration {
     }
 
     private static void buildSyncTaskDestinationFolderFromXml(Context c, GlobalParameters gp, CommonUtilities cu,
-                                                              XmlPullParser xpp, CipherParms cp_int, SyncTaskItem sti) {
+                                                              XmlPullParser xpp, CipherParms cp_int, SyncTaskItem sti, boolean[] decrypt_failed) {
         for (int i = 0; i < xpp.getAttributeCount(); i++) {
             if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_TYPE)) {
                 sti.setDestinationFolderType(xpp.getAttributeValue(i));
@@ -1228,8 +1251,10 @@ public class SyncConfiguration {
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_SMB_SERVER_ENCRYPTED_ACCOUNT_NAME)) {
                 if (!xpp.getAttributeValue(i).equals("")) {
                     String dec_str = CommonUtilities.decryptUserData(c, cp_int, xpp.getAttributeValue(i));
-                    if (dec_str == null)
+                    if (dec_str == null) {
                         sti.setDestinationFolderStatusError(sti.getDestinationFolderStatusError() | SyncTaskItem.SYNC_FOLDER_STATUS_ERROR_ACCOUNT_NAME);
+                        if (decrypt_failed != null) decrypt_failed[0] = true;
+                    }
                     else sti.setDestinationSmbAccountName(dec_str);
                 }
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_SMB_SERVER_ACCOUNT_PASSWORD)) {
@@ -1237,8 +1262,10 @@ public class SyncConfiguration {
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_SMB_SERVER_ENCRYPTED_ACCOUNT_PASSWORD)) {
                 if (!xpp.getAttributeValue(i).equals("")) {
                     String dec_str = CommonUtilities.decryptUserData(c, cp_int, xpp.getAttributeValue(i));
-                    if (dec_str == null)
+                    if (dec_str == null) {
                         sti.setDestinationFolderStatusError(sti.getDestinationFolderStatusError() | SyncTaskItem.SYNC_FOLDER_STATUS_ERROR_ACCOUNT_PASSWORD);
+                        if (decrypt_failed != null) decrypt_failed[0] = true;
+                    }
                     else sti.setDestinationSmbPassword(dec_str);
                 }
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_SMB_SERVER_ADDR)) {
@@ -1294,8 +1321,10 @@ public class SyncConfiguration {
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_ZIP_ENCRYPTED_OUTPUT_FILE_PASSWORD)) {
                 if (!xpp.getAttributeValue(i).equals("")) {
                     String dec_str = CommonUtilities.decryptUserData(c, cp_int, xpp.getAttributeValue(i));
-                    if (dec_str == null)
+                    if (dec_str == null) {
                         sti.setDestinationFolderStatusError(sti.getDestinationFolderStatusError() | SyncTaskItem.SYNC_FOLDER_STATUS_ERROR_ZIP_PASSWORD);
+                        if (decrypt_failed != null) decrypt_failed[0] = true;
+                    }
                     else sti.setDestinationZipPassword(dec_str);
                 }
             } else if (xpp.getAttributeName(i).equals(SYNC_TASK_XML_TAG_FOLDER_ZIP_OUTPUT_FILE_PASSWORD)) {

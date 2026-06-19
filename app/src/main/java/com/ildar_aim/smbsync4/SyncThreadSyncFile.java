@@ -81,6 +81,24 @@ public class SyncThreadSyncFile {
         return true;                                   // parent is a live directory; absence is real
     }
 
+    /**
+     * NEW-4 GUARD: In Move mode the "file unchanged" verdict can be reached WITHOUT comparing
+     * size or content -- the "different by size" option may be off and last-modified may match
+     * within tolerance. Deleting the source on that verdict alone risks destroying the only copy
+     * when the destination is actually missing or a truncated/wrong file. Only allow the source
+     * delete when the destination is POSITIVELY confirmed to be a complete copy: it exists AND has
+     * the same length as the source. Any error reading the destination (SafFile3 swallows them and
+     * returns 0/false; JcifsFile throws) yields "not verified" -> the source is kept.
+     */
+    static private boolean isMoveDestinationVerified(long source_length, SafFile3 dest) {
+        try { return dest != null && dest.exists() && dest.length() == source_length; }
+        catch (Exception e) { return false; }
+    }
+    static private boolean isMoveDestinationVerified(long source_length, JcifsFile dest) {
+        try { return dest != null && dest.exists() && dest.length() == source_length; }
+        catch (Exception e) { return false; }
+    }
+
     static final private int syncDeleteLocalToLocal(SyncThreadWorkArea stwa, SyncTaskItem sti, String from_base,
                                                     String source_dir, String to_base, String destination_dir, SafFile3 tf, ContentProviderClient cpc, boolean isTakenDateUsed) {
         int sync_result = 0;
@@ -841,14 +859,20 @@ public class SyncThreadSyncFile {
                             } else {
                                 if (move_file) {
                                     if (SyncThread.sendConfirmRequest(stwa, sti, conf_type, from_path, parsed_to_path)) {
-                                        sync_result=deleteLocalItem(stwa, sti, mf);
-                                        if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
-                                            stwa.totalMoveCount++;
-                                            SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
-                                                    "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                        if (isMoveDestinationVerified(mf.length(), tf)) {
+                                            sync_result=deleteLocalItem(stwa, sti, mf);
+                                            if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                                                stwa.totalMoveCount++;
+                                                SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
+                                                        "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                            } else {
+                                                SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
+                                                        "", stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete));
+                                            }
                                         } else {
-                                            SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
-                                                    "", stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete));
+                                            stwa.totalIgnoreCount++;
+                                            stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path,
+                                                    " Move source NOT deleted: destination could not be verified as a complete copy (missing or size mismatch); source kept to prevent data loss");
                                         }
                                     } else {
                                         if (move_file) stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path, " "+stwa.appContext.getString(R.string.msgs_mirror_confirm_move_cancel));
@@ -1289,15 +1313,20 @@ public class SyncThreadSyncFile {
                         } else {
                             if (move_file) {
                                 if (SyncThread.sendConfirmRequest(stwa, sti, conf_type, from_path, parsed_to_path)) {
-                                    sync_result= deleteLocalItem(stwa, sti, mf);
-                                    if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
-                                        stwa.totalMoveCount++;
-                                        SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
-                                                "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                    if (isMoveDestinationVerified(mf.length(), tf)) {
+                                        sync_result= deleteLocalItem(stwa, sti, mf);
+                                        if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                                            stwa.totalMoveCount++;
+                                            SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
+                                                    "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                        } else {
+                                            SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
+                                                    "", stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete, mf.getPath()));
+                                        }
                                     } else {
-                                        SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
-                                                "", stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete, mf.getPath()));
-                                        SafFile3 sf =new SafFile3(stwa.appContext, parsed_to_path);
+                                        stwa.totalIgnoreCount++;
+                                        stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path,
+                                                " Move source NOT deleted: destination could not be verified as a complete copy (missing or size mismatch); source kept to prevent data loss");
                                     }
                                 } else {
                                     if (move_file) stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path, " "+stwa.appContext.getString(R.string.msgs_mirror_confirm_move_cancel));
@@ -1544,14 +1573,20 @@ public class SyncThreadSyncFile {
                         } else {
                             if (move_file) {
                                 if (SyncThread.sendConfirmRequest(stwa, sti, conf_type, from_path, parsed_to_path)) {
-                                    sync_result=deleteSmbItem(stwa, sti, mf);
-                                    if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
-                                        stwa.totalMoveCount++;
-                                        SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
-                                                "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                    if (isMoveDestinationVerified(mf.length(), tf)) {
+                                        sync_result=deleteSmbItem(stwa, sti, mf);
+                                        if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                                            stwa.totalMoveCount++;
+                                            SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
+                                                    "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                        } else {
+                                            SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", mf.getPath(), mf.getName(),
+                                                    "", stwa.appContext.getString(R.string.msgs_mirror_task_file_delete_failed));
+                                        }
                                     } else {
-                                        SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", mf.getPath(), mf.getName(),
-                                                "", stwa.appContext.getString(R.string.msgs_mirror_task_file_delete_failed));
+                                        stwa.totalIgnoreCount++;
+                                        stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path,
+                                                " Move source NOT deleted: destination could not be verified as a complete copy (missing or size mismatch); source kept to prevent data loss");
                                     }
                                 } else {
                                     stwa.totalIgnoreCount++;
@@ -1889,14 +1924,20 @@ public class SyncThreadSyncFile {
                                 } else {
                                     if (move_file) {
                                         if (SyncThread.sendConfirmRequest(stwa, sti, conf_type, from_path, parsed_to_path)) {
-                                            sync_result=deleteSmbItem(stwa, sti, mf);
-                                            if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
-                                                stwa.totalMoveCount++;
-                                                SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
-                                                        "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                            if (isMoveDestinationVerified(mf.length(), tf)) {
+                                                sync_result=deleteSmbItem(stwa, sti, mf);
+                                                if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
+                                                    stwa.totalMoveCount++;
+                                                    SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", parsed_to_path, mf.getName(),
+                                                            "", stwa.appContext.getString(R.string.msgs_mirror_task_file_moved));
+                                                } else {
+                                                    SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", mf.getPath(), mf.getName(),
+                                                            "", stwa.appContext.getString(R.string.msgs_mirror_task_file_delete_failed));
+                                                }
                                             } else {
-                                                SyncThread.showMsg(stwa, false, sti.getSyncTaskName(), "I", mf.getPath(), mf.getName(),
-                                                        "", stwa.appContext.getString(R.string.msgs_mirror_task_file_delete_failed));
+                                                stwa.totalIgnoreCount++;
+                                                stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path,
+                                                        " Move source NOT deleted: destination could not be verified as a complete copy (missing or size mismatch); source kept to prevent data loss");
                                             }
                                         } else {
                                             stwa.totalIgnoreCount++;

@@ -1415,8 +1415,20 @@ public class TaskListImportExport {
                 String[] config_array = SyncConfiguration.createConfigurationDataArray(c, gp, cu, fis);
                 result=SyncConfiguration.isSavedSyncTaskListFile(c, gp, cu, config_array);
                 if (result) {
+                    // B2 GUARD: detect a vital-credential decrypt miss (cipher initialised, but an
+                    // individual encrypted SMB/ZIP field decrypted to null -- e.g. a corrupt field
+                    // or a key that no longer matches). If we committed such a load, the next save
+                    // would re-serialise BLANK credentials with the current key and permanently
+                    // erase them. Treat it as a load failure instead, so the C4 configLoadFailed
+                    // guard keeps the on-disk file untouched and we retry on the next launch.
+                    boolean[] decrypt_failed = new boolean[]{false};
                     result = SyncConfiguration.buildConfigurationList(c, gp, cu, config_array[1], sync_task_list, schedule_list, setting_parm_list,
-                            group_list, ENCRYPT_MODE_ENCRYPT_VITAL_DATA, cp_int);
+                            group_list, ENCRYPT_MODE_ENCRYPT_VITAL_DATA, cp_int, decrypt_failed);
+                    if (result && decrypt_failed[0]) {
+                        cu.addLogMsg("E", "", CommonUtilities.getExecutedMethodName()+
+                                " one or more encrypted SMB/ZIP credentials could not be decrypted; treating config load as failed to avoid overwriting on-disk credentials with blanks (possible KeyStore key change).");
+                        result = false;
+                    }
                 }
             }
         } catch (Exception e) {
