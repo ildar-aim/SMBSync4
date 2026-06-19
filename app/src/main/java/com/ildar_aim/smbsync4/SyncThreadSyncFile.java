@@ -104,7 +104,10 @@ public class SyncThreadSyncFile {
         int sync_result = 0;
         stwa.jcifsNtStatusCode=0;
         if (stwa.logLevel>=2) stwa.util.addDebugMsg(2, "I", CommonUtilities.getExecutedMethodName() + " source=", source_dir, ", destination=", destination_dir);
-        String relative_dir = destination_dir.replace(to_base, "");
+        // Strip the base PREFIX only. Previously String.replace(to_base,"") removed EVERY
+        // occurrence, corrupting relative_dir when the base name recurs as a sub-segment, which
+        // then mis-feeds the filter/selection checks. The other 3 directions use substring().
+        String relative_dir = destination_dir.startsWith(to_base) ? destination_dir.substring(to_base.length()) : destination_dir.replace(to_base, "");
         if (relative_dir.startsWith("/")) relative_dir = relative_dir.substring(1);
         SafFile3 mf = new SafFile3(stwa.appContext, source_dir);
         boolean mf_exists=mf.exists();
@@ -250,7 +253,11 @@ public class SyncThreadSyncFile {
                     }
                 }
             } else { // file Delete
-                if (!SyncThread.isHiddenDirectory(stwa, sti, tf) ) {
+                // Gate a FILE delete with the hidden-FILE option (the other 3 directions do).
+                // Was isHiddenDirectory, which evaluated the wrong "sync hidden directories"
+                // option for a file -> with hidden-dirs ON + hidden-files OFF, a Mirror to SMB
+                // could delete dest-only hidden files the user opted to exclude.
+                if (!SyncThread.isHiddenFile(stwa, sti, tf) ) {
                     boolean isFileSelected=SyncThread.isFileSelected(stwa, sti, relative_dir);
                     if (isFileSelected) {
                         if (!mf_exists) {
@@ -627,7 +634,7 @@ public class SyncThreadSyncFile {
                     stwa.util.addLogMsg("W", sti.getSyncTaskName(), "EXIF parse error: "+from_path+" err="+ex.getMessage());
                 }
                 if (taken_date!=null && taken_date.length==2 && taken_date[0]!=null && taken_date[1]!=null) {
-                    SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+                    SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");// 24-hour: lowercase hh (12-hour, no AM/PM) mis-parsed afternoon EXIF times into the wrong hour folder
                     Date date = null;
                     try {
                         date = sdFormat.parse(taken_date[0]+" "+taken_date[1]);
@@ -870,9 +877,10 @@ public class SyncThreadSyncFile {
                                                         "", stwa.appContext.getString(R.string.msgs_mirror_task_file_move_failed_delete));
                                             }
                                         } else {
-                                            stwa.totalIgnoreCount++;
-                                            stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path,
-                                                    " Move source NOT deleted: destination could not be verified as a complete copy (missing or size mismatch); source kept to prevent data loss");
+                                            // NEW-4 refinement: "unchanged" was decided without a confirmed size match and the
+                                            // destination is NOT a verified complete copy. Copy now (which removes the source on
+                                            // success) instead of skipping -- self-heals, avoids data loss AND a no-progress loop.
+                                            sync_result= moveCopyLocalToLocalFile(stwa, sti, move_file, mf, tf, tf_exists);
                                         }
                                     } else {
                                         if (move_file) stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path, " "+stwa.appContext.getString(R.string.msgs_mirror_confirm_move_cancel));
@@ -1285,7 +1293,10 @@ public class SyncThreadSyncFile {
                             parsed_to_path=convertToExifDateTime(stwa, sti, mf.getInputStream(), mf_last_modified, from_path, to_path);
                         JcifsFile tf = new JcifsFile(parsed_to_path, stwa.destinationSmbAuth);
                         if (isTakenDateUsed){
-                            SyncThread.createDirectoryToLocalStorage(stwa, sti, tf.getParent());
+                            // Destination is SMB: create the taken-date directory via the SMB API.
+                            // Was createDirectoryToLocalStorage on an smb:// path -> SafFile3 swallows
+                            // it -> the share directory was never created and the write then failed.
+                            SyncThread.createDirectoryToSmb(stwa, sti, tf.getParent(), stwa.destinationSmbAuth);
                         }
                         boolean tf_exists = tf.exists();
                         String conf_type="";
@@ -1935,9 +1946,10 @@ public class SyncThreadSyncFile {
                                                             "", stwa.appContext.getString(R.string.msgs_mirror_task_file_delete_failed));
                                                 }
                                             } else {
-                                                stwa.totalIgnoreCount++;
-                                                stwa.util.addLogMsg("W", sti.getSyncTaskName(), parsed_to_path,
-                                                        " Move source NOT deleted: destination could not be verified as a complete copy (missing or size mismatch); source kept to prevent data loss");
+                                                // NEW-4 refinement: "unchanged" was decided without a confirmed size match and the
+                                                // destination is NOT a verified complete copy. Copy now (which removes the source on
+                                                // success) instead of skipping -- self-heals, avoids data loss AND a no-progress loop.
+                                                sync_result= moveCopySmbToSmbFile(stwa, sti, move_file, mf, tf, tf_exists);
                                             }
                                         } else {
                                             stwa.totalIgnoreCount++;
