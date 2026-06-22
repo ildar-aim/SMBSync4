@@ -306,6 +306,7 @@ public class ActivityMain extends AppCompatActivity {
 
     private void initApplication() {
         setMediaStatusListener();
+        requestNotificationPermissionIfNeeded();
         checkStoredKey(new CallBackListener(){
             @Override
             public void onCallBack(Context context, boolean positive, Object[] objects) {
@@ -765,24 +766,51 @@ public class ActivityMain extends AppCompatActivity {
         dialog.show();
     }
 
+    // API 33+ requires runtime POST_NOTIFICATIONS. Without it, the dataSync foreground-service
+    // notification cannot post, sync progress + the confirm/overwrite dialogs are invisible, and
+    // an FGS with no visible notification is a prime kill target on Realme UI / HiOS. Declared in
+    // the manifest but was never requested at runtime. Fire-and-forget (non-blocking).
+    private void requestNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= 33) {
+            try {
+                if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                    launchRequestPermission(mActivity, Manifest.permission.POST_NOTIFICATIONS, new CallBackListener() {
+                        @Override
+                        public void onCallBack(Context c, boolean positive, Object[] o) {
+                            mUtil.addDebugMsg(1, "I", "POST_NOTIFICATIONS permission result=" + positive);
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                mUtil.addLogMsg("W", "", "requestNotificationPermissionIfNeeded failed: " + e.getMessage());
+            }
+        }
+    }
+
     private void showBatteryOptimization() {
         if (Build.VERSION.SDK_INT >= 23) {
-            Intent intent = new Intent();
-//            String packageName = mContext.getPackageName();
-//            PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-//            if (pm.isIgnoringBatteryOptimizations(packageName)) {
-//                intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-//                startActivity(intent);
-//                mUtil.addDebugMsg(1, "I", "Invoke battery optimization settings");
-//            } else {
-//                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-//                intent.setData(Uri.parse("package:" + packageName));
-//                startActivity(intent);
-//                mUtil.addDebugMsg(1, "I", "Request ignore battery optimization");
-//            }
-            intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-            startActivity(intent);
-            mUtil.addDebugMsg(1, "I", "Invoke battery optimization settings");
+            // Some Realme/Tecno/Infinix ROMs remove the AOSP battery-optimization screen; an
+            // unguarded startActivity then throws ActivityNotFoundException and crashes the app
+            // (this is invoked from a dialog pushed to scheduler users). Try it, then fall back to
+            // this app's details page, then just inform the user.
+            try {
+                Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                startActivity(intent);
+                mUtil.addDebugMsg(1, "I", "Invoke battery optimization settings");
+            } catch (Exception e) {
+                mUtil.addLogMsg("W", "", "Battery optimization settings screen not available: " + e.getMessage());
+                try {
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.parse("package:" + getPackageName()));
+                    startActivity(intent);
+                } catch (Exception e2) {
+                    mUtil.addLogMsg("W", "", "App details settings screen not available: " + e2.getMessage());
+                    try {
+                        mUtil.showCommonDialog(false, "W", getString(R.string.app_name),
+                                "Battery optimization settings are not available on this device. Please disable battery optimization for this app manually in the system battery settings.", null);
+                    } catch (Exception e3) {}
+                }
+            }
         }
     }
 
@@ -2212,11 +2240,26 @@ public class ActivityMain extends AppCompatActivity {
 
     public void launchActivityResult(Activity a, String req_id, Intent intent, CallBackListener cbl) {
         int req_code=mActivityLaunchList.size()+1;
+        ActivityLaunchItem launch_item=new ActivityLaunchItem(req_code, req_id, cbl);
         synchronized (mActivityLaunchList) {
             mUtil.addDebugMsg(1, "I", "launchActivityResult req_id="+req_id+", req_code="+req_code);
-            mActivityLaunchList.add(new ActivityLaunchItem(req_code, req_id, cbl));
+            mActivityLaunchList.add(launch_item);
         }
-        a.startActivityForResult(intent, req_code);
+        // Some Realme/Tecno/Infinix ROMs strip AOSP settings Activities (e.g. the
+        // MANAGE_ALL_FILES_ACCESS screen used on first run). An unguarded startActivityForResult
+        // then throws ActivityNotFoundException and crashes the app. Catch it, undo the pending
+        // launch bookkeeping, and unwind the flow via the callback the same way a cancelled result
+        // would (onActivityResult passes resultCode==RESULT_CANCELED as positive=true), so callers
+        // run their "not granted" handling instead of the process dying.
+        try {
+            a.startActivityForResult(intent, req_code);
+        } catch (Exception e) {
+            mUtil.addLogMsg("W", "", "launchActivityResult failed (no Activity for "+req_id+"): "+e.getMessage());
+            synchronized (mActivityLaunchList) { mActivityLaunchList.remove(launch_item); }
+            if (cbl!=null) {
+                try { cbl.onCallBack(mContext, true, new Object[]{null}); } catch (Exception ignore) {}
+            }
+        }
     }
 
     @Override

@@ -1288,10 +1288,21 @@ public class SyncThreadArchiveFile {
 
     static final public boolean isFileArchiveRequired(SyncThreadWorkArea stwa, SyncTaskItem sti, ArchiveFileListItem afli) {
         Calendar cal= Calendar.getInstance() ;
-        String[] dt=afli.shoot_date.split("-");
-        String[] tm=afli.shoot_time.split("-");
-        cal.set(Integer.parseInt(dt[0]), Integer.parseInt(dt[1])-1, Integer.parseInt(dt[2]),
-                Integer.parseInt(tm[0]), Integer.parseInt(tm[1]), Integer.parseInt(tm[2]));
+        // shoot_date/shoot_time are normally "yyyy-MM-dd"/"HH-mm-ss", but the EXIF path stores
+        // whatever a (possibly corrupt/non-standard) DateTimeOriginal tag decoded to. An unguarded
+        // split + parseInt on garbage throws NumberFormatException/ArrayIndexOutOfBounds, which
+        // previously propagated out and aborted the WHOLE directory's archive. Fail safe: if the
+        // date can't be parsed, treat the file as "not due for archive" (return false) so it stays
+        // in place (no move, no source delete) and the rest of the directory still runs.
+        try {
+            String[] dt=afli.shoot_date.split("-");
+            String[] tm=afli.shoot_time.split("-");
+            cal.set(Integer.parseInt(dt[0]), Integer.parseInt(dt[1])-1, Integer.parseInt(dt[2]),
+                    Integer.parseInt(tm[0]), Integer.parseInt(tm[1]), Integer.parseInt(tm[2]));
+        } catch (Exception e) {
+            stwa.util.addLogMsg("W", sti.getSyncTaskName(), "Archive skipped (unparseable shoot date/time '"+afli.shoot_date+" "+afli.shoot_time+"'): "+afli.full_path);
+            return false;
+        }
         String c_ft=StringUtil.convDateTimeTo_YearMonthDayHourMinSec(cal.getTimeInMillis());
         long exp_time=0, day_mili=1000L*60L*60L*24L;
         if (sti.getSyncFilterArchiveRetentionPeriod()== SyncTaskItem.ARCHIVE_RETAIN_FOR_A_7_DAYS) exp_time=day_mili*7L;

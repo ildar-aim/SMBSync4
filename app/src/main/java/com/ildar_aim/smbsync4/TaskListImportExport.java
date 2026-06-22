@@ -1229,9 +1229,15 @@ public class TaskListImportExport {
         // authoritative. Refuse to overwrite the existing config with them — otherwise a
         // boot / date / time / timezone broadcast (which load-then-saves) would wipe every
         // task/schedule/group. Import/restore clears the flag once it has authoritative data.
-        if (gp != null && gp.configLoadFailed) {
-            if (cu != null) cu.addLogMsg("W", "", "saveTaskListToAppDirectory skipped: config was not loaded successfully; refusing to overwrite on-disk config to prevent data loss.");
-            else log.error("saveTaskListToAppDirectory skipped: configLoadFailed; refusing to overwrite to prevent data loss.");
+        // Also refuse while the config has NOT yet been loaded (configListLoaded==false). On a
+        // cold process, loadConfigList runs on a background thread and the in-memory lists are
+        // empty until it commits; a save firing in that window (the load does NOT hold the same
+        // lock as this save) would atomically replace the good config.xml with EMPTY lists. The
+        // configLoadFailed flag is not yet set in that window, so it alone cannot guard it.
+        // Import/first-run/restore all set configListLoaded=true before their first save.
+        if (gp != null && (gp.configLoadFailed || !gp.configListLoaded)) {
+            if (cu != null) cu.addLogMsg("W", "", "saveTaskListToAppDirectory skipped: config not loaded (configLoadFailed="+gp.configLoadFailed+", configListLoaded="+gp.configListLoaded+"); refusing to overwrite on-disk config to prevent data loss.");
+            else log.error("saveTaskListToAppDirectory skipped: config not loaded; refusing to overwrite to prevent data loss.");
             return null;
         }
         // Atomic save: write to a temp file first, then rename to the final location.

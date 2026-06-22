@@ -97,8 +97,11 @@ public class SyncWorker extends Worker {
             mGp.loadConfigList(mContext, mUtil);
         } else {
             mGp=GlobalWorkArea.getGlobalParameter(mContext);
-            if (mGp.notificationManager==null) NotificationUtils.initNotification(mGp, mUtil, mContext);
+            // Assign mUtil BEFORE it is used: initNotification() takes mUtil, and the original
+            // order passed a still-null mUtil here -> NPE if notificationManager was null while a
+            // GlobalParameters instance already existed.
             mUtil = new CommonUtilities(mContext, "SyncWorker", mGp, null);
+            if (mGp.notificationManager==null) NotificationUtils.initNotification(mGp, mUtil, mContext);
         }
 
         mUtil.addDebugMsg(1, "I", "Init SyncWorker entered");
@@ -117,6 +120,11 @@ public class SyncWorker extends Worker {
         mUtil.addDebugMsg(1, "I", "onStopped entered");
         mWorkerStopped=true;
         mGp.syncThreadCtrl.setDisabled();
+        // Wake any SyncThread blocked in the confirm-dialog wait so it observes the disabled
+        // state and unwinds, instead of hanging forever (and re-acquiring a wakelock on a late
+        // response). setDisabled() above is on a DIFFERENT monitor, so it can't wake that wait.
+        try { synchronized (mGp.syncThreadConfirm) { mGp.syncThreadConfirm.notifyAll(); } }
+        catch (Exception e) { mUtil.addDebugMsg(1, "W", "notify syncThreadConfirm in onStopped: "+e.getMessage()); }
         // OEMs like Realme UI / HiOS may kill the Worker without going through
         // the doWork() return path. Release any held wakelocks here so the device
         // doesn't drain battery indefinitely.
@@ -144,7 +152,20 @@ public class SyncWorker extends Worker {
         } else {
             fg = new ForegroundInfo(mGp.notificationOngoingMessageID, mGp.notification);
         }
-        setForegroundAsync(fg);
+        // Observe the FGS-promotion future: if setForegroundAsync fails (FGS-start not allowed,
+        // notification blocked because POST_NOTIFICATIONS was denied, Android 15 dataSync quota),
+        // the exception is otherwise swallowed and the worker silently runs unpromoted -> killed.
+        try {
+            final com.google.common.util.concurrent.ListenableFuture<Void> fg_future = setForegroundAsync(fg);
+            fg_future.addListener(new Runnable() {
+                @Override public void run() {
+                    try { fg_future.get(); }
+                    catch (Throwable t) { mUtil.addLogMsg("W", "", "setForegroundAsync (foreground service start) failed: "+t.getMessage()); }
+                }
+            }, Runnable::run);
+        } catch (Throwable t) {
+            mUtil.addLogMsg("W", "", "setForegroundAsync threw: "+t.getMessage());
+        }
 
         listWorkerEnqueuedItem(mContext, mGp, mUtil, WorkManager.getInstance(mContext), WORKER_TAG);
 
