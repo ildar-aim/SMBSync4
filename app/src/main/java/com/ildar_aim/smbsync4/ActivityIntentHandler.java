@@ -75,6 +75,12 @@ public class ActivityIntentHandler extends Activity {
                 finish();
             } else {
                 String action=received_intent.getAction();
+                // This handler is exported, so ANY app can trigger a stored (possibly destructive
+                // Mirror/Move) task. We keep the automation feature working but make every external
+                // trigger auditable in the log so an unexpected sync can be traced to its caller.
+                String caller=getCallingPackage();
+                if (caller==null && getReferrer()!=null) caller=getReferrer().getHost();
+                mUtil.addLogMsg("I", "", "External sync trigger action="+action+", caller="+caller);
                 String task_list=received_intent.getStringExtra(START_SYNC_EXTRA_PARM_SYNC_TASK);
                 if (task_list==null) {
                     SyncWorker.startSyncWorkerByAction(c, mGp, mUtil, action, "", "");
@@ -136,6 +142,18 @@ public class ActivityIntentHandler extends Activity {
         reply.putExtra(REPLY_SYNC_TASK_EXTRA_PARM_SYNC_COUNT, reply_count);
         reply.putExtra(REPLY_SYNC_TASK_EXTRA_PARM_SYNC_ARRAY, reply_list);
         mUtil.addDebugMsg(1, "I", "query result, count="+reply_count+", list=["+reply_list+"]");
+        // Scope the reply to the requesting app when we can identify it. A global broadcast leaks
+        // the user's task names to ANY app registered for REPLY_SYNC_TASK_INTENT (which is exactly
+        // what an attacker needs to then trigger a stored destructive task). Falls back to the
+        // legacy unscoped broadcast only when the caller cannot be determined (backward compat).
+        String target_pkg=getCallingPackage();
+        if (target_pkg==null && getReferrer()!=null) target_pkg=getReferrer().getHost();
+        if (target_pkg!=null && !target_pkg.equals("")) {
+            reply.setPackage(target_pkg);
+            mUtil.addDebugMsg(1, "I", "query reply scoped to caller="+target_pkg);
+        } else {
+            mUtil.addDebugMsg(1, "W", "query reply caller unknown; sending unscoped (legacy) broadcast");
+        }
         c.sendBroadcast(reply);
     }
 

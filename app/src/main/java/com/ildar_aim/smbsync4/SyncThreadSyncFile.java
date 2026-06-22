@@ -91,12 +91,48 @@ public class SyncThreadSyncFile {
      * returns 0/false; JcifsFile throws) yields "not verified" -> the source is kept.
      */
     static private boolean isMoveDestinationVerified(long source_length, SafFile3 dest) {
-        try { return dest != null && dest.exists() && dest.length() == source_length; }
-        catch (Exception e) { return false; }
+        try {
+            if (dest == null || !dest.exists()) return false;
+            long dl = dest.length();
+            // A 0/-1 length on EITHER side means "unknown" (SafFile3 returns 0 on a SAF/USB/SD
+            // read error) OR genuinely empty. Never treat that as a verified complete copy:
+            // source_length is mf.length(), which is 0 on a source read error too, so a naive
+            // (dl == source_length) would let 0 == 0 verify a bad destination and the Move would
+            // then delete the ONLY copy of the source. Fall through to the self-healing copy.
+            if (source_length <= 0 || dl <= 0) return false;
+            return dl == source_length;
+        } catch (Exception e) { return false; }
     }
     static private boolean isMoveDestinationVerified(long source_length, JcifsFile dest) {
-        try { return dest != null && dest.exists() && dest.length() == source_length; }
-        catch (Exception e) { return false; }
+        try {
+            if (dest == null || !dest.exists()) return false;
+            long dl = dest.length();
+            if (source_length <= 0 || dl <= 0) return false;
+            return dl == source_length;
+        } catch (Exception e) { return false; }
+    }
+
+    // True if a destination ORPHAN (no source counterpart) is a file this task would actually
+    // manage, i.e. it passes the full size/date/0-byte + name filter the COPY phase uses (read from
+    // the destination's own attributes). Gates Mirror orphan-deletion so a dest file the copy phase
+    // never managed (excluded by a size/date filter) is not deleted. NB this is intentionally NOT
+    // tied to the removeExcludedByFilter option, which targets only the name/dir include-exclude
+    // filter. On any attribute read error, returns false (fail-safe: do NOT delete).
+    static private boolean isOrphanManagedLocal(SyncThreadWorkArea stwa, SyncTaskItem sti, String relative_dir, String destination_dir, SafFile3 tf) {
+        try {
+            return SyncThread.isFileSelected(stwa, sti, relative_dir, destination_dir, tf.length(), tf.lastModified());
+        } catch (Exception e) {
+            stwa.util.addLogMsg("W", sti.getSyncTaskName(), "Mirror orphan-delete skipped (cannot read destination attributes): "+destination_dir);
+            return false;
+        }
+    }
+    static private boolean isOrphanManagedSmb(SyncThreadWorkArea stwa, SyncTaskItem sti, String relative_dir, String destination_dir, JcifsFile tf) {
+        try {
+            return SyncThread.isFileSelected(stwa, sti, relative_dir, destination_dir, tf.length(), tf.getLastModified());
+        } catch (Exception e) {
+            stwa.util.addLogMsg("W", sti.getSyncTaskName(), "Mirror orphan-delete skipped (cannot read destination attributes): "+destination_dir);
+            return false;
+        }
     }
 
     static final private int syncDeleteLocalToLocal(SyncThreadWorkArea stwa, SyncTaskItem sti, String from_base,
@@ -164,9 +200,14 @@ public class SyncThreadSyncFile {
             }
         } else { // file Delete
             if (!SyncThread.isHiddenFile(stwa, sti, tf)) {
+                // removeExcludedByFilter targets the NAME/dir include-exclude filter (the user-facing
+                // "delete dirs/files excluded by the filter"), so keep the name-only 1-arg form for
+                // that branch. But gate the ORPHAN delete with the full size/date/0-byte filter using
+                // the destination's own attrs: a dest-only file the copy phase would never manage
+                // (excluded by a size/date filter) must NOT be orphan-deleted. Read error -> keep.
                 boolean isFileSelected=SyncThread.isFileSelected(stwa, sti, relative_dir);
                 if (isFileSelected) {
-                    if (!mf_exists) {
+                    if (!mf_exists && isOrphanManagedLocal(stwa, sti, relative_dir, destination_dir, tf)) {
                         sync_result= deleteLocalItemForSyncDelete(stwa, sti, CONFIRM_REQUEST_DELETE_FILE, tf, destination_dir);
                     }
                 } else {
@@ -258,9 +299,11 @@ public class SyncThreadSyncFile {
                 // option for a file -> with hidden-dirs ON + hidden-files OFF, a Mirror to SMB
                 // could delete dest-only hidden files the user opted to exclude.
                 if (!SyncThread.isHiddenFile(stwa, sti, tf) ) {
+                    // See the Local-to-Local note: removeExcludedByFilter = name filter only; gate the
+                    // ORPHAN delete with the full size/date filter (SMB destination).
                     boolean isFileSelected=SyncThread.isFileSelected(stwa, sti, relative_dir);
                     if (isFileSelected) {
-                        if (!mf_exists) {
+                        if (!mf_exists && isOrphanManagedSmb(stwa, sti, relative_dir, destination_dir, tf)) {
                             sync_result= deleteSmbItemForSyncDelete(stwa, sti, CONFIRM_REQUEST_DELETE_FILE, tf, destination_dir);
                         }
                     } else {
@@ -348,9 +391,11 @@ public class SyncThreadSyncFile {
                 }
             } else { // file Delete
                 if (!SyncThread.isHiddenFile(stwa, sti, tf)) {
+                    // See the Local-to-Local note: removeExcludedByFilter = name filter only; gate the
+                    // ORPHAN delete with the full size/date filter (local destination).
                     boolean isFileSelected=SyncThread.isFileSelected(stwa, sti, relative_dir);
                     if (isFileSelected) {
-                        if (!mf_exists) {
+                        if (!mf_exists && isOrphanManagedLocal(stwa, sti, relative_dir, destination_dir, tf)) {
                             sync_result= deleteLocalItemForSyncDelete(stwa, sti, CONFIRM_REQUEST_DELETE_FILE, tf, destination_dir);
                         }
                     } else {
@@ -435,9 +480,11 @@ public class SyncThreadSyncFile {
                 }
             } else { // file Delete
                 if (!SyncThread.isHiddenFile(stwa, sti, tf)) {
+                    // See the Local-to-Local note: removeExcludedByFilter = name filter only; gate the
+                    // ORPHAN delete with the full size/date filter (SMB destination).
                     boolean isFileSelected=SyncThread.isFileSelected(stwa, sti, relative_dir);
                     if (isFileSelected) {
-                        if (!mf_exists) {
+                        if (!mf_exists && isOrphanManagedSmb(stwa, sti, relative_dir, destination_dir, tf)) {
                             sync_result= deleteSmbItemForSyncDelete(stwa, sti, CONFIRM_REQUEST_DELETE_FILE, tf, destination_dir);
                         }
                     } else {

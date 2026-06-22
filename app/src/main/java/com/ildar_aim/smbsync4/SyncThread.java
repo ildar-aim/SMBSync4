@@ -1276,6 +1276,14 @@ public class SyncThread extends Thread {
         // Normalize trailing slashes for comparison
         String p = parent.endsWith("/") ? parent : parent + "/";
         String ch = child.endsWith("/") ? child : child + "/";
+        // SMB/CIFS paths are CASE-INSENSITIVE. A case-sensitive compare here would miss an
+        // overlapping source/dest that differ only in case (e.g. smb://h/Photos vs
+        // smb://h/photos/Archive) and defeat the cycle guard -> SMB Move could delete BOTH
+        // sides / Mirror could nest forever. Case-fold when both endpoints are smb:// URLs.
+        if (p.regionMatches(true, 0, "smb://", 0, 6) && ch.regionMatches(true, 0, "smb://", 0, 6)) {
+            p = p.toLowerCase();
+            ch = ch.toLowerCase();
+        }
         if (p.equals(ch)) return true;
         return ch.startsWith(p);
     }
@@ -1779,10 +1787,21 @@ public class SyncThread extends Thread {
                     }
                     synchronized (stwa.gp.syncThreadConfirm) {
                         stwa.gp.syncThreadConfirmWait = true;
-                        stwa.gp.syncThreadConfirm.wait();//Posted by SMBSyncService#aidlConfirmResponse()
+                        // Bounded, cancel-aware wait. The response sets extra_id != 0 then notifies;
+                        // onStopped() now notifies this monitor and disables syncThreadCtrl. Without
+                        // the timeout+enabled check a background confirm (no UI to answer, or a stop
+                        // during the wait) would block this worker thread forever. initThreadCtrl()
+                        // zeroed extra_id, so ==0 means "no response yet".
+                        while (stwa.gp.syncThreadConfirmWait
+                                && stwa.gp.syncThreadConfirm.getExtraDataInt() == 0
+                                && stwa.gp.syncThreadCtrl.isEnabled()) {
+                            stwa.gp.syncThreadConfirm.wait(60000L);//Posted by SMBSyncService#aidlConfirmResponse()
+                        }
                         stwa.gp.syncThreadConfirmWait = false;
                     }
-                    stwa.gp.acquireWakeLock(stwa.appContext, stwa.util);
+                    // Don't re-acquire a fresh (long-timeout) wakelock if the task was stopped/
+                    // cancelled while we waited - nothing would be left alive to release it.
+                    if (stwa.gp.syncThreadCtrl.isEnabled()) stwa.gp.acquireWakeLock(stwa.appContext, stwa.util);
                     if (type.equals(CONFIRM_REQUEST_DELETE_DIR) || type.equals(CONFIRM_REQUEST_DELETE_FILE) ||
                             type.equals(CONFIRM_REQUEST_DELETE_ZIP_ITEM_DIR) || type.equals(CONFIRM_REQUEST_DELETE_ZIP_ITEM_FILE)) {
                         rc = stwa.confirmDeleteResult = stwa.gp.syncThreadConfirm.getExtraDataInt();
@@ -1849,10 +1868,15 @@ public class SyncThread extends Thread {
                 }
                 synchronized (stwa.gp.syncThreadConfirm) {
                     stwa.gp.syncThreadConfirmWait = true;
-                    stwa.gp.syncThreadConfirm.wait();//Posted by SMBSyncService#aidlConfirmResponse()
+                    // Bounded, cancel-aware wait (see sendConfirmRequest for rationale).
+                    while (stwa.gp.syncThreadConfirmWait
+                            && stwa.gp.syncThreadConfirm.getExtraDataInt() == 0
+                            && stwa.gp.syncThreadCtrl.isEnabled()) {
+                        stwa.gp.syncThreadConfirm.wait(60000L);//Posted by SMBSyncService#aidlConfirmResponse()
+                    }
                     stwa.gp.syncThreadConfirmWait = false;
                 }
-                stwa.gp.acquireWakeLock(stwa.appContext, stwa.util);
+                if (stwa.gp.syncThreadCtrl.isEnabled()) stwa.gp.acquireWakeLock(stwa.appContext, stwa.util);
                 if (type.equals(CONFIRM_REQUEST_ARCHIVE_DATE_FROM_FILE)) {
                     rc = stwa.confirmArchiveResult = stwa.gp.syncThreadConfirm.getExtraDataInt();
                     if (stwa.confirmArchiveResult > 0) result = true;

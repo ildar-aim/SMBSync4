@@ -61,6 +61,14 @@ public class SyncThreadCopyFile {
 
             String to_file_temp = tf.getPath()+".tmp";
             SafFile3 t_df = new SafFile3(stwa.appContext, to_file_temp);
+            // A4 (same fix as copyFileSmbToLocalUnsetLastModified): the temp uses a FIXED name. A
+            // prior run killed mid-copy (common on aggressive-kill OEMs like Realme UI / HiOS) can
+            // leave a stale .tmp here, and SAF "w" mode is not guaranteed to truncate -- a shorter
+            // new copy would inherit the previous run's trailing bytes. copyFile()'s size check
+            // counts bytes WRITTEN, not the final file length, so it would NOT catch that, and the
+            // corrupt file would be renamed onto the real target (and the source deleted in Move
+            // mode). Delete any leftover first.
+            t_df.deleteIfExists();
             t_df.createNewFile();
 
             int result=copyFile(stwa, sti, mf.getParentFile().getPath(), tf.getParentFile().getPath(), mf.getName(), mf.length(), mf.getInputStream(), t_df.getOutputStream());

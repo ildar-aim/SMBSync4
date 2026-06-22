@@ -133,7 +133,10 @@ public class SyncThreadArchiveFile {
 
                 File temp_file=new File(temp_path);
                 OutputStream os=new FileOutputStream(temp_file);
-
+                // copyFile closes os on its own paths, but if mf.getInputStream() (the argument)
+                // throws, copyFile never runs and os leaks a descriptor per failed file. Close it
+                // in finally (idempotent) and drop the orphan temp on failure.
+                try {
                 sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, mf.length(), sti.isSyncOptionUseSmallIoBuffer());
                 if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
                     temp_file.setLastModified(mf.lastModified());
@@ -160,6 +163,10 @@ public class SyncThreadArchiveFile {
                         }
                     }
                 }
+                } finally {
+                    try { os.close(); } catch(Exception ignore) {}
+                    if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS && temp_file.exists()) temp_file.delete();
+                }
             }
         } else {
             stwa.util.addLogMsg("W", sti.getSyncTaskName(), to_path, " ", stwa.appContext.getString(R.string.msgs_mirror_confirm_move_cancel));
@@ -178,7 +185,9 @@ public class SyncThreadArchiveFile {
                 String temp_path=tf.getPath()+"."+System.currentTimeMillis();
                 File temp_file=new File(temp_path);
                 OutputStream os=new FileOutputStream(temp_file);
-
+                // Close os in finally (idempotent) so it can't leak if mf.getInputStream() throws;
+                // drop the orphan .tmp (it lives in the destination dir here) on failure.
+                try {
                 sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, mf.length(), sti.isSyncOptionUseSmallIoBuffer());
 
                 if (sync_result== SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) {
@@ -206,6 +215,10 @@ public class SyncThreadArchiveFile {
                             sync_result=SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
                         }
                     }
+                }
+                } finally {
+                    try { os.close(); } catch(Exception ignore) {}
+                    if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS && temp_file.exists()) temp_file.delete();
                 }
             }
         } else {
@@ -487,7 +500,12 @@ public class SyncThreadArchiveFile {
             String temp_dir= convertKeywordWithDate(stwa, sti, to_path, item);
             JcifsFile tf=new JcifsFile(temp_dir+"/"+to_file_name+to_file_ext, stwa.destinationSmbAuth);
             if (tf.exists()) {
-                String new_name=createArchiveLocalNewFilePath(stwa, sti, to_path, to_path+"/"+temp_dir+"/"+to_file_name+to_file_seqno,to_file_ext) ;
+                // Destination is an SMB share: probe collisions with the SMB (JcifsFile) prober,
+                // not the local SAF one. createArchiveLocalNewFilePath ran SafFile3.exists() on an
+                // smb:// path, which SafFile3 swallows to false -> every candidate looked "free" ->
+                // the sequence-rename could clobber an existing _N file on the share. Same args as
+                // the SMB-to-SMB sibling (archiveFileSmbToSmb), only the prober differs.
+                String new_name=createArchiveSmbNewFilePath(stwa, sti, to_path, to_path+"/"+temp_dir+"/"+to_file_name+to_file_seqno,to_file_ext) ;
                 if (new_name.equals("")) {
                     stwa.util.addLogMsg("E",sti.getSyncTaskName(), "Archive sequence number overflow error.");
                     sync_result= SyncTaskItem.SYNC_RESULT_STATUS_ERROR;
@@ -630,7 +648,9 @@ public class SyncThreadArchiveFile {
                 temp_saf.deleteIfExists();
                 temp_saf.createNewFile();
                 OutputStream os=temp_saf.getOutputStream();
-
+                // Close os in finally (idempotent) so an mf.getInputStream() throw inside the loop
+                // can't leak it; drop the orphan .tmp on any non-success exit.
+                try {
                 while ( stwa.retryCount> 0) {
                     sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, mf.length(), sti.isSyncOptionUseSmallIoBuffer());
                     if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
@@ -664,6 +684,10 @@ public class SyncThreadArchiveFile {
                         SyncThread.scanMediaFile(stwa, sti, tf);
                     }
                 }
+                } finally {
+                    try { os.close(); } catch(Exception ignore) {}
+                    if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) temp_saf.deleteIfExists();
+                }
             }
         } else {
             stwa.util.addLogMsg("W", sti.getSyncTaskName(), to_path, " ", stwa.appContext.getString(R.string.msgs_mirror_confirm_move_cancel));
@@ -687,7 +711,9 @@ public class SyncThreadArchiveFile {
                 File temp_file=new File(temp_path);
                 SafFile3 temp_saf=new SafFile3(stwa.appContext, temp_path);
                 OutputStream os=new FileOutputStream(temp_file);
-
+                // Close os in finally (idempotent) so an mf.getInputStream() throw inside the loop
+                // can't leak it; drop the orphan temp on any non-success exit.
+                try {
                 while ( stwa.retryCount> 0) {
                     sync_result= copyFile(stwa, sti, mf.getInputStream(), os, from_path, to_path, file_name, mf.length(), sti.isSyncOptionUseSmallIoBuffer());
                     if (sync_result == SyncTaskItem.SYNC_RESULT_STATUS_ERROR && SyncThread.isJcifsRetryRequiredError(stwa.jcifsNtStatusCode)) {
@@ -720,6 +746,10 @@ public class SyncThreadArchiveFile {
                         }
                         SyncThread.scanMediaFile(stwa, sti, tf);
                     }
+                }
+                } finally {
+                    try { os.close(); } catch(Exception ignore) {}
+                    if (sync_result != SyncTaskItem.SYNC_RESULT_STATUS_SUCCESS) temp_saf.deleteIfExists();
                 }
             }
         } else {
@@ -1289,7 +1319,12 @@ public class SyncThreadArchiveFile {
         String temp_dir="";
 
         Date shoot_date=null;
-        SimpleDateFormat sdf_date_shoot = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
+        // HH (24-hour), not hh (12-hour, no AM/PM): shoot_time is produced in 24-hour form, so
+        // lenient parsing of an afternoon/evening hour (13-23) with hh rolled it into the wrong
+        // half-day, mis-filing the media into the wrong hour bucket when the template uses an
+        // hour/time keyword. setLenient(false) so a genuinely malformed value falls back to "now".
+        SimpleDateFormat sdf_date_shoot = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        sdf_date_shoot.setLenient(false);
         long tu=System.currentTimeMillis();
         try {
             shoot_date=sdf_date_shoot.parse(afli.shoot_date+" "+afli.shoot_time);
@@ -1346,8 +1381,17 @@ public class SyncThreadArchiveFile {
 
     static final public String[] getFileExifDateTime(SyncThreadWorkArea stwa, SyncTaskItem sti, JcifsFile lf) throws JcifsException {
         String[] date_time=null;
+        // If the SECOND getInputStream() throws (SMB drop), the first fis would leak a server
+        // handle + local fd per affected file on large SMB archive runs. Close fis if the second
+        // open fails; once the inner 5-arg overload is entered it closes both in its own finally.
         InputStream fis=lf.getInputStream();
-        InputStream fis_retry=lf.getInputStream();
+        InputStream fis_retry;
+        try {
+            fis_retry=lf.getInputStream();
+        } catch (Exception e) {
+            try { fis.close(); } catch(Exception ignore) {}
+            throw e;
+        }
         date_time=getFileExifDateTime(stwa, sti, fis, fis_retry, lf.getLastModified(), lf.getName());
         return date_time;
     }

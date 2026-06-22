@@ -392,9 +392,24 @@ class ScheduleUtils {
                             PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
                     AlarmManager am = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
                     try {
-//                    am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pi);
-                        am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pi);
+                        // Prefer an EXACT alarm (SCHEDULE_EXACT_ALARM is declared) so scheduled syncs
+                        // fire on time even in Doze on aggressive OEMs (Realme/HiOS); the inexact
+                        // setAndAllowWhileIdle is heavily deferred. Exact alarms need permission on
+                        // API 31+ (and the OEM may revoke it -> SecurityException), so check
+                        // canScheduleExactAlarms() and fall back to the inexact form.
+                        boolean exact_ok = true;
+                        if (android.os.Build.VERSION.SDK_INT >= 31) exact_ok = am.canScheduleExactAlarms();
+                        if (exact_ok) am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pi);
+                        else am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pi);
                         schedule_done=true;
+                    } catch(SecurityException se) {
+                        // Exact-alarm permission revoked between check and call: fall back to inexact.
+                        try {
+                            am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pi);
+                            schedule_done=true;
+                        } catch(Exception e2) {
+                            lu.addDebugMsg(1, "I", "setTimer inexact fallback failed. error="+e2.getMessage());
+                        }
                     } catch(Exception e) {
                         String stm= MiscUtil.getStackTraceString(e);
                         lu.addDebugMsg(1, "I", "setTimer failed. error="+e.getMessage()+"\n"+stm);

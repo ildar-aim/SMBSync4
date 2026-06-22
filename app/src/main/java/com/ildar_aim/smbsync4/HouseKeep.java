@@ -42,6 +42,9 @@ class HouseKeep {
     private GlobalParameters mGp=null;
     private Handler mUiHandler=null;
     private ThreadCtrl mTcHousekeep = null;
+    // Predicate for the result-log delete confirm dialog wait: guards against a lost notify
+    // (user answers before the worker reaches wait()) and lets the wait use a timeout.
+    private volatile boolean mHousekeepDlgResponded = false;
 
     public HouseKeep(ActivityMain a, GlobalParameters gp, CommonUtilities cu) {
         mActivity=a;
@@ -196,7 +199,8 @@ class HouseKeep {
                         }
                         mUtil.addLogMsg("I", "", String.format(mActivity.getString(R.string.msgs_maintenance_result_log_list_del_count), mResultLogDeleteCount));
                         synchronized (mTcHousekeep) {
-                            mTcHousekeep.notify();
+                            mHousekeepDlgResponded = true;
+                            mTcHousekeep.notifyAll();
                         }
                     }
 
@@ -204,16 +208,25 @@ class HouseKeep {
                     public void negativeResponse(Context c, Object[] o) {
                         mUtil.addLogMsg("I", "", String.format(mActivity.getString(R.string.msgs_maintenance_result_log_list_del_count), mResultLogDeleteCount));
                         synchronized (mTcHousekeep) {
-                            mTcHousekeep.notify();
+                            mHousekeepDlgResponded = true;
+                            mTcHousekeep.notifyAll();
                         }
                     }
                 });
+                mHousekeepDlgResponded = false;
                 mUtil.showCommonDialog(true, "W", mActivity.getString(R.string.msgs_maintenance_result_log_list_del_title), del_msg, ntfy);
                 synchronized (mTcHousekeep) {
-                    try {
-                        mTcHousekeep.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    // Bounded + predicate-guarded: a dismissed dialog (rotation / OEM kill) or a
+                    // notify that races ahead of this wait must not hang this MAX_PRIORITY thread
+                    // (which would leave the UI disabled forever). 10-minute safety cap.
+                    long dlg_deadline = System.currentTimeMillis() + 10L*60L*1000L;
+                    while (!mHousekeepDlgResponded && mTcHousekeep.isEnabled() && System.currentTimeMillis() < dlg_deadline) {
+                        try {
+                            mTcHousekeep.wait(30000L);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            break;
+                        }
                     }
                 }
             }
@@ -225,6 +238,12 @@ class HouseKeep {
         SafFile3 lf = new SafFile3(mActivity, fp);
         if (lf.isDirectory()) {
             SafFile3[] fl = lf.listFiles();
+            // listFiles() returns null on a build/IO error (e.g. ejected USB on Realme/HiOS).
+            // Iterating it would NPE and crash this housekeep thread, leaving the UI disabled.
+            if (fl == null) {
+                mUtil.addLogMsg("W", "", "deleteResultLogFile: directory listing returned null (USB/SD/SAF error), skipping: " + fp);
+                return false;
+            }
             for (SafFile3 item : fl) {
                 if (item.isDirectory()) {
                     if (!deleteResultLogFile(item.getPath())) {
