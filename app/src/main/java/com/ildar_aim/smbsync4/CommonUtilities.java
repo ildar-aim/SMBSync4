@@ -1193,24 +1193,40 @@ public final class CommonUtilities {
     }
 
     public static boolean isCharging(Context c, CommonUtilities cu) {
+        // registerReceiver() for the sticky battery broadcast can return null on
+        // restricted/early-boot contexts (e.g. before first unlock, or on some
+        // Realme UI / HiOS ROMs). The sticky intent is only used to build the
+        // debug-log line below; the value we actually RETURN comes from the
+        // BatteryManager service, which does not depend on the sticky intent.
+        // Guard the dereference so this charge-gate never throws an NPE — on the
+        // sync thread that would abort the task, and on the manual-run UI path
+        // (ActivityMain.checkExecuteScheduleConditions) it would crash the app.
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        Intent batteryInfo = c.registerReceiver(null, ifilter);
-        // Are we charging / charged?
-        int status = batteryInfo.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-        boolean legacy_charging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
-                status == BatteryManager.BATTERY_STATUS_FULL;
-        int bs=batteryInfo.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
-        int bl=batteryInfo.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-        int batteryLevel=(bs==0)?bl:(bl*100)/bs;
+        Intent batteryInfo = null;
+        try { batteryInfo = c.registerReceiver(null, ifilter); } catch (Exception e) { batteryInfo = null; }
+        int status = -1, chargePlug = -1, batteryLevel = -1;
+        boolean legacy_charging = false;
+        if (batteryInfo != null) {
+            // Are we charging / charged?
+            status = batteryInfo.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            legacy_charging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                    status == BatteryManager.BATTERY_STATUS_FULL;
+            int bs=batteryInfo.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
+            int bl=batteryInfo.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            batteryLevel=(bs==0)?bl:(bl*100)/bs;
 
-        // How are we charging?
-        int chargePlug = batteryInfo.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+            // How are we charging?
+            chargePlug = batteryInfo.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
 //        boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
 //        boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
+        }
 
-        BatteryManager bm=(BatteryManager)c.getSystemService(Context.BATTERY_SERVICE);;
-        boolean bm_charging=bm.isCharging();
-        cu.addDebugMsg(1, "I", "Battery status="+status+", level="+batteryLevel+", chargePlug="+chargePlug+", bm_charging="+bm_charging+", legacy_charging="+legacy_charging);
+        BatteryManager bm=(BatteryManager)c.getSystemService(Context.BATTERY_SERVICE);
+        // bm is non-null on all supported API levels (min 26), but guard anyway:
+        // if the service is somehow unavailable, fall back to the sticky-intent
+        // status so a "sync only when charging" task is not silently blocked.
+        boolean bm_charging = (bm != null) ? bm.isCharging() : legacy_charging;
+        cu.addDebugMsg(1, "I", "Battery status="+status+", level="+batteryLevel+", chargePlug="+chargePlug+", bm_charging="+bm_charging+", legacy_charging="+legacy_charging+", battteryInfoNull="+(batteryInfo==null));
 
         return bm_charging;
     }
